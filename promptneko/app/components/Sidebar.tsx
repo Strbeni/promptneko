@@ -34,10 +34,10 @@ export function Sidebar({ active, credits, onAction, onTopUp }: SidebarProps) {
             ) : null}
             {group.items.map(({ icon: Icon, label, href }) => (
               <Link
-                className={`flex items-center w-full h-[35px] gap-3 px-[10px] mb-[3px] rounded-8 text-[14px] no-underline transition-colors
+                className={`flex items-center w-full h-[35px] gap-3 px-[10px] mb-[3px] rounded-xl text-[14px] no-underline transition-all duration-200
                   ${active === label 
                     ? "border border-[#6540b6] [background:linear-gradient(90deg,rgba(124,60,255,0.35),rgba(124,60,255,0.08))] text-white" 
-                    : "bg-transparent text-[#d8ddf2] hover:bg-white/5"}`}
+                    : "bg-transparent text-[#d8ddf2] hover:bg-white/5 hover:translate-x-1"}`}
                 href={href}
                 key={label}
                 onClick={() => {
@@ -54,7 +54,7 @@ export function Sidebar({ active, credits, onAction, onTopUp }: SidebarProps) {
         ))}
       </div>
 
-      <section className="mt-auto p-3 border border-[#202746] rounded-8 [background:linear-gradient(180deg,#0d1324,#0a101d)]">
+      <section className="mt-auto p-3 border border-[#202746] rounded-2xl [background:linear-gradient(180deg,#0d1324,#0a101d)]">
         <button 
           className="flex justify-between w-full p-0 bg-transparent border-0 text-[#c7cce0] text-[11px] cursor-pointer"
           onClick={() => onAction("Credit history")}
@@ -66,7 +66,7 @@ export function Sidebar({ active, credits, onAction, onTopUp }: SidebarProps) {
           {credits.toLocaleString()} <Coins className="fill-[#f4a11b] text-[#f4a11b]" size={14} />
         </strong>
         <button 
-          className="w-full h-[29px] rounded-6 text-white text-[13px] font-[650] cursor-pointer [background:linear-gradient(180deg,#8751ff_0%,#6530e9_100%)] [box-shadow:0_0_24px_rgba(112,61,255,0.34)]" 
+          className="w-full h-[29px] rounded-lg text-white text-[13px] font-[650] cursor-pointer [background:linear-gradient(180deg,#8751ff_0%,#6530e9_100%)] [box-shadow:0_0_24px_rgba(112,61,255,0.34)] transition-all hover:brightness-110 hover:scale-[1.02]" 
           onClick={onTopUp}
         >
           Top Up
@@ -74,9 +74,9 @@ export function Sidebar({ active, credits, onAction, onTopUp }: SidebarProps) {
       </section>
 
       <div className="flex justify-between px-[14px] pt-[22px] text-[#ccd5ee]">
-        <button aria-label="Settings" className="bg-transparent border-0 cursor-pointer text-inherit" onClick={() => onAction("Settings")}><Settings size={19} /></button>
-        <button aria-label="Preferences" className="bg-transparent border-0 cursor-pointer text-inherit" onClick={() => onAction("Preferences")}><Settings size={19} /></button>
-        <button aria-label="Theme" className="bg-transparent border-0 cursor-pointer text-inherit" onClick={() => onAction("Theme")}><Moon size={19} /></button>
+        <button aria-label="Settings" className="bg-transparent border-0 cursor-pointer text-inherit hover:text-white hover:scale-110 transition-all duration-200" onClick={() => onAction("Settings")}><Settings size={19} /></button>
+        <button aria-label="Preferences" className="bg-transparent border-0 cursor-pointer text-inherit hover:text-white hover:scale-110 transition-all duration-200" onClick={() => onAction("Preferences")}><Settings size={19} /></button>
+        <button aria-label="Theme" className="bg-transparent border-0 cursor-pointer text-inherit hover:text-white hover:scale-110 transition-all duration-200" onClick={() => onAction("Theme")}><Moon size={19} /></button>
       </div>
     </aside>
   );

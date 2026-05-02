@@ -17,7 +17,7 @@ export function RightRail({ onAction }: RightRailProps) {
             key={item.title} 
             onClick={() => onAction(item.title)}
           >
-            <span className="grid place-items-center w-6 h-6 rounded-4 bg-[#1b2341] text-[#a5aec7] text-[12px] font-bold group-hover:bg-[#7b3cff] group-hover:text-white transition-colors">
+            <span className="grid place-items-center w-6 h-6 rounded-md bg-[#1b2341] text-[#a5aec7] text-[12px] font-bold group-hover:bg-[#7b3cff] group-hover:text-white transition-all duration-300">
               {index + 1}
             </span>
             <div className="flex flex-col min-w-0">
@@ -59,7 +59,7 @@ export function RightRail({ onAction }: RightRailProps) {
           {popularTags.map(([tag, count]) => (
             <button 
               key={tag} 
-              className="flex items-center h-[26px] px-[10px] border border-[#1b2544] rounded-full bg-[#0c1122] text-[#c5ccdd] text-[11px] cursor-pointer hover:border-[#7b3cff] hover:text-white transition-colors"
+              className="flex items-center h-[26px] px-[10px] border border-[#1b2544] rounded-full bg-[#0c1122] text-[#c5ccdd] text-[11px] cursor-pointer hover:border-[#7b3cff] hover:text-white transition-all duration-300 hover:scale-105"
               onClick={() => onAction(tag)}
             >
               {tag}
@@ -69,11 +69,11 @@ export function RightRail({ onAction }: RightRailProps) {
         </div>
       </Panel>
 
-      <section className="mt-[22px] p-5 border border-[#30395e] rounded-8 bg-gradient-to-b from-[#131b33] to-[#0b1020] [box-shadow:inset_0_0_40px_rgba(112,61,255,0.06)]">
+      <section className="mt-[22px] p-5 border border-[#30395e] rounded-2xl bg-gradient-to-b from-[#131b33] to-[#0b1020] [box-shadow:inset_0_0_40px_rgba(112,61,255,0.06)] hover:shadow-2xl transition-all duration-500">
         <h2 className="m-0 text-white text-[19px] font-extrabold leading-tight">Create. Share. Earn.</h2>
         <p className="mt-[6px] mb-[15px] text-[#aeb5ca] text-[13px] leading-[1.5]">Join thousands of creators earning from their prompts.</p>
         <button 
-          className="w-full h-9 border-0 rounded-7 bg-gradient-to-b from-[#8751ff] to-[#6530e9] text-white text-[14px] font-bold cursor-pointer [box-shadow:0_0_24px_rgba(112,61,255,0.3)] hover:brightness-110 transition-all"
+          className="w-full h-9 border-0 rounded-lg bg-gradient-to-b from-[#8751ff] to-[#6530e9] text-white text-[14px] font-bold cursor-pointer [box-shadow:0_0_24px_rgba(112,61,255,0.3)] hover:brightness-110 hover:scale-[1.02] transition-all"
           onClick={() => onAction("Start Selling")}
         >
           Start Selling

@@ -19,7 +19,7 @@ export function TopBar({ query, onQueryChange, onSearch, onAction }: TopBarProps
 
   return (
     <header className="flex items-center h-[58px] gap-[22px] px-5 pt-[11px] border-b border-[#141b31]">
-      <form className="flex items-center w-[min(386px,32vw)] h-[34px] gap-3 px-[13px] border border-[#202746] rounded-8 bg-[#0b1020] text-[#8990aa] text-[13px]" onSubmit={submit}>
+      <form className="flex items-center w-[min(386px,32vw)] h-[34px] gap-3 px-[13px] border border-[#202746] rounded-xl bg-[#0b1020] text-[#8990aa] text-[13px] transition-all focus-within:border-[#7b3cff] focus-within:shadow-[0_0_15px_rgba(123,60,255,0.15)]" onSubmit={submit}>
         <Search size={18} />
         <input 
           className="flex-1 min-w-0 bg-transparent border-0 outline-none text-white font-inherit placeholder-[#8990aa]" 
@@ -27,13 +27,13 @@ export function TopBar({ query, onQueryChange, onSearch, onAction }: TopBarProps
           onChange={(event) => onQueryChange(event.target.value)} 
           placeholder="Search prompts, models, users..." 
         />
-        <kbd className="px-2 py-[2px] border border-[#29314f] rounded-5 bg-[#12182a] text-[#abb1c8] text-[11px] leading-none">
+        <kbd className="px-2 py-[2px] border border-[#29314f] rounded-lg bg-[#12182a] text-[#abb1c8] text-[11px] leading-none">
           <Command size={12} className="inline mr-1" />/
         </kbd>
       </form>
 
       <button 
-        className="flex items-center h-[34px] gap-[9px] ml-auto px-[17px] rounded-8 text-white text-[13px] font-bold cursor-pointer [background:linear-gradient(180deg,#8751ff_0%,#6530e9_100%)] [box-shadow:0_0_24px_rgba(112,61,255,0.34)]" 
+        className="flex items-center h-[34px] gap-[9px] ml-auto px-[17px] rounded-xl text-white text-[13px] font-bold cursor-pointer [background:linear-gradient(180deg,#8751ff_0%,#6530e9_100%)] [box-shadow:0_0_24px_rgba(112,61,255,0.34)] transition-all hover:brightness-110 hover:scale-[1.02]" 
         onClick={() => onAction("Create Prompt")}
       >
         <Plus size={18} />

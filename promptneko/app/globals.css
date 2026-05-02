@@ -127,7 +127,7 @@ button,
   gap: 12px;
   padding: 0 10px;
   margin-bottom: 3px;
-  border-radius: 8px;
+  border-radius: 12px;
   background: transparent;
   color: #d8ddf2;
   font-size: 14px;
@@ -153,7 +153,7 @@ button,
   margin-top: auto;
   padding: 12px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 12px;
   background: linear-gradient(180deg, #0d1324, #0a101d);
 }
 
@@ -226,7 +226,7 @@ button,
   gap: 12px;
   padding: 0 13px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 10px;
   background: #0b1020;
   color: #8990aa;
   font-size: 13px;
@@ -254,7 +254,7 @@ button,
   gap: 9px;
   margin-left: auto;
   padding: 0 17px;
-  border-radius: 8px;
+  border-radius: 10px;
   color: white;
   font-size: 13px;
   font-weight: 700;
@@ -341,7 +341,7 @@ button,
   height: 313px;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 20px;
   background: #12172a;
 }
 
@@ -406,7 +406,7 @@ button,
   gap: 14px;
   padding: 0 0 0 14px;
   border: 1px solid #2d3452;
-  border-radius: 8px;
+  border-radius: 12px;
   background: rgba(11, 16, 32, 0.82);
   color: #9ea5be;
   font-size: 13px;
@@ -455,7 +455,7 @@ button,
   height: 72px;
   margin-top: 16px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 16px;
   background: linear-gradient(180deg, #0c1223, #090e1a);
 }
 
@@ -559,10 +559,16 @@ section {
   height: 30px;
   padding: 0 12px;
   border: 1px solid #2a1f58;
-  border-radius: 7px;
+  border-radius: 10px;
   background: #0f1024;
   color: #a36dff;
   font-size: 12px;
+  transition: all 0.2s;
+}
+
+.section-title button:hover {
+  background: #1a1c3d;
+  transform: translateY(-1px);
 }
 
 .featured-grid {
@@ -578,7 +584,7 @@ section {
 .category-card {
   overflow: hidden;
   border: 1px solid #273056;
-  border-radius: 8px;
+  border-radius: 16px;
   background: #080d19;
 }
 

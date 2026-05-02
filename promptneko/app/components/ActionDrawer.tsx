@@ -22,15 +22,15 @@ export function ActionDrawer({ action, prompt, onClose }: ActionDrawerProps) {
       </button>
       {prompt ? (
         <>
-          <CropImage className={`w-full aspect-square rounded-8 mb-5 ${prompt.crop}`} />
+          <CropImage className={`w-full aspect-square rounded-2xl mb-5 ${prompt.crop}`} />
           <h2 className="m-0 text-white text-[22px] font-bold">{prompt.title}</h2>
           <p className="mt-2 text-[#aeb5ca] text-[14px] leading-relaxed">
             {prompt.model} prompt by {prompt.author}. Ready for preview, checkout, and save workflows.
           </p>
           <div className="flex flex-col gap-3 mt-6">
-            <button className="w-full h-11 rounded-8 bg-white/10 border-0 text-white text-[14px] font-bold cursor-pointer hover:bg-white/15 transition-colors">Preview Prompt</button>
-            <button className="w-full h-11 rounded-8 bg-[#7b3cff] border-0 text-white text-[14px] font-bold cursor-pointer hover:bg-[#6a2ce6] transition-colors">Buy Prompt</button>
-            <button className="w-full h-11 rounded-8 bg-transparent border border-[#202746] text-[#d8def2] text-[14px] font-bold cursor-pointer hover:bg-white/5 transition-colors">Open Creator</button>
+            <button className="w-full h-11 rounded-xl bg-white/10 border-0 text-white text-[14px] font-bold cursor-pointer hover:bg-white/15 transition-all">Preview Prompt</button>
+            <button className="w-full h-11 rounded-xl bg-[#7b3cff] border-0 text-white text-[14px] font-bold cursor-pointer hover:bg-[#6a2ce6] transition-all">Buy Prompt</button>
+            <button className="w-full h-11 rounded-xl bg-transparent border border-[#202746] text-[#d8def2] text-[14px] font-bold cursor-pointer hover:bg-white/5 transition-all">Open Creator</button>
           </div>
         </>
       ) : (
@@ -40,8 +40,8 @@ export function ActionDrawer({ action, prompt, onClose }: ActionDrawerProps) {
             This control is wired and ready for the production route or modal behind {action}.
           </p>
           <div className="flex flex-col gap-3 mt-6">
-            <button className="w-full h-11 rounded-8 bg-[#7b3cff] border-0 text-white text-[14px] font-bold cursor-pointer hover:bg-[#6a2ce6] transition-colors">Open</button>
-            <button className="w-full h-11 rounded-8 bg-transparent border border-[#202746] text-[#d8def2] text-[14px] font-bold cursor-pointer hover:bg-white/5 transition-colors">Save View</button>
+            <button className="w-full h-11 rounded-xl bg-[#7b3cff] border-0 text-white text-[14px] font-bold cursor-pointer hover:bg-[#6a2ce6] transition-all">Open</button>
+            <button className="w-full h-11 rounded-xl bg-transparent border border-[#202746] text-[#d8def2] text-[14px] font-bold cursor-pointer hover:bg-white/5 transition-all">Save View</button>
           </div>
         </>
       )}

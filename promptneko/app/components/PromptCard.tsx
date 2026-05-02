@@ -25,7 +25,7 @@ type PromptCardProps = {
 export function PromptCard({ item, isSaved, isLiked, onOpen, onSave, onLike }: PromptCardProps) {
   return (
     <div 
-      className="relative h-[198px] overflow-hidden border border-[#202a4d] rounded-8 bg-[#0a1020] cursor-pointer transition-all hover:border-[#6132bf] hover:-translate-y-px"
+      className="relative h-[198px] overflow-hidden border border-[#202a4d] rounded-2xl bg-[#0a1020] cursor-pointer transition-all hover:border-[#6132bf] hover:-translate-y-px hover:shadow-xl duration-300"
       onClick={() => onOpen(item)}
     >
       <CropImage className={item.crop} />
