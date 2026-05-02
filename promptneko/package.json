@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:migrate": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"psql $env:DATABASE_URL -v ON_ERROR_STOP=1 -f database/migrations/001_promptvault_foundation.sql\"",
+    "db:seed": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"psql $env:DATABASE_URL -v ON_ERROR_STOP=1 -f database/seeds/001_categories.sql\""
   },
   "dependencies": {
     "lucide-react": "^1.14.0",

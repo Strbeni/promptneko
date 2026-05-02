@@ -1,3 +1,5 @@
+"use client";
+
 import {
   BadgeCheck,
   Bell,
@@ -31,12 +33,13 @@ import {
   Trophy,
   Video,
   Wand,
+  X,
   Zap,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { FormEvent, ReactNode, useMemo, useState } from "react";
 
 const mainNav = [
-  { icon: Home, label: "Home", active: true },
+  { icon: Home, label: "Home" },
   { icon: Compass, label: "Explore" },
   { icon: Grid2X2, label: "Categories" },
   { icon: Cpu, label: "Models" },
@@ -66,22 +69,22 @@ const spaceNav = [
 ];
 
 const featured = [
-  { title: "Cyberpunk Nightshade", model: "Midjourney", author: "@VoidWalker", likes: "2.3K", crop: "crop-featured-1" },
-  { title: "Lost in the Stars", model: "ChatGPT Image", author: "@astro.archer", likes: "1.8K", crop: "crop-featured-2" },
-  { title: "Ethereal Beauty", model: "Stable Diffusion", author: "@raws.art", likes: "3.1K", crop: "crop-featured-3" },
-  { title: "90s Retro Lounge", model: "Midjourney", author: "@pixel.muse", likes: "1.2K", crop: "crop-featured-4" },
-  { title: "Dragon's Peak", model: "FLUX", author: "@fantasyforge", likes: "2.7K", crop: "crop-featured-5" },
+  { title: "Cyberpunk Nightshade", model: "Midjourney", author: "@VoidWalker", likes: 2300, crop: "crop-featured-1", category: "Cyberpunk" },
+  { title: "Lost in the Stars", model: "ChatGPT Image", author: "@astro.archer", likes: 1800, crop: "crop-featured-2", category: "Sci-Fi" },
+  { title: "Ethereal Beauty", model: "Stable Diffusion", author: "@raws.art", likes: 3100, crop: "crop-featured-3", category: "Portraits" },
+  { title: "90s Retro Lounge", model: "Midjourney", author: "@pixel.muse", likes: 1200, crop: "crop-featured-4", category: "Retro" },
+  { title: "Dragon's Peak", model: "FLUX", author: "@fantasyforge", likes: 2700, crop: "crop-featured-5", category: "Fantasy" },
 ];
 
 const trending = [
-  { rank: 1, title: "Neon Samurai", model: "Midjourney", likes: "4.5K", crop: "crop-trend-1" },
-  { rank: 2, title: "Anime School Life", model: "Niji Journey", likes: "3.2K", crop: "crop-trend-2" },
-  { rank: 3, title: "Dark Fantasy King", model: "Stable Diffusion", likes: "2.8K", crop: "crop-trend-3" },
-  { rank: 4, title: "Floating Islands", model: "FLUX", likes: "2.3K", crop: "crop-trend-4" },
-  { rank: 5, title: "Mecha City", model: "Midjourney", likes: "1.9K", crop: "crop-trend-5" },
-  { rank: 6, title: "Portrait Study", model: "ChatGPT Image", likes: "1.6K", crop: "crop-trend-6" },
-  { rank: 7, title: "Cosmic Whale", model: "Veo", likes: "1.4K", crop: "crop-trend-7" },
-  { rank: 8, title: "Steampunk Girl", model: "Stable Diffusion", likes: "1.2K", crop: "crop-trend-8" },
+  { rank: 1, title: "Neon Samurai", model: "Midjourney", likes: 4500, crop: "crop-trend-1", category: "Cyberpunk" },
+  { rank: 2, title: "Anime School Life", model: "Niji Journey", likes: 3200, crop: "crop-trend-2", category: "Anime" },
+  { rank: 3, title: "Dark Fantasy King", model: "Stable Diffusion", likes: 2800, crop: "crop-trend-3", category: "Fantasy" },
+  { rank: 4, title: "Floating Islands", model: "FLUX", likes: 2300, crop: "crop-trend-4", category: "Landscape" },
+  { rank: 5, title: "Mecha City", model: "Midjourney", likes: 1900, crop: "crop-trend-5", category: "Sci-Fi" },
+  { rank: 6, title: "Portrait Study", model: "ChatGPT Image", likes: 1600, crop: "crop-trend-6", category: "Portraits" },
+  { rank: 7, title: "Cosmic Whale", model: "Veo", likes: 1400, crop: "crop-trend-7", category: "Video" },
+  { rank: 8, title: "Steampunk Girl", model: "Stable Diffusion", likes: 1200, crop: "crop-trend-8", category: "Portraits" },
 ];
 
 const creators = [
@@ -109,7 +112,27 @@ const categories = [
   { title: "Landscapes", count: "15.6K prompts", crop: "cat-6" },
 ];
 
-function NavGroup({ title, items }: { title?: string; items: typeof mainNav }) {
+type PromptItem = (typeof featured)[number] | (typeof trending)[number];
+
+function formatLikes(value: number) {
+  return value >= 1000 ? `${(value / 1000).toFixed(value % 1000 === 0 ? 0 : 1)}K` : `${value}`;
+}
+
+function Crop({ className }: { className: string }) {
+  return <div className={`shot-crop ${className}`} />;
+}
+
+function NavGroup({
+  title,
+  items,
+  activeNav,
+  onSelect,
+}: {
+  title?: string;
+  items: typeof mainNav;
+  activeNav: string;
+  onSelect: (label: string) => void;
+}) {
   return (
     <div className="nav-group">
       {title ? (
@@ -119,11 +142,11 @@ function NavGroup({ title, items }: { title?: string; items: typeof mainNav }) {
         </div>
       ) : null}
       <nav>
-        {items.map(({ icon: Icon, label, active }) => (
-          <button className={active ? "nav-item active" : "nav-item"} key={label}>
+        {items.map(({ icon: Icon, label }) => (
+          <button className={activeNav === label ? "nav-item active" : "nav-item"} key={label} onClick={() => onSelect(label)}>
             <Icon size={18} />
             <span>{label}</span>
-            {active ? <ChevronRight className="nav-chevron" size={16} /> : null}
+            {activeNav === label ? <ChevronRight className="nav-chevron" size={16} /> : null}
           </button>
         ))}
       </nav>
@@ -131,129 +154,190 @@ function NavGroup({ title, items }: { title?: string; items: typeof mainNav }) {
   );
 }
 
-function Crop({ className }: { className: string }) {
-  return <div className={`shot-crop ${className}`} />;
-}
-
-function FeaturedCard({ item }: { item: (typeof featured)[number] }) {
-  return (
-    <article className="featured-card">
-      <div className="featured-art">
-        <Crop className={item.crop} />
-        <button className="save-button" aria-label={`Save ${item.title}`}>
-          <Bookmark size={18} />
-        </button>
-        <span className="model-pill">
-          <BadgeCheck size={10} />
-          {item.model}
-        </span>
-      </div>
-      <div className="card-meta">
-        <h3>{item.title}</h3>
-        <div>
-          <span className="author-dot" />
-          <span>{item.author}</span>
-          <span className="likes">
-            <Heart size={14} />
-            {item.likes}
-          </span>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-function TrendingCard({ item }: { item: (typeof trending)[number] }) {
-  return (
-    <article className="trend-card">
-      <div className="trend-art">
-        <Crop className={item.crop} />
-        <span className="rank">{item.rank}</span>
-      </div>
-      <div className="trend-body">
-        <h3>{item.title}</h3>
-        <p>{item.model}</p>
-        <span>
-          <Heart size={13} />
-          {item.likes}
-        </span>
-      </div>
-    </article>
-  );
-}
-
-function SectionTitle({ icon, title }: { icon: ReactNode; title: string }) {
+function SectionTitle({ icon, title, onViewAll }: { icon: ReactNode; title: string; onViewAll: () => void }) {
   return (
     <div className="section-title">
       <div>
         {icon}
         <h2>{title}</h2>
       </div>
-      <button>View all</button>
+      <button onClick={onViewAll}>View all</button>
     </div>
   );
 }
 
 export default function MainPage() {
+  const [activeNav, setActiveNav] = useState("Home");
+  const [query, setQuery] = useState("");
+  const [selectedPrompt, setSelectedPrompt] = useState<PromptItem | null>(null);
+  const [selectedPanel, setSelectedPanel] = useState<string | null>(null);
+  const [saved, setSaved] = useState<Set<string>>(new Set());
+  const [liked, setLiked] = useState<Set<string>>(new Set());
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [credits, setCredits] = useState(1250);
+  const [isDark, setIsDark] = useState(true);
+
+  const allPrompts = useMemo(() => [...featured, ...trending], []);
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredFeatured = featured.filter((item) => {
+    const haystack = `${item.title} ${item.model} ${item.author} ${item.category}`.toLowerCase();
+    return (!normalizedQuery || haystack.includes(normalizedQuery)) && (!selectedCategory || item.category === selectedCategory);
+  });
+  const filteredTrending = trending.filter((item) => {
+    const haystack = `${item.title} ${item.model} ${item.category}`.toLowerCase();
+    return (!normalizedQuery || haystack.includes(normalizedQuery)) && (!selectedCategory || item.category === selectedCategory);
+  });
+
+  function openPanel(title: string) {
+    setSelectedPanel(title);
+  }
+
+  function submitSearch(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSelectedPanel(query.trim() ? `Search results for "${query.trim()}"` : "Search");
+  }
+
+  function toggleSet(setter: (value: Set<string>) => void, current: Set<string>, title: string) {
+    const next = new Set(current);
+    if (next.has(title)) {
+      next.delete(title);
+    } else {
+      next.add(title);
+    }
+    setter(next);
+  }
+
+  function PromptActions({ item }: { item: PromptItem }) {
+    const isSaved = saved.has(item.title);
+    const isLiked = liked.has(item.title);
+
+    return (
+      <>
+        <button
+          className={isSaved ? "save-button active" : "save-button"}
+          aria-label={isSaved ? `Unsave ${item.title}` : `Save ${item.title}`}
+          onClick={(event) => {
+            event.stopPropagation();
+            toggleSet(setSaved, saved, item.title);
+          }}
+        >
+          <Bookmark size={18} fill={isSaved ? "currentColor" : "none"} />
+        </button>
+        <span className={isLiked ? "likes active" : "likes"}>
+          <button
+            aria-label={isLiked ? `Unlike ${item.title}` : `Like ${item.title}`}
+            onClick={(event) => {
+              event.stopPropagation();
+              toggleSet(setLiked, liked, item.title);
+            }}
+          >
+            <Heart size={14} fill={isLiked ? "currentColor" : "none"} />
+          </button>
+          {formatLikes(item.likes + (isLiked ? 1 : 0))}
+        </span>
+      </>
+    );
+  }
+
+  function FeaturedCard({ item }: { item: (typeof featured)[number] }) {
+    return (
+      <article className="featured-card interactive-card" onClick={() => setSelectedPrompt(item)}>
+        <div className="featured-art">
+          <Crop className={item.crop} />
+          <PromptActions item={item} />
+          <span className="model-pill">
+            <BadgeCheck size={10} />
+            {item.model}
+          </span>
+        </div>
+        <div className="card-meta">
+          <h3>{item.title}</h3>
+          <div>
+            <span className="author-dot" />
+            <button onClick={(event) => { event.stopPropagation(); openPanel(`${item.author} profile`); }}>{item.author}</button>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
+  function TrendingCard({ item }: { item: (typeof trending)[number] }) {
+    return (
+      <article className="trend-card interactive-card" onClick={() => setSelectedPrompt(item)}>
+        <div className="trend-art">
+          <Crop className={item.crop} />
+          <span className="rank">{item.rank}</span>
+        </div>
+        <div className="trend-body">
+          <h3>{item.title}</h3>
+          <p>{item.model}</p>
+          <PromptActions item={item} />
+        </div>
+      </article>
+    );
+  }
+
+  const shellClassName = isDark ? "prompt-shell" : "prompt-shell light-mode";
+
   return (
-    <div className="prompt-shell">
+    <div className={shellClassName}>
       <aside className="left-sidebar">
-        <div className="brand">
+        <button className="brand brand-button" onClick={() => { setActiveNav("Home"); setSelectedCategory(null); setQuery(""); }}>
           <div className="brand-mark">
             <Shield size={22} />
           </div>
           <span>PromptHub</span>
-        </div>
+        </button>
 
-        <NavGroup items={mainNav} />
-        <NavGroup title="Generate" items={generateNav} />
-        <NavGroup title="Community" items={communityNav} />
-        <NavGroup title="Your Space" items={spaceNav} />
+        <NavGroup items={mainNav} activeNav={activeNav} onSelect={(label) => { setActiveNav(label); openPanel(label); }} />
+        <NavGroup title="Generate" items={generateNav} activeNav={activeNav} onSelect={(label) => { setActiveNav(label); setQuery(label.replace(" Generation", "")); openPanel(label); }} />
+        <NavGroup title="Community" items={communityNav} activeNav={activeNav} onSelect={(label) => { setActiveNav(label); openPanel(label); }} />
+        <NavGroup title="Your Space" items={spaceNav} activeNav={activeNav} onSelect={(label) => { setActiveNav(label); openPanel(label); }} />
 
         <div className="credits">
-          <div className="credits-top">
+          <button className="credits-top" onClick={() => openPanel("Credit history")}>
             <span>Your Credits</span>
             <ChevronRight size={15} />
-          </div>
+          </button>
           <strong>
-            1,250 <Coins size={15} />
+            {credits.toLocaleString()} <Coins size={15} />
           </strong>
-          <button>Top Up</button>
+          <button onClick={() => { setCredits((value) => value + 250); openPanel("250 credits added"); }}>Top Up</button>
         </div>
 
         <div className="sidebar-tools">
-          <Settings size={20} />
-          <SlidersHorizontal size={20} />
-          <Moon size={20} />
+          <button aria-label="Settings" onClick={() => openPanel("Settings")}><Settings size={20} /></button>
+          <button aria-label="Filters" onClick={() => openPanel("Filters")}><SlidersHorizontal size={20} /></button>
+          <button aria-label="Toggle theme" onClick={() => setIsDark((value) => !value)}><Moon size={20} /></button>
         </div>
       </aside>
 
       <main className="content">
         <header className="topbar">
-          <div className="top-search">
+          <form className="top-search" onSubmit={submitSearch}>
             <Search size={18} />
-            <span>Search prompts, models, users...</span>
+            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search prompts, models, users..." />
             <kbd>⌘ /</kbd>
-          </div>
-          <button className="create-button">
+          </form>
+          <button className="create-button" onClick={() => openPanel("Create Prompt")}>
             <Plus size={19} />
             Create Prompt
           </button>
-          <button className="icon-button alert" aria-label="Notifications">
+          <button className="icon-button alert" aria-label="Notifications" onClick={() => openPanel("Notifications")}>
             <Bell size={20} />
             <span>3</span>
           </button>
-          <button className="icon-button" aria-label="Messages">
+          <button className="icon-button" aria-label="Messages" onClick={() => openPanel("Messages")}>
             <MessageCircle size={20} />
           </button>
-          <div className="profile">
+          <button className="profile" onClick={() => openPanel("Profile menu")}>
             <Crop className="profile-avatar" />
             <div>
               <strong>Lunaria</strong>
               <span>Pro</span>
             </div>
             <ChevronDown size={18} />
-          </div>
+          </button>
         </header>
 
         <div className="workspace">
@@ -273,17 +357,19 @@ export default function MainPage() {
                   <br />
                   ChatGPT, Stable Diffusion, Veo, FLUX and more.
                 </p>
-                <div className="hero-search">
+                <form className="hero-search" onSubmit={submitSearch}>
                   <Search size={19} />
-                  <span>Search prompts, models, styles...</span>
+                  <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search prompts, models, styles..." />
                   <button aria-label="Search">
                     <Search size={24} />
                   </button>
-                </div>
+                </form>
                 <div className="tags">
                   <span>Popular searches:</span>
-                  {["Cyberpunk", "Anime Girl", "Fantasy", "Photorealistic", "Dark Art"].map((tag) => (
-                    <button key={tag}>{tag}</button>
+                  {["Cyberpunk", "Anime", "Fantasy", "Photorealistic", "Dark Art"].map((tag) => (
+                    <button key={tag} className={query === tag ? "active" : ""} onClick={() => { setQuery(tag); setSelectedCategory(null); }}>
+                      {tag}
+                    </button>
                   ))}
                 </div>
               </div>
@@ -296,46 +382,53 @@ export default function MainPage() {
                 { icon: Sparkles, value: "1.2M+", label: "Generations" },
                 { icon: Heart, value: "98%", label: "Satisfaction Rate" },
               ].map(({ icon: Icon, value, label }) => (
-                <div className="stat" key={label}>
+                <button className="stat" key={label} onClick={() => openPanel(label)}>
                   <div>
                     <Icon size={25} />
                   </div>
                   <strong>{value}</strong>
                   <span>{label}</span>
-                </div>
+                </button>
               ))}
               <ChevronRight className="stats-chevron" size={18} />
             </section>
 
             <section>
-              <SectionTitle icon={<Flame size={20} />} title="Featured Prompts" />
+              <SectionTitle icon={<Flame size={20} />} title="Featured Prompts" onViewAll={() => { setActiveNav("Top Prompts"); setSelectedCategory(null); setQuery(""); }} />
               <div className="featured-grid">
-                {featured.map((item) => (
+                {(filteredFeatured.length ? filteredFeatured : featured).map((item) => (
                   <FeaturedCard item={item} key={item.title} />
                 ))}
               </div>
             </section>
 
             <section>
-              <SectionTitle icon={<Zap size={20} />} title="Trending This Week" />
+              <SectionTitle icon={<Zap size={20} />} title="Trending This Week" onViewAll={() => { setActiveNav("Explore"); setSelectedCategory(null); setQuery(""); }} />
               <div className="trending-grid">
-                {trending.map((item) => (
+                {(filteredTrending.length ? filteredTrending : trending).map((item) => (
                   <TrendingCard item={item} key={item.title} />
                 ))}
               </div>
             </section>
 
             <section className="categories-section">
-              <SectionTitle icon={<Grid2X2 size={18} />} title="Explore by Categories" />
+              <SectionTitle icon={<Grid2X2 size={18} />} title="Explore by Categories" onViewAll={() => { setActiveNav("Categories"); setSelectedCategory(null); }} />
               <div className="category-grid">
                 {categories.map((item) => (
-                  <article className="category-card" key={item.title}>
+                  <button
+                    className={selectedCategory === item.title ? "category-card active" : "category-card"}
+                    key={item.title}
+                    onClick={() => {
+                      setSelectedCategory((current) => (current === item.title ? null : item.title));
+                      setActiveNav("Categories");
+                    }}
+                  >
                     <Crop className={item.crop} />
                     <div>
                       <h3>{item.title}</h3>
                       <p>{item.count}</p>
                     </div>
-                  </article>
+                  </button>
                 ))}
               </div>
             </section>
@@ -352,43 +445,79 @@ export default function MainPage() {
                     {item}
                   </p>
                 ))}
-                <button>Upgrade Now</button>
+                <button onClick={() => openPanel("Upgrade to Pro")}>Upgrade Now</button>
               </div>
             </section>
 
             <section className="side-card">
-              <SectionTitle icon={null} title="Top Creators" />
+              <SectionTitle icon={null} title="Top Creators" onViewAll={() => openPanel("Creator leaderboard")} />
               <div className="creator-list">
                 {creators.map((creator) => (
-                  <div className="creator-row" key={creator.name}>
+                  <button className="creator-row" key={creator.name} onClick={() => openPanel(`${creator.name} profile`)}>
                     <span className="creator-rank">{creator.rank}</span>
                     <Crop className={creator.crop} />
                     <div>
                       <strong>{creator.name}</strong>
                       <span>{creator.followers} Followers</span>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </section>
 
             <section className="side-card hot-card">
-              <SectionTitle icon={null} title="Hot Right Now" />
+              <SectionTitle icon={null} title="Hot Right Now" onViewAll={() => openPanel("Hot prompts")} />
               <div className="hot-list">
                 {hot.map((item) => (
-                  <div className="hot-row" key={item.title}>
+                  <button className="hot-row" key={item.title} onClick={() => setQuery(item.title.replace(" City", "").replace(" Character", ""))}>
                     <Crop className={item.crop} />
                     <div>
                       <strong>{item.title}</strong>
                       <span>{item.uses}</span>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </section>
           </aside>
         </div>
       </main>
+
+      {(selectedPrompt || selectedPanel) ? (
+        <div className="action-drawer" role="dialog" aria-modal="true">
+          <button className="drawer-close" aria-label="Close" onClick={() => { setSelectedPrompt(null); setSelectedPanel(null); }}>
+            <X size={18} />
+          </button>
+          {selectedPrompt ? (
+            <>
+              <div className="drawer-art">
+                <Crop className={selectedPrompt.crop} />
+              </div>
+              <h2>{selectedPrompt.title}</h2>
+              <p>{selectedPrompt.model} prompt by {"author" in selectedPrompt ? selectedPrompt.author : "PromptHub"}</p>
+              <div className="drawer-actions">
+                <button onClick={() => toggleSet(setSaved, saved, selectedPrompt.title)}>
+                  {saved.has(selectedPrompt.title) ? "Saved" : "Save"}
+                </button>
+                <button onClick={() => toggleSet(setLiked, liked, selectedPrompt.title)}>
+                  {liked.has(selectedPrompt.title) ? "Liked" : "Like"}
+                </button>
+                <button onClick={() => openPanel("Checkout")}>Buy Prompt</button>
+              </div>
+            </>
+          ) : (
+            <>
+              <h2>{selectedPanel}</h2>
+              <p>{selectedPanel === "Create Prompt" ? "The creator flow is ready for the next marketplace step." : `Opened ${selectedPanel}.`}</p>
+              <div className="drawer-actions">
+                {allPrompts.slice(0, 3).map((item) => (
+                  <button key={item.title} onClick={() => setSelectedPrompt(item)}>{item.title}</button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      ) : null}
     </div>
   );
 }
