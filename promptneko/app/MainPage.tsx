@@ -4,16 +4,13 @@ import { useState } from "react";
 import { MarketplaceLayout } from "./components/MarketplaceLayout";
 import { HomePage } from "./components/HomePage";
 import { ActionDrawer } from "./components/ActionDrawer";
-import type { PromptCardItem } from "./components/PromptCard";
 
 export default function MainPage() {
   const [query, setQuery] = useState("");
   const [activeNav, setActiveNav] = useState("Home");
-  const [selectedPrompt, setSelectedPrompt] = useState<PromptCardItem | null>(null);
   const [drawerAction, setDrawerAction] = useState<string | null>(null);
 
   function openAction(action: string) {
-    setSelectedPrompt(null);
     setDrawerAction(action);
   }
 
@@ -29,16 +26,13 @@ export default function MainPage() {
       }}
     >
       <HomePage 
-        onAction={openAction} 
-        setSelectedPrompt={setSelectedPrompt} 
         setDrawerAction={setDrawerAction} 
       />
 
       <ActionDrawer 
         action={drawerAction} 
-        prompt={selectedPrompt} 
+        prompt={null} 
         onClose={() => {
-          setSelectedPrompt(null);
           setDrawerAction(null);
         }} 
       />

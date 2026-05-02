@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { ActionDrawer } from "./ActionDrawer";
 import { FilterBar } from "./FilterBar";
 import { MarketplaceLayout } from "./MarketplaceLayout";
-import { PromptCard, type PromptCardItem } from "./PromptCard";
+import { PromptCard } from "./PromptCard";
 import { ResultsTabs } from "./ResultsTabs";
 import { RightRail } from "./RightRail";
 import { promptCards } from "./marketplace-data";
@@ -18,7 +18,6 @@ export function ExplorePage() {
   const [saved, setSaved] = useState<Set<string>>(new Set());
   const [liked, setLiked] = useState<Set<string>>(new Set());
   const [drawerAction, setDrawerAction] = useState<string | null>(null);
-  const [selectedPrompt, setSelectedPrompt] = useState<PromptCardItem | null>(null);
 
   const visiblePrompts = useMemo(() => {
     const needle = query.trim().toLowerCase();
@@ -31,7 +30,6 @@ export function ExplorePage() {
 
   function openAction(action: string) {
     setActiveNav(action);
-    setSelectedPrompt(null);
     setDrawerAction(action);
   }
 
@@ -72,9 +70,8 @@ export function ExplorePage() {
                 isSaved={saved.has(prompt.title)}
                 isLiked={liked.has(prompt.title)}
                 key={prompt.title}
-                onOpen={(item) => {
+                onOpen={() => {
                   setDrawerAction(null);
-                  setSelectedPrompt(item);
                 }}
                 onSave={(title) => toggle(setSaved, saved, title)}
                 onLike={(title) => toggle(setLiked, liked, title)}
@@ -103,14 +100,9 @@ export function ExplorePage() {
         <RightRail onAction={(action) => {
           setQuery(action);
           setDrawerAction(action);
-          setSelectedPrompt(null);
         }} />
       </div>
-
-      <ActionDrawer action={drawerAction} prompt={selectedPrompt} onClose={() => {
-        setDrawerAction(null);
-        setSelectedPrompt(null);
-      }} />
+      <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
     </MarketplaceLayout>
   );
 }

@@ -10,16 +10,23 @@ import {
   Sparkles, 
   Star 
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { filterCategories, promptCards } from "./marketplace-data";
+import { promptSlug } from "./marketplace-data";
 import { RightRail } from "./RightRail";
+import type { PromptCardItem } from "./PromptCard";
 
 type HomePageProps = {
-  onAction: (action: string) => void;
-  setSelectedPrompt: (prompt: any) => void;
   setDrawerAction: (action: string | null) => void;
 };
 
-export function HomePage({ onAction, setSelectedPrompt, setDrawerAction }: HomePageProps) {
+export function HomePage({ setDrawerAction }: HomePageProps) {
+  const router = useRouter();
+
+  function openPrompt(prompt: PromptCardItem) {
+    router.push(`/prompt/${promptSlug(prompt.title)}`);
+  }
+
   return (
     <div className="flex flex-1 min-h-0 [grid-template-columns:minmax(0,1fr)_300px] lg:grid overflow-hidden">
       <section className="flex-1 min-w-0 overflow-y-auto px-5 py-3 lg:border-r lg:border-[#121930]/72">
@@ -92,7 +99,7 @@ export function HomePage({ onAction, setSelectedPrompt, setDrawerAction }: HomeP
               <div 
                 key={prompt.title} 
                 className="relative h-[216px] overflow-hidden border border-[#273056] rounded-2xl bg-[#080d19] cursor-pointer group hover:border-[#6132bf] hover:scale-[1.03] transition-all duration-300"
-                onClick={() => onAction(`Prompt: ${prompt.title}`)}
+                onClick={() => openPrompt(prompt)}
               >
                 <div className={`absolute inset-0 bg-no-repeat bg-[url('/main.png')] bg-[length:1536px_1024px] bg-[-228px_-58px] brightness-[0.8] opacity-60 group-hover:opacity-100 group-hover:brightness-100 transition-all`} style={{ backgroundPosition: `-${(i%3)*400}px -${Math.floor(i/3)*300}px` }} />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -152,7 +159,6 @@ export function HomePage({ onAction, setSelectedPrompt, setDrawerAction }: HomeP
       </section>
 
       <RightRail onAction={(action) => {
-        setSelectedPrompt(null);
         setDrawerAction(action);
       }} />
     </div>

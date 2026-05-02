@@ -90,6 +90,17 @@ export const promptCards = [
   { title: "Space Station", model: "Midjourney", author: "@galactic.visuals", likes: "1.1K", crop: "shot-card-12", category: "Concept Art", video: false },
 ];
 
+export function promptSlug(title: string) {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+export function findPromptBySlug(slug: string) {
+  return promptCards.find((prompt) => promptSlug(prompt.title) === slug) ?? promptCards[1];
+}
+
 export const trendingSearches = [
   { title: "Cyberpunk City", subtitle: "24.5K searches", change: "126%" },
   { title: "Anime Girl", subtitle: "18.7K searches", change: "94%" },

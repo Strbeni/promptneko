@@ -1,7 +1,9 @@
 "use client";
 
 import { Bookmark, Heart, Play } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { CropImage } from "./CropImage";
+import { promptSlug } from "./marketplace-data";
 
 export type PromptCardItem = {
   title: string;
@@ -23,10 +25,15 @@ type PromptCardProps = {
 };
 
 export function PromptCard({ item, isSaved, isLiked, onOpen, onSave, onLike }: PromptCardProps) {
+  const router = useRouter();
+
   return (
     <div 
       className="relative h-[198px] overflow-hidden border border-[#202a4d] rounded-2xl bg-[#0a1020] cursor-pointer transition-all hover:border-[#6132bf] hover:-translate-y-px hover:shadow-xl duration-300"
-      onClick={() => onOpen(item)}
+      onClick={() => {
+        onOpen(item);
+        router.push(`/prompt/${promptSlug(item.title)}`);
+      }}
     >
       <CropImage className={item.crop} />
       
