@@ -56,18 +56,12 @@ button,
 }
 
 .prompt-shell {
-  position: fixed;
-  inset: 0;
   display: flex;
   width: 100vw;
   height: 100vh;
   background:
     radial-gradient(circle at 72% 0%, rgba(81, 44, 173, 0.15), transparent 30%),
     linear-gradient(180deg, #050813 0%, #07101b 100%);
-}
-
-.prompt-shell.light-mode {
-  filter: brightness(1.08) saturate(0.92);
 }
 
 .left-sidebar {
@@ -89,14 +83,6 @@ button,
   font-size: 22px;
   font-weight: 760;
   letter-spacing: -0.01em;
-}
-
-.brand-button {
-  width: 100%;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  text-align: left;
 }
 
 .brand-mark {
@@ -173,10 +159,6 @@ button,
 
 .credits-top {
   display: flex;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  background: transparent;
   justify-content: space-between;
   color: #c7cce0;
   font-size: 11px;
@@ -220,16 +202,6 @@ button,
   color: #ccd5ee;
 }
 
-.sidebar-tools button,
-.profile,
-.creator-row,
-.hot-row,
-.stat {
-  border: 0;
-  background: transparent;
-  color: inherit;
-}
-
 .content {
   display: flex;
   min-width: 0;
@@ -258,22 +230,6 @@ button,
   background: #0b1020;
   color: #8990aa;
   font-size: 13px;
-}
-
-.top-search input,
-.hero-search input {
-  flex: 1;
-  min-width: 0;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: white;
-  font: inherit;
-}
-
-.top-search input::placeholder,
-.hero-search input::placeholder {
-  color: #8990aa;
 }
 
 .top-search span {
@@ -334,8 +290,6 @@ button,
   align-items: center;
   gap: 10px;
   min-width: 153px;
-  padding: 0;
-  text-align: left;
 }
 
 .profile .shot-crop {
@@ -494,12 +448,6 @@ button,
   font-size: 11px;
 }
 
-.tags button.active,
-.category-card.active {
-  border-color: #7b3cff;
-  box-shadow: inset 0 0 0 1px rgba(123, 60, 255, 0.6), 0 0 24px rgba(123, 60, 255, 0.18);
-}
-
 .stats {
   position: relative;
   display: grid;
@@ -518,7 +466,6 @@ button,
   align-content: center;
   column-gap: 15px;
   padding-left: 32px;
-  text-align: left;
 }
 
 .stat:not(:last-of-type)::after {
@@ -670,10 +617,6 @@ section {
   color: white;
 }
 
-.save-button.active {
-  color: #ffbd27;
-}
-
 .model-pill {
   position: absolute;
   left: 13px;
@@ -714,15 +657,6 @@ section {
   font-size: 10px;
 }
 
-.card-meta button,
-.likes button {
-  border: 0;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  padding: 0;
-}
-
 .author-dot {
   width: 13px;
   height: 13px;
@@ -735,11 +669,6 @@ section {
   align-items: center;
   gap: 5px;
   margin-left: auto;
-}
-
-.likes.active,
-.likes.active svg {
-  color: #f0378e;
 }
 
 .likes svg {
@@ -813,8 +742,6 @@ section {
 .category-card {
   position: relative;
   height: 70px;
-  width: 100%;
-  text-align: left;
 }
 
 .category-card > div:last-child {
@@ -893,7 +820,6 @@ section {
 
 .creator-row {
   display: grid;
-  width: 100%;
   grid-template-columns: 24px 36px 1fr;
   align-items: center;
   gap: 10px;
@@ -939,92 +865,11 @@ section {
 
 .hot-row {
   display: grid;
-  width: 100%;
   grid-template-columns: 41px 1fr;
   align-items: center;
   gap: 11px;
   min-height: 47px;
   border-bottom: 1px solid rgba(31, 39, 68, 0.55);
-}
-
-.interactive-card {
-  cursor: pointer;
-  transition: border-color 160ms ease, transform 160ms ease;
-}
-
-.interactive-card:hover,
-.creator-row:hover,
-.hot-row:hover,
-.nav-item:hover,
-.section-title button:hover {
-  border-color: #6241b7;
-}
-
-.interactive-card:hover {
-  transform: translateY(-1px);
-}
-
-.action-drawer {
-  position: fixed;
-  right: 22px;
-  bottom: 22px;
-  z-index: 10;
-  width: 330px;
-  padding: 14px;
-  border: 1px solid #35215c;
-  border-radius: 8px;
-  background: #090e1c;
-  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.45);
-}
-
-.drawer-close {
-  position: absolute;
-  top: 9px;
-  right: 9px;
-  display: grid;
-  width: 28px;
-  height: 28px;
-  place-items: center;
-  border-radius: 6px;
-  background: #141b31;
-}
-
-.drawer-art {
-  height: 130px;
-  overflow: hidden;
-  margin-bottom: 12px;
-  border-radius: 8px;
-}
-
-.drawer-art .shot-crop {
-  width: 100%;
-  height: 100%;
-}
-
-.action-drawer h2 {
-  margin: 0 34px 6px 0;
-  font-size: 18px;
-}
-
-.action-drawer p {
-  margin: 0 0 12px;
-  color: #b4bbcf;
-  font-size: 12px;
-}
-
-.drawer-actions {
-  display: grid;
-  gap: 8px;
-}
-
-.drawer-actions button {
-  min-height: 34px;
-  padding: 0 12px;
-  border: 1px solid #2a1f58;
-  border-radius: 7px;
-  background: #10152a;
-  color: #d8ddf2;
-  text-align: left;
 }
 
 .hot-row:last-child {
