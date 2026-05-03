@@ -28,7 +28,24 @@ export const sidebarGroups = [
     items: [
       { label: "Home", icon: Home, href: "/" },
       { label: "Explore", icon: Compass, href: "/explore" },
-      { label: "Categories", icon: Grid2X2, href: "/categories" },
+      { 
+        label: "Categories", 
+        icon: Grid2X2, 
+        href: "/categories",
+        children: [
+          { label: "Art", href: "/art" },
+          { label: "Logos", href: "/logos" },
+          { label: "Productivity", href: "/productivity" },
+          { label: "Marketing", href: "/marketing" },
+          { label: "Content", href: "/content" },
+          { label: "Viral Videos", href: "/viral-videos" },
+          { label: "Coding", href: "/coding" },
+          { label: "Projects", href: "/projects" },
+          { label: "Image Generation", href: "/image-generation" },
+          { label: "Video Generation", href: "/video-generation" },
+        ]
+      },
+
       { label: "Models", icon: Cuboid, href: "/models" },
       { label: "Collections", icon: Briefcase, href: "/collections" },
       { label: "Top Prompts", icon: Star, href: "/top-prompts" },
@@ -43,15 +60,15 @@ export const sidebarGroups = [
       { label: "Tools", icon: WandSparkles, href: "/tools" },
     ],
   },
-  {
-    title: "Community",
-    items: [
-      { label: "Feed", icon: SlidersHorizontal, href: "/feed" },
-      { label: "Discussions", icon: MessageCircle, href: "/discussions" },
-      { label: "Events", icon: Calendar, href: "/events" },
-      { label: "Leaderboard", icon: Boxes, href: "/leaderboard" },
-    ],
-  },
+  // {
+  //   title: "Community",
+  //   items: [
+  //     { label: "Feed", icon: SlidersHorizontal, href: "/feed" },
+  //     { label: "Discussions", icon: MessageCircle, href: "/discussions" },
+  //     { label: "Events", icon: Calendar, href: "/events" },
+  //     { label: "Leaderboard", icon: Boxes, href: "/leaderboard" },
+  //   ],
+  // },
   {
     title: "Your Space",
     items: [

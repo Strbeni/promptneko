@@ -55,6 +55,22 @@ button,
   border-radius: 999px;
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #27304f;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #36426a;
+  background-clip: padding-box;
+}
+
 .prompt-shell {
   display: flex;
   width: 100vw;
