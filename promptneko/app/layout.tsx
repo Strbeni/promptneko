@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import "./globals copy.css";
-
+// Note: globals copy.css removed — dark theme replaced by CSS variable system
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +14,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PromptNeko - Find Prompts For Any Task",
-  description: "Discover, save, and buy marketplace prompts for creative AI workflows.",
+  title: "PromptHub — Discover AI Prompts That Create Incredible Results",
+  description: "The best curated platform to discover AI prompts for websites, branding, ads, videos, social media, and more. Output-first. Inspiration-driven.",
+  keywords: ["AI prompts", "prompt marketplace", "AI workflows", "branding prompts", "UI design prompts", "viral AI content"],
+  openGraph: {
+    title: "PromptHub — Discover AI Prompts That Create Incredible Results",
+    description: "Curated AI prompts for websites, branding, product ads, viral reels, anime art, and coding.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

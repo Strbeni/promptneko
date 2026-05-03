@@ -7,7 +7,6 @@ import { FilterBar } from "./FilterBar";
 import { MarketplaceLayout } from "./MarketplaceLayout";
 import { PromptCard } from "./PromptCard";
 import { ResultsTabs } from "./ResultsTabs";
-import { RightRail } from "./RightRail";
 import { promptCards } from "./marketplace-data";
 
 export function ExplorePage() {
@@ -22,7 +21,7 @@ export function ExplorePage() {
   const visiblePrompts = useMemo(() => {
     const needle = query.trim().toLowerCase();
     return promptCards.filter((prompt) => {
-      const matchesQuery = !needle || `${prompt.title} ${prompt.model} ${prompt.author} ${prompt.category}`.toLowerCase().includes(needle);
+      const matchesQuery = !needle || `${prompt.title} ${prompt.creator} ${prompt.category}`.toLowerCase().includes(needle);
       const matchesCategory = selectedCategory === "All" || prompt.category === selectedCategory;
       return matchesQuery && matchesCategory;
     });
@@ -35,11 +34,8 @@ export function ExplorePage() {
 
   function toggle(setter: (value: Set<string>) => void, current: Set<string>, key: string) {
     const next = new Set(current);
-    if (next.has(key)) {
-      next.delete(key);
-    } else {
-      next.add(key);
-    }
+    if (next.has(key)) next.delete(key);
+    else next.add(key);
     setter(next);
   }
 
@@ -51,56 +47,82 @@ export function ExplorePage() {
       onSearch={() => openAction(query ? `Search: ${query}` : "Search")}
       onAction={openAction}
     >
-      <div className="flex flex-1 min-h-0 [grid-template-columns:minmax(0,1fr)_300px] lg:grid">
-        <section className="flex-1 min-w-0 overflow-y-auto px-5 py-3 pb-7 lg:border-r lg:border-[#121930]/72">
-          <FilterBar
-            query={query}
-            selectedCategory={selectedCategory}
-            onQueryChange={setQuery}
-            onCategoryChange={(category) => setSelectedCategory(category)}
-            onAction={openAction}
-          />
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0, overflow: "hidden", background: "var(--bg)" }}>
+        <section style={{ flex: 1, minWidth: 0, overflowY: "auto", padding: "24px 32px 60px" }}>
+          <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+            <FilterBar
+              query={query}
+              selectedCategory={selectedCategory}
+              onQueryChange={setQuery}
+              onCategoryChange={(category) => setSelectedCategory(category)}
+              onAction={openAction}
+            />
 
-          <ResultsTabs activeTab={activeTab} onTabChange={setActiveTab} />
+            <ResultsTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
-          <div className="grid grid-cols-4 gap-x-2 gap-y-3">
-            {(visiblePrompts.length ? visiblePrompts : promptCards).map((prompt) => (
-              <PromptCard
-                item={prompt}
-                isSaved={saved.has(prompt.title)}
-                isLiked={liked.has(prompt.title)}
-                key={prompt.title}
-                onOpen={() => {
-                  setDrawerAction(null);
-                }}
-                onSave={(title) => toggle(setSaved, saved, title)}
-                onLike={(title) => toggle(setLiked, liked, title)}
-              />
-            ))}
-          </div>
+            <div style={{ 
+              display: "grid", 
+              gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", 
+              gap: "20px",
+              marginBottom: "40px"
+            }}>
+              {(visiblePrompts.length ? visiblePrompts : promptCards).map((prompt) => (
+                <PromptCard
+                  item={prompt}
+                  isSaved={saved.has(prompt.title)}
+                  isLiked={liked.has(prompt.title)}
+                  key={prompt.title}
+                  onOpen={() => setDrawerAction(null)}
+                  onSave={(title) => toggle(setSaved, saved, title)}
+                  onLike={(title) => toggle(setLiked, liked, title)}
+                />
+              ))}
+            </div>
 
-          <footer className="flex items-center justify-center h-[60px] mt-4 gap-[9px] border border-[#151d37] border-t-0 rounded-[8px] bg-[#090e1b]">
-            <button aria-label="Previous page" className="grid place-items-center min-w-[30px] h-[30px] border border-[#1a2340] rounded-[7px] bg-[#0e1427] text-[#a5aec7] hover:text-white"><ChevronLeft size={17} /></button>
-            {[1, 2, 3, 4, 5].map((page) => (
-              <button 
-                className={`grid place-items-center min-w-[30px] h-[30px] border rounded-[7px] text-[12px] 
-                  ${page === 1 ? "border-[#7332f3] bg-[#682ee2] text-white" : "border-[#1a2340] bg-[#0e1427] text-[#a5aec7]"}`} 
-                key={page}
-              >
-                {page}
+            {/* Pagination */}
+            <footer style={{ 
+              display: "flex", 
+              alignItems: "center", 
+              justifyContent: "center", 
+              gap: "10px", 
+              marginTop: "48px", 
+              paddingTop: "32px", 
+              borderTop: "1px solid var(--border-soft)" 
+            }}>
+              <button style={{ 
+                display: "flex", alignItems: "center", justifyContent: "center", 
+                width: "36px", height: "36px", borderRadius: "10px", 
+                border: "1px solid var(--border)", background: "var(--surface)", 
+                color: "var(--text-secondary)", cursor: "pointer", transition: "all 0.2s" 
+              }}>
+                <ChevronLeft size={18} />
               </button>
-            ))}
-            <button className="grid place-items-center min-w-[30px] h-[30px] border border-[#1a2340] rounded-7 bg-[#0e1427] text-[#a5aec7]">1059</button>
-            <button aria-label="Next page" className="grid place-items-center min-w-[30px] h-[30px] border border-[#1a2340] rounded-7 bg-[#0e1427] text-[#a5aec7] hover:text-white"><ChevronRight size={17} /></button>
-            <span className="ml-auto text-[#8f98b4] text-[12px]">Go to page</span>
-            <button className="grid place-items-center min-w-[30px] h-[30px] border border-[#1a2340] rounded-7 bg-[#0e1427] text-[#a5aec7]">1</button>
-          </footer>
+              {[1, 2, 3, 4, 5].map((page) => (
+                <button
+                  key={page}
+                  style={{
+                    display: "flex", alignItems: "center", justifyContent: "center", 
+                    width: "36px", height: "36px", borderRadius: "10px", 
+                    fontSize: "13px", fontWeight: 600, cursor: "pointer", transition: "all 0.2s",
+                    ...(page === 1 
+                      ? { background: "var(--accent)", color: "white", border: "1px solid var(--accent)", boxShadow: "0 4px 12px rgba(123,60,255,0.3)" } 
+                      : { border: "1px solid var(--border)", background: "var(--surface)", color: "var(--text-secondary)" })
+                  }}
+                >
+                  {page}
+                </button>
+              ))}
+              <button style={{ 
+                display: "flex", alignItems: "center", justifyContent: "center", 
+                width: "36px", height: "36px", borderRadius: "10px", 
+                border: "1px solid var(--border)", background: "var(--surface)", 
+                color: "var(--text-secondary)", cursor: "pointer", transition: "all 0.2s" 
+              }}>
+                <ChevronRight size={18} />
+              </button>
+            </footer>
+          </div>
         </section>
-
-        <RightRail onAction={(action) => {
-          setQuery(action);
-          setDrawerAction(action);
-        }} />
       </div>
       <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
     </MarketplaceLayout>

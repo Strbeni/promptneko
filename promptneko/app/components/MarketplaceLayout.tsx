@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { TopBar } from "./TopBar";
 
@@ -14,21 +14,35 @@ type MarketplaceLayoutProps = {
 };
 
 export function MarketplaceLayout({ activeNav, query, children, onQueryChange, onSearch, onAction }: MarketplaceLayoutProps) {
-  const [credits, setCredits] = useState(1250);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  // Apply theme to document
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  function toggleTheme() {
+    setTheme((t) => (t === "light" ? "dark" : "light"));
+  }
 
   return (
-    <div className="fixed inset-0 flex w-screen h-screen overflow-hidden bg-[#060913] text-[#f4f1ff] [background:radial-gradient(circle_at_72%_0%,rgba(81,44,173,0.15),transparent_30%),linear-gradient(180deg,#050813_0%,#07101b_100%)]">
+    <div
+      className="fixed inset-0 flex w-screen h-screen overflow-hidden"
+      style={{ background: "var(--bg)" }}
+    >
       <Sidebar
         active={activeNav}
-        credits={credits}
+        theme={theme}
         onAction={onAction}
-        onTopUp={() => {
-          setCredits((value) => value + 250);
-          onAction("250 credits added");
-        }}
+        onToggleTheme={toggleTheme}
       />
-      <main className="flex flex-col flex-1 min-w-0">
-        <TopBar query={query} onQueryChange={onQueryChange} onSearch={onSearch} onAction={onAction} />
+      <main className="flex flex-col flex-1 min-w-0" style={{ background: "var(--bg)" }}>
+        <TopBar
+          query={query}
+          onQueryChange={onQueryChange}
+          onSearch={onSearch}
+          onAction={onAction}
+        />
         {children}
       </main>
     </div>

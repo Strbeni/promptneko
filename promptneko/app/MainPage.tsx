@@ -25,16 +25,14 @@ export default function MainPage() {
         openAction(action);
       }}
     >
-      <HomePage 
-        setDrawerAction={setDrawerAction} 
-      />
+      <HomePage setDrawerAction={setDrawerAction} />
 
-      <ActionDrawer 
-        action={drawerAction} 
-        prompt={null} 
+      <ActionDrawer
+        action={drawerAction}
+        prompt={null}
         onClose={() => {
           setDrawerAction(null);
-        }} 
+        }}
       />
     </MarketplaceLayout>
   );

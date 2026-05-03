@@ -2,7 +2,6 @@
 
 import { Bell, Command, MessageSquare, Plus, Search } from "lucide-react";
 import { FormEvent } from "react";
-import { CropImage } from "./CropImage";
 
 type TopBarProps = {
   query: string;
@@ -12,61 +11,69 @@ type TopBarProps = {
 };
 
 export function TopBar({ query, onQueryChange, onSearch, onAction }: TopBarProps) {
-  function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    onSearch();
-  }
+  function submit(e: FormEvent<HTMLFormElement>) { e.preventDefault(); onSearch(); }
 
   return (
-    <header className="flex items-center h-[58px] gap-[22px] px-5 pt-[11px] border-b border-[#141b31]">
-      <form className="flex items-center w-[min(386px,32vw)] h-[34px] gap-3 px-[13px] border border-[#202746] rounded-xl bg-[#0b1020] text-[#8990aa] text-[13px] transition-all focus-within:border-[#7b3cff] focus-within:shadow-[0_0_15px_rgba(123,60,255,0.15)]" onSubmit={submit}>
-        <Search size={18} />
-        <input 
-          className="flex-1 min-w-0 bg-transparent border-0 outline-none text-white font-inherit placeholder-[#8990aa]" 
-          value={query} 
-          onChange={(event) => onQueryChange(event.target.value)} 
-          placeholder="Search prompts, models, users..." 
+    <header style={{
+      display: "flex", alignItems: "center", height: 50, gap: 14, padding: "0 18px",
+      borderBottom: "1px solid var(--border-soft)", background: "var(--surface)", flexShrink: 0,
+    }}>
+      {/* Search */}
+      <form onSubmit={submit} style={{
+        display: "flex", alignItems: "center", gap: 8, width: "min(360px,32vw)", height: 34,
+        padding: "0 12px", border: "1px solid var(--border)", borderRadius: 10,
+        background: "var(--bg-alt)", fontSize: 13, color: "var(--text-muted)",
+      }}>
+        <Search size={14} style={{ flexShrink: 0 }} />
+        <input
+          value={query} onChange={(e) => onQueryChange(e.target.value)}
+          placeholder='Search for anything... e.g. "product ad", "anime girl"'
+          style={{ flex: 1, border: 0, outline: "none", background: "transparent", color: "var(--text-primary)", font: "inherit" }}
         />
-        <kbd className="px-2 py-[2px] border border-[#29314f] rounded-lg bg-[#12182a] text-[#abb1c8] text-[11px] leading-none">
-          <Command size={12} className="inline mr-1" />/
+        <kbd style={{
+          padding: "2px 6px", border: "1px solid var(--border)", borderRadius: 5,
+          background: "var(--surface)", color: "var(--text-muted)", fontSize: 10, lineHeight: 1, display: "flex", alignItems: "center", gap: 2,
+        }}>
+          <Command size={9} />/
         </kbd>
       </form>
 
-      <button 
-        className="flex items-center h-[34px] gap-[9px] ml-auto px-[17px] rounded-xl text-white text-[13px] font-bold cursor-pointer [background:linear-gradient(180deg,#8751ff_0%,#6530e9_100%)] [box-shadow:0_0_24px_rgba(112,61,255,0.34)] transition-all hover:brightness-110 hover:scale-[1.02]" 
-        onClick={() => onAction("Create Prompt")}
-      >
-        <Plus size={18} />
-        Create Prompt
+      {/* Create */}
+      <button onClick={() => onAction("Create Prompt")} style={{
+        display: "flex", alignItems: "center", gap: 6, height: 34, padding: "0 14px", marginLeft: "auto",
+        borderRadius: 9, background: "linear-gradient(135deg,#7B3CFF,#9B6DFF)", color: "white",
+        fontSize: 13, fontWeight: 600, boxShadow: "0 2px 8px rgba(123,60,255,0.3)",
+      }}>
+        <Plus size={15} strokeWidth={2.5} /> Create Prompt
       </button>
 
-      <button 
-        className="relative grid place-items-center w-[27px] h-[34px] bg-transparent border-0 cursor-pointer text-[#d8def2]" 
-        aria-label="Notifications" 
-        onClick={() => onAction("Notifications")}
-      >
-        <Bell size={20} />
-        <span className="absolute top-[2px] right-[1px] grid place-items-center w-[14px] h-[14px] rounded-full bg-[#ed3b76] text-white text-[9px] font-bold">
-          3
-        </span>
+      {/* Icons */}
+      <button onClick={() => onAction("Notifications")} aria-label="Notifications" style={{
+        position: "relative", width: 32, height: 32, borderRadius: 8, display: "flex",
+        alignItems: "center", justifyContent: "center", border: "1px solid var(--border)", background: "var(--surface)",
+      }}>
+        <Bell size={15} style={{ color: "var(--text-secondary)" }} />
+        <span style={{ position: "absolute", top: 5, right: 5, width: 6, height: 6, borderRadius: "50%", background: "#EF4444" }} />
+      </button>
+      <button onClick={() => onAction("Messages")} aria-label="Messages" style={{
+        width: 32, height: 32, borderRadius: 8, display: "flex",
+        alignItems: "center", justifyContent: "center", border: "1px solid var(--border)", background: "var(--surface)",
+      }}>
+        <MessageSquare size={15} style={{ color: "var(--text-secondary)" }} />
       </button>
 
-      <button 
-        className="grid place-items-center w-[27px] h-[34px] bg-transparent border-0 cursor-pointer text-[#d8def2]" 
-        aria-label="Messages" 
-        onClick={() => onAction("Messages")}
-      >
-        <MessageSquare size={20} />
-      </button>
-
-      <button 
-        className="flex items-center gap-[10px] min-width-[153px] p-0 bg-transparent border-0 text-left cursor-pointer text-inherit" 
-        onClick={() => onAction("Profile menu")}
-      >
-        <CropImage className="w-[38px] h-[38px] rounded-full" />
-        <span className="flex flex-col">
-          <strong className="block text-white text-[14px] leading-[1.05]">Lunaria</strong>
-          <em className="inline-block mt-[2px] px-[6px] py-[1px] rounded-5 bg-[#4e36a1] text-white text-[10px] font-bold not-italic">Pro</em>
+      {/* Profile */}
+      <button onClick={() => onAction("Profile menu")} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div style={{
+          width: 32, height: 32, borderRadius: "50%", background: "linear-gradient(135deg,#7B3CFF,#9B6DFF)",
+          display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: 12, fontWeight: 700,
+        }}>L</div>
+        <span style={{ display: "flex", flexDirection: "column", textAlign: "left" }}>
+          <strong style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.1, color: "var(--text-primary)" }}>Lunaria</strong>
+          <em style={{
+            display: "inline-block", width: "fit-content", marginTop: 2, padding: "1px 6px", borderRadius: 999,
+            background: "linear-gradient(135deg,#7B3CFF,#9B6DFF)", color: "white", fontSize: 9, fontWeight: 700, fontStyle: "normal",
+          }}>Pro</em>
         </span>
       </button>
     </header>

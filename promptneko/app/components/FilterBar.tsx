@@ -2,7 +2,7 @@
 
 import { ChevronDown, ChevronRight, SlidersHorizontal, Search } from "lucide-react";
 import { FormEvent } from "react";
-import { filterCategories } from "./marketplace-data";
+import { useCaseCategories } from "./marketplace-data";
 
 type FilterBarProps = {
   query: string;
@@ -20,65 +20,88 @@ export function FilterBar({ query, selectedCategory, onQueryChange, onCategoryCh
 
   return (
     <>
-      <div className="mb-4 ml-[3px]">
-        <h1 className="m-0 text-white text-[25px] font-[780] tracking-0 leading-[1.15]">Explore</h1>
-        <p className="mt-[5px] text-[#8f98b3] text-[13px]">Discover amazing prompts from our community</p>
+      <div style={{ marginBottom: "24px" }}>
+        <h1 style={{ fontSize: "28px", fontWeight: 800, tracking: "-0.04em", color: "var(--text-primary)", marginBottom: "4px" }}>Explore</h1>
+        <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>Discover the best curated AI prompts from our community</p>
       </div>
 
-      <div className="grid grid-cols-[minmax(240px,1.55fr)_repeat(4,minmax(130px,0.75fr))_108px] gap-2 mx-[3px] mb-5">
-        <form className="flex items-center h-[37px] px-4 gap-3 border border-[#1d2545] rounded-xl bg-[#0c1122] text-[#c5ccdd] text-[12px]" onSubmit={submit}>
-          <input 
-            className="flex-1 bg-transparent border-0 outline-none text-white placeholder-[#8990aa]" 
-            value={query} 
-            onChange={(event) => onQueryChange(event.target.value)} 
-            placeholder="Search prompts..." 
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
+        <form
+          style={{ 
+            display: "flex", alignItems: "center", flex: 1, maxWidth: "420px", height: "42px", 
+            padding: "0 16px", gap: "10px", transition: "all 0.2s",
+            border: "1px solid var(--border)", borderRadius: "12px", background: "var(--surface)", 
+            color: "var(--text-muted)", fontSize: "14px",
+            boxShadow: "var(--shadow-sm)"
+          }}
+          onSubmit={submit}
+        >
+          <Search size={16} style={{ flexShrink: 0, color: "var(--text-muted)" }} />
+          <input
+            style={{ flex: 1, bg: "transparent", border: 0, outline: "none", color: "var(--text-primary)", font: "inherit", background: "transparent" }}
+            value={query}
+            onChange={(event) => onQueryChange(event.target.value)}
+            placeholder="Search thousands of prompts..."
           />
-          <Search className="text-[#aeb7d2]" size={18} />
         </form>
-        {["All Categories", "All Models", "All Pricing", "All Languages"].map((label) => (
-          <button 
-            className="flex items-center justify-between h-[37px] px-[13px] border border-[#1d2545] rounded-xl bg-[#0c1122] text-[#c5ccdd] text-[12px] cursor-pointer hover:border-[#3d2875] transition-all" 
-            key={label} 
+        {["Category", "Sort by", "Tags"].map((label) => (
+          <button
+            key={label}
+            style={{ 
+              display: "flex", alignItems: "center", gap: "8px", h: "42px", px: "14px", 
+              height: "42px", padding: "0 14px",
+              fontSize: "13px", fontWeight: 500, transition: "all 0.2s",
+              border: "1px solid var(--border)", borderRadius: "12px", background: "var(--surface)", 
+              color: "var(--text-secondary)", cursor: "pointer"
+            }}
             onClick={() => onAction(label)}
           >
-            {label}
-            <ChevronDown size={15} />
+            {label} <ChevronDown size={14} />
           </button>
         ))}
-        <button 
-          className="flex items-center justify-center h-[37px] gap-2 border border-[#3d2875] rounded-xl bg-[#0c1122] text-[#c5ccdd] text-[12px] cursor-pointer hover:bg-[#1a1c3d] transition-all" 
+        <button
+          style={{ 
+            display: "flex", alignItems: "center", gap: "8px", height: "42px", padding: "0 16px", 
+            fontSize: "13px", fontWeight: 600, marginLeft: "auto", transition: "all 0.2s",
+            border: "1px solid var(--accent-border)", borderRadius: "12px", background: "var(--accent-soft)", 
+            color: "var(--accent)", cursor: "pointer"
+          }}
           onClick={() => onAction("Filters")}
         >
-          <SlidersHorizontal size={17} />
-          Filters
+          <SlidersHorizontal size={16} /> Filters
         </button>
       </div>
 
-      <div className="relative grid grid-cols-[68px_repeat(8,minmax(95px,1fr))_28px] gap-2 mb-[15px] p-2 border border-[#151d37] rounded-2xl bg-[#080d1a]">
-        {filterCategories.map(({ icon: Icon, label, count }) => (
-          <button 
-            className={`grid grid-cols-[26px_minmax(0,1fr)] grid-rows-[16px_15px] items-center min-w-0 h-[48px] gap-x-2 px-[9px] py-[7px] border rounded-xl text-left transition-all
-              ${selectedCategory === label 
-                ? "border-[#7b3cff] [box-shadow:inset_0_0_0_1px_rgba(122,53,255,0.45),0_0_28px_rgba(122,53,255,0.15)] text-white" 
-                : "border-[#1b2544] bg-[#0f1428] text-[#d8ddec] hover:border-[#3d2875] hover:bg-white/[0.02]"}`} 
-            key={label} 
+      {/* Category pills */}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px", overflowX: "auto", paddingBottom: "8px" }} className="custom-scrollbar">
+        <button
+          style={{
+            flexShrink: 0, height: "32px", padding: "0 16px", borderRadius: "99px", 
+            fontSize: "12px", fontWeight: 600, transition: "all 0.2s", cursor: "pointer",
+            ...(selectedCategory === "All"
+              ? { background: "var(--accent)", color: "white", boxShadow: "0 4px 10px rgba(123,60,255,0.25)" }
+              : { border: "1px solid var(--border)", background: "var(--surface)", color: "var(--text-secondary)" })
+          }}
+          onClick={() => onCategoryChange("All")}
+        >
+          All
+        </button>
+        {useCaseCategories.map(({ label, icon: Icon }) => (
+          <button
+            key={label}
+            style={{
+              flexShrink: 0, display: "flex", alignItems: "center", gap: "6px", 
+              height: "32px", padding: "0 16px", borderRadius: "99px", 
+              fontSize: "12px", fontWeight: 600, transition: "all 0.2s", cursor: "pointer",
+              ...(selectedCategory === label
+                ? { background: "var(--accent)", color: "white", boxShadow: "0 4px 10px rgba(123,60,255,0.25)" }
+                : { border: "1px solid var(--border)", background: "var(--surface)", color: "var(--text-secondary)" })
+            }}
             onClick={() => onCategoryChange(label)}
           >
-            <span className={`grid place-items-center w-[26px] h-[26px] row-span-2 rounded-lg 
-              ${selectedCategory === label ? "bg-[#7a35ff]/28 text-white" : "bg-[#171d35] text-[#bcc5de]"}`}>
-              <Icon size={18} />
-            </span>
-            <strong className="overflow-hidden text-[11px] font-[720] truncate">{label}</strong>
-            <small className="text-[#808aa5] text-[11px]">{count}</small>
+            <Icon size={13} /> {label}
           </button>
         ))}
-        <button 
-          className="grid place-items-center h-[48px] rounded-xl bg-[#10162a] text-[#a5aec8] hover:text-white cursor-pointer border-0 transition-all hover:bg-white/[0.05]" 
-          onClick={() => onAction("More categories")} 
-          aria-label="More categories"
-        >
-          <ChevronRight size={20} />
-        </button>
       </div>
     </>
   );
