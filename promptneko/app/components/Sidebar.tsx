@@ -9,7 +9,7 @@ import Link from "next/link";
 
 type SidebarProps = {
   active: string;
-  theme: "light" | "dark";
+  theme: "light";
   onAction: (action: string) => void;
   onToggleTheme: () => void;
 };

@@ -14,7 +14,7 @@ type MarketplaceLayoutProps = {
 };
 
 export function MarketplaceLayout({ activeNav, query, children, onQueryChange, onSearch, onAction }: MarketplaceLayoutProps) {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   // Apply theme to document
   useEffect(() => {
