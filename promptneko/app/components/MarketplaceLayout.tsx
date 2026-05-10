@@ -27,8 +27,7 @@ export function MarketplaceLayout({ activeNav, query, children, onQueryChange, o
 
   return (
     <div
-      className="fixed inset-0 flex w-screen h-screen overflow-hidden"
-      style={{ background: "var(--bg)" }}
+      className="prompt-shell fixed inset-0 flex overflow-hidden"
     >
       <Sidebar
         active={activeNav}
@@ -36,7 +35,7 @@ export function MarketplaceLayout({ activeNav, query, children, onQueryChange, o
         onAction={onAction}
         onToggleTheme={toggleTheme}
       />
-      <main className="flex flex-col flex-1 min-w-0" style={{ background: "var(--bg)" }}>
+      <main className="content flex-1 min-w-0 flex flex-col">
         <TopBar
           query={query}
           onQueryChange={onQueryChange}

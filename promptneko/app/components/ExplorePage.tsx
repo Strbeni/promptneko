@@ -47,9 +47,8 @@ export function ExplorePage() {
       onSearch={() => openAction(query ? `Search: ${query}` : "Search")}
       onAction={openAction}
     >
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0, overflow: "hidden", background: "var(--bg)" }}>
-        <section style={{ flex: 1, minWidth: 0, overflowY: "auto", padding: "24px 32px 60px" }}>
-          <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+      <section className="main-scroll" style={{ background: "var(--bg)" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <FilterBar
               query={query}
               selectedCategory={selectedCategory}
@@ -121,9 +120,8 @@ export function ExplorePage() {
                 <ChevronRight size={18} />
               </button>
             </footer>
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
       <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
     </MarketplaceLayout>
   );

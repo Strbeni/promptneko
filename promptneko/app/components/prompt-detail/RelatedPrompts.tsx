@@ -7,21 +7,37 @@ import { promptCards, promptSlug } from "../marketplace-data";
 
 export function RelatedPrompts({ title }: { title: string }) {
   return (
-    <section className="mt-6">
-      <header className="mb-3 flex items-center justify-between">
-        <h2 className="text-[16px] font-bold text-white">{title}</h2>
-        <Link className="text-[12px] text-[#a463ff]" href="/explore">View all ›</Link>
+    <section className="mt-8">
+      <header className="mb-4 flex items-center justify-between">
+        <h2 className="text-[18px] font-700 text-[var(--text-primary)] letter-spacing-[-0.01em]">{title}</h2>
+        <Link className="text-[12px] font-600 text-[var(--accent)] hover:underline" href="/explore">View all ›</Link>
       </header>
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-4 gap-4">
         {promptCards.slice(1, 5).map((prompt) => (
-          <Link className="group relative h-[150px] overflow-hidden rounded-xl border border-[#202746] bg-[#0a1020] hover:border-[#7b3cff]" href={`/prompt/${promptSlug(prompt.title)}`} key={prompt.title}>
-            <CropImage className={`absolute inset-0 h-full w-full ${prompt.crop}`} />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/75" />
-            <Play className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-white/80" size={28} fill="currentColor" />
-            <Bookmark className="absolute right-3 top-3 z-10 text-white" size={17} />
-            <div className="absolute bottom-3 left-3 right-3 z-10">
-              <strong className="block truncate text-[12px] text-white">{prompt.title}</strong>
-              <span className="text-[11px] text-[#c5ccdd]">$5.49</span>
+          <Link 
+            className="group relative h-[180px] overflow-hidden rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] transition-all hover:border-[var(--accent)] hover:translate-y-[-4px] hover:shadow-lg" 
+            href={`/prompt/${promptSlug(prompt.title)}`} 
+            key={prompt.title}
+          >
+            <CropImage className={`absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-110 ${prompt.crop}`} />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="grid h-10 w-10 place-items-center rounded-full bg-white/20 text-white backdrop-blur">
+                <Play size={20} fill="currentColor" />
+              </div>
+            </div>
+
+            <button className="absolute right-3 top-3 z-10 grid h-7 w-7 place-items-center rounded-lg bg-white/10 text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
+              <Bookmark size={14} />
+            </button>
+
+            <div className="absolute bottom-4 left-4 right-4 z-10">
+              <strong className="block truncate text-[13px] font-600 text-white mb-0.5">{prompt.title}</strong>
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-500 text-white/70">@{prompt.author}</span>
+                <span className="text-[12px] font-700 text-white">$5.49</span>
+              </div>
             </div>
           </Link>
         ))}

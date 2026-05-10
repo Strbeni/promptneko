@@ -209,7 +209,7 @@ export function CategoriesPage() {
       onSearch={() => setDrawerAction(query ? `Search: ${query}` : "Search")}
       onAction={setDrawerAction}
     >
-      <div style={{ flex: 1, overflowY: "auto", background: "var(--bg)", padding: "16px 20px 40px" }}>
+      <div className="main-scroll" style={{ background: "var(--bg)" }}>
         <nav style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: "var(--text-muted)", marginBottom: 12 }}>
           <span>Home</span> <ChevronRight size={12} /> <span style={{ color: "var(--text-primary)", fontWeight: 600 }}>Categories</span>
         </nav>

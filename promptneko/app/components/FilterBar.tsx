@@ -38,7 +38,7 @@ export function FilterBar({ query, selectedCategory, onQueryChange, onCategoryCh
         >
           <Search size={16} style={{ flexShrink: 0, color: "var(--text-muted)" }} />
           <input
-            style={{ flex: 1, bg: "transparent", border: 0, outline: "none", color: "var(--text-primary)", font: "inherit", background: "transparent" }}
+            style={{ flex: 1, background: "transparent", border: 0, outline: "none", color: "var(--text-primary)", font: "inherit" }}
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
             placeholder="Search thousands of prompts..."
@@ -48,7 +48,7 @@ export function FilterBar({ query, selectedCategory, onQueryChange, onCategoryCh
           <button
             key={label}
             style={{ 
-              display: "flex", alignItems: "center", gap: "8px", h: "42px", px: "14px", 
+              display: "flex", alignItems: "center", gap: "8px", 
               height: "42px", padding: "0 14px",
               fontSize: "13px", fontWeight: 500, transition: "all 0.2s",
               border: "1px solid var(--border)", borderRadius: "12px", background: "var(--surface)", 

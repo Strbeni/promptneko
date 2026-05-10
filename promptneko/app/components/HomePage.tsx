@@ -106,8 +106,8 @@ export function HomePage({ setDrawerAction }: HomePageProps) {
   const [sq, setSq] = useState("");
 
   return (
-    <div style={{ flex: 1, overflowY: "auto", background: "var(--bg)" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "16px 20px 40px" }}>
+    <div className="main-scroll" style={{ background: "var(--bg)" }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto" }}>
 
         {/* ═══ 1. HERO ═══ */}
         <section style={{

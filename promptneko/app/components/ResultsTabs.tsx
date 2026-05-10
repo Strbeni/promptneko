@@ -10,10 +10,10 @@ type ResultsTabsProps = {
 export function ResultsTabs({ activeTab, onTabChange }: ResultsTabsProps) {
   return (
     <div
-      className="flex items-center h-[48px] gap-1 mb-5 px-4 py-4"
+      className="flex items-center h-[52px] gap-1 mb-5 px-3"
       style={{
         border: "1px solid var(--border-soft)",
-        borderRadius: "12px",
+        borderRadius: "14px",
         background: "var(--surface)",
       }}
     >
@@ -21,7 +21,7 @@ export function ResultsTabs({ activeTab, onTabChange }: ResultsTabsProps) {
         {["Popular", "Newest", "Top Rated", "Free"].map((tab) => (
           <button
             key={tab}
-            className="h-[30px] px-8 py-6 rounded-[8px] text-[13px] font-[500] transition-all"
+            className="h-[32px] px-4 rounded-[8px] text-[13px] font-[500] transition-all flex items-center"
             style={activeTab === tab
               ? { background: "var(--accent-soft)", color: "var(--accent)", fontWeight: 600 }
               : { background: "transparent", color: "var(--text-muted)" }}

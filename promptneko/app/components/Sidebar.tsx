@@ -50,71 +50,98 @@ const navGroups = [
 export function Sidebar({ active, theme, onAction, onToggleTheme }: SidebarProps) {
   return (
     <aside style={{
-      display: "flex", flexDirection: "column", width: 175, minWidth: 175, height: "100vh",
-      padding: "14px 10px", borderRight: "1px solid var(--sidebar-border)", background: "var(--sidebar-bg)",
+      display: "flex", flexDirection: "column", width: "var(--sidebar-width)", minWidth: "var(--sidebar-width)", height: "100vh",
+      padding: "24px 16px", borderRight: "1px solid var(--sidebar-border)", background: "var(--sidebar-bg)",
+      transition: "all 0.3s ease",
+      backdropFilter: "blur(20px)",
     }}>
       {/* Logo */}
       <Link href="/" onClick={() => onAction("Home")} style={{
-        display: "flex", alignItems: "center", gap: 8, height: 36, marginBottom: 12, textDecoration: "none",
+        display: "flex", alignItems: "center", gap: 12, height: 40, marginBottom: 32, textDecoration: "none",
+        padding: "0 12px",
       }}>
         <div style={{
-          width: 28, height: 28, borderRadius: 8, background: "linear-gradient(135deg,#7B3CFF,#9B6DFF)",
+          width: 32, height: 32, borderRadius: 10, background: "linear-gradient(135deg,#8B5CF6,#6366F1)",
           display: "flex", alignItems: "center", justifyContent: "center", color: "white",
+          boxShadow: "0 0 20px rgba(139, 92, 246, 0.3)",
         }}>
-          <Zap size={15} strokeWidth={2.5} />
+          <Zap size={18} strokeWidth={2.5} />
         </div>
-        <span style={{ fontSize: 16, fontWeight: 700, letterSpacing: "-0.02em", color: "var(--text-primary)" }}>
-          PromptHub
+        <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text-primary)" }}>
+          PromptNeko
         </span>
       </Link>
 
       {/* Nav groups */}
-      <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column" }} className="custom-scrollbar">
+      <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: 24 }} className="custom-scrollbar">
         {navGroups.map((group, gi) => (
-          <div key={gi} style={{ marginTop: gi > 0 ? 14 : 0 }}>
+          <div key={gi}>
             {group.title && (
               <div style={{
-                fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em",
-                color: "var(--text-muted)", padding: "0 8px", marginBottom: 4, height: 20, display: "flex", alignItems: "center",
+                fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em",
+                color: "var(--text-muted)", padding: "0 12px", marginBottom: 12, height: 20, display: "flex", alignItems: "center",
               }}>
                 {group.title}
               </div>
             )}
-            {group.items.map(({ label, icon: Icon, href }) => {
-              const isActive = active === label;
-              return (
-                <Link key={label} href={href} onClick={() => {
-                  if (href !== "/" && href !== "/explore" && href !== "/categories") onAction(label);
-                }} style={{
-                  display: "flex", alignItems: "center", gap: 8, height: 33, padding: "0 8px", marginBottom: 1,
-                  borderRadius: 8, fontSize: 13, fontWeight: isActive ? 600 : 500,
-                  background: isActive ? "var(--sidebar-active-bg)" : "transparent",
-                  color: isActive ? "var(--sidebar-active-text)" : "var(--text-secondary)",
-                  transition: "all 0.15s", textDecoration: "none",
-                }}>
-                  <Icon size={15} strokeWidth={1.8} style={{ flexShrink: 0 }} />
-                  <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{label}</span>
-                </Link>
-              );
-            })}
+            <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              {group.items.map(({ label, icon: Icon, href }) => {
+                const isActive = active === label;
+                return (
+                  <Link key={label} href={href} onClick={() => {
+                    if (href !== "/" && href !== "/explore" && href !== "/categories") onAction(label);
+                  }} style={{
+                    position: "relative",
+                    display: "flex", alignItems: "center", gap: 12, height: 40, padding: "0 12px",
+                    borderRadius: 12, fontSize: 14, fontWeight: isActive ? 600 : 500,
+                    background: isActive ? "var(--sidebar-active-bg)" : "transparent",
+                    color: isActive ? "var(--text-primary)" : "var(--text-secondary)",
+                    transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)", textDecoration: "none",
+                  }}>
+                    {isActive && (
+                      <div style={{
+                        position: "absolute", left: -16, width: 4, height: 20, 
+                        background: "var(--accent)", borderRadius: "0 4px 4px 0",
+                        boxShadow: "0 0 15px var(--accent)",
+                      }} />
+                    )}
+                    <Icon size={18} strokeWidth={isActive ? 2 : 1.5} style={{ 
+                      flexShrink: 0, 
+                      color: isActive ? "var(--accent)" : "var(--text-secondary)",
+                      transition: "color 0.2s",
+                    }} />
+                    <span style={{ whiteSpace: "nowrap" }}>{label}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         ))}
       </div>
 
       {/* Bottom: settings / theme / profile */}
       <div style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: 10,
-        borderTop: "1px solid var(--border-soft)", marginTop: 8,
+        display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 12px 0",
+        borderTop: "1px solid var(--border-soft)", marginTop: 16,
       }}>
-        <button onClick={() => onAction("Settings")} style={{ width: 30, height: 30, borderRadius: 7, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-muted)" }}>
-          <Settings size={15} />
-        </button>
-        <button onClick={onToggleTheme} style={{ width: 30, height: 30, borderRadius: 7, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-muted)" }}>
-          {theme === "light" ? <Moon size={15} /> : <Sun size={15} />}
-        </button>
+        <div style={{ display: "flex", gap: 4 }}>
+          <button onClick={() => onAction("Settings")} style={{ 
+            width: 36, height: 36, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", 
+            color: "var(--text-secondary)", transition: "all 0.2s",
+          }} className="hover:bg-white/5">
+            <Settings size={18} strokeWidth={1.5} />
+          </button>
+          <button onClick={onToggleTheme} style={{ 
+            width: 36, height: 36, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", 
+            color: "var(--text-secondary)", transition: "all 0.2s",
+          }} className="hover:bg-white/5">
+            {theme === "light" ? <Moon size={18} strokeWidth={1.5} /> : <Sun size={18} strokeWidth={1.5} />}
+          </button>
+        </div>
         <button onClick={() => onAction("Profile")} style={{
-          width: 28, height: 28, borderRadius: "50%", background: "linear-gradient(135deg,#7B3CFF,#9B6DFF)",
-          display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: 11, fontWeight: 700,
+          width: 32, height: 32, borderRadius: 10, background: "linear-gradient(135deg,#8B5CF6,#6366F1)",
+          display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: 12, fontWeight: 700,
+          boxShadow: "0 4px 12px rgba(139, 92, 246, 0.2)",
         }}>
           L
         </button>
