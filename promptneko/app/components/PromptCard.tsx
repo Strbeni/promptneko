@@ -2,40 +2,38 @@
 
 import { Bookmark, Heart, Play } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { CropImage } from "./CropImage";
-import { promptSlug } from "./marketplace-data";
-
-export type PromptCardItem = {
-  title: string;
-  model: string;
-  author: string;
-  likes: string;
-  crop: string;
-  category: string;
-  video: boolean;
-};
+import { DetailedPrompt } from "./marketplace-data";
 
 type PromptCardProps = {
-  item: PromptCardItem;
+  item: DetailedPrompt;
   isSaved: boolean;
   isLiked: boolean;
-  onOpen: (item: PromptCardItem) => void;
+  onOpen: (item: DetailedPrompt) => void;
   onSave: (title: string) => void;
   onLike: (title: string) => void;
 };
 
 export function PromptCard({ item, isSaved, isLiked, onOpen, onSave, onLike }: PromptCardProps) {
   const router = useRouter();
+  const primaryAsset = item.assets[0];
+
+  function formatCount(num: number) {
+    if (num >= 1000) return (num / 1000).toFixed(1) + "K";
+    return num.toString();
+  }
 
   return (
     <div 
       className="relative h-[198px] overflow-hidden border border-[#202a4d] rounded-2xl bg-[#0a1020] cursor-pointer transition-all hover:border-[#6132bf] hover:-translate-y-px hover:shadow-xl duration-300"
       onClick={() => {
         onOpen(item);
-        router.push(`/prompt/${promptSlug(item.title)}`);
+        router.push(`/prompt/${item.slug}`);
       }}
     >
-      <CropImage className={item.crop} />
+      <div 
+        className="absolute inset-0 bg-cover bg-center brightness-[0.9] group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" 
+        style={{ backgroundImage: `url(${primaryAsset.thumbnailUrl})` }} 
+      />
       
       <button 
         className={`absolute top-[13px] right-[11px] z-10 grid place-items-center w-5 h-[23px] bg-transparent border-0 cursor-pointer transition-colors
@@ -51,22 +49,22 @@ export function PromptCard({ item, isSaved, isLiked, onOpen, onSave, onLike }: P
         onClick={(e) => { e.stopPropagation(); onLike(item.title); }}
       >
         <Heart size={14} fill={isLiked ? "currentColor" : "none"} />
-        {item.likes}
+        {formatCount(item.stats.likes)}
       </button>
 
-      {item.video && (
+      {primaryAsset.type === 'video' && (
         <div className="absolute top-3 left-3 z-10 text-white/80">
           <Play size={16} fill="currentColor" />
         </div>
       )}
 
-      <div className="absolute inset-0 z-[1] [background:linear-gradient(180deg,rgba(0,0,0,0)_47%,rgba(2,4,10,0.18)_100%)] pointer-events-none" />
+      <div className="absolute inset-0 z-[1] [background:linear-gradient(180deg,rgba(0,0,0,0)_40%,rgba(0,0,0,0.8)_100%)] pointer-events-none" />
       
       <div className="absolute bottom-0 left-0 right-0 p-3 z-10">
         <h3 className="m-0 text-white text-[13px] font-bold truncate">{item.title}</h3>
         <div className="flex items-center gap-2 mt-1 text-[#aeb5ca] text-[10px]">
           <span className="w-[13px] h-[13px] rounded-full [background:linear-gradient(135deg,#56d06c,#cf69ff)]" />
-          <span>{item.author}</span>
+          <span>{item.creator.handle}</span>
         </div>
       </div>
     </div>

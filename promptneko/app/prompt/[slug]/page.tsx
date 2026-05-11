@@ -3,7 +3,7 @@ import { findPromptBySlug, promptCards, promptSlug } from "../../components/mark
 
 export function generateStaticParams() {
   return promptCards.map((prompt) => ({
-    slug: promptSlug(prompt.title),
+    slug: prompt.slug,
   }));
 }
 

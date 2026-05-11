@@ -22,8 +22,9 @@ export function ExplorePage() {
   const visiblePrompts = useMemo(() => {
     const needle = query.trim().toLowerCase();
     return promptCards.filter((prompt) => {
-      const matchesQuery = !needle || `${prompt.title} ${prompt.model} ${prompt.author} ${prompt.category}`.toLowerCase().includes(needle);
-      const matchesCategory = selectedCategory === "All" || prompt.category === selectedCategory;
+      const matchesQuery = !needle || 
+        `${prompt.title} ${prompt.engine.provider} ${prompt.creator.handle} ${prompt.taxonomy.primaryCategory}`.toLowerCase().includes(needle);
+      const matchesCategory = selectedCategory === "All" || prompt.taxonomy.primaryCategory === selectedCategory;
       return matchesQuery && matchesCategory;
     });
   }, [query, selectedCategory]);
@@ -67,14 +68,14 @@ export function ExplorePage() {
             {(visiblePrompts.length ? visiblePrompts : promptCards).map((prompt) => (
               <PromptCard
                 item={prompt}
-                isSaved={saved.has(prompt.title)}
-                isLiked={liked.has(prompt.title)}
-                key={prompt.title}
+                isSaved={saved.has(prompt.id)}
+                isLiked={liked.has(prompt.id)}
+                key={prompt.id}
                 onOpen={() => {
                   setDrawerAction(null);
                 }}
-                onSave={(title) => toggle(setSaved, saved, title)}
-                onLike={(title) => toggle(setLiked, liked, title)}
+                onSave={(title) => toggle(setSaved, saved, prompt.id)}
+                onLike={(title) => toggle(setLiked, liked, prompt.id)}
               />
             ))}
           </div>

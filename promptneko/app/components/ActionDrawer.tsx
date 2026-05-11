@@ -1,12 +1,11 @@
 "use client";
 
 import { X } from "lucide-react";
-import { CropImage } from "./CropImage";
-import type { PromptCardItem } from "./PromptCard";
+import { DetailedPrompt } from "./marketplace-data";
 
 type ActionDrawerProps = {
   action: string | null;
-  prompt: PromptCardItem | null;
+  prompt: DetailedPrompt | null;
   onClose: () => void;
 };
 
@@ -22,10 +21,13 @@ export function ActionDrawer({ action, prompt, onClose }: ActionDrawerProps) {
       </button>
       {prompt ? (
         <>
-          <CropImage className={`w-full aspect-square rounded-2xl mb-5 ${prompt.crop}`} />
+          <div 
+            className="w-full aspect-square rounded-2xl mb-5 bg-cover bg-center" 
+            style={{ backgroundImage: `url(${prompt.assets[0].thumbnailUrl})` }} 
+          />
           <h2 className="m-0 text-white text-[22px] font-bold">{prompt.title}</h2>
           <p className="mt-2 text-[#aeb5ca] text-[14px] leading-relaxed">
-            {prompt.model} prompt by {prompt.author}. Ready for preview, checkout, and save workflows.
+            {prompt.engine.provider} prompt by {prompt.creator.handle}. Ready for preview, checkout, and save workflows.
           </p>
           <div className="flex flex-col gap-3 mt-6">
             <button className="w-full h-11 rounded-xl bg-white/10 border-0 text-white text-[14px] font-bold cursor-pointer hover:bg-white/15 transition-all">Preview Prompt</button>

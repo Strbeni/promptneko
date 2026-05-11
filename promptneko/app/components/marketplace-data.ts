@@ -92,19 +92,125 @@ export const filterCategories = [
   { label: "Architecture", count: "12.7K", icon: Code },
 ];
 
-export const promptCards = [
-  { title: "Sakura Night", model: "Midjourney", author: "@VoidWalker", likes: "2.3K", crop: "shot-card-1", category: "Anime", video: false },
-  { title: "Neon Tokyo Streets", model: "ChatGPT Image", author: "@astro.archer", likes: "1.8K", crop: "shot-card-2", category: "Cyberpunk", video: true },
-  { title: "Ethereal Castle in Clouds", model: "Stable Diffusion", author: "@raws.art", likes: "3.1K", crop: "shot-card-3", category: "Fantasy", video: false },
-  { title: "Cybernetic Girl", model: "Midjourney", author: "@pixel.muse", likes: "1.2K", crop: "shot-card-4", category: "Cyberpunk", video: false },
-  { title: "Lost in the Galaxy", model: "FLUX", author: "@fantasyforge", likes: "2.7K", crop: "shot-card-5", category: "Concept Art", video: true },
-  { title: "Cinematic Portrait", model: "Midjourney", author: "@elric.studios", likes: "1.9K", crop: "shot-card-6", category: "Realistic", video: false },
-  { title: "90s Retro Room", model: "ChatGPT Image", author: "@retro.dreams", likes: "1.6K", crop: "shot-card-7", category: "3D Render", video: true },
-  { title: "Dragon Awakening", model: "Stable Diffusion", author: "@beastmind", likes: "2.9K", crop: "shot-card-8", category: "Fantasy", video: false },
-  { title: "Mystic Forest", model: "Midjourney", author: "@dreamweaver", likes: "1.3K", crop: "shot-card-9", category: "Fantasy", video: false },
-  { title: "Future Metropolis", model: "FLUX", author: "@city.arch", likes: "2.2K", crop: "shot-card-10", category: "Architecture", video: true },
-  { title: "Anime School Girl", model: "SDXL", author: "@waifu.lab", likes: "1.4K", crop: "shot-card-11", category: "Anime", video: false },
-  { title: "Space Station", model: "Midjourney", author: "@galactic.visuals", likes: "1.1K", crop: "shot-card-12", category: "Concept Art", video: false },
+export interface DetailedPrompt {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  content: {
+    text: string;
+    negativePrompt?: string;
+    version: string;
+  };
+  assets: {
+    type: 'image' | 'video';
+    primaryUrl: string;
+    thumbnailUrl: string;
+    dimensions: { width: number; height: number };
+  }[];
+  creator: {
+    id: string;
+    handle: string;
+    displayName: string;
+    avatarUrl: string;
+    isVerified: boolean;
+  };
+  engine: {
+    modelId: string;
+    provider: string;
+    parameters: Record<string, any>;
+  };
+  taxonomy: {
+    primaryCategory: string;
+    tags: string[];
+  };
+  stats: {
+    likes: number;
+    views: number;
+    saves: number;
+  };
+  createdAt: string;
+}
+
+export const promptCards: DetailedPrompt[] = [
+  {
+    id: "p1",
+    slug: "sakura-night",
+    title: "Sakura Night",
+    description: "A serene night scene with cherry blossoms under moonlight.",
+    content: { text: "Serene night, cherry blossoms, moonlight, 8k", version: "1.0" },
+    assets: [{ type: 'image', primaryUrl: "/images/stock/sakura-night.png", thumbnailUrl: "/images/stock/sakura-night.png", dimensions: { width: 1024, height: 1024 } }],
+    creator: { id: "u1", handle: "@VoidWalker", displayName: "Void Walker", avatarUrl: "", isVerified: true },
+    engine: { modelId: "mj-v6", provider: "Midjourney", parameters: {} },
+    taxonomy: { primaryCategory: "Anime", tags: ["nature", "night"] },
+    stats: { likes: 2300, views: 12000, saves: 450 },
+    createdAt: "2024-05-10T08:00:00Z"
+  },
+  {
+    id: "p2",
+    slug: "neon-tokyo-streets",
+    title: "Neon Tokyo Streets",
+    description: "Cyberpunk city streets with neon lights and rain.",
+    content: { text: "Tokyo streets, neon, rain, cyberpunk, cinematic", version: "1.2" },
+    assets: [{ type: 'video', primaryUrl: "/images/stock/neon-tokyo.png", thumbnailUrl: "/images/stock/neon-tokyo.png", dimensions: { width: 1920, height: 1080 } }],
+    creator: { id: "u2", handle: "@astro.archer", displayName: "Astro Archer", avatarUrl: "", isVerified: false },
+    engine: { modelId: "gpt-img", provider: "ChatGPT Image", parameters: {} },
+    taxonomy: { primaryCategory: "Cyberpunk", tags: ["city", "neon"] },
+    stats: { likes: 1800, views: 8500, saves: 320 },
+    createdAt: "2024-05-10T09:00:00Z"
+  },
+  {
+    id: "p3",
+    slug: "ethereal-castle-in-clouds",
+    title: "Ethereal Castle in Clouds",
+    description: "A fantasy castle floating in the clouds.",
+    content: { text: "Floating castle, clouds, ethereal, fantasy, high detail", version: "1.0" },
+    assets: [{ type: 'image', primaryUrl: "/images/stock/ethereal-castle.png", thumbnailUrl: "/images/stock/ethereal-castle.png", dimensions: { width: 1024, height: 1024 } }],
+    creator: { id: "u3", handle: "@raws.art", displayName: "Raws Art", avatarUrl: "", isVerified: true },
+    engine: { modelId: "sdxl", provider: "Stable Diffusion", parameters: {} },
+    taxonomy: { primaryCategory: "Fantasy", tags: ["castle", "sky"] },
+    stats: { likes: 3100, views: 15000, saves: 890 },
+    createdAt: "2024-05-10T10:00:00Z"
+  },
+  {
+    id: "p4",
+    slug: "cybernetic-girl",
+    title: "Cybernetic Girl",
+    description: "A portrait of a girl with cybernetic enhancements.",
+    content: { text: "Cybernetic girl, portrait, futuristic, neon details", version: "1.1" },
+    assets: [{ type: 'image', primaryUrl: "/images/stock/cybernetic-girl.png", thumbnailUrl: "/images/stock/cybernetic-girl.png", dimensions: { width: 1024, height: 1024 } }],
+    creator: { id: "u4", handle: "@pixel.muse", displayName: "Pixel Muse", avatarUrl: "", isVerified: true },
+    engine: { modelId: "mj-v6", provider: "Midjourney", parameters: {} },
+    taxonomy: { primaryCategory: "Cyberpunk", tags: ["portrait", "cyborg"] },
+    stats: { likes: 1200, views: 5000, saves: 210 },
+    createdAt: "2024-05-10T11:00:00Z"
+  },
+  {
+    id: "p5",
+    slug: "lost-in-the-galaxy",
+    title: "Lost in the Galaxy",
+    description: "An astronaut floating in space with vibrant nebulae.",
+    content: { text: "Astronaut, space, nebula, stars, cinematic lighting", version: "1.0" },
+    assets: [{ type: 'video', primaryUrl: "/images/stock/lost-galaxy.png", thumbnailUrl: "/images/stock/lost-galaxy.png", dimensions: { width: 1920, height: 1080 } }],
+    creator: { id: "u5", handle: "@fantasyforge", displayName: "Fantasy Forge", avatarUrl: "", isVerified: false },
+    engine: { modelId: "flux", provider: "FLUX", parameters: {} },
+    taxonomy: { primaryCategory: "Concept Art", tags: ["space", "astronaut"] },
+    stats: { likes: 2700, views: 11000, saves: 640 },
+    createdAt: "2024-05-10T12:00:00Z"
+  },
+  {
+    id: "p6",
+    slug: "cinematic-portrait",
+    title: "Cinematic Portrait",
+    description: "A high-end cinematic portrait with dramatic lighting.",
+    content: { text: "Dramatic portrait, cinematic lighting, photorealistic, 8k", version: "1.0" },
+    assets: [{ type: 'image', primaryUrl: "/images/stock/cinematic-portrait.png", thumbnailUrl: "/images/stock/cinematic-portrait.png", dimensions: { width: 1024, height: 1024 } }],
+    creator: { id: "u6", handle: "@elric.studios", displayName: "Elric Studios", avatarUrl: "", isVerified: true },
+    engine: { modelId: "mj-v6", provider: "Midjourney", parameters: {} },
+    taxonomy: { primaryCategory: "Realistic", tags: ["portrait", "cinematic"] },
+    stats: { likes: 1900, views: 9000, saves: 420 },
+    createdAt: "2024-05-10T13:00:00Z"
+  },
 ];
 
 export function promptSlug(title: string) {
@@ -115,7 +221,7 @@ export function promptSlug(title: string) {
 }
 
 export function findPromptBySlug(slug: string) {
-  return promptCards.find((prompt) => promptSlug(prompt.title) === slug) ?? promptCards[1];
+  return promptCards.find((prompt) => prompt.slug === slug) ?? promptCards[1];
 }
 
 export const trendingSearches = [

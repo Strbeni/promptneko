@@ -1,25 +1,32 @@
 "use client";
 
 import { Bookmark, Copy, Eye, Heart, Share2, ShoppingCart, Sparkles } from "lucide-react";
-import type { PromptCardItem } from "../PromptCard";
+import { DetailedPrompt } from "../marketplace-data";
 
-export function PromptSidebar({ prompt, onAction }: { prompt: PromptCardItem; onAction: (action: string) => void }) {
+export function PromptSidebar({ prompt, onAction }: { prompt: DetailedPrompt; onAction: (action: string) => void }) {
+  function formatCount(num: number) {
+    if (num >= 1000) return (num / 1000).toFixed(1) + "K";
+    return num.toString();
+  }
+
   return (
     <aside className="space-y-4">
       <section className="pt-2">
         <div className="mb-3 flex items-center gap-2 text-[12px] font-semibold text-[#f7d45a]">
           <Sparkles size={15} />
-          {prompt.model}
+          {prompt.engine.provider}
         </div>
         <h1 className="mb-5 text-[27px] font-extrabold leading-tight text-white">
-          Seedream 5 prompt: Ultra-cinematic sci-fi storm sequence, a glowing...
+          {prompt.title}: {prompt.description.slice(0, 60)}...
         </h1>
         <div className="mb-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-[#2a2d42] text-[13px] font-bold text-white">DA</span>
+            <span className="grid h-10 w-10 place-items-center rounded-full bg-[#2a2d42] text-[13px] font-bold text-white">
+              {prompt.creator.displayName.slice(0, 2).toUpperCase()}
+            </span>
             <div>
-              <strong className="block text-[13px] text-white">{prompt.author}</strong>
-              <span className="text-[11px] text-[#8f98b4]">Posted 2 days ago</span>
+              <strong className="block text-[13px] text-white">{prompt.creator.displayName}</strong>
+              <span className="text-[11px] text-[#8f98b4]">{prompt.creator.handle}</span>
             </div>
           </div>
           <button className="h-9 rounded-lg border border-[#202746] px-4 text-[12px] font-bold text-white hover:bg-white/5" onClick={() => onAction("Follow creator")}>
@@ -27,9 +34,9 @@ export function PromptSidebar({ prompt, onAction }: { prompt: PromptCardItem; on
           </button>
         </div>
         <div className="flex gap-7 text-[12px] text-[#9aa3bd]">
-          <span className="flex items-center gap-2"><Eye size={15} />62 views</span>
-          <span className="flex items-center gap-2"><Heart size={15} />0 favorites</span>
-          <span className="flex items-center gap-2"><Bookmark size={15} />0 saves</span>
+          <span className="flex items-center gap-2"><Eye size={15} />{formatCount(prompt.stats.views)} views</span>
+          <span className="flex items-center gap-2"><Heart size={15} />{formatCount(prompt.stats.likes)} favorites</span>
+          <span className="flex items-center gap-2"><Bookmark size={15} />{formatCount(prompt.stats.saves)} saves</span>
         </div>
       </section>
 
@@ -71,23 +78,23 @@ export function PromptSidebar({ prompt, onAction }: { prompt: PromptCardItem; on
         <h2 className="mb-4 text-[13px] text-[#aeb5ca]">Model Used</h2>
         <div className="mb-5 flex items-center gap-3">
           <span className="grid h-9 w-9 place-items-center rounded-lg bg-[#173a5c] text-white">✦</span>
-          <strong className="text-[13px] text-white">Seedream 5 <span className="text-[#7f8aa5]">v2</span></strong>
+          <strong className="text-[13px] text-white">{prompt.engine.modelId} <span className="text-[#7f8aa5]">v{prompt.content.version}</span></strong>
         </div>
         <h3 className="mb-3 text-[11px] text-[#7f8aa5]">Generation Parameters</h3>
         <div className="flex flex-wrap gap-2 text-[11px] text-[#c5ccdd]">
-          {["Image", "3072×3072", "jpg", "3K"].map((item) => <span className="rounded-md border border-[#202746] px-2 py-1" key={item}>{item}</span>)}
+          {["Image", "1024×1024", "png", "8K"].map((item) => <span className="rounded-md border border-[#202746] px-2 py-1" key={item}>{item}</span>)}
         </div>
       </section>
 
       <section className="grid grid-cols-4 rounded-2xl border border-[#202746] bg-[#0a1020] p-4 text-center">
         {[
-          ["Words", "136"],
+          ["Words", prompt.content.text.split(' ').length],
           ["Tokens", "~270"],
           ["Quality", "4.5 ★"],
           ["Clarity", "98%"],
         ].map(([label, value]) => (
-          <div className="border-r border-[#202746] last:border-r-0" key={label}>
-            <span className="block text-[11px] text-[#8f98b4]">{label}</span>
+          <div className="border-r border-[#202746] last:border-r-0" key={label as string}>
+            <span className="block text-[11px] text-[#8f98b4]">{label as string}</span>
             <strong className="mt-1 block text-[18px] text-white">{value}</strong>
           </div>
         ))}
@@ -97,8 +104,10 @@ export function PromptSidebar({ prompt, onAction }: { prompt: PromptCardItem; on
         <div className="rounded-2xl border border-[#202746] bg-[#0a1020] p-4">
           <h2 className="mb-4 text-[12px] text-white">About the Creator</h2>
           <div className="mb-4 flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-[#2a2d42] text-[13px] font-bold text-white">DA</span>
-            <div><strong className="block text-[13px] text-white">{prompt.author}</strong><span className="text-[10px] text-[#ff4f9d]">Top Creator</span></div>
+            <span className="grid h-10 w-10 place-items-center rounded-full bg-[#2a2d42] text-[13px] font-bold text-white">
+              {prompt.creator.displayName.slice(0, 2).toUpperCase()}
+            </span>
+            <div><strong className="block text-[13px] text-white">{prompt.creator.displayName}</strong><span className="text-[10px] text-[#ff4f9d]">Top Creator</span></div>
           </div>
           <div className="mb-4 grid grid-cols-3 text-center text-[11px] text-[#8f98b4]">
             <strong className="text-white">24<br /><span className="font-normal text-[#8f98b4]">Prompts</span></strong>

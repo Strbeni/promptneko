@@ -63,18 +63,34 @@ export function Sidebar({ active, credits, onAction, onTopUp }: SidebarProps) {
                 return (
                   <div key={label} className="flex flex-col">
                     {children ? (
-                      <button
-                        className={`flex items-center w-full h-[35px] gap-3 px-[10px] mb-[3px] rounded-xl text-[14px] text-left border-0 cursor-pointer transition-all duration-200
+                      <div
+                        className={`flex items-center w-full h-[35px] gap-3 px-[10px] mb-[3px] rounded-xl text-[14px] transition-all duration-200
                           ${isActive 
                             ? "border border-[#6540b6] [background:linear-gradient(90deg,rgba(124,60,255,0.35),rgba(124,60,255,0.08))] text-white" 
                             : "bg-transparent text-[#d8ddf2] hover:bg-white/5"}`}
-                        onClick={() => toggleExpand(label)}
                       >
-                        <Icon className={isActive ? "text-white" : "text-[#dce4ff]"} size={18} strokeWidth={1.85} />
-                        <span className="flex-1">{label}</span>
-                        <Link href=""></Link>
-                        {isExpanded ? <ChevronDown className="text-[#818aa7]" size={16} /> : <ChevronRight className="text-[#818aa7]" size={16} />}
-                      </button>
+                        <Link 
+                          href={href} 
+                          className="flex flex-1 items-center gap-3 no-underline text-inherit h-full"
+                          onClick={() => {
+                            if (href === "/" || href === "/explore" || href === "/categories") return;
+                            onAction(label);
+                          }}
+                        >
+                          <Icon className={isActive ? "text-white" : "text-[#dce4ff]"} size={18} strokeWidth={1.85} />
+                          <span className="flex-1">{label}</span>
+                        </Link>
+                        <button 
+                          className="flex items-center justify-center h-full px-1 -mr-1 bg-transparent border-0 cursor-pointer text-[#818aa7] hover:text-white transition-colors"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            toggleExpand(label);
+                          }}
+                        >
+                          {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                        </button>
+                      </div>
                     ) : (
                       <Link
                         className={`flex items-center w-full h-[35px] gap-3 px-[10px] mb-[3px] rounded-xl text-[14px] no-underline transition-all duration-200

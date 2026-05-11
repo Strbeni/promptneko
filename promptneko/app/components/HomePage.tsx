@@ -11,10 +11,8 @@ import {
   Star 
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { filterCategories, promptCards } from "./marketplace-data";
-import { promptSlug } from "./marketplace-data";
+import { filterCategories, promptCards, DetailedPrompt } from "./marketplace-data";
 import { RightRail } from "./RightRail";
-import type { PromptCardItem } from "./PromptCard";
 
 type HomePageProps = {
   setDrawerAction: (action: string | null) => void;
@@ -23,8 +21,8 @@ type HomePageProps = {
 export function HomePage({ setDrawerAction }: HomePageProps) {
   const router = useRouter();
 
-  function openPrompt(prompt: PromptCardItem) {
-    router.push(`/prompt/${promptSlug(prompt.title)}`);
+  function openPrompt(prompt: DetailedPrompt) {
+    router.push(`/prompt/${prompt.slug}`);
   }
 
   return (
@@ -32,7 +30,7 @@ export function HomePage({ setDrawerAction }: HomePageProps) {
       <section className="flex-1 min-w-0 overflow-y-auto px-5 py-3 lg:border-r lg:border-[#121930]/72">
         {/* Hero */}
         <div className="relative h-[313px] overflow-hidden border border-[#202746] rounded-2xl bg-[#101629] after:absolute after:inset-0 after:[background:linear-gradient(90deg,rgba(6,8,17,0.94),rgba(6,8,17,0.72)_39%,rgba(6,8,17,0.06)_74%)] after:content-['']">
-          <div className="absolute inset-0 bg-no-repeat bg-[url('/main.png')] bg-[length:1536px_1024px] bg-[-228px_-58px]" />
+          <div className="absolute inset-0 bg-cover bg-center bg-[url('/images/hero.png')]" />
           <div className="relative z-10 w-[520px] px-[39px] py-8">
             <p className="mb-[10px] text-[#dce0ef] text-[11px] font-semibold uppercase">Premium Market</p>
             <h1 className="m-0 text-white text-[39px] font-extrabold leading-[1.06]">
@@ -51,11 +49,11 @@ export function HomePage({ setDrawerAction }: HomePageProps) {
                 <Search size={20} />
               </button>
             </div>
-
+{/* Trending bar */}
             <div className="flex items-center gap-2 mt-[15px]">
               <span className="text-[#dce0ef] text-[12px]">Trending:</span>
-              {["Midjourney", "Stable Diffusion", "Logo", "Portrait"].map((tag) => (
-                <button key={tag} className="h-[22px] px-[11px] border border-[#242d4a] rounded-full bg-[#151b2d] text-[#d3d8e8] text-[11px] hover:border-[#7b3cff] transition-colors cursor-pointer">
+              {["Story Telling Video", "Fruit AI Videos", "Landing Page", "Portrait"].map((tag) => (
+                <button key={tag} className="h-[22px] px-[11px] border border-[#242d4a] rounded-full bg-[#151b2d] text-[#d3d8e8] text-[5px] whitespace-nowrap hover:border-[#7b3cff] transition-colors cursor-pointer">
                   {tag}
                 </button>
               ))}
@@ -97,15 +95,18 @@ export function HomePage({ setDrawerAction }: HomePageProps) {
           <div className="grid grid-cols-5 gap-3">
             {promptCards.slice(0, 5).map((prompt, i) => (
               <div 
-                key={prompt.title} 
+                key={prompt.id} 
                 className="relative h-[216px] overflow-hidden border border-[#273056] rounded-2xl bg-[#080d19] cursor-pointer group hover:border-[#6132bf] hover:scale-[1.03] transition-all duration-300"
                 onClick={() => openPrompt(prompt)}
               >
-                <div className={`absolute inset-0 bg-no-repeat bg-[url('/main.png')] bg-[length:1536px_1024px] bg-[-228px_-58px] brightness-[0.8] opacity-60 group-hover:opacity-100 group-hover:brightness-100 transition-all`} style={{ backgroundPosition: `-${(i%3)*400}px -${Math.floor(i/3)*300}px` }} />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform bg-black/40 backdrop-blur-sm">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center brightness-[0.8] opacity-60 group-hover:opacity-100 group-hover:brightness-100 transition-all duration-500" 
+                  style={{ backgroundImage: `url(${prompt.assets[0].thumbnailUrl || '/main.png'})` }} 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 bg-black/40 backdrop-blur-sm border-t border-white/5">
                   <strong className="block text-white text-[13px] truncate">{prompt.title}</strong>
-                  <span className="text-[#c1c7d8] text-[10px]">{prompt.model}</span>
+                  <span className="text-[#c1c7d8] text-[10px]">{prompt.engine.provider}</span>
                 </div>
               </div>
             ))}
@@ -126,7 +127,10 @@ export function HomePage({ setDrawerAction }: HomePageProps) {
           <div className="grid grid-cols-8 gap-[10px]">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="relative h-[154px] overflow-hidden border border-[#273056] rounded-2xl bg-[#080d19] group hover:border-[#6132bf] hover:scale-[1.05] transition-all duration-300 cursor-pointer">
-                <div className="absolute inset-0 bg-no-repeat bg-[url('/main.png')] bg-[length:1536px_1024px] opacity-40 group-hover:opacity-70 transition-opacity" style={{ backgroundPosition: `-${(i%4)*300}px -${Math.floor(i/4)*250 + 400}px` }} />
+                <div 
+                  className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-70 transition-opacity duration-500" 
+                  style={{ backgroundImage: `url(/images/stock/${['sakura-night', 'neon-tokyo', 'ethereal-castle', 'cybernetic-girl', 'lost-galaxy', 'cinematic-portrait'][i % 6]}.png)` }} 
+                />
                 <i className="absolute top-2 left-2 z-10 grid place-items-center w-[22px] h-[22px] rounded-full bg-gradient-to-b from-[#8c57ff] to-[#6433e9] text-white text-[12px] font-extrabold not-italic">
                   {i + 1}
                 </i>
@@ -149,7 +153,10 @@ export function HomePage({ setDrawerAction }: HomePageProps) {
           <div className="grid grid-cols-6 gap-[10px]">
             {filterCategories.slice(1, 7).map((cat, i) => (
               <button key={cat.label} className="relative h-[70px] overflow-hidden border border-[#273056] rounded-xl bg-[#080d19] text-left group hover:border-[#6132bf] hover:scale-[1.05] transition-all duration-300 cursor-pointer">
-                <div className="absolute inset-0 opacity-20 bg-no-repeat bg-[url('/main.png')] bg-[length:1536px_1024px] group-hover:opacity-40 transition-opacity" style={{ backgroundPosition: `-${i*200}px -800px` }} />
+                <div 
+                  className="absolute inset-0 opacity-20 bg-cover bg-center group-hover:opacity-40 transition-opacity duration-500" 
+                  style={{ backgroundImage: `url(/images/stock/${['sakura-night', 'neon-tokyo', 'ethereal-castle', 'cybernetic-girl', 'lost-galaxy', 'cinematic-portrait'][i % 6]}.png)` }} 
+                />
                 <strong className="relative z-10 block mt-3 ml-3 text-white text-[13px] font-bold">{cat.label}</strong>
                 <small className="relative z-10 block mt-[2px] ml-3 text-[#c1c7d8] text-[10px]">{cat.count} Prompts</small>
               </button>

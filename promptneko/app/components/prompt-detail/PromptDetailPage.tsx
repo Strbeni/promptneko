@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { Bookmark, Heart, Play } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { ActionDrawer } from "../ActionDrawer";
 import { MarketplaceLayout } from "../MarketplaceLayout";
-import type { PromptCardItem } from "../PromptCard";
+import { DetailedPrompt } from "../marketplace-data";
 import { PromptMedia } from "./PromptMedia";
 import { PromptSidebar } from "./PromptSidebar";
 import { PromptTabs } from "./PromptTabs";
@@ -11,7 +13,7 @@ import { RelatedPrompts } from "./RelatedPrompts";
 import { ReviewsPanel } from "./ReviewsPanel";
 
 type PromptDetailPageProps = {
-  prompt: PromptCardItem;
+  prompt: DetailedPrompt;
 };
 
 export function PromptDetailPage({ prompt }: PromptDetailPageProps) {
@@ -36,7 +38,7 @@ export function PromptDetailPage({ prompt }: PromptDetailPageProps) {
           <span>›</span>
           <span>Explore</span>
           <span>›</span>
-          <span>{prompt.category}</span>
+          <span>{prompt.taxonomy.primaryCategory}</span>
           <span>›</span>
           <span className="text-[#c5ccdd]">Prompt Detail</span>
         </div>
@@ -45,7 +47,7 @@ export function PromptDetailPage({ prompt }: PromptDetailPageProps) {
           <main className="min-w-0">
             <PromptMedia prompt={prompt} />
             <PromptTabs />
-            <RelatedPrompts title={`More by ${prompt.author}`} />
+            <RelatedPrompts title={`More by ${prompt.creator.displayName}`} />
             <ReviewsPanel />
           </main>
 
