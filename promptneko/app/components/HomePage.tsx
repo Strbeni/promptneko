@@ -11,7 +11,7 @@ import {
   Star 
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { filterCategories, promptCards, DetailedPrompt } from "./marketplace-data";
+import { filterCategories, promptCards, DetailedPrompt, websiteUiPrompts, brandingPrompts, productAdPrompts, socialReelPrompts, animeArtPrompts, codingPrompts, marketingPrompts, fruitVideoPrompts } from "./marketplace-data";
 import { RightRail } from "./RightRail";
 
 type HomePageProps = {
@@ -140,7 +140,7 @@ export function HomePage({ setDrawerAction }: HomePageProps) {
         </section>
 
         {/* Categories */}
-        <section className="mt-[18px] mb-10">
+        <section className="mt-[18px]">
           <header className="flex items-center justify-between h-7 mb-[11px]">
             <div className="flex items-center gap-2">
               <Boxes className="text-[#ff9823]" size={18} />
@@ -160,6 +160,180 @@ export function HomePage({ setDrawerAction }: HomePageProps) {
                 <strong className="relative z-10 block mt-3 ml-3 text-white text-[13px] font-bold">{cat.label}</strong>
                 <small className="relative z-10 block mt-[2px] ml-3 text-[#c1c7d8] text-[10px]">{cat.count} Prompts</small>
               </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Websites & UI */}
+        <section className="mt-[18px]">
+          <header className="flex items-center justify-between h-7 mb-[11px]">
+            <div className="flex items-center gap-2">
+              <Star className="text-[#a46aff]" size={18} />
+              <h2 className="m-0 text-white text-[17px] font-bold">Websites & UI</h2>
+            </div>
+          </header>
+          <div className="grid grid-cols-5 gap-3">
+            {websiteUiPrompts.map((prompt) => (
+              <div 
+                key={prompt.id} 
+                className="relative h-[216px] overflow-hidden border border-[#273056] rounded-2xl bg-[#080d19] cursor-pointer group hover:border-[#6132bf] hover:scale-[1.03] transition-all duration-300"
+                onClick={() => openPrompt(prompt)}
+              >
+                <div 
+                  className="absolute inset-0 bg-cover bg-center brightness-[0.8] opacity-60 group-hover:opacity-100 group-hover:brightness-100 transition-all duration-500" 
+                  style={{ backgroundImage: `url(${prompt.assets[0].thumbnailUrl || '/main.png'})` }} 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 bg-black/40 backdrop-blur-sm border-t border-white/5">
+                  <strong className="block text-white text-[13px] truncate">{prompt.title}</strong>
+                  <span className="text-[#c1c7d8] text-[10px]">{prompt.engine.provider}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Branding & Logos */}
+        <section className="mt-[18px]">
+          <header className="flex items-center justify-between h-7 mb-[11px]">
+            <div className="flex items-center gap-2">
+              <Star className="text-[#00d9a8]" size={18} />
+              <h2 className="m-0 text-white text-[17px] font-bold">Branding & Logos</h2>
+            </div>
+          </header>
+          <div className="grid grid-cols-5 gap-3">
+            {brandingPrompts.map((prompt) => (
+              <div 
+                key={prompt.id} 
+                className="relative h-[216px] overflow-hidden border border-[#273056] rounded-2xl bg-[#080d19] cursor-pointer group hover:border-[#6132bf] hover:scale-[1.03] transition-all duration-300"
+                onClick={() => openPrompt(prompt)}
+              >
+                <div 
+                  className="absolute inset-0 bg-cover bg-center brightness-[0.8] opacity-60 group-hover:opacity-100 group-hover:brightness-100 transition-all duration-500" 
+                  style={{ backgroundImage: `url(${prompt.assets[0].thumbnailUrl || '/main.png'})` }} 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 bg-black/40 backdrop-blur-sm border-t border-white/5">
+                  <strong className="block text-white text-[13px] truncate">{prompt.title}</strong>
+                  <span className="text-[#c1c7d8] text-[10px]">{prompt.engine.provider}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* AI Fruit & Marketing */}
+        <section className="mt-[18px]">
+          <header className="flex items-center justify-between h-7 mb-[11px]">
+            <div className="flex items-center gap-2">
+              <Sparkles className="text-[#ff9f21]" size={18} />
+              <h2 className="m-0 text-white text-[17px] font-bold">AI Fruit & Marketing</h2>
+            </div>
+          </header>
+          <div className="grid grid-cols-5 gap-3">
+            {[...new Set([...fruitVideoPrompts, ...marketingPrompts])].map((prompt) => (
+              <div 
+                key={prompt.id} 
+                className="relative h-[216px] overflow-hidden border border-[#273056] rounded-2xl bg-[#080d19] cursor-pointer group hover:border-[#6132bf] hover:scale-[1.03] transition-all duration-300"
+                onClick={() => openPrompt(prompt)}
+              >
+                <div 
+                  className="absolute inset-0 bg-cover bg-center brightness-[0.8] opacity-60 group-hover:opacity-100 group-hover:brightness-100 transition-all duration-500" 
+                  style={{ backgroundImage: `url(${prompt.assets[0].thumbnailUrl || '/main.png'})` }} 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 bg-black/40 backdrop-blur-sm border-t border-white/5">
+                  <strong className="block text-white text-[13px] truncate">{prompt.title}</strong>
+                  <span className="text-[#c1c7d8] text-[10px]">{prompt.engine.provider}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Coding & Technical */}
+        <section className="mt-[18px]">
+          <header className="flex items-center justify-between h-7 mb-[11px]">
+            <div className="flex items-center gap-2">
+              {/* <Code className="text-[#00d9a8]" size={18} /> */}
+              <h2 className="m-0 text-white text-[17px] font-bold">Coding & Technical</h2>
+            </div>
+          </header>
+          <div className="grid grid-cols-5 gap-3">
+            {codingPrompts.map((prompt) => (
+              <div 
+                key={prompt.id} 
+                className="relative h-[216px] overflow-hidden border border-[#273056] rounded-2xl bg-[#080d19] cursor-pointer group hover:border-[#6132bf] hover:scale-[1.03] transition-all duration-300"
+                onClick={() => openPrompt(prompt)}
+              >
+                <div 
+                  className="absolute inset-0 bg-cover bg-center brightness-[0.8] opacity-100 group-hover:opacity-100 group-hover:brightness-100 transition-all duration-500" 
+                  style={{ backgroundImage: `url(${prompt.assets[0].thumbnailUrl || '/main.png'})` }} 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 bg-black/40 backdrop-blur-sm border-t border-white/5">
+                  <strong className="block text-white text-[13px] truncate">{prompt.title}</strong>
+                  <span className="text-[#c1c7d8] text-[10px]">{prompt.engine.provider}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Social & Reels */}
+        <section className="mt-[18px]">
+          <header className="flex items-center justify-between h-7 mb-[11px]">
+            <div className="flex items-center gap-2">
+              <Star className="text-[#f0378e]" size={18} />
+              <h2 className="m-0 text-white text-[17px] font-bold">Social Media & Reels</h2>
+            </div>
+          </header>
+          <div className="grid grid-cols-5 gap-3">
+            {socialReelPrompts.map((prompt) => (
+              <div 
+                key={prompt.id} 
+                className="relative h-[216px] overflow-hidden border border-[#273056] rounded-2xl bg-[#080d19] cursor-pointer group hover:border-[#6132bf] hover:scale-[1.03] transition-all duration-300"
+                onClick={() => openPrompt(prompt)}
+              >
+                <div 
+                  className="absolute inset-0 bg-cover bg-center brightness-[0.8] opacity-60 group-hover:opacity-100 group-hover:brightness-100 transition-all duration-500" 
+                  style={{ backgroundImage: `url(${prompt.assets[0].thumbnailUrl || '/main.png'})` }} 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 bg-black/40 backdrop-blur-sm border-t border-white/5">
+                  <strong className="block text-white text-[13px] truncate">{prompt.title}</strong>
+                  <span className="text-[#c1c7d8] text-[10px]">{prompt.engine.provider}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* AI Art & Anime */}
+        <section className="mt-[18px] mb-10">
+          <header className="flex items-center justify-between h-7 mb-[11px]">
+            <div className="flex items-center gap-2">
+              <Sparkles className="text-[#7b3cff]" size={18} />
+              <h2 className="m-0 text-white text-[17px] font-bold">AI Art & Anime</h2>
+            </div>
+          </header>
+          <div className="grid grid-cols-5 gap-3">
+            {animeArtPrompts.map((prompt) => (
+              <div 
+                key={prompt.id} 
+                className="relative h-[216px] overflow-hidden border border-[#273056] rounded-2xl bg-[#080d19] cursor-pointer group hover:border-[#6132bf] hover:scale-[1.03] transition-all duration-300"
+                onClick={() => openPrompt(prompt)}
+              >
+                <div 
+                  className="absolute inset-0 bg-cover bg-center brightness-[0.8] opacity-60 group-hover:opacity-100 group-hover:brightness-100 transition-all duration-500" 
+                  style={{ backgroundImage: `url(${prompt.assets[0].thumbnailUrl || '/main.png'})` }} 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 bg-black/40 backdrop-blur-sm border-t border-white/5">
+                  <strong className="block text-white text-[13px] truncate">{prompt.title}</strong>
+                  <span className="text-[#c1c7d8] text-[10px]">{prompt.engine.provider}</span>
+                </div>
+              </div>
             ))}
           </div>
         </section>

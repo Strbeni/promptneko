@@ -48,7 +48,7 @@ export function PromptDetailPage({ prompt }: PromptDetailPageProps) {
             <PromptMedia prompt={prompt} />
             <PromptTabs />
             <RelatedPrompts title={`More by ${prompt.creator.displayName}`} />
-            <ReviewsPanel />
+            {/* <ReviewsPanel /> */}
           </main>
 
           <PromptSidebar prompt={prompt} onAction={openAction} />
