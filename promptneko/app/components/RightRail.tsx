@@ -1,96 +1,143 @@
 "use client";
 
-import { ArrowUp, Sparkles } from "lucide-react";
+import { ArrowUp, Sparkles, ChevronRight, ChevronLeft, TrendingUp, Layers, Tag } from "lucide-react";
 import { popularTags, topModels, trendingSearches } from "./marketplace-data";
 
 type RightRailProps = {
   onAction: (action: string) => void;
+  isCollapsed: boolean;
+  onToggle: () => void;
 };
 
-export function RightRail({ onAction }: RightRailProps) {
-  return (
-    <aside className="w-[300px] flex-[0_0_300px] overflow-y-auto px-[18px] py-3 pb-7">
-      <Panel title="Trending Searches" onViewAll={() => onAction("Trending Searches")}>
-        {trendingSearches.map((item, index) => (
-          <button 
-            className="flex items-center w-full h-[46px] gap-3 bg-transparent border-0 text-left cursor-pointer group" 
-            key={item.title} 
-            onClick={() => onAction(item.title)}
-          >
-            <span className="grid place-items-center w-6 h-6 rounded-md bg-[#1b2341] text-[#a5aec7] text-[12px] font-bold group-hover:bg-[#7b3cff] group-hover:text-white transition-all duration-300">
-              {index + 1}
-            </span>
-            <div className="flex flex-col min-w-0">
-              <strong className="block text-white text-[13px] font-medium truncate">{item.title}</strong>
-              <small className="block text-[#8f98b3] text-[11px] font-normal">{item.subtitle}</small>
-            </div>
-            <i className="flex-1 h-px ml-2 bg-[#1b2341]" />
-            <em className="flex items-center gap-[2px] ml-1 text-[#00d9a8] text-[11px] font-bold not-italic font-mono">
-              <ArrowUp size={12} />{item.change}
-            </em>
-          </button>
-        ))}
-      </Panel>
-
-      <Panel title="Top Models" onViewAll={() => onAction("Top Models")}>
-        {topModels.map((item) => (
-          <button 
-            className="flex items-center w-full h-[46px] gap-3 bg-transparent border-0 text-left cursor-pointer group" 
-            key={item.title} 
-            onClick={() => onAction(item.title)}
-          >
-            <span className={`grid place-items-center w-8 h-8 rounded-full border 
-              ${item.tone === 'gold' ? 'border-[#ff9823]/40 bg-[#ff9823]/10 text-[#ff9823]' : 
-                item.tone === 'blue' ? 'border-[#3ba2ff]/40 bg-[#3ba2ff]/10 text-[#3ba2ff]' : 
-                item.tone === 'purple' ? 'border-[#a46aff]/40 bg-[#a46aff]/10 text-[#a46aff]' : 
-                'border-[#00d9a8]/40 bg-[#00d9a8]/10 text-[#00d9a8]'}`}>
-              <Sparkles size={16} />
-            </span>
-            <div className="flex flex-col min-w-0">
-              <strong className="block text-white text-[13px] font-medium truncate">{item.title}</strong>
-              <small className="block text-[#8f98b3] text-[11px] font-normal">{item.subtitle}</small>
-            </div>
-          </button>
-        ))}
-      </Panel>
-
-      <Panel title="Popular Tags" onViewAll={() => onAction("Popular Tags")}>
-        <div className="flex flex-wrap gap-x-2 gap-y-[9px] pt-1">
-          {popularTags.map(([tag, count]) => (
-            <button 
-              key={tag} 
-              className="flex items-center h-[26px] px-[10px] border border-[#1b2544] rounded-full bg-[#0c1122] text-[#c5ccdd] text-[11px] cursor-pointer hover:border-[#7b3cff] hover:text-white transition-all duration-300 hover:scale-105"
-              onClick={() => onAction(tag)}
-            >
-              {tag}
-              <span className="ml-[6px] text-[#808aa5] text-[10px]">{count}</span>
-            </button>
-          ))}
-        </div>
-      </Panel>
-
-      <section className="mt-[22px] p-5 border border-[#30395e] rounded-2xl bg-gradient-to-b from-[#131b33] to-[#0b1020] [box-shadow:inset_0_0_40px_rgba(112,61,255,0.06)] hover:shadow-2xl transition-all duration-500">
-        <h2 className="m-0 text-white text-[19px] font-extrabold leading-tight">Create. Share. Earn.</h2>
-        <p className="mt-[6px] mb-[15px] text-[#aeb5ca] text-[13px] leading-[1.5]">Join thousands of creators earning from their prompts.</p>
+export function RightRail({ onAction, isCollapsed, onToggle }: RightRailProps) {
+  if (isCollapsed) {
+    return (
+      <aside className="w-[60px] flex-[0_0_60px] border-l border-white/5 bg-[#030711] flex flex-col items-center py-6 gap-8">
         <button 
-          className="w-full h-9 border-0 rounded-lg bg-gradient-to-b from-[#8751ff] to-[#6530e9] text-white text-[14px] font-bold cursor-pointer [box-shadow:0_0_24px_rgba(112,61,255,0.3)] hover:brightness-110 hover:scale-[1.02] transition-all"
-          onClick={() => onAction("Start Selling")}
+          onClick={onToggle}
+          className="w-8 h-8 grid place-items-center rounded-lg bg-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-colors"
         >
-          Start Selling
+          <ChevronLeft size={18} />
         </button>
-      </section>
-    </aside>
-  );
-}
+        <div className="flex flex-col gap-6 items-center">
+          <TrendingUp size={20} className="text-[#a46aff]" />
+          <div className="w-8 h-8 rounded-full bg-[#00d9a8]/10 flex items-center justify-center">
+            <Tag size={18} className="text-[#00d9a8]" />
+          </div>
+          <div className="w-8 h-8 rounded-full bg-[#ff9f21]/10 flex items-center justify-center">
+            <Sparkles size={18} className="text-[#ff9f21]" />
+          </div>
+        </div>
+      </aside>
+    );
+  }
 
-function Panel({ title, children, onViewAll }: { title: string; children: React.ReactNode; onViewAll: () => void }) {
   return (
-    <section className="mb-6 first:mt-[6px]">
-      <header className="flex items-center justify-between h-[18px] mb-3">
-        <h2 className="m-0 text-[#8f98b3] text-[11px] font-bold uppercase tracking-wider">{title}</h2>
-        <button className="bg-transparent border-0 text-[#a46aff] text-[11px] font-bold cursor-pointer hover:underline" onClick={onViewAll}>View all</button>
-      </header>
-      {children}
-    </section>
+    <aside className="w-[300px] flex-[0_0_300px] overflow-y-auto bg-[#030711] border-l border-white/5 flex flex-col h-full">
+      <div className="p-5 flex items-center justify-between border-b border-white/5 mb-2">
+        <h2 className="text-white text-[15px] font-bold tracking-tight">Market Insights</h2>
+        <button 
+          onClick={onToggle}
+          className="w-8 h-8 grid place-items-center rounded-lg bg-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+        >
+          <ChevronRight size={18} />
+        </button>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-5 py-2 space-y-8 scrollbar-hide">
+        {/* Trending */}
+        <section>
+          <header className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2 text-[#a46aff]">
+              <TrendingUp size={14} />
+              <span className="text-[11px] font-bold uppercase tracking-wider">Trending</span>
+            </div>
+            <button className="text-[11px] font-semibold text-white/30 hover:text-[#a46aff] transition-colors" onClick={() => onAction("Trending")}>
+              View All
+            </button>
+          </header>
+          <div className="space-y-3">
+            {trendingSearches.slice(0, 4).map((item, index) => (
+              <button 
+                key={item.title}
+                onClick={() => onAction(item.title)}
+                className="group flex items-center w-full gap-3 p-2 rounded-xl hover:bg-white/5 transition-all text-left"
+              >
+                <span className="text-[11px] font-mono font-bold text-white/20 group-hover:text-[#a46aff] transition-colors">
+                  0{index + 1}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[13px] font-medium text-white/90 truncate">{item.title}</p>
+                  <p className="text-[10px] text-white/40">{item.subtitle}</p>
+                </div>
+                <div className="flex items-center gap-0.5 text-[#00d9a8] text-[10px] font-mono font-bold">
+                  <ArrowUp size={10} strokeWidth={3} />
+                  {item.change}
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Trending Tags */}
+        <section>
+          <header className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2 text-[#00d9a8]">
+              <Tag size={14} />
+              <span className="text-[11px] font-bold uppercase tracking-wider">Top Topics</span>
+            </div>
+          </header>
+          <div className="grid grid-cols-1 gap-2">
+            {popularTags.slice(0, 5).map(([tag, count]) => (
+              <button 
+                key={tag}
+                onClick={() => onAction(tag)}
+                className="flex items-center justify-between p-3 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/5 hover:border-white/10 transition-all text-left group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#00d9a8]/40 group-hover:bg-[#00d9a8] transition-colors" />
+                  <span className="text-[12px] font-semibold text-white/90">#{tag}</span>
+                </div>
+                <span className="text-[10px] text-white/30 font-mono">{count}</span>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Tags */}
+        <section>
+          <header className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2 text-[#ff9f21]">
+              <Tag size={14} />
+              <span className="text-[11px] font-bold uppercase tracking-wider">Popular Tags</span>
+            </div>
+          </header>
+          <div className="flex flex-wrap gap-2">
+            {popularTags.slice(0, 10).map(([tag, count]) => (
+              <button 
+                key={tag}
+                onClick={() => onAction(tag)}
+                className="px-3 py-1.5 rounded-lg border border-white/5 bg-white/5 text-[11px] text-white/60 hover:text-white hover:bg-white/10 transition-all"
+              >
+                #{tag}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Sell Banner */}
+        <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#8751ff] to-[#6530e9] p-5 shadow-lg group">
+          <div className="absolute top-[-20%] right-[-10%] w-32 h-32 bg-white/10 rounded-full blur-2xl transition-transform group-hover:scale-150 duration-700" />
+          <h3 className="relative z-10 text-white text-[17px] font-bold leading-tight">Start earning today</h3>
+          <p className="relative z-10 mt-1.5 mb-4 text-white/70 text-[12px] leading-relaxed">Join 12K+ creators selling high-performing prompts.</p>
+          <button 
+            onClick={() => onAction("Sell")}
+            className="relative z-10 w-full py-2 bg-white text-[#6530e9] rounded-xl text-[13px] font-bold shadow-md hover:bg-white/90 transition-colors"
+          >
+            Become a Seller
+          </button>
+        </section>
+      </div>
+    </aside>
   );
 }

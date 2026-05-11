@@ -32,8 +32,8 @@ export function PromptDetailPage({ prompt }: PromptDetailPageProps) {
       onSearch={() => openAction(query ? `Search: ${query}` : "Search")}
       onAction={openAction}
     >
-      <div className="min-h-0 overflow-y-auto bg-[#030711] px-6 py-4">
-        <div className="mb-5 flex items-center gap-2 text-[11px] text-[#7f8aa5]">
+      <div className="min-h-0 overflow-y-auto bg-[#030711] px-4 md:px-6 py-4">
+        <div className="mb-5 flex flex-wrap items-center gap-2 text-[10px] md:text-[11px] text-[#7f8aa5]">
           <span>Home</span>
           <span>›</span>
           <span>Explore</span>
@@ -43,15 +43,23 @@ export function PromptDetailPage({ prompt }: PromptDetailPageProps) {
           <span className="text-[#c5ccdd]">Prompt Detail</span>
         </div>
 
-        <div className="grid grid-cols-[minmax(0,1.15fr)_380px] gap-5">
-          <main className="min-w-0">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_380px] gap-5 lg:min-h-[calc(100vh-180px)]">
+          <main className="min-w-0 order-1 lg:order-none flex flex-col h-full">
             <PromptMedia prompt={prompt} />
-            <PromptTabs />
-            <RelatedPrompts title={`More by ${prompt.creator.displayName}`} />
+            <div className="block lg:hidden mt-5">
+              <PromptSidebar prompt={prompt} onAction={openAction} />
+            </div>
+            <PromptTabs prompt={prompt} className="flex-1" />
+            <div className="lg:hidden mt-8">
+              <RelatedPrompts title={`More by ${prompt.creator.displayName}`} />
+            </div>
             {/* <ReviewsPanel /> */}
           </main>
 
-          <PromptSidebar prompt={prompt} onAction={openAction} />
+          <div className="hidden lg:block space-y-6">
+            <PromptSidebar prompt={prompt} onAction={openAction} />
+            <RelatedPrompts title={`More by ${prompt.creator.displayName}`} />
+          </div>
         </div>
       </div>
 

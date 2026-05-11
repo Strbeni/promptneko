@@ -64,7 +64,7 @@ export function ExplorePage() {
 
           <ResultsTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
-          <div className="grid grid-cols-4 gap-x-2 gap-y-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {(visiblePrompts.length ? visiblePrompts : promptCards).map((prompt) => (
               <PromptCard
                 item={prompt}

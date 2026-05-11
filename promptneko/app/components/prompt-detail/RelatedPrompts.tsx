@@ -1,27 +1,46 @@
 "use client";
 
-import { Bookmark, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import Link from "next/link";
-import { CropImage } from "../CropImage";
-import { promptCards, promptSlug } from "../marketplace-data";
+import { promptCards } from "../marketplace-data";
 
 export function RelatedPrompts({ title }: { title: string }) {
   return (
-    <section className="mt-6">
-      <header className="mb-3 flex items-center justify-between">
-        <h2 className="text-[16px] font-bold text-white">{title}</h2>
-        <Link className="text-[12px] text-[#a463ff]" href="/explore">View all ›</Link>
+    <section className="mt-2">
+      <header className="mb-4 flex items-center justify-between">
+        <h2 className="text-[15px] font-bold text-white">{title}</h2>
+        <Link className="text-[11px] font-medium text-[#a463ff] hover:underline" href="/explore">
+          View all
+        </Link>
       </header>
-      <div className="grid grid-cols-4 gap-3">
-        {promptCards.slice(1, 5).map((prompt) => (
-          <Link className="group relative h-[150px] overflow-hidden rounded-xl border border-[#202746] bg-[#0a1020] hover:border-[#7b3cff]" href={`/prompt/${promptSlug(prompt.title)}`} key={prompt.title}>
-            <CropImage className={`absolute inset-0 h-full w-full ${prompt.crop}`} />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/75" />
-            <Play className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-white/80" size={28} fill="currentColor" />
-            <Bookmark className="absolute right-3 top-3 z-10 text-white" size={17} />
-            <div className="absolute bottom-3 left-3 right-3 z-10">
-              <strong className="block truncate text-[12px] text-white">{prompt.title}</strong>
-              <span className="text-[11px] text-[#c5ccdd]">$5.49</span>
+      <div className="grid grid-cols-2 gap-3">
+        {promptCards.slice(0, 4).map((prompt) => (
+          <Link 
+            className="group block overflow-hidden rounded-xl border border-white/5 bg-[#111111] transition-all hover:border-white/10" 
+            href={`/prompt/${prompt.slug}`} 
+            key={prompt.id}
+          >
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0a0a0a]">
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" 
+                style={{ backgroundImage: `url(${prompt.assets[0].thumbnailUrl || '/main.png'})` }} 
+              />
+              <div className="absolute inset-0 bg-black/20 transition-opacity group-hover:opacity-0" />
+              {prompt.assets[0].type === 'video' && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="grid place-items-center w-7 h-7 rounded-full bg-black/40 backdrop-blur-sm text-white/90 border border-white/10">
+                    <Play size={12} fill="currentColor" className="ml-0.5" />
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="p-2.5">
+              <strong className="block truncate text-[11px] font-semibold text-white/90">
+                {prompt.title}
+              </strong>
+              <span className="mt-0.5 block text-[10px] text-[#8f98b4] capitalize">
+                {prompt.taxonomy.primaryCategory}
+              </span>
             </div>
           </Link>
         ))}
