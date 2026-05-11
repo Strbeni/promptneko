@@ -11,6 +11,12 @@
     "db:seed": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"psql $env:DATABASE_URL -v ON_ERROR_STOP=1 -f database/seeds/001_categories.sql\""
   },
   "dependencies": {
+    "@supabase/ssr": "^0.10.3",
+    "@supabase/supabase-js": "^2.105.4",
+    "@tiptap/extension-placeholder": "^3.23.1",
+    "@tiptap/pm": "^3.23.1",
+    "@tiptap/react": "^3.23.1",
+    "@tiptap/starter-kit": "^3.23.1",
     "lucide-react": "^1.14.0",
     "next": "16.2.4",
     "react": "19.2.4",

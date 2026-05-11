@@ -1,0 +1,121 @@
+"use client";
+
+import { PromptFormState, Example } from "./types";
+import { Plus, Trash2 } from "lucide-react";
+
+export function Step4Examples({ data, updateData }: { data: PromptFormState, updateData: (data: PromptFormState) => void }) {
+  const addExample = () => {
+    if (data.examples.length >= 5) return;
+    
+    // Initialize empty input record based on variables
+    const initialInput: Record<string, string> = {};
+    data.variables.forEach(v => {
+      initialInput[v.name] = v.defaultValue || "";
+    });
+
+    const newExample: Example = {
+      id: Math.random().toString(36).substr(2, 9),
+      input: initialInput,
+      output: ""
+    };
+
+    updateData({ ...data, examples: [...data.examples, newExample] });
+  };
+
+  const removeExample = (id: string) => {
+    updateData({ ...data, examples: data.examples.filter(e => e.id !== id) });
+  };
+
+  const updateExampleInput = (id: string, key: string, val: string) => {
+    updateData({
+      ...data,
+      examples: data.examples.map(e => e.id === id ? { ...e, input: { ...e.input, [key]: val } } : e)
+    });
+  };
+
+  const updateExampleOutput = (id: string, val: string) => {
+    updateData({
+      ...data,
+      examples: data.examples.map(e => e.id === id ? { ...e, output: val } : e)
+    });
+  };
+
+  return (
+    <div className="h-full overflow-y-auto pr-2">
+      <div className="mb-6 flex items-start justify-between">
+        <div>
+          <h2 className="text-xl font-bold text-white mb-2">Examples</h2>
+          <p className="text-sm text-[#7f88a4]">
+            Provide at least 1 example of what your prompt generates. <span className="text-amber-400 font-semibold">More examples = more sales. Buyers want proof.</span>
+          </p>
+        </div>
+        <button 
+          onClick={addExample}
+          disabled={data.examples.length >= 5}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1b2341] text-white text-sm font-semibold hover:bg-[#252f55] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <Plus size={16} /> Add Example
+        </button>
+      </div>
+
+      {data.examples.length === 0 ? (
+        <div className="flex flex-col items-center justify-center h-[300px] border-2 border-dashed border-[#202746] rounded-2xl text-[#565e78]">
+          <p className="mb-4">No examples added yet.</p>
+          <button 
+            onClick={addExample}
+            className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#a46aff] to-[#7b3cff] text-white text-sm font-bold hover:brightness-110 transition-all shadow-[0_0_20px_rgba(164,106,255,0.2)]"
+          >
+            Add Your First Example
+          </button>
+        </div>
+      ) : (
+        <div className="space-y-8">
+          {data.examples.map((ex, idx) => (
+            <div key={ex.id} className="bg-[#11162a] border border-[#202746] rounded-xl overflow-hidden">
+              <div className="bg-[#18203b] px-4 py-3 flex items-center justify-between border-b border-[#202746]">
+                <h3 className="text-white font-bold text-sm">Example {idx + 1}</h3>
+                <button onClick={() => removeExample(ex.id)} className="text-[#7f88a4] hover:text-red-400 transition-colors">
+                  <Trash2 size={16} />
+                </button>
+              </div>
+              
+              <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Inputs */}
+                <div className="space-y-4">
+                  <h4 className="text-xs font-bold text-[#aeb6cb] uppercase tracking-wider mb-2">Input Variables</h4>
+                  {data.variables.length === 0 ? (
+                    <p className="text-sm text-[#565e78]">No variables required for this prompt.</p>
+                  ) : (
+                    data.variables.map(v => (
+                      <div key={v.name} className="space-y-1.5">
+                        <label className="text-sm text-[#d2d7e8] font-medium">{v.displayName || v.name}</label>
+                        <input 
+                          type="text" 
+                          value={ex.input[v.name] || ''} 
+                          onChange={e => updateExampleInput(ex.id, v.name, e.target.value)}
+                          placeholder={`Value for ${v.name}...`}
+                          className="w-full h-10 px-3 bg-[#0c1122] border border-[#30395e] rounded-lg text-white text-sm focus:outline-none focus:border-[#a46aff] transition-colors"
+                        />
+                      </div>
+                    ))
+                  )}
+                </div>
+
+                {/* Output */}
+                <div className="space-y-4 flex flex-col h-full">
+                  <h4 className="text-xs font-bold text-[#aeb6cb] uppercase tracking-wider mb-2">Expected Output</h4>
+                  <textarea 
+                    value={ex.output} 
+                    onChange={e => updateExampleOutput(ex.id, e.target.value)}
+                    placeholder="Paste the output generated by the AI here..."
+                    className="flex-1 w-full min-h-[150px] p-3 bg-[#0c1122] border border-[#30395e] rounded-lg text-white text-sm focus:outline-none focus:border-[#a46aff] transition-colors resize-none"
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

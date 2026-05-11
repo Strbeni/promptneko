@@ -109,7 +109,7 @@ export interface DetailedPrompt {
   engine: {
     modelId: string;
     provider: string;
-    parameters: Record<string, any>;
+    parameters: Record<string, unknown>;
   };
   taxonomy: {
     primaryCategory: string;
@@ -120,8 +120,25 @@ export interface DetailedPrompt {
     views: number;
     saves: number;
   };
+  pricing?: {
+    type: 'free' | 'one_time' | 'subscription_only' | 'api_per_use';
+    priceCents: number;
+  };
+  /** Extra DB fields passed through for the detail page — not shown on cards */
+  _db?: {
+    longDescription?: string | null;
+    variables?: unknown[];
+    exampleInput?: unknown;
+    exampleOutput?: string | null;
+    modelCompatibility?: string[];
+    avgRating?: number;
+    reviewCount?: number;
+    purchaseCount?: number;
+    isNsfw?: boolean;
+  };
   createdAt: string;
 }
+
 
 export const promptCards: DetailedPrompt[] = [
   // AI Art & Anime
@@ -238,7 +255,7 @@ export const promptCards: DetailedPrompt[] = [
     stats: { likes: 1400, views: 6000, saves: 190 }, createdAt: "2024-05-13T08:00:00Z"
   },
   {
-    id: "p18", slug: "cyber-energy-drink", slug2: "cyber-energy", title: "Cyber Energy Branding", description: "Futuristic and high-contrast branding for an energy drink.",
+    id: "p18", slug: "cyber-energy-drink", title: "Cyber Energy Branding", description: "Futuristic and high-contrast branding for an energy drink.",
     content: { text: "Energy drink, cyberpunk aesthetic, neon colors, bold typography, futuristic packaging", version: "1.0" }, promptToCopy: "Energy drink, cyberpunk aesthetic, neon colors, bold typography, futuristic packaging",
     assets: [{ type: 'image', primaryUrl: "/images/marketplace/energy_drink.png", thumbnailUrl: "/images/marketplace/energy_drink.png", dimensions: { width: 1024, height: 1024 } }],
     creator: { id: "u18", handle: "@glow.studio", displayName: "Glow Studio", avatarUrl: "", isVerified: true },

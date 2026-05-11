@@ -98,10 +98,14 @@ export function ExplorePage() {
           </footer>
         </section>
 
-        <RightRail onAction={(action) => {
-          setQuery(action);
-          setDrawerAction(action);
-        }} />
+        <RightRail
+          isCollapsed={false}
+          onToggle={() => {}}
+          onAction={(action) => {
+            setQuery(action);
+            setDrawerAction(action);
+          }}
+        />
       </div>
       <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
     </MarketplaceLayout>

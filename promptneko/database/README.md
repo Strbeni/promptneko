@@ -1,29 +1,54 @@
-# PromptVault Database
 
-This folder contains the Phase 1 PostgreSQL foundation schema and required category seed data.
+# PromptNeko — Database Setup
 
-## Requirements
+## 1. Run the migration in Supabase SQL Editor
 
-- PostgreSQL 15+
-- `pgcrypto`
-- `pgvector`
-- `psql` available on your PATH
+Paste the contents of `database/migrations/001_promptvault_foundation.sql` into the **Supabase SQL Editor** and run it. Then run `002_rpc_functions.sql`.
 
-The migration uses UUID primary keys throughout, `timestamptz` timestamps, enum types for constrained workflow state, database-level verified-purchase review enforcement, prompt slug generation, and denormalized count/rating triggers.
+> **Do NOT run against production until tests pass.**
 
-## Apply Locally
+## 2. Get your API Keys
 
-Set `DATABASE_URL` to your PostgreSQL connection string, then run:
+Go to: **Supabase Dashboard → Project Settings → API**
 
-```bash
-npm run db:migrate
-npm run db:seed
+Copy:
+- `URL` → `NEXT_PUBLIC_SUPABASE_URL`  
+- `anon / public` key → `NEXT_PUBLIC_SUPABASE_ANON_KEY`  
+- `service_role / secret` key → `SUPABASE_SERVICE_ROLE_KEY`
+
+Then update `.env.local`:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=https://maklruruvcxgrrjunysc.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<paste anon key here>
+SUPABASE_SERVICE_ROLE_KEY=<paste service role key here>
+DATABASE_URL=postgresql://postgres.maklruruvcxgrrjunysc:promptneko123@aws-1-ap-northeast-1.pooler.supabase.com:5432/postgres
 ```
 
-The seed is idempotent and can be re-run safely.
+## 3. Architecture Overview
 
-## Notes
+```
+/app/prompt/[slug]/page.tsx   ← tries Supabase first, falls back to static data
+/app/api/prompts/create/route.ts  ← writes new prompts from /create wizard
+/lib/queries.ts               ← all Supabase read/write functions
+/lib/adapters.ts              ← converts DB rows → DetailedPrompt UI shape
+/lib/supabase.ts              ← client singleton (browser + server)
+/lib/database.types.ts        ← full TypeScript types
+/database/migrations/         ← SQL schema + seed data
+```
 
-- `prompts.content` and `prompt_versions.content_snapshot` are `bytea` fields intended to store application-encrypted prompt payloads.
-- Review verification is enforced by a composite foreign key to `purchases` plus a trigger requiring the purchase status to be `completed`.
-- `categories.prompt_count`, `prompts.purchase_count`, `prompts.avg_rating`, `prompts.review_count`, creator stats, and collection item counts are maintained by triggers.
+## 4. Data Flow
+
+| Action | Source |
+|--------|--------|
+| Browse prompts (homepage) | Static `promptCards` → migrate to `getPrompts()` |
+| View prompt detail `/prompt/[slug]` | **Supabase** (falls back to static) |
+| Submit prompt via `/create` | **Supabase** via `POST /api/prompts/create` |
+| Categories | **Supabase** (seeded in migration) |
+
+## 5. Next Steps (Future)
+
+- Add `supabase auth` for real `creator_id` on submission
+- Migrate `HomePage` sections to use `getPrompts({ category })` server-side
+- Add image upload via `supabase.storage.from('prompt-assets').upload(...)`
+- Set up `SUPABASE_SERVICE_ROLE_KEY` environment secret in Vercel

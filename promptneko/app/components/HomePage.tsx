@@ -22,6 +22,7 @@ type HomePageProps = {
 };
 
 export function HomePage({ setDrawerAction }: HomePageProps) {
+  const router = useRouter();
   const [isRightRailCollapsed, setIsRightRailCollapsed] = useState(false);
 
   function openPrompt(prompt: DetailedPrompt) {
