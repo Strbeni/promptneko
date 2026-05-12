@@ -135,6 +135,8 @@ export interface DetailedPrompt {
     reviewCount?: number;
     purchaseCount?: number;
     isNsfw?: boolean;
+    is_featured?: boolean;
+    is_staff_pick?: boolean;
   };
   createdAt: string;
 }

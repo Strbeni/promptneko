@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 import {
   Aperture,
   Brush,
@@ -305,13 +307,48 @@ function SuggestCategory() {
   );
 }
 
-export function CategoriesPage() {
+import { DetailedPrompt } from "./marketplace-data";
+
+export function CategoriesPage({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }) {
   const [query, setQuery] = useState("");
   const [drawerAction, setDrawerAction] = useState<string | null>(null);
-  const content = useMemo(() => sections, []);
+
+  // Group prompts dynamically into sections matching our static layout if possible
+  // Otherwise use static ones as placeholders
+  const content = useMemo(() => {
+    return sections.map(sec => {
+      // Find prompts matching this category
+      const dynamicPrompts = allPrompts
+        .filter(p => p.taxonomy.primaryCategory === sec.title || (sec.title === 'Art' && p.taxonomy.primaryCategory === 'Anime/Manga'))
+        .slice(0, 5)
+        .map(p => ({
+          title: p.title,
+          author: p.creator.handle,
+          likes: p.stats.views.toString(),
+          tag: p.taxonomy.primaryCategory,
+          crop: sec.prompts[0]?.crop || "",
+          video: p.assets?.[0]?.type === 'video'
+        }));
+
+      return {
+        ...sec,
+        prompts: dynamicPrompts.length > 0 ? dynamicPrompts : sec.prompts
+      };
+    });
+  }, [allPrompts]);
+
+  const router = useRouter();
 
   function openAction(action: string) {
     setDrawerAction(action);
+  }
+
+  function handleSearch() {
+    if (query.trim()) {
+      router.push(`/explore?q=${encodeURIComponent(query)}`);
+    } else {
+      router.push(`/explore`);
+    }
   }
 
   return (
@@ -319,7 +356,7 @@ export function CategoriesPage() {
       activeNav="Categories"
       query={query}
       onQueryChange={setQuery}
-      onSearch={() => openAction(query ? `Search: ${query}` : "Search")}
+      onSearch={handleSearch}
       onAction={openAction}
     >
       <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-7 pt-3">

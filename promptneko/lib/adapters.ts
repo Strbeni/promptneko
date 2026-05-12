@@ -76,6 +76,8 @@ export function dbPromptToDetailedPrompt(row: DbPrompt): DetailedPrompt {
       reviewCount: row.review_count,
       purchaseCount: row.purchase_count,
       isNsfw: row.is_nsfw,
+      is_featured: row.is_featured,
+      is_staff_pick: row.is_staff_pick,
     },
   };
 }

@@ -1,5 +1,7 @@
 import { ExplorePage } from "../components/ExplorePage";
+import { fetchAllActivePrompts } from "../actions/marketplace";
 
-export default function Page() {
-  return <ExplorePage />;
+export default async function Page() {
+  const allPrompts = await fetchAllActivePrompts();
+  return <ExplorePage allPrompts={allPrompts} />;
 }

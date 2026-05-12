@@ -1,19 +1,32 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useMemo, useState, Suspense } from "react";
 import { ActionDrawer } from "./ActionDrawer";
 import { FilterBar } from "./FilterBar";
 import { MarketplaceLayout } from "./MarketplaceLayout";
 import { PromptCard } from "./PromptCard";
 import { ResultsTabs } from "./ResultsTabs";
 import { RightRail } from "./RightRail";
-import { promptCards } from "./marketplace-data";
+import { DetailedPrompt } from "./marketplace-data";
 
-export function ExplorePage() {
+function ExplorePageInner({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }) {
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("q") || "";
+  
   const [activeNav, setActiveNav] = useState("Explore");
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery);
   const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (searchParams.get("q") !== null) {
+      setQuery(searchParams.get("q") || "");
+    }
+  }, [searchParams]);
+
   const [activeTab, setActiveTab] = useState("Popular");
   const [saved, setSaved] = useState<Set<string>>(new Set());
   const [liked, setLiked] = useState<Set<string>>(new Set());
@@ -21,17 +34,25 @@ export function ExplorePage() {
 
   const visiblePrompts = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    return promptCards.filter((prompt) => {
+    return allPrompts.filter((prompt) => {
       const matchesQuery = !needle || 
         `${prompt.title} ${prompt.engine.provider} ${prompt.creator.handle} ${prompt.taxonomy.primaryCategory}`.toLowerCase().includes(needle);
       const matchesCategory = selectedCategory === "All" || prompt.taxonomy.primaryCategory === selectedCategory;
       return matchesQuery && matchesCategory;
     });
-  }, [query, selectedCategory]);
+  }, [query, selectedCategory, allPrompts]);
 
   function openAction(action: string) {
     setActiveNav(action);
     setDrawerAction(action);
+  }
+
+  function handleSearch() {
+    if (query.trim()) {
+      router.push(`/explore?q=${encodeURIComponent(query)}`);
+    } else {
+      router.push(`/explore`);
+    }
   }
 
   function toggle(setter: (value: Set<string>) => void, current: Set<string>, key: string) {
@@ -49,7 +70,7 @@ export function ExplorePage() {
       activeNav={activeNav}
       query={query}
       onQueryChange={setQuery}
-      onSearch={() => openAction(query ? `Search: ${query}` : "Search")}
+      onSearch={handleSearch}
       onAction={openAction}
     >
       <div className="flex flex-1 min-h-0 [grid-template-columns:minmax(0,1fr)_300px] lg:grid">
@@ -65,7 +86,7 @@ export function ExplorePage() {
           <ResultsTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {(visiblePrompts.length ? visiblePrompts : promptCards).map((prompt) => (
+            {(visiblePrompts.length || query || selectedCategory !== "All" ? visiblePrompts : allPrompts).map((prompt) => (
               <PromptCard
                 item={prompt}
                 isSaved={saved.has(prompt.id)}
@@ -109,5 +130,13 @@ export function ExplorePage() {
       </div>
       <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
     </MarketplaceLayout>
+  );
+}
+
+export function ExplorePage({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }) {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-white">Loading...</div>}>
+      <ExplorePageInner allPrompts={allPrompts} />
+    </Suspense>
   );
 }

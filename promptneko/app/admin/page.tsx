@@ -5,13 +5,14 @@ import { useAuth } from "../components/auth/AuthContext";
 import { MarketplaceLayout } from "../components/MarketplaceLayout";
 import { CheckCircle, XCircle, Loader2, ShieldAlert } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { getAdminDashboardData, adminUpdatePromptStatus, adminApproveCreator } from "./actions";
+import { getAdminDashboardData, adminUpdatePromptStatus, adminApproveCreator, adminToggleFlag } from "./actions";
 
 export default function AdminPage() {
   const { user, dbUser, loading } = useAuth();
   const router = useRouter();
   
   const [pendingPrompts, setPendingPrompts] = useState<any[]>([]);
+  const [activePrompts, setActivePrompts] = useState<any[]>([]);
   const [pendingCreators, setPendingCreators] = useState<any[]>([]);
   const [fetching, setFetching] = useState(true);
 
@@ -30,6 +31,7 @@ export default function AdminPage() {
     const result = await getAdminDashboardData();
     if (!result.error) {
       setPendingPrompts(result.prompts || []);
+      setActivePrompts(result.activePrompts || []);
       setPendingCreators(result.creators || []);
     }
     
@@ -46,6 +48,11 @@ export default function AdminPage() {
 
   async function updatePromptStatus(id: string, status: string) {
     await adminUpdatePromptStatus(id, status);
+    loadAdminData();
+  }
+
+  async function toggleFlag(id: string, flag: 'is_featured' | 'is_staff_pick', value: boolean) {
+    await adminToggleFlag(id, flag, value);
     loadAdminData();
   }
 
@@ -182,6 +189,55 @@ export default function AdminPage() {
                         className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors text-sm"
                       >
                         <CheckCircle size={14} /> Approve & Publish
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Active Prompts */}
+          <div className="space-y-4">
+            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+              Active Prompts (Manage Categories) <span className="px-2 py-0.5 rounded-full bg-[#1e2640] text-xs">{activePrompts.length}</span>
+            </h2>
+            
+            {fetching ? (
+              <div className="p-8 text-center text-[#8990aa]">Loading...</div>
+            ) : activePrompts.length === 0 ? (
+              <div className="p-8 text-center border border-dashed border-[#1e2640] rounded-xl text-[#8990aa] bg-[#0a1020]">
+                No active prompts.
+              </div>
+            ) : (
+              <div className="grid gap-4">
+                {activePrompts.map((prompt) => (
+                  <div key={prompt.id} className="flex flex-col md:flex-row md:items-center justify-between p-5 border border-[#1e2640] rounded-xl bg-[#080f1e]">
+                    <div>
+                      <h3 className="font-semibold text-white">{prompt.title}</h3>
+                      <p className="text-sm text-[#8990aa]">
+                        By: {prompt.users?.display_name || "Unknown"} • {new Date(prompt.created_at).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <div className="flex gap-2 mt-4 md:mt-0">
+                      <button 
+                        onClick={() => toggleFlag(prompt.id, "is_featured", !prompt.is_featured)}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 border rounded-lg transition-colors text-sm ${prompt.is_featured ? "bg-[#7b3cff]/20 text-[#a46aff] border-[#7b3cff]/30" : "bg-transparent text-[#8990aa] border-[#1e2640] hover:text-white"}`}
+                      >
+                        Featured
+                      </button>
+                      <button 
+                        onClick={() => toggleFlag(prompt.id, "is_staff_pick", !prompt.is_staff_pick)}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 border rounded-lg transition-colors text-sm ${prompt.is_staff_pick ? "bg-[#00d9a8]/20 text-[#00d9a8] border-[#00d9a8]/30" : "bg-transparent text-[#8990aa] border-[#1e2640] hover:text-white"}`}
+                      >
+                        Staff Pick (Trending)
+                      </button>
+                      <button 
+                        onClick={() => updatePromptStatus(prompt.id, "archived")}
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-lg hover:bg-rose-500/20 transition-colors text-sm"
+                        title="Hide prompt from the marketplace"
+                      >
+                        <XCircle size={14} /> Hide
                       </button>
                     </div>
                   </div>
