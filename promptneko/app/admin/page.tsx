@@ -5,7 +5,8 @@ import { useAuth } from "../components/auth/AuthContext";
 import { MarketplaceLayout } from "../components/MarketplaceLayout";
 import { CheckCircle, XCircle, Loader2, ShieldAlert } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { getAdminDashboardData, adminUpdatePromptStatus, adminApproveCreator, adminToggleFlag } from "./actions";
+import { getAdminDashboardData, adminUpdatePromptStatus, adminApproveCreator, adminToggleFlag, adminUpdatePromptCategory } from "./actions";
+import { filterCategories } from "../components/marketplace-data";
 
 export default function AdminPage() {
   const { user, dbUser, loading } = useAuth();
@@ -48,6 +49,12 @@ export default function AdminPage() {
 
   async function updatePromptStatus(id: string, status: string) {
     await adminUpdatePromptStatus(id, status);
+    loadAdminData();
+  }
+
+  async function updatePromptCategory(id: string, category: string) {
+    if (!category || category === "All") return;
+    await adminUpdatePromptCategory(id, category);
     loadAdminData();
   }
 
@@ -219,7 +226,17 @@ export default function AdminPage() {
                         By: {prompt.users?.display_name || "Unknown"} • {new Date(prompt.created_at).toLocaleDateString()}
                       </p>
                     </div>
-                    <div className="flex gap-2 mt-4 md:mt-0">
+                    <div className="flex flex-wrap items-center gap-2 mt-4 md:mt-0">
+                      <select 
+                        onChange={(e) => updatePromptCategory(prompt.id, e.target.value)}
+                        className="px-3 py-1.5 bg-[#080f1e] text-[#8990aa] border border-[#1e2640] rounded-lg text-sm outline-none"
+                        defaultValue=""
+                      >
+                        <option value="" disabled>Assign Category</option>
+                        {filterCategories.filter(c => c.label !== "All").map(c => (
+                          <option key={c.label} value={c.label}>{c.label}</option>
+                        ))}
+                      </select>
                       <button 
                         onClick={() => toggleFlag(prompt.id, "is_featured", !prompt.is_featured)}
                         className={`flex items-center gap-1.5 px-3 py-1.5 border rounded-lg transition-colors text-sm ${prompt.is_featured ? "bg-[#7b3cff]/20 text-[#a46aff] border-[#7b3cff]/30" : "bg-transparent text-[#8990aa] border-[#1e2640] hover:text-white"}`}

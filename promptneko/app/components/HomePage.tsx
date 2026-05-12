@@ -52,20 +52,21 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
   const getPromptsByCat = (catName: string) => 
     allPrompts.filter(p => p.taxonomy.primaryCategory === catName);
 
-  const websiteUiPrompts = getPromptsByCat("UI Mockup");
-  const brandingPrompts = getPromptsByCat("Logo/Brand");
-  const fruitVideoPrompts = getPromptsByCat("Product Ad");
-  const marketingPrompts = getPromptsByCat("Ad Copy");
-  const codingPrompts = getPromptsByCat("Code Development");
-  const socialReelPrompts = getPromptsByCat("Social Media");
-  const animeArtPrompts = getPromptsByCat("Anime/Manga");
-
   function openPrompt(prompt: DetailedPrompt) {
     router.push(`/prompt/${prompt.slug}`);
   }
 
+  // Find the valid categories to render sections for
+  const categoriesToRender = filterCategories
+    .filter(cat => cat.label !== "All")
+    .map(cat => ({
+      ...cat,
+      prompts: getPromptsByCat(cat.label)
+    }))
+    .filter(cat => cat.prompts.length > 0);
+
   return (
-    <div className={`flex flex-col lg:flex-row flex-1 min-h-0 lg:grid overflow-hidden transition-all duration-300 ${isRightRailCollapsed ? 'lg:[grid-template-columns:minmax(0,1fr)_60px]' : 'lg:[grid-template-columns:minmax(0,1fr)_300px]'}`}>
+    <div className={`h-full flex flex-col lg:flex-row flex-1 min-h-0 lg:grid overflow-hidden transition-all duration-300 ${isRightRailCollapsed ? 'lg:[grid-template-columns:minmax(0,1fr)_60px]' : 'lg:[grid-template-columns:minmax(0,1fr)_300px]'}`}>
       <section className="flex-1 min-w-0 overflow-y-auto px-4 md:px-8 py-6 md:py-4 lg:border-r lg:border-[#121930]/72 space-y-4 md:space-y-2">
         {/* Hero */}
         <div className="relative h-[280px] md:h-[313px] overflow-visible border border-[#202746] rounded-2xl bg-[#101629] after:absolute after:inset-0 after:[background:linear-gradient(90deg,rgba(6,8,17,0.94),rgba(6,8,17,0.72)_39%,rgba(6,8,17,0.06)_74%)] after:content-[''] after:pointer-events-none">
@@ -195,16 +196,25 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
               Market Trends
             </button>
           </header>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {trendingPrompts.slice(0, 8).map((prompt, i) => (
-              <div key={prompt.id} onClick={() => openPrompt(prompt)} className="relative h-[120px] md:h-[154px] overflow-hidden border border-[#273056] rounded-2xl bg-[#080d19] group hover:border-[#6132bf] hover:scale-[1.05] transition-all duration-300 cursor-pointer">
+              <div key={prompt.id} onClick={() => openPrompt(prompt)} className="relative h-[150px] md:h-[180px] overflow-hidden border border-[#273056] rounded-2xl bg-[#080d19] group hover:border-[#6132bf] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#6132bf]/20 transition-all duration-300 cursor-pointer flex flex-col justify-end">
                 <div 
-                  className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-70 transition-opacity duration-500" 
+                  className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-500" 
                   style={{ backgroundImage: `url(${prompt.assets[0]?.thumbnailUrl || `/images/stock/${['sakura-night', 'neon-tokyo', 'ethereal-castle', 'cybernetic-girl', 'lost-galaxy', 'cinematic-portrait'][i % 6]}.png`})` }} 
                 />
-                <i className="absolute top-2 left-2 z-10 grid place-items-center w-[18px] md:w-[22px] h-[18px] md:h-[22px] rounded-full bg-gradient-to-b from-[#8c57ff] to-[#6433e9] text-white text-[10px] md:text-[12px] font-extrabold not-italic">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030711] via-[#030711]/40 to-transparent" />
+                <i className="absolute top-2 left-2 z-10 grid place-items-center w-[18px] md:w-[22px] h-[18px] md:h-[22px] rounded-full bg-gradient-to-b from-[#8c57ff] to-[#6433e9] text-white text-[10px] md:text-[12px] font-extrabold not-italic shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
                   {i + 1}
                 </i>
+                <div className="relative z-10 p-3 w-full">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00d9a8] shadow-[0_0_8px_#00d9a8]"></span>
+                    <span className="text-[10px] text-[#00d9a8] font-bold uppercase tracking-wider">{prompt.stats.views.toLocaleString()}</span>
+                  </div>
+                  <h3 className="text-white text-[13px] md:text-[14px] font-bold leading-tight mb-1 line-clamp-2 drop-shadow-md">{prompt.title}</h3>
+                  <p className="text-[#aeb5ca] text-[11px] md:text-[12px] truncate drop-shadow-md">by {prompt.creator.handle}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -223,7 +233,11 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
           </header>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {filterCategories.slice(1, 7).map((cat, i) => (
-              <button key={cat.label} className="relative h-[60px] md:h-[70px] overflow-hidden border border-[#273056] rounded-xl bg-[#080d19] text-left group hover:border-[#6132bf] hover:scale-[1.05] transition-all duration-300 cursor-pointer">
+              <button 
+                key={cat.label} 
+                onClick={() => router.push(`/explore?category=${encodeURIComponent(cat.label)}`)}
+                className="relative h-[60px] md:h-[70px] overflow-hidden border border-[#273056] rounded-xl bg-[#080d19] text-left group hover:border-[#6132bf] hover:scale-[1.05] transition-all duration-300 cursor-pointer"
+              >
                 <div 
                   className="absolute inset-0 opacity-20 bg-cover bg-center group-hover:opacity-40 transition-opacity duration-500" 
                   style={{ backgroundImage: `url(/images/stock/${['sakura-night', 'neon-tokyo', 'ethereal-castle', 'cybernetic-girl', 'lost-galaxy', 'cinematic-portrait'][i % 6]}.png)` }} 
@@ -235,107 +249,28 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
           </div>
         </section>
 
-        {/* Websites & UI */}
-        {websiteUiPrompts.length > 0 && (
-        <section >
-          <header className="flex items-center justify-between h-10 mb-5">
-            <div className="flex items-center gap-2">
-              <Star className="text-[#a46aff]" size={18} />
-              <h2 className="m-0 text-white text-[17px] font-bold">Websites & UI</h2>
+        {/* Dynamic Category Sections */}
+        {categoriesToRender.map(cat => (
+          <section key={cat.label}>
+            <header className="flex items-center justify-between h-10 mb-5">
+              <div className="flex items-center gap-2">
+                <cat.icon className="text-[#a46aff]" size={18} />
+                <h2 className="m-0 text-white text-[17px] font-bold">{cat.label}</h2>
+              </div>
+              <button 
+                onClick={() => router.push(`/explore?category=${encodeURIComponent(cat.label)}`)}
+                className="flex items-center gap-1 h-[29px] px-3 border border-[#2a1c58] rounded-full bg-[#0f1024] text-[#a463ff] text-[11px] md:text-[12px] cursor-pointer hover:bg-[#1a1c3d] transition-colors"
+              >
+                View All <ChevronRight size={14} />
+              </button>
+            </header>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {cat.prompts.slice(0, 5).map((prompt) => (
+                <PromptCard key={prompt.id} item={prompt} onOpen={openPrompt} />
+              ))}
             </div>
-          </header>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {websiteUiPrompts.slice(0, 5).map((prompt) => (
-              <PromptCard key={prompt.id} item={prompt} onOpen={openPrompt} />
-            ))}
-          </div>
-        </section>
-        )}
-
-        {/* Branding & Logos */}
-        {brandingPrompts.length > 0 && (
-        <section >
-          <header className="flex items-center justify-between h-10 mb-5">
-            <div className="flex items-center gap-2">
-              <Star className="text-[#00d9a8]" size={18} />
-              <h2 className="m-0 text-white text-[17px] font-bold">Branding & Logos</h2>
-            </div>
-          </header>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {brandingPrompts.slice(0, 5).map((prompt) => (
-              <PromptCard key={prompt.id} item={prompt} onOpen={openPrompt} />
-            ))}
-          </div>
-        </section>
-        )}
-
-        {/* AI Fruit & Marketing */}
-        {(fruitVideoPrompts.length > 0 || marketingPrompts.length > 0) && (
-        <section >
-          <header className="flex items-center justify-between h-10 mb-5">
-            <div className="flex items-center gap-2">
-              <Sparkles className="text-[#ff9f21]" size={18} />
-              <h2 className="m-0 text-white text-[17px] font-bold">AI Fruit & Marketing</h2>
-            </div>
-          </header>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {[...new Set([...fruitVideoPrompts, ...marketingPrompts])].slice(0, 5).map((prompt) => (
-              <PromptCard key={prompt.id} item={prompt} onOpen={openPrompt} />
-            ))}
-          </div>
-        </section>
-        )}
-
-        {/* Coding & Technical */}
-        {codingPrompts.length > 0 && (
-        <section >
-          <header className="flex items-center justify-between h-10 mb-5">
-            <div className="flex items-center gap-2">
-              <Code className="text-[#00d9a8]" size={18} />
-              <h2 className="m-0 text-white text-[17px] font-bold">Coding & Technical</h2>
-            </div>
-          </header>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {codingPrompts.slice(0, 5).map((prompt) => (
-              <PromptCard key={prompt.id} item={prompt} onOpen={openPrompt} />
-            ))}
-          </div>
-        </section>
-        )}
-
-        {/* Social & Reels */}
-        {socialReelPrompts.length > 0 && (
-        <section >
-          <header className="flex items-center justify-between h-10 mb-5">
-            <div className="flex items-center gap-2">
-              <Star className="text-[#f0378e]" size={18} />
-              <h2 className="m-0 text-white text-[17px] font-bold">Social Media & Reels</h2>
-            </div>
-          </header>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {socialReelPrompts.slice(0, 5).map((prompt) => (
-              <PromptCard key={prompt.id} item={prompt} onOpen={openPrompt} />
-            ))}
-          </div>
-        </section>
-        )}
-
-        {/* AI Art & Anime */}
-        {animeArtPrompts.length > 0 && (
-        <section>
-          <header className="flex items-center justify-between h-10 mb-5">
-            <div className="flex items-center gap-2">
-              <Sparkles className="text-[#7b3cff]" size={18} />
-              <h2 className="m-0 text-white text-[17px] font-bold">AI Art & Anime</h2>
-            </div>
-          </header>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {animeArtPrompts.slice(0, 5).map((prompt) => (
-              <PromptCard key={prompt.id} item={prompt} onOpen={openPrompt} />
-            ))}
-          </div>
-        </section>
-        )}
+          </section>
+        ))}
       </section>
 
       <div className="hidden lg:block">

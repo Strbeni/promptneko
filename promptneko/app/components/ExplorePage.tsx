@@ -14,16 +14,20 @@ import { DetailedPrompt } from "./marketplace-data";
 function ExplorePageInner({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }) {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") || "";
+  const initialCategory = searchParams.get("category") || "All";
   
   const [activeNav, setActiveNav] = useState("Explore");
   const [query, setQuery] = useState(initialQuery);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
 
   const router = useRouter();
 
   useEffect(() => {
     if (searchParams.get("q") !== null) {
       setQuery(searchParams.get("q") || "");
+    }
+    if (searchParams.get("category") !== null) {
+      setSelectedCategory(searchParams.get("category") || "All");
     }
   }, [searchParams]);
 
@@ -79,7 +83,11 @@ function ExplorePageInner({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }
             query={query}
             selectedCategory={selectedCategory}
             onQueryChange={setQuery}
-            onCategoryChange={(category) => setSelectedCategory(category)}
+            onCategoryChange={(category) => {
+              setSelectedCategory(category);
+              // Update URL without a full reload for copy-paste sharing
+              window.history.replaceState(null, '', `/explore?q=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`);
+            }}
             onAction={openAction}
           />
 

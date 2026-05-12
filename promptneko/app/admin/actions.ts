@@ -72,6 +72,39 @@ export async function adminUpdatePromptStatus(id: string, status: string) {
   return { success: true };
 }
 
+export async function adminUpdatePromptCategory(id: string, categoryLabel: string) {
+  const cookieStore = await cookies();
+  const authClient = createSupabaseServerClient(cookieStore);
+  const { data: { user } } = await authClient.auth.getUser();
+  if (!user) return { error: "Unauthorized" };
+
+  const { data: dbUser } = await (authClient as any).from("users").select("role").eq("id", user.id).single();
+  if ((dbUser as any)?.role !== "admin") return { error: "Forbidden" };
+
+  const adminClient = createServerClient();
+  
+  // Create slug from label
+  const slug = categoryLabel.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  
+  // Find category ID
+  const { data: cat } = await (adminClient as any).from("categories").select("id").eq("slug", slug).maybeSingle();
+  
+  let categoryId = cat?.id;
+  
+  if (!categoryId) {
+    // If category doesn't exist, try to create it
+    const { data: newCat, error } = await (adminClient as any).from("categories").insert({ name: categoryLabel, slug }).select("id").single();
+    if (newCat) {
+      categoryId = newCat.id;
+    } else {
+      return { error: "Failed to resolve category" };
+    }
+  }
+
+  await (adminClient as any).from("prompts").update({ category_id: categoryId }).eq("id", id);
+  return { success: true };
+}
+
 export async function adminApproveCreator(id: string) {
   const cookieStore = await cookies();
   const authClient = createSupabaseServerClient(cookieStore);
