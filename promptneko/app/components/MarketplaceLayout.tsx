@@ -14,7 +14,6 @@ type MarketplaceLayoutProps = {
 };
 
 export function MarketplaceLayout({ activeNav, query, children, onQueryChange, onSearch, onAction }: MarketplaceLayoutProps) {
-  const [credits, setCredits] = useState(1250);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -22,14 +21,9 @@ export function MarketplaceLayout({ activeNav, query, children, onQueryChange, o
       <div className={`fixed inset-y-0 left-0 z-50 transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out`}>
         <Sidebar
           active={activeNav}
-          credits={credits}
           onAction={(action) => {
             onAction(action);
             setIsSidebarOpen(false);
-          }}
-          onTopUp={() => {
-            setCredits((value) => value + 250);
-            onAction("250 credits added");
           }}
         />
       </div>
