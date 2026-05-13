@@ -10,8 +10,8 @@ type PromptCardProps = {
   isSaved?: boolean;
   isLiked?: boolean;
   onOpen?: (item: DetailedPrompt) => void;
-  onSave?: (title: string) => void;
-  onLike?: (title: string) => void;
+  onSave?: (item: DetailedPrompt) => void;
+  onLike?: (item: DetailedPrompt) => void;
 };
 
 export function PromptCard({ item, isSaved = false, isLiked = false, onOpen, onSave, onLike }: PromptCardProps) {
@@ -49,13 +49,13 @@ export function PromptCard({ item, isSaved = false, isLiked = false, onOpen, onS
         <div className="absolute top-3 right-3 z-10 flex flex-col gap-2">
           <button 
             className={`grid place-items-center w-[30px] h-[30px] rounded-full bg-black/40 backdrop-blur-md border border-white/10 transition-colors ${isSaved ? 'text-white' : 'text-white/70 hover:text-white hover:bg-black/60'}`}
-            onClick={(e) => { e.stopPropagation(); onSave?.(item.title); }}
+            onClick={(e) => { e.stopPropagation(); onSave?.(item); }}
           >
             <Bookmark size={14} fill={isSaved ? "currentColor" : "none"} />
           </button>
           <button 
             className={`grid place-items-center w-[30px] h-[30px] rounded-full bg-black/40 backdrop-blur-md border border-white/10 transition-colors ${isLiked ? 'text-[#ff4f9d]' : 'text-white/70 hover:text-[#ff4f9d] hover:bg-black/60'}`}
-            onClick={(e) => { e.stopPropagation(); onLike?.(item.title); }}
+            onClick={(e) => { e.stopPropagation(); onLike?.(item); }}
           >
             <Heart size={14} fill={isLiked ? "currentColor" : "none"} />
           </button>

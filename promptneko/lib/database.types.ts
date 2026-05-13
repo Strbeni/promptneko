@@ -192,9 +192,40 @@ export type Database = {
         Insert: Omit<Database['public']['Tables']['purchases']['Row'], 'id' | 'created_at'>;
         Update: Partial<Database['public']['Tables']['purchases']['Insert']>;
       };
+      user_likes: {
+        Row: {
+          user_id: string;
+          prompt_id: string;
+          created_at: string;
+        };
+        Insert: Omit<Database['public']['Tables']['user_likes']['Row'], 'created_at'>;
+        Update: Partial<Database['public']['Tables']['user_likes']['Insert']>;
+      };
+      user_saved_prompts: {
+        Row: {
+          user_id: string;
+          prompt_id: string;
+          created_at: string;
+        };
+        Insert: Omit<Database['public']['Tables']['user_saved_prompts']['Row'], 'created_at'>;
+        Update: Partial<Database['public']['Tables']['user_saved_prompts']['Insert']>;
+      };
     };
     Views: Record<string, never>;
-    Functions: Record<string, never>;
+    Functions: {
+      increment_view_count: {
+        Args: { p_id: string };
+        Returns: number;
+      };
+      prompt_like_count: {
+        Args: { p_id: string };
+        Returns: number;
+      };
+      prompt_save_count: {
+        Args: { p_id: string };
+        Returns: number;
+      };
+    };
     Enums: Record<string, never>;
   };
 };
@@ -207,3 +238,5 @@ export type DbPromptAsset = Database['public']['Tables']['prompt_assets']['Row']
 export type DbPromptVariable = Database['public']['Tables']['prompt_variables']['Row'];
 export type DbReview = Database['public']['Tables']['reviews']['Row'];
 export type DbPurchase = Database['public']['Tables']['purchases']['Row'];
+export type DbUserLike = Database['public']['Tables']['user_likes']['Row'];
+export type DbUserSavedPrompt = Database['public']['Tables']['user_saved_prompts']['Row'];

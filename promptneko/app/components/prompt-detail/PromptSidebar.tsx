@@ -4,7 +4,16 @@ import { useState } from "react";
 import { Bookmark, Copy, Eye, Heart, Sparkles, Check } from "lucide-react";
 import { DetailedPrompt } from "../marketplace-data";
 
-export function PromptSidebar({ prompt, onAction }: { prompt: DetailedPrompt; onAction: (action: string) => void }) {
+type PromptSidebarProps = {
+  prompt: DetailedPrompt;
+  onAction: (action: string) => void;
+  isLiked?: boolean;
+  isSaved?: boolean;
+  onLike?: () => void;
+  onSave?: () => void;
+};
+
+export function PromptSidebar({ prompt, onAction, isLiked = false, isSaved = false, onLike, onSave }: PromptSidebarProps) {
   const [copied, setCopied] = useState(false);
 
   function formatCount(num: number) {
@@ -62,6 +71,17 @@ export function PromptSidebar({ prompt, onAction }: { prompt: DetailedPrompt; on
         <button className="flex h-11 items-center justify-center gap-2 rounded-xl border border-[#202746] bg-[#11162a] text-[13px] font-bold text-white hover:border-[#7b3cff] transition-all" onClick={() => onAction("Try this prompt")}>
           <Sparkles size={16} />
           <span>Try Prompt</span>
+        </button>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <button className={`flex h-10 items-center justify-center gap-2 rounded-xl border text-[12px] font-bold transition-all ${isLiked ? "border-[#ff4f9d]/50 bg-[#ff4f9d]/15 text-[#ff7ebd]" : "border-[#202746] bg-[#11162a] text-white hover:border-[#ff4f9d]/40"}`} onClick={onLike}>
+          <Heart size={15} fill={isLiked ? "currentColor" : "none"} />
+          <span>{isLiked ? "Liked" : "Like"}</span>
+        </button>
+        <button className={`flex h-10 items-center justify-center gap-2 rounded-xl border text-[12px] font-bold transition-all ${isSaved ? "border-[#f7d45a]/50 bg-[#f7d45a]/10 text-[#f7d45a]" : "border-[#202746] bg-[#11162a] text-white hover:border-[#f7d45a]/40"}`} onClick={onSave}>
+          <Bookmark size={15} fill={isSaved ? "currentColor" : "none"} />
+          <span>{isSaved ? "Saved" : "Save"}</span>
         </button>
       </div>
 

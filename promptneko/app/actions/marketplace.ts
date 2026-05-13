@@ -6,7 +6,7 @@ import { promptCards } from "../components/marketplace-data";
 
 export async function fetchAllActivePrompts() {
   try {
-    const rawPrompts = await getPrompts({ limit: 500 });
+    const rawPrompts = await getPrompts({ limit: 100 });
     const dynamicPrompts = dbPromptsToDetailedPrompts(rawPrompts);
     return [...dynamicPrompts, ...promptCards];
   } catch (err) {

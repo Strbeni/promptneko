@@ -10,6 +10,7 @@ import { PromptCard } from "./PromptCard";
 import { ResultsTabs } from "./ResultsTabs";
 import { RightRail } from "./RightRail";
 import { DetailedPrompt } from "./marketplace-data";
+import { usePromptInteractions } from "./usePromptInteractions";
 
 function ExplorePageInner({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }) {
   const searchParams = useSearchParams();
@@ -32,9 +33,8 @@ function ExplorePageInner({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }
   }, [searchParams]);
 
   const [activeTab, setActiveTab] = useState("Popular");
-  const [saved, setSaved] = useState<Set<string>>(new Set());
-  const [liked, setLiked] = useState<Set<string>>(new Set());
   const [drawerAction, setDrawerAction] = useState<string | null>(null);
+  const { liked, saved, toggleLike, toggleSave } = usePromptInteractions(allPrompts);
 
   const visiblePrompts = useMemo(() => {
     const needle = query.trim().toLowerCase();
@@ -57,16 +57,6 @@ function ExplorePageInner({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }
     } else {
       router.push(`/explore`);
     }
-  }
-
-  function toggle(setter: (value: Set<string>) => void, current: Set<string>, key: string) {
-    const next = new Set(current);
-    if (next.has(key)) {
-      next.delete(key);
-    } else {
-      next.add(key);
-    }
-    setter(next);
   }
 
   return (
@@ -103,8 +93,8 @@ function ExplorePageInner({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }
                 onOpen={() => {
                   setDrawerAction(null);
                 }}
-                onSave={(title) => toggle(setSaved, saved, prompt.id)}
-                onLike={(title) => toggle(setLiked, liked, prompt.id)}
+                onSave={() => toggleSave(prompt)}
+                onLike={() => toggleLike(prompt)}
               />
             ))}
           </div>

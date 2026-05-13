@@ -12,23 +12,38 @@ import {
   Share2,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { ActionDrawer } from "./ActionDrawer";
 import { MarketplaceLayout } from "./MarketplaceLayout";
-import { promptCards } from "./marketplace-data";
+import { DetailedPrompt, promptCards } from "./marketplace-data";
+import { dbPromptsToDetailedPrompts } from "../../lib/adapters";
+import { useAuth } from "./auth/AuthContext";
 
-// ─── Placeholder liked prompts (replace with Supabase user data) ──────────────
+const LOCAL_KEY = "pn_static_interactions";
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-const LIKED_PROMPTS = promptCards.slice(4, 18);
+function isDbPrompt(id: string) {
+  return UUID_RE.test(id);
+}
 
-const CATEGORY_FILTERS = [
-  "All",
-  ...Array.from(new Set(LIKED_PROMPTS.map((p) => p.taxonomy.primaryCategory))).slice(0, 6),
-];
+function readLocalLikes() {
+  if (typeof window === "undefined") return [];
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(LOCAL_KEY) ?? "{}");
+    return Array.isArray(parsed.liked) ? parsed.liked as string[] : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeLocalLikes(next: string[]) {
+  const parsed = JSON.parse(window.localStorage.getItem(LOCAL_KEY) ?? "{}");
+  window.localStorage.setItem(LOCAL_KEY, JSON.stringify({ ...parsed, liked: next }));
+}
 
 // ─── Liked Prompt Card ────────────────────────────────────────────────────────
 
-function LikedCard({ item, onUnlike }: { item: typeof promptCards[0]; onUnlike: (id: string) => void }) {
+function LikedCard({ item, onUnlike }: { item: DetailedPrompt; onUnlike: (id: string) => void }) {
   const router = useRouter();
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -106,21 +121,70 @@ function LikedCard({ item, onUnlike }: { item: typeof promptCards[0]; onUnlike: 
 
 export function LikedPage() {
   const router = useRouter();
+  const { user, loading } = useAuth();
   const [query, setQuery] = useState("");
   const [drawerAction, setDrawerAction] = useState<string | null>(null);
-  const [likedIds, setLikedIds] = useState(LIKED_PROMPTS.map((p) => p.id));
+  const [likedIds, setLikedIds] = useState<string[]>([]);
+  const [remotePrompts, setRemotePrompts] = useState<DetailedPrompt[]>([]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQ, setSearchQ] = useState("");
 
+  useEffect(() => {
+    setLikedIds(readLocalLikes());
+  }, []);
+
+  useEffect(() => {
+    if (loading || !user) {
+      setRemotePrompts([]);
+      return;
+    }
+
+    const controller = new AbortController();
+    fetch("/api/me/liked", { signal: controller.signal })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((payload) => {
+        if (payload?.prompts) {
+          setRemotePrompts(dbPromptsToDetailedPrompts(payload.prompts));
+        }
+      })
+      .catch(() => {});
+
+    return () => controller.abort();
+  }, [loading, user]);
+
+  const allLikedPrompts = useMemo(() => {
+    const staticPrompts = promptCards.filter((p) => likedIds.includes(p.id));
+    const seen = new Set<string>();
+    return [...remotePrompts, ...staticPrompts].filter((prompt) => {
+      if (seen.has(prompt.id)) return false;
+      seen.add(prompt.id);
+      return true;
+    });
+  }, [likedIds, remotePrompts]);
+
+  const categoryFilters = useMemo(() => [
+    "All",
+    ...Array.from(new Set(allLikedPrompts.map((p) => p.taxonomy.primaryCategory))).slice(0, 6),
+  ], [allLikedPrompts]);
+
   const visible = useMemo(() => {
-    return promptCards
-      .filter((p) => likedIds.includes(p.id))
+    return allLikedPrompts
       .filter((p) => activeCategory === "All" || p.taxonomy.primaryCategory === activeCategory)
       .filter((p) => !searchQ || p.title.toLowerCase().includes(searchQ.toLowerCase()));
-  }, [likedIds, activeCategory, searchQ]);
+  }, [allLikedPrompts, activeCategory, searchQ]);
 
-  function handleUnlike(id: string) {
-    setLikedIds((prev) => prev.filter((pid) => pid !== id));
+  async function handleUnlike(id: string) {
+    if (isDbPrompt(id)) {
+      const res = await fetch(`/api/prompts/${id}/like`, { method: "POST" });
+      if (res.ok) setRemotePrompts((prev) => prev.filter((prompt) => prompt.id !== id));
+      return;
+    }
+
+    setLikedIds((prev) => {
+      const next = prev.filter((pid) => pid !== id);
+      writeLocalLikes(next);
+      return next;
+    });
   }
 
   return (
@@ -155,7 +219,7 @@ export function LikedPage() {
         <div className="flex items-center gap-3 mb-6 flex-wrap">
           {/* Category pills */}
           <div className="flex items-center gap-2 flex-wrap">
-            {CATEGORY_FILTERS.map((cat) => (
+            {categoryFilters.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}

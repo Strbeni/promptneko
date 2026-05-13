@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { Bookmark, Heart, Play } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { ActionDrawer } from "../ActionDrawer";
 import { MarketplaceLayout } from "../MarketplaceLayout";
 import { DetailedPrompt } from "../marketplace-data";
+import { usePromptInteractions } from "../usePromptInteractions";
 import { PromptMedia } from "./PromptMedia";
 import { PromptSidebar } from "./PromptSidebar";
 import { PromptTabs } from "./PromptTabs";
@@ -20,10 +19,36 @@ type PromptDetailPageProps = {
 export function PromptDetailPage({ prompt, isPending }: PromptDetailPageProps) {
   const [query, setQuery] = useState("");
   const [drawerAction, setDrawerAction] = useState<string | null>(null);
+  const { liked, saved, counterPatches, toggleLike, toggleSave, setViews } = usePromptInteractions([prompt]);
+  const patchedPrompt = useMemo(() => {
+    const patch = counterPatches[prompt.id];
+    if (!patch) return prompt;
+    return {
+      ...prompt,
+      stats: {
+        ...prompt.stats,
+        ...patch,
+      },
+    };
+  }, [counterPatches, prompt]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch(`/api/prompts/${prompt.id}/view`, { method: "POST", signal: controller.signal })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((payload) => {
+        if (typeof payload?.views === "number") setViews(prompt.id, payload.views);
+      })
+      .catch(() => {});
+
+    return () => controller.abort();
+  }, [prompt.id, setViews]);
 
   function openAction(action: string) {
     setDrawerAction(action);
   }
+
+  const promptDrawerActions = new Set(["Try this prompt", "Buy Prompt", "View Profile"]);
 
   return (
     <MarketplaceLayout
@@ -57,25 +82,39 @@ export function PromptDetailPage({ prompt, isPending }: PromptDetailPageProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_380px] gap-5 lg:min-h-[calc(100vh-180px)]">
           <main className="min-w-0 order-1 lg:order-none flex flex-col h-full">
-            <PromptMedia prompt={prompt} />
+            <PromptMedia prompt={patchedPrompt} />
             <div className="block lg:hidden mt-5">
-              <PromptSidebar prompt={prompt} onAction={openAction} />
+              <PromptSidebar
+                prompt={patchedPrompt}
+                onAction={openAction}
+                isLiked={liked.has(prompt.id)}
+                isSaved={saved.has(prompt.id)}
+                onLike={() => toggleLike(prompt)}
+                onSave={() => toggleSave(prompt)}
+              />
             </div>
-            <PromptTabs prompt={prompt} className="flex-1" />
+            <PromptTabs prompt={patchedPrompt} className="flex-1" />
             <div className="lg:hidden mt-8">
-              <RelatedPrompts title={`More by ${prompt.creator.displayName}`} />
+              <RelatedPrompts title={`More by ${patchedPrompt.creator.displayName}`} />
             </div>
-            {/* <ReviewsPanel /> */}
+            <ReviewsPanel prompt={patchedPrompt} />
           </main>
 
           <div className="hidden lg:block space-y-6">
-            <PromptSidebar prompt={prompt} onAction={openAction} />
-            <RelatedPrompts title={`More by ${prompt.creator.displayName}`} />
+            <PromptSidebar
+              prompt={patchedPrompt}
+              onAction={openAction}
+              isLiked={liked.has(prompt.id)}
+              isSaved={saved.has(prompt.id)}
+              onLike={() => toggleLike(prompt)}
+              onSave={() => toggleSave(prompt)}
+            />
+            <RelatedPrompts title={`More by ${patchedPrompt.creator.displayName}`} />
           </div>
         </div>
       </div>
 
-      <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
+      <ActionDrawer action={drawerAction} prompt={drawerAction && promptDrawerActions.has(drawerAction) ? patchedPrompt : null} onClose={() => setDrawerAction(null)} />
     </MarketplaceLayout>
   );
 }

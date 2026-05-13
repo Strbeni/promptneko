@@ -11,6 +11,8 @@ export function dbPromptToDetailedPrompt(row: DbPrompt): DetailedPrompt {
   const variables: DbPromptVariable[] = (row.prompt_variables as DbPromptVariable[]) ?? [];
   const creator = (row.creator as any) ?? {};
   const category = (row.category as any) ?? {};
+  const likes = Number((row as any).user_likes?.[0]?.count ?? 0);
+  const saves = Number((row as any).user_saved_prompts?.[0]?.count ?? 0);
 
   // Sort assets: primary first, then by sort_order
   const sortedAssets = [...assets].sort((a, b) => {
@@ -56,9 +58,9 @@ export function dbPromptToDetailedPrompt(row: DbPrompt): DetailedPrompt {
       tags: row.tags ?? [],
     },
     stats: {
-      likes: 0,          // reviews.rating aggregation done server-side
+      likes,
       views: row.view_count,
-      saves: 0,
+      saves,
     },
     pricing: {
       type: row.pricing_type,

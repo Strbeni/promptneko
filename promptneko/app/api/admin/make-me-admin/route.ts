@@ -3,6 +3,10 @@ import { cookies } from "next/headers";
 import { createServerClient, createSupabaseServerClient } from "../../../../lib/supabase";
 
 export async function POST() {
+  if (process.env.NODE_ENV !== "development" || process.env.ENABLE_DEV_ADMIN_ROUTE !== "true") {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
   try {
     const cookieStore = await cookies();
     const authClient = createSupabaseServerClient(cookieStore);

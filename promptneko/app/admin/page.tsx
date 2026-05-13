@@ -68,13 +68,6 @@ export default function AdminPage() {
     loadAdminData();
   }
 
-  // --- Hack to make yourself an admin for testing ---
-  async function makeMeAdmin() {
-    if (!user) return;
-    await fetch("/api/admin/make-me-admin", { method: "POST" });
-    window.location.reload();
-  }
-
   if (loading || (!user && fetching)) {
     return (
       <div className="flex h-screen items-center justify-center bg-[#060913]">
@@ -91,12 +84,7 @@ export default function AdminPage() {
             <ShieldAlert size={48} className="mx-auto text-rose-500 mb-4" />
             <h1 className="text-2xl font-bold text-white">Access Denied</h1>
             <p className="text-[#8990aa]">You need admin privileges to view this page.</p>
-            <button 
-              onClick={makeMeAdmin}
-              className="mt-6 px-4 py-2 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-lg hover:bg-rose-500/20 transition-colors text-sm font-semibold"
-            >
-              [Dev Tool] Make me an Admin
-            </button>
+            <p className="text-xs text-[#6070a0]">Ask an existing admin to assign access from Supabase or the admin dashboard.</p>
           </div>
         </div>
       </MarketplaceLayout>

@@ -4,34 +4,48 @@ import {
   Bookmark,
   BookmarkX,
   Check,
-  ChevronDown,
   Copy,
-  FolderOpen,
-  Grid2X2,
   Heart,
-  LayoutList,
   Play,
   Plus,
   Search,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { ActionDrawer } from "./ActionDrawer";
 import { MarketplaceLayout } from "./MarketplaceLayout";
-import { promptCards, CATEGORY_REGISTRY } from "./marketplace-data";
+import { DetailedPrompt, promptCards } from "./marketplace-data";
+import { dbPromptsToDetailedPrompts } from "../../lib/adapters";
+import { useAuth } from "./auth/AuthContext";
 
-// ─── Placeholder bookmarks (replace with Supabase user data) ─────────────────
+const LOCAL_KEY = "pn_static_interactions";
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-const BOOKMARKED = promptCards.slice(0, 12);
+function isDbPrompt(id: string) {
+  return UUID_RE.test(id);
+}
 
-const CATEGORY_FILTERS = [
-  "All",
-  ...Array.from(new Set(BOOKMARKED.map((p) => p.taxonomy.primaryCategory))).slice(0, 6),
-];
+function readLocalBookmarks() {
+  if (typeof window === "undefined") return [];
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(LOCAL_KEY) ?? "{}");
+    return Array.isArray(parsed.saved) ? (parsed.saved as string[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeLocalBookmarks(next: string[]) {
+  let parsed = {};
+  try {
+    parsed = JSON.parse(window.localStorage.getItem(LOCAL_KEY) ?? "{}");
+  } catch {}
+  window.localStorage.setItem(LOCAL_KEY, JSON.stringify({ ...parsed, saved: next }));
+}
 
 // ─── Bookmark Card ────────────────────────────────────────────────────────────
 
-function BookmarkCard({ item, onRemove }: { item: typeof promptCards[0]; onRemove: (id: string) => void }) {
+function BookmarkCard({ item, onRemove }: { item: DetailedPrompt; onRemove: (id: string) => void }) {
   const router = useRouter();
   const [copied, setCopied] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -101,22 +115,70 @@ function BookmarkCard({ item, onRemove }: { item: typeof promptCards[0]; onRemov
 
 export function BookmarksPage() {
   const router = useRouter();
+  const { user, loading } = useAuth();
   const [query, setQuery] = useState("");
   const [drawerAction, setDrawerAction] = useState<string | null>(null);
-  const [bookmarks, setBookmarks] = useState(BOOKMARKED.map((p) => p.id));
+  const [bookmarks, setBookmarks] = useState<string[]>([]);
+  const [remotePrompts, setRemotePrompts] = useState<DetailedPrompt[]>([]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQ, setSearchQ] = useState("");
-  const [sortBy, setSortBy] = useState("Recent");
+
+  useEffect(() => {
+    setBookmarks(readLocalBookmarks());
+  }, []);
+
+  useEffect(() => {
+    if (loading || !user) {
+      setRemotePrompts([]);
+      return;
+    }
+
+    const controller = new AbortController();
+    fetch("/api/me/saved", { signal: controller.signal })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((payload) => {
+        if (payload?.prompts) {
+          setRemotePrompts(dbPromptsToDetailedPrompts(payload.prompts));
+        }
+      })
+      .catch(() => {});
+
+    return () => controller.abort();
+  }, [loading, user]);
+
+  const allBookmarkedPrompts = useMemo(() => {
+    const staticPrompts = promptCards.filter((p) => bookmarks.includes(p.id));
+    const seen = new Set<string>();
+    return [...remotePrompts, ...staticPrompts].filter((prompt) => {
+      if (seen.has(prompt.id)) return false;
+      seen.add(prompt.id);
+      return true;
+    });
+  }, [bookmarks, remotePrompts]);
+
+  const categoryFilters = useMemo(() => [
+    "All",
+    ...Array.from(new Set(allBookmarkedPrompts.map((p) => p.taxonomy.primaryCategory))).slice(0, 6),
+  ], [allBookmarkedPrompts]);
 
   const visible = useMemo(() => {
-    return promptCards
-      .filter((p) => bookmarks.includes(p.id))
+    return allBookmarkedPrompts
       .filter((p) => activeCategory === "All" || p.taxonomy.primaryCategory === activeCategory)
       .filter((p) => !searchQ || p.title.toLowerCase().includes(searchQ.toLowerCase()));
-  }, [bookmarks, activeCategory, searchQ]);
+  }, [allBookmarkedPrompts, activeCategory, searchQ]);
 
-  function removeBookmark(id: string) {
-    setBookmarks((prev) => prev.filter((b) => b !== id));
+  async function removeBookmark(id: string) {
+    if (isDbPrompt(id)) {
+      const res = await fetch(`/api/prompts/${id}/save`, { method: "POST" });
+      if (res.ok) setRemotePrompts((prev) => prev.filter((prompt) => prompt.id !== id));
+      return;
+    }
+
+    setBookmarks((prev) => {
+      const next = prev.filter((b) => b !== id);
+      writeLocalBookmarks(next);
+      return next;
+    });
   }
 
   return (
@@ -148,7 +210,7 @@ export function BookmarksPage() {
         <div className="flex items-center gap-3 mb-6 flex-wrap">
           {/* Category pills */}
           <div className="flex items-center gap-2 flex-wrap">
-            {CATEGORY_FILTERS.map((cat) => (
+            {categoryFilters.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}

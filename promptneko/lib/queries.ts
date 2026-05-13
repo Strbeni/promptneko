@@ -8,7 +8,9 @@ const PROMPT_SELECT = `
   creator:users!creator_id(id, username, display_name, avatar_url, is_creator_approved),
   category:categories!category_id(id, slug, name),
   prompt_assets(id, url, type, width, height, is_primary, sort_order),
-  prompt_variables(id, name, placeholder_key, description, variable_type, default_value, options, is_required, sort_order)
+  prompt_variables(id, name, placeholder_key, description, variable_type, default_value, options, is_required, sort_order),
+  user_likes(count),
+  user_saved_prompts(count)
 `;
 
 export async function getPrompts({
@@ -25,12 +27,14 @@ export async function getPrompts({
   featured?: boolean;
 } = {}) {
   const db = createServerClient();
+  const safeLimit = Math.min(Math.max(limit, 1), 100);
+  const safeOffset = Math.max(offset, 0);
   let q = db
     .from('prompts')
     .select(PROMPT_SELECT)
     .eq('status', 'active')
     .order('published_at', { ascending: false })
-    .range(offset, offset + limit - 1);
+    .range(safeOffset, safeOffset + safeLimit - 1);
 
   if (category) q = q.eq('category_id', category);
   if (search) q = q.textSearch('title', search, { type: 'plain' });

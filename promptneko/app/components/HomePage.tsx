@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { filterCategories, DetailedPrompt, trendingTags } from "./marketplace-data";
 import { RightRail } from "./RightRail";
 import { PromptCard } from "./PromptCard";
+import { usePromptInteractions } from "./usePromptInteractions";
 
 type HomePageProps = {
   setDrawerAction: (action: string | null) => void;
@@ -27,6 +28,7 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
   const [isRightRailCollapsed, setIsRightRailCollapsed] = useState(false);
   const [homeQuery, setHomeQuery] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const { liked, saved, toggleLike, toggleSave } = usePromptInteractions(allPrompts);
 
   const suggestions = useMemo(() => {
     if (!homeQuery.trim()) return [];
@@ -47,6 +49,9 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
 
   const featuredPrompts = allPrompts.filter(p => p._db?.is_featured || p.stats.views > 100);
   const trendingPrompts = [...allPrompts].sort((a, b) => b.stats.views - a.stats.views);
+  const creatorCount = new Set(allPrompts.map((prompt) => prompt.creator.id || prompt.creator.handle)).size;
+  const totalViews = allPrompts.reduce((sum, prompt) => sum + prompt.stats.views, 0);
+  const totalLikes = allPrompts.reduce((sum, prompt) => sum + prompt.stats.likes, 0);
   
   // Group by category helper
   const getPromptsByCat = (catName: string) => 
@@ -148,10 +153,10 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
         {/* Stats */}
         <div className="relative grid grid-cols-2 md:grid-cols-4 min-h-[72px]  border border-[#202746] rounded-2xl bg-gradient-to-b from-[#0d1325] to-[#090f1d] py-3 md:py-0">
           {[
-            { label: "Prompts", value: "158K+", icon: Sparkles, color: "text-[#a46aff] bg-[#7a23ff]/20" },
-            { label: "Creators", value: "12.4K", icon: MessageSquare, color: "text-[#00d9a8] bg-[#00d2a4]/16" },
-            { label: "Sales", value: "892K", icon: Coins, color: "text-[#ff9f21] bg-[#ff971f]/14" },
-            { label: "Users", value: "2.1M", icon: Bell, color: "text-[#f0378e] bg-[#ec3684]/18" },
+            { label: "Prompts", value: allPrompts.length.toLocaleString(), icon: Sparkles, color: "text-[#a46aff] bg-[#7a23ff]/20" },
+            { label: "Creators", value: creatorCount.toLocaleString(), icon: MessageSquare, color: "text-[#00d9a8] bg-[#00d2a4]/16" },
+            { label: "Views", value: totalViews.toLocaleString(), icon: Coins, color: "text-[#ff9f21] bg-[#ff971f]/14" },
+            { label: "Likes", value: totalLikes.toLocaleString(), icon: Bell, color: "text-[#f0378e] bg-[#ec3684]/18" },
           ].map((stat, i) => (
             <button key={i} className={`relative grid grid-cols-[32px_auto] md:grid-cols-[40px_auto] gap-x-2 md:gap-x-[15px] pl-4 md:pl-[31px] bg-transparent border-0 text-left cursor-pointer group hover:bg-white/[0.02] transition-colors py-2 md:py-0`}>
               <span className={`grid place-items-center w-8 md:w-[39px] h-8 md:h-[39px] row-span-2 self-center rounded-full ${stat.color}`}>
@@ -179,7 +184,15 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
             </header>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {featuredPrompts.slice(0, 5).map((prompt) => (
-                <PromptCard key={prompt.id} item={prompt} onOpen={openPrompt} />
+                <PromptCard
+                  key={prompt.id}
+                  item={prompt}
+                  isLiked={liked.has(prompt.id)}
+                  isSaved={saved.has(prompt.id)}
+                  onOpen={openPrompt}
+                  onLike={() => toggleLike(prompt)}
+                  onSave={() => toggleSave(prompt)}
+                />
               ))}
             </div>
           </section>
@@ -266,7 +279,15 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
             </header>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {cat.prompts.slice(0, 5).map((prompt) => (
-                <PromptCard key={prompt.id} item={prompt} onOpen={openPrompt} />
+                <PromptCard
+                  key={prompt.id}
+                  item={prompt}
+                  isLiked={liked.has(prompt.id)}
+                  isSaved={saved.has(prompt.id)}
+                  onOpen={openPrompt}
+                  onLike={() => toggleLike(prompt)}
+                  onSave={() => toggleSave(prompt)}
+                />
               ))}
             </div>
           </section>
