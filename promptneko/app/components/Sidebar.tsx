@@ -33,7 +33,7 @@ export function Sidebar({ active, credits, onAction, onTopUp }: SidebarProps) {
         onClick={() => onAction("Home")}
       >
         <Hexagon className="text-[#7b3cff]" size={29} />
-        <span>PromptHub</span>
+        <span>PromptNeko</span>
       </Link>
 
       <div className="flex-1 flex flex-col gap-0 overflow-y-auto custom-scrollbar">
