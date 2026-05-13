@@ -156,85 +156,142 @@ function FeaturedRail({ prompts }: { prompts: DetailedPrompt[] }) {
 
 function CategoryHero({
   meta,
+  previewImages,
   onSearch,
 }: {
   meta: CategoryMeta;
+  previewImages: string[];
   onSearch: (q: string) => void;
 }) {
   const [q, setQ] = useState("");
+  // Take up to 6 images for the mosaic
+  const mosaicImages = previewImages.slice(0, 6);
+
   return (
     <section
-      className="relative overflow-hidden rounded-[20px] border px-10 py-10 mb-6"
+      className="relative overflow-hidden rounded-[20px] border px-10 py-11 mb-6"
       style={{
         borderColor: `${meta.accent}28`,
-        background: `linear-gradient(135deg, #0a0f1e 0%, #0f142a 60%, ${meta.accent}12 100%)`,
-        boxShadow: `0 0 40px ${meta.accent}14`,
+        background: `linear-gradient(135deg, #080d1a 0%, #0c1228 60%, ${meta.accent}0d 100%)`,
+        boxShadow: `0 0 60px ${meta.accent}10`,
+        minHeight: "280px",
       }}
     >
-      {/* Background glow orb */}
+      {/* ── Mosaic image background ── */}
+      {mosaicImages.length > 0 && (
+        <div className="absolute inset-0 overflow-hidden rounded-[20px] pointer-events-none">
+          {/* Right-side image strip */}
+          <div className="absolute right-0 top-0 bottom-0 w-[55%] flex gap-[3px]">
+            {/* Column 1 */}
+            <div className="flex-1 flex flex-col gap-[3px]">
+              {mosaicImages.slice(0, 3).map((src, i) => (
+                <div
+                  key={i}
+                  className="flex-1 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${src})` }}
+                />
+              ))}
+            </div>
+            {/* Column 2 */}
+            <div className="flex-1 flex flex-col gap-[3px]">
+              {(mosaicImages.slice(3, 6).length > 0 ? mosaicImages.slice(3, 6) : mosaicImages.slice(0, 3)).map((src, i) => (
+                <div
+                  key={i}
+                  className="flex-1 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${src})` }}
+                />
+              ))}
+            </div>
+          </div>
+          {/* Gradient overlay — fades mosaic into the dark left side */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(90deg, #080d1a 28%, #080d1a 38%, rgba(8,13,26,0.88) 52%, rgba(8,13,26,0.55) 68%, rgba(8,13,26,0.2) 100%)`,
+            }}
+          />
+          {/* Accent colour tint over the mosaic */}
+          <div
+            className="absolute right-0 top-0 bottom-0 w-[55%]"
+            style={{ background: `linear-gradient(135deg, transparent 30%, ${meta.accent}1a 100%)` }}
+          />
+          {/* Top / bottom vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080d1a] via-transparent to-transparent opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#080d1a]/60 via-transparent to-transparent" />
+          {/* Blur layer */}
+          <div className="absolute right-0 top-0 bottom-0 w-[55%] backdrop-blur-[1px]" />
+        </div>
+      )}
+
+      {/* ── Accent glow orb ── */}
       <div
-        className="absolute right-[-60px] top-[-60px] w-[340px] h-[340px] rounded-full opacity-10 blur-3xl pointer-events-none"
+        className="absolute right-[-40px] top-[-60px] w-[320px] h-[320px] rounded-full opacity-[0.08] blur-3xl pointer-events-none"
         style={{ background: meta.accent }}
       />
 
-      {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-[11px] text-[#8090b4] mb-5">
-        <Link href="/" className="hover:text-white transition-colors no-underline text-inherit">Home</Link>
-        <ChevronRight size={12} />
-        <Link href="/categories" className="hover:text-white transition-colors no-underline text-inherit">Categories</Link>
-        <ChevronRight size={12} />
-        <span style={{ color: meta.accent }}>{meta.label}</span>
-      </nav>
+      {/* ── Content ── */}
+      <div className="relative z-10">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-2 text-[11px] text-[#8090b4] mb-5">
+          <Link href="/" className="hover:text-white transition-colors no-underline text-inherit">Home</Link>
+          <ChevronRight size={12} />
+          <Link href="/categories" className="hover:text-white transition-colors no-underline text-inherit">Categories</Link>
+          <ChevronRight size={12} />
+          <span style={{ color: meta.accent }}>{meta.label}</span>
+        </nav>
 
-      <div className="flex items-start justify-between gap-8">
-        <div className="flex-1 max-w-[520px]">
-          <span
-            className="inline-block mb-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.12em] border"
-            style={{ color: meta.accent, borderColor: `${meta.accent}30`, background: `${meta.accent}12` }}
-          >
-            {meta.promptCount} Prompts
-          </span>
-          <h1 className="m-0 text-[38px] font-extrabold leading-[1.05] text-white mb-3">
-            {meta.label}
-          </h1>
-          <p className="m-0 text-[15px] leading-[1.6] text-[#a0aac2] mb-6">{meta.description}</p>
-
-          {/* Search */}
-          <form
-            className="flex h-[44px] items-center gap-3 rounded-xl border border-[#2a3454] bg-[#0b1123]/90 px-4 pr-[4px] max-w-[420px]"
-            onSubmit={(e) => { e.preventDefault(); onSearch(q); }}
-          >
-            <Search size={16} className="text-[#6070a0] shrink-0" />
-            <input
-              className="flex-1 bg-transparent border-0 outline-none text-[13px] text-white placeholder:text-[#6070a0]"
-              placeholder={`Search ${meta.label} prompts...`}
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-            />
-            <button
-              type="submit"
-              className="h-[36px] px-4 rounded-lg text-white text-[12px] font-semibold"
-              style={{ background: `linear-gradient(135deg, ${meta.accent} 0%, ${meta.accent}aa 100%)` }}
+        <div className="flex items-start justify-between gap-8 max-w-[580px]">
+          <div className="flex-1">
+            <span
+              className="inline-block mb-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.12em] border"
+              style={{ color: meta.accent, borderColor: `${meta.accent}30`, background: `${meta.accent}12` }}
             >
-              Search
-            </button>
-          </form>
-        </div>
+              {meta.promptCount} Prompts · Free Access
+            </span>
+            <h1 className="m-0 text-[40px] font-extrabold leading-[1.03] text-white mb-3 tracking-tight">
+              {meta.label}
+            </h1>
+            <p className="m-0 text-[14px] leading-[1.65] text-[#8fa0c2] mb-6 max-w-[430px]">
+              {meta.description}
+            </p>
 
-        {/* Stats */}
-        <div className="hidden lg:flex flex-col gap-4 shrink-0">
-          {[
-            { label: "Prompts", value: meta.promptCount },
-            { label: "Subcategories", value: `${meta.subcategories.length}` },
-            { label: "Free Access", value: "100%" },
-          ].map(({ label, value }) => (
-            <div key={label} className="text-right">
-              <strong className="block text-[22px] font-extrabold leading-none" style={{ color: meta.accent }}>
-                {value}
-              </strong>
-              <span className="mt-1 block text-[11px] text-[#8090b4]">{label}</span>
+            {/* Stats row */}
+            <div className="flex items-center gap-6 mb-6">
+              {[
+                { label: "Prompts", value: meta.promptCount },
+                { label: "Subcategories", value: `${meta.subcategories.length}` },
+                { label: "Free Access", value: "100%" },
+              ].map(({ label, value }) => (
+                <div key={label}>
+                  <strong className="block text-[20px] font-extrabold leading-none" style={{ color: meta.accent }}>
+                    {value}
+                  </strong>
+                  <span className="mt-0.5 block text-[10px] text-[#6070a0]">{label}</span>
+                </div>
+              ))}
             </div>
-          ))}
+
+            {/* Search */}
+            <form
+              className="flex h-[44px] items-center gap-3 rounded-xl border border-[#2a3454] bg-[#060b18]/95 px-4 pr-[4px] max-w-[400px]"
+              onSubmit={(e) => { e.preventDefault(); onSearch(q); }}
+            >
+              <Search size={16} className="text-[#5060a0] shrink-0" />
+              <input
+                className="flex-1 bg-transparent border-0 outline-none text-[13px] text-white placeholder:text-[#5060a0]"
+                placeholder={`Search ${meta.label} prompts...`}
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+              />
+              <button
+                type="submit"
+                className="h-[36px] px-5 rounded-lg text-white text-[12px] font-semibold transition-all hover:brightness-110"
+                style={{ background: `linear-gradient(135deg, ${meta.accent} 0%, ${meta.accent}bb 100%)` }}
+              >
+                Search
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -500,7 +557,11 @@ function CategoryDetailPageInner({
     >
       <div className="flex-1 overflow-y-auto px-5 pb-8 pt-4 min-h-0">
         {/* Hero */}
-        <CategoryHero meta={meta} onSearch={handleSearch} />
+        <CategoryHero
+          meta={meta}
+          previewImages={[...featured, ...all].map((p) => p.assets[0]?.thumbnailUrl).filter(Boolean) as string[]}
+          onSearch={handleSearch}
+        />
 
         {/* Subcategory pills */}
         <SubcategoryPills meta={meta} activeTags={activeTags} onTagToggle={toggleTag} />
