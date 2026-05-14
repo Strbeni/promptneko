@@ -2,11 +2,11 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
 /**
- * Middleware refreshes the Supabase session on every request so that
+ * Proxy refreshes the Supabase session on every request so that
  * the access token is always fresh.  It does NOT enforce authentication
  * — pages handle that themselves.
  */
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const response = NextResponse.next({ request });
 
   const supabase = createServerClient(

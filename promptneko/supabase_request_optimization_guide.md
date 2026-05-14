@@ -8,8 +8,8 @@ Below is a detailed breakdown of why this is happening in your codebase and the 
 
 ## 🔍 Root Cause Analysis: Why are Auth Requests so High?
 
-### 1. Unconditional `getUser()` Calls in Middleware
-Your `middleware.ts` file executes on every matching request route. Currently, it calls:
+### 1. Unconditional `getUser()` Calls in Proxy
+Your `proxy.ts` file executes on every matching request route. Currently, it calls:
 ```typescript
 await supabase.auth.getUser();
 ```
@@ -17,7 +17,7 @@ Unlike `getSession()`, which decodes and verifies the JWT session cookie **local
 
 ### 2. Double Authentication Multipliers on API Routes
 When a client component makes a standard API request (e.g., fetching `/api/me/interactions` on mount):
-1. **Pass 1:** The request hits `middleware.ts`, triggering `supabase.auth.getUser()` (**Auth Request #1**).
+1. **Pass 1:** The request hits `proxy.ts`, triggering `supabase.auth.getUser()` (**Auth Request #1**).
 2. **Pass 2:** The request reaches the route handler (`app/api/me/interactions/route.ts`), which calls `requireUser()`. Inside `requireUser()`, `authClient.auth.getUser()` is invoked again (**Auth Request #2**).
 
 Every individual authenticated API call incurs a **2x multiplier** on Auth requests.
@@ -29,13 +29,13 @@ Client hooks like `usePromptInteractions` use standard `useEffect` blocks to fet
 
 ## 🛠️ Actionable Best Practices & Solutions
 
-### Practice 1: Switch to `getSession()` in Middleware
+### Practice 1: Switch to `getSession()` in Proxy
 For general route traversal and session extension, rely on `getSession()`. It validates the user's JWT cryptographically on your server without calling the Supabase Auth REST API, falling back to a network request only when the token is expired and requires refreshing.
 
 > [!TIP]
 > Reserve `getUser()` strictly for highly sensitive Server Actions or API endpoints where immediate server-side permission validation/revocation checks are absolutely necessary before mutating data.
 
-#### Recommended `middleware.ts` Update:
+#### Recommended `proxy.ts` Update:
 ```diff
 -  // Refresh session — this is a no-op if the session is still valid
 -  await supabase.auth.getUser();
@@ -77,8 +77,8 @@ export const requireUser = cache(async () => {
 
 ---
 
-### Practice 3: Tighten Middleware Matchers
-Ensure your middleware matcher strictly ignores paths that don't require user authentication checks or session refreshing, such as external webhooks, static polling assets, or specific background workers.
+### Practice 3: Tighten Proxy Matchers
+Ensure your proxy matcher strictly ignores paths that don't require user authentication checks or session refreshing, such as external webhooks, static polling assets, or specific background workers.
 
 ```typescript
 export const config = {
@@ -131,6 +131,6 @@ export function usePromptInteractions(prompts: DetailedPrompt[]) {
 
 | Optimization Step | Targeted Metric | Expected Impact |
 | :--- | :--- | :--- |
-| **`getSession()` in Middleware** | Auth Requests | **~50% reduction** in total Auth API calls. |
+| **`getSession()` in Proxy** | Auth Requests | **~50% reduction** in total Auth API calls. |
 | **React `cache()` wrapping** | Database / Auth Requests | Eliminates redundant inline server calls per render pass. |
 | **Client-side caching (SWR)** | Total Requests | Halves client API polling volume during UI browsing. |

@@ -40,7 +40,7 @@ export function createSupabaseServerClient(cookieStore: ReadonlyRequestCookies) 
       },
       setAll(cookiesToSet) {
         // API routes are read-only for cookies in Next.js app router;
-        // the middleware handles cookie rotation.
+        // the proxy handles cookie rotation.
         cookiesToSet.forEach(() => {});
       },
     },
