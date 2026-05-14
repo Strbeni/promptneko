@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./globals copy.css";
@@ -18,6 +19,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "PromptNeko - Find Prompts For Any Task",
   description: "Discover, save, and buy marketplace prompts for creative AI workflows.",
+  other: {
+    "google-adsense-account": "ca-pub-6845864108687354",
+  },
 };
 
 export default function RootLayout({
@@ -30,6 +34,14 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6845864108687354"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
       <body>
         <AuthProvider>
           <AuthGate />

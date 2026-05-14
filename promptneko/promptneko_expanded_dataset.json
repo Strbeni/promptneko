@@ -1,0 +1,1291 @@
+[
+  {
+    "id": "prod-prompt-011",
+    "slug": "asmr-rain-copper-textures-macro",
+    "title": "ASMR Macro Copper Rain Droplets — Whisper Trigger Series",
+    "description": "Ultra-close macro video prompt generating satisfying water droplets cascading down brushed copper surfaces with ultra-realistic acoustic-visual synchronization cues.",
+    "content": {
+      "text": "Ultra-macro slow-motion video of water droplets falling in rhythmic succession onto a hand-hammered brushed copper plate, each bead of water magnified 8x revealing internal refraction caustics and rainbow spectral bloom, surface patina shifting between warm amber and verdigris under a single diffused tungsten softbox raking light at 15-degree angle, droplets leaving micro-rivulet trails with precise tactile surface tension integrity, temporal consistency 120fps slowed to 24fps, ambient silence punctuated only by crystalline metallic resonance, shallow depth-of-field at f/1.8 isolating foreground droplet against bokeh copper texture, ASMR visual pacing — one droplet every 3 seconds, cinematic color grade: warm shadows, neutral mids, lifted highlights. Camera: static locked-off macro rail. No camera movement.",
+      "negativePrompt": "camera shake, digital noise, oversaturated colors, synthetic CGI look, motion blur inconsistency, rushed pacing, unnatural water simulation, plastic surface appearance",
+      "version": "1.1"
+    },
+    "promptToCopy": "Ultra-macro slow-motion video of water droplets falling in rhythmic succession onto a hand-hammered brushed copper plate, each bead of water magnified 8x revealing internal refraction caustics and rainbow spectral bloom, surface patina shifting between warm amber and verdigris under a single diffused tungsten softbox raking light at 15-degree angle, droplets leaving micro-rivulet trails with precise tactile surface tension integrity, temporal consistency 120fps slowed to 24fps, ambient silence punctuated only by crystalline metallic resonance, shallow depth-of-field at f/1.8 isolating foreground droplet against bokeh copper texture, ASMR visual pacing — one droplet every 3 seconds, cinematic color grade: warm shadows, neutral mids, lifted highlights. Camera: static locked-off macro rail. No camera movement.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/asmr_copper_droplet.mp4",
+        "thumbnailUrl": "/images/marketplace/asmr_copper_thumb.png",
+        "dimensions": { "width": 1080, "height": 1920 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-011",
+      "handle": "@sensory.architect",
+      "displayName": "Sensory Architect",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "kling-v1.6",
+      "provider": "Kling AI",
+      "parameters": { "motion_strength": 0.3, "fps": 24, "duration": 10 }
+    },
+    "taxonomy": {
+      "primaryCategory": "ASMR Videos",
+      "tags": ["asmr", "macro", "water", "copper", "satisfying", "slow-motion", "tactile", "sensory"]
+    },
+    "stats": { "likes": 4820, "views": 38500, "saves": 1760 },
+    "pricing": { "type": "one_time", "priceCents": 799 },
+    "_db": {
+      "longDescription": "Purpose-built for ASMR content creators targeting YouTube Sleep, TikTok Relaxation, and Instagram Reels audiences. Engineered for acoustic-visual synchronization with zero distracting motion artifacts.",
+      "variables": [
+        { "name": "surface_material", "description": "Primary surface texture material", "default": "brushed copper" },
+        { "name": "droplet_interval", "description": "Time between droplet falls in seconds", "default": "3" }
+      ],
+      "exampleInput": { "surface_material": "aged slate stone", "droplet_interval": "4" },
+      "exampleOutput": "A perfectly paced 10-second slow motion loop of crystalline droplets striking aged slate, each impact sending micro-splash crowns captured at 120fps.",
+      "modelCompatibility": ["Kling v1.6", "Runway Gen-3", "Luma Dream Machine"],
+      "avgRating": 4.97,
+      "reviewCount": 143,
+      "purchaseCount": 512
+    },
+    "createdAt": "2026-05-14T08:00:00Z"
+  },
+  {
+    "id": "prod-prompt-012",
+    "slug": "asmr-kinetic-sand-compression",
+    "title": "ASMR Kinetic Sand Compression — Geometric Form Series",
+    "description": "Hyper-satisfying overhead video prompt of geometric stamps compressing colored kinetic sand into perfect relief patterns with extreme tactile visual fidelity.",
+    "content": {
+      "text": "Overhead locked-off camera, extreme close-up of a hexagonal brass geometric stamp slowly pressing into a perfectly leveled bed of ultra-fine terracotta-colored kinetic sand, compression happening at 0.5cm per second revealing intricate relief pattern in real time, sand particles densifying and darkening under compression with photorealistic granular simulation, ambient studio lighting from a single top-mounted LED panel delivering even shadowless illumination, no reflections on sand surface, matte finish throughout, subtle grain texture in sand particles visible at maximum zoom, slow deliberate motion with 3-second hold at maximum compression, then 2-second release — spatially symmetric composition, absolutely zero camera drift, therapeutic pacing. Target: ASMR/Satisfying video audience. 4K vertical 9:16.",
+      "negativePrompt": "camera movement, artificial colors, over-saturated sand, CGI texture, messy composition, asymmetric stamping, rushed motion, blurry grain simulation",
+      "version": "1.0"
+    },
+    "promptToCopy": "Overhead locked-off camera, extreme close-up of a hexagonal brass geometric stamp slowly pressing into a perfectly leveled bed of ultra-fine terracotta-colored kinetic sand, compression happening at 0.5cm per second revealing intricate relief pattern in real time, sand particles densifying and darkening under compression with photorealistic granular simulation, ambient studio lighting from a single top-mounted LED panel delivering even shadowless illumination, no reflections on sand surface, matte finish throughout, subtle grain texture in sand particles visible at maximum zoom, slow deliberate motion with 3-second hold at maximum compression, then 2-second release — spatially symmetric composition, absolutely zero camera drift, therapeutic pacing. Target: ASMR/Satisfying video audience. 4K vertical 9:16.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/asmr_sand.mp4",
+        "thumbnailUrl": "/images/marketplace/asmr_sand_thumb.png",
+        "dimensions": { "width": 1080, "height": 1920 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-012",
+      "handle": "@haptic.studio",
+      "displayName": "Haptic Studio",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "runway-gen3",
+      "provider": "Runway",
+      "parameters": { "motion_intensity": "low", "consistency_frames": 48 }
+    },
+    "taxonomy": {
+      "primaryCategory": "ASMR Videos",
+      "tags": ["asmr", "kinetic-sand", "satisfying", "geometric", "tactile", "overhead", "compression"]
+    },
+    "stats": { "likes": 6100, "views": 52000, "saves": 2300 },
+    "pricing": { "type": "one_time", "priceCents": 699 },
+    "_db": {
+      "longDescription": "Optimized for the massively viral kinetic sand niche on TikTok and YouTube Shorts. The geometric stamp variant offers infinite variation with different shape variables.",
+      "variables": [
+        { "name": "stamp_shape", "description": "Geometric shape of the compression stamp", "default": "hexagon" },
+        { "name": "sand_color", "description": "Color of kinetic sand", "default": "terracotta" }
+      ],
+      "exampleInput": { "stamp_shape": "star of david", "sand_color": "midnight blue" },
+      "exampleOutput": "Perfect overhead video of a star stamp sinking into midnight blue kinetic sand with photorealistic granular compression.",
+      "modelCompatibility": ["Runway Gen-3", "Kling v1.6", "Pika 2.0"],
+      "avgRating": 4.95,
+      "reviewCount": 201,
+      "purchaseCount": 688
+    },
+    "createdAt": "2026-05-14T08:30:00Z"
+  },
+  {
+    "id": "prod-prompt-013",
+    "slug": "viral-shorts-hook-freeze-frame",
+    "title": "Viral Short-Form Hook — Cinematic Freeze-Frame Reveal",
+    "description": "Engineered viral hook prompt generating dramatic freeze-frame title card entrances for YouTube Shorts and TikTok with motion-graphic energy and psychological curiosity loops.",
+    "content": {
+      "text": "Dynamic 9:16 cinematic short-form video opening sequence: subject enters frame from left edge at walking pace, at frame 48 the entire world FREEZES — subject mid-stride, particles freeze suspended in air, a sweeping arc light burst radiates outward from subject silhouette creating dramatic rim illumination, bold kinetic typography slams onto frame '{{hook_text}}' using a heavy compressed sans-serif with chromatic aberration fringe at letter edges, text appears with 3-frame snap animation followed by a 0.4-second slight scale pulse, 2-second hold, then motion resumes at 120% speed with subtle lens distortion, color grade shifts from flat bleach-bypass to saturated primary palette on resume, total duration 4 seconds, extreme cinematic energy, broadcast-quality motion design. Luma/Runway target.",
+      "negativePrompt": "slow reveal, weak typography contrast, generic stock motion, inconsistent temporal freeze, wobble on text, muddy color grade, overused zoom punch effect",
+      "version": "2.0"
+    },
+    "promptToCopy": "Dynamic 9:16 cinematic short-form video opening sequence: subject enters frame from left edge at walking pace, at frame 48 the entire world FREEZES — subject mid-stride, particles freeze suspended in air, a sweeping arc light burst radiates outward from subject silhouette creating dramatic rim illumination, bold kinetic typography slams onto frame '{{hook_text}}' using a heavy compressed sans-serif with chromatic aberration fringe at letter edges, text appears with 3-frame snap animation followed by a 0.4-second slight scale pulse, 2-second hold, then motion resumes at 120% speed with subtle lens distortion, color grade shifts from flat bleach-bypass to saturated primary palette on resume, total duration 4 seconds, extreme cinematic energy, broadcast-quality motion design. Luma/Runway target.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/viral_hook.mp4",
+        "thumbnailUrl": "/images/marketplace/viral_hook_thumb.png",
+        "dimensions": { "width": 1080, "height": 1920 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-013",
+      "handle": "@shorts.engineer",
+      "displayName": "Shorts Engineer",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "luma-v1.6",
+      "provider": "Luma AI",
+      "parameters": { "motion_curve": "ease-impact", "frame_interpolation": true }
+    },
+    "taxonomy": {
+      "primaryCategory": "Viral Shorts",
+      "tags": ["viral", "shorts", "hook", "freeze-frame", "tiktok", "youtube-shorts", "motion", "typography"]
+    },
+    "stats": { "likes": 8900, "views": 74000, "saves": 3100 },
+    "pricing": { "type": "one_time", "priceCents": 999 },
+    "_db": {
+      "longDescription": "Engineered using psychological hook-loop frameworks. The freeze-frame + typography combo consistently achieves 85%+ retention past the 3-second mark — critical for algorithm amplification on TikTok and YouTube Shorts.",
+      "variables": [
+        { "name": "hook_text", "description": "Primary hook statement on freeze-frame", "default": "NOBODY TELLS YOU THIS" }
+      ],
+      "exampleInput": { "hook_text": "THEY LIED TO YOU" },
+      "exampleOutput": "4-second freeze-frame cinematic short with bold compressed typography slam on a frozen world.",
+      "modelCompatibility": ["Luma Dream Machine v1.6", "Runway Gen-3 Alpha", "Kling v1.6"],
+      "avgRating": 4.98,
+      "reviewCount": 317,
+      "purchaseCount": 1240
+    },
+    "createdAt": "2026-05-14T09:00:00Z"
+  },
+  {
+    "id": "prod-prompt-014",
+    "slug": "viral-shorts-satisfying-reverse-loop",
+    "title": "Perfectly Looped Satisfying Reverse — Viral Shorts Engine",
+    "description": "Generate hypnotic forward-reverse seamless loop video prompts optimized for TikTok autoplay psychology and sub-15-second watch-completion rates.",
+    "content": {
+      "text": "Seamlessly looping 8-second vertical video (9:16) of {{subject_action}} filmed in real time at 48fps then reversed and crossfaded at the midpoint for a perfectly invisible loop junction, subject matter chosen for maximum visual satisfaction: clean arc motion, visible material state changes, or liquid pour dynamics — lighting: single diffused overhead with practical fill, color grade muted and natural with lifted blacks to aid loop invisibility, pacing: action completes in 4 seconds and reverses for 4 seconds with 6-frame morph dissolve at junction making the reversal imperceptible, no audio required, motion trajectory perfectly horizontal or vertical axis only for maximum symmetry. Loop must be mathematically seamless on autoplay inspection. Render 4K, export for Reels/Shorts optimization.",
+      "negativePrompt": "visible loop seam, camera reposition, jarring color shift at junction, curved inconsistent motion axis, abrupt speed change, shaky handheld",
+      "version": "1.3"
+    },
+    "promptToCopy": "Seamlessly looping 8-second vertical video (9:16) of {{subject_action}} filmed in real time at 48fps then reversed and crossfaded at the midpoint for a perfectly invisible loop junction, subject matter chosen for maximum visual satisfaction: clean arc motion, visible material state changes, or liquid pour dynamics — lighting: single diffused overhead with practical fill, color grade muted and natural with lifted blacks to aid loop invisibility, pacing: action completes in 4 seconds and reverses for 4 seconds with 6-frame morph dissolve at junction making the reversal imperceptible, no audio required, motion trajectory perfectly horizontal or vertical axis only for maximum symmetry. Loop must be mathematically seamless on autoplay inspection. Render 4K, export for Reels/Shorts optimization.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/reverse_loop.mp4",
+        "thumbnailUrl": "/images/marketplace/reverse_loop_thumb.png",
+        "dimensions": { "width": 1080, "height": 1920 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-014",
+      "handle": "@loop.theory",
+      "displayName": "Loop Theory",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "runway-gen3",
+      "provider": "Runway",
+      "parameters": { "loop": true, "motion_intensity": "medium" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Viral Shorts",
+      "tags": ["loop", "reverse", "satisfying", "shorts", "reels", "autoplay", "viral"]
+    },
+    "stats": { "likes": 5600, "views": 43000, "saves": 1980 },
+    "pricing": { "type": "one_time", "priceCents": 699 },
+    "_db": {
+      "longDescription": "Reverse-loop content consistently outperforms standard clips by 3x on autoplay platforms. This prompt is engineered for the invisible seam — the psychological magic of seamless repetition.",
+      "variables": [
+        { "name": "subject_action", "description": "The satisfying action being filmed and reversed", "default": "paint being poured over a canvas in a single arc" }
+      ],
+      "exampleInput": { "subject_action": "honey dripping off a spoon into a glass jar" },
+      "exampleOutput": "Perfectly looped honey drip video with invisible midpoint crossfade, 4K 9:16 vertical, 8-second duration.",
+      "modelCompatibility": ["Runway Gen-3", "Kling v1.6", "Luma Dream Machine"],
+      "avgRating": 4.93,
+      "reviewCount": 188,
+      "purchaseCount": 720
+    },
+    "createdAt": "2026-05-14T09:30:00Z"
+  },
+  {
+    "id": "prod-prompt-015",
+    "slug": "exotic-fruit-macro-cross-section",
+    "title": "Exotic Fruit Macro Cross-Section — High-Key Studio Still",
+    "description": "Generate world-class macro fruit photography stills showcasing internal cross-section geometry, translucent pulp volumetric light, and extreme surface texture fidelity.",
+    "content": {
+      "text": "Studio product photograph: a perfectly halved {{fruit_name}} displayed on a clean white Italian Carrara marble slab, freshly cut cross-section facing camera at slight 15-degree angle, internal cell structure illuminated by a backlit LED panel creating translucent sub-surface scattering through the fruit flesh — warm amber glow radiating from seed pocket cavities, micro water droplets beading across the outer rind texture, skin pores magnified to reveal waxy cuticle detail, single specular highlight from above on the wettest interior point, pure white background (#FFFFFF), shadows only beneath the fruit from soft fill card below frame, shot on 100mm macro lens at f/5.6, ISO 100, diffused twin strobe setup, extreme color accuracy — fruit pigments rendered without digital saturation boost, natural gradient from skin to pulp, hero product framing --ar 4:5 --v 6.0 --style raw --stylize 80",
+      "negativePrompt": "artificial color grading, over-saturated pigments, studio background gradients, messy juice splatter, unnatural glow, floating unsupported fruit, generic white seamless look",
+      "version": "1.1"
+    },
+    "promptToCopy": "Studio product photograph: a perfectly halved {{fruit_name}} displayed on a clean white Italian Carrara marble slab, freshly cut cross-section facing camera at slight 15-degree angle, internal cell structure illuminated by a backlit LED panel creating translucent sub-surface scattering through the fruit flesh — warm amber glow radiating from seed pocket cavities, micro water droplets beading across the outer rind texture, skin pores magnified to reveal waxy cuticle detail, single specular highlight from above on the wettest interior point, pure white background (#FFFFFF), shadows only beneath the fruit from soft fill card below frame, shot on 100mm macro lens at f/5.6, ISO 100, diffused twin strobe setup, extreme color accuracy — fruit pigments rendered without digital saturation boost, natural gradient from skin to pulp, hero product framing --ar 4:5 --v 6.0 --style raw --stylize 80",
+    "assets": [
+      {
+        "type": "image",
+        "primaryUrl": "/images/marketplace/fruit_macro.png",
+        "thumbnailUrl": "/images/marketplace/fruit_macro_thumb.png",
+        "dimensions": { "width": 1080, "height": 1350 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-015",
+      "handle": "@botanica.lens",
+      "displayName": "Botanica Lens",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "stylize": 80, "version": "6.0", "style": "raw" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Fruit Videos & Photography",
+      "tags": ["fruit", "macro", "food-photography", "cross-section", "studio", "product", "organic"]
+    },
+    "stats": { "likes": 3400, "views": 27500, "saves": 1250 },
+    "pricing": { "type": "one_time", "priceCents": 599 },
+    "_db": {
+      "longDescription": "Perfect for food brands, health content creators, and stock photography libraries. The backlit sub-surface scattering technique makes fruit internal structures appear like stained glass.",
+      "variables": [
+        { "name": "fruit_name", "description": "Name of the exotic fruit to feature", "default": "dragon fruit" }
+      ],
+      "exampleInput": { "fruit_name": "Buddha's hand citron" },
+      "exampleOutput": "Studio macro of a Buddha's hand citron cross-section with amber sub-surface glow, marble surface, commercial quality.",
+      "modelCompatibility": ["Midjourney v6", "FLUX 1.1 Pro", "DALL-E 3"],
+      "avgRating": 4.91,
+      "reviewCount": 96,
+      "purchaseCount": 388
+    },
+    "createdAt": "2026-05-14T10:00:00Z"
+  },
+  {
+    "id": "prod-prompt-016",
+    "slug": "exploding-fruit-ultra-slow-motion",
+    "title": "Exploding Fruit Ultra Slow-Motion — Impact Cinematography",
+    "description": "Generate explosive high-speed macro video of fruit impact moments with ultra-detailed liquid trajectory, seed dispersion physics, and cinematic color science.",
+    "content": {
+      "text": "Ultra-high-speed 4000fps slow-motion video of a ripe {{fruit_name}} being struck by a solid steel pendulum from the right side, captured at the precise moment of maximum structural failure — fruit flesh erupting outward in symmetric arcs, juice droplets forming perfect spherical beads suspended mid-air with full internal refraction caustics visible inside each droplet, seed cores trajectory locked in parabolic paths, impact debris cloud rendered with atmospheric density against a pure black (#000000) seamless background, single xenon strobe flash freezing motion at peak expansion moment, edge illumination from rim lights at camera-left and camera-right creating crisp silhouette separation on every fragment, color grade: natural fruit pigments boosted +15% vibrancy in post, ultra-sharp focus maintained across entire debris field, no motion blur at 4000fps equivalent, 9:16 vertical reframe for Shorts export. Duration: 6 seconds real-time playback.",
+      "negativePrompt": "CGI simulation appearance, monotone color, overexposed highlights on juice, blurry debris edges, asymmetric impact, dirty background gradient, inconsistent droplet sizes",
+      "version": "1.0"
+    },
+    "promptToCopy": "Ultra-high-speed 4000fps slow-motion video of a ripe {{fruit_name}} being struck by a solid steel pendulum from the right side, captured at the precise moment of maximum structural failure — fruit flesh erupting outward in symmetric arcs, juice droplets forming perfect spherical beads suspended mid-air with full internal refraction caustics visible inside each droplet, seed cores trajectory locked in parabolic paths, impact debris cloud rendered with atmospheric density against a pure black (#000000) seamless background, single xenon strobe flash freezing motion at peak expansion moment, edge illumination from rim lights at camera-left and camera-right creating crisp silhouette separation on every fragment, color grade: natural fruit pigments boosted +15% vibrancy in post, ultra-sharp focus maintained across entire debris field, no motion blur at 4000fps equivalent, 9:16 vertical reframe for Shorts export. Duration: 6 seconds real-time playback.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/exploding_fruit.mp4",
+        "thumbnailUrl": "/images/marketplace/exploding_fruit_thumb.png",
+        "dimensions": { "width": 1080, "height": 1920 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-016",
+      "handle": "@impulse.cinema",
+      "displayName": "Impulse Cinema",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "kling-v1.6",
+      "provider": "Kling AI",
+      "parameters": { "motion_strength": 0.9, "fps": 24, "duration": 6 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Fruit Videos & Photography",
+      "tags": ["slow-motion", "fruit", "explosion", "impact", "viral", "macro", "shorts"]
+    },
+    "stats": { "likes": 9200, "views": 88000, "saves": 3800 },
+    "pricing": { "type": "one_time", "priceCents": 1299 },
+    "_db": {
+      "longDescription": "The exploding fruit slow-motion genre consistently goes viral on YouTube Shorts and Instagram Reels. This prompt is calibrated for physics-accurate liquid simulation and maximum visual drama.",
+      "variables": [
+        { "name": "fruit_name", "description": "Target fruit for impact sequence", "default": "pomegranate" }
+      ],
+      "exampleInput": { "fruit_name": "watermelon" },
+      "exampleOutput": "6-second 4000fps slow-motion watermelon impact with suspended juice droplet caustics on black background.",
+      "modelCompatibility": ["Kling v1.6", "Runway Gen-3", "Luma Dream Machine"],
+      "avgRating": 4.96,
+      "reviewCount": 274,
+      "purchaseCount": 960
+    },
+    "createdAt": "2026-05-14T10:30:00Z"
+  },
+  {
+    "id": "prod-prompt-017",
+    "slug": "educational-diagram-animation-science",
+    "title": "Animated Scientific Concept Explainer — Cellular Biology Series",
+    "description": "Production-grade educational animation prompt for visualizing complex microscopic biological processes with clean motion-design aesthetics and didactic spatial clarity.",
+    "content": {
+      "text": "2D flat-design educational animation video for teaching {{biological_concept}}, visual style inspired by Kurzgesagt dimensional illustration system — each component clearly labeled with thin line-weight Helvetica Neue 300 caption callouts, color palette restricted to 4 primary hues plus white: deep midnight navy (#0A1628), warm coral (#FF6B47), clean cyan (#00D4FF), muted sage (#7EC8A4), process shown in linear left-to-right temporal flow with smooth easing transitions between states (cubic-bezier 0.4, 0, 0.2, 1), component icons use rounded geometric forms with 2px stroke weight and solid color fills, animated arrows show directional flow with dashoffset path draw-on animation, scale reference included bottom-left, duration 45-90 seconds, narration placeholder text blocks included, 16:9 widescreen, white background for educational LMS compatibility, modular component structure — each stage animates independently for pause-point clarity.",
+      "negativePrompt": "photorealistic rendering, dark background, decorative flourishes, 3D perspective distortion, crowded frame, unlabeled components, fast non-pausable transitions, inconsistent icon style",
+      "version": "1.2"
+    },
+    "promptToCopy": "2D flat-design educational animation video for teaching {{biological_concept}}, visual style inspired by Kurzgesagt dimensional illustration system — each component clearly labeled with thin line-weight Helvetica Neue 300 caption callouts, color palette restricted to 4 primary hues plus white: deep midnight navy (#0A1628), warm coral (#FF6B47), clean cyan (#00D4FF), muted sage (#7EC8A4), process shown in linear left-to-right temporal flow with smooth easing transitions between states (cubic-bezier 0.4, 0, 0.2, 1), component icons use rounded geometric forms with 2px stroke weight and solid color fills, animated arrows show directional flow with dashoffset path draw-on animation, scale reference included bottom-left, duration 45-90 seconds, narration placeholder text blocks included, 16:9 widescreen, white background for educational LMS compatibility, modular component structure — each stage animates independently for pause-point clarity.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/edu_animation.mp4",
+        "thumbnailUrl": "/images/marketplace/edu_animation_thumb.png",
+        "dimensions": { "width": 1920, "height": 1080 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-017",
+      "handle": "@edugraph.studio",
+      "displayName": "Edugraph Studio",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "claude-sonnet-4-20250514",
+      "provider": "Anthropic",
+      "parameters": { "temperature": 0.3 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Educational Videos",
+      "tags": ["education", "animation", "science", "explainer", "biology", "classroom", "kurzgesagt-style"]
+    },
+    "stats": { "likes": 2800, "views": 19000, "saves": 1100 },
+    "pricing": { "type": "one_time", "priceCents": 1499 },
+    "_db": {
+      "longDescription": "Built for educators, YouTubers, and EdTech companies. The Kurzgesagt-inspired flat design system ensures conceptual clarity without sacrificing visual appeal. Modular stage structure allows easy adaptation across subject matters.",
+      "variables": [
+        { "name": "biological_concept", "description": "Scientific concept to visualize", "default": "mitosis cell division" }
+      ],
+      "exampleInput": { "biological_concept": "ATP synthase proton gradient energy production" },
+      "exampleOutput": "90-second animated explainer of ATP synthase with labeled component callouts, flow arrows, and modular pause stages on white background.",
+      "modelCompatibility": ["Claude Sonnet 4", "GPT-4o", "Gemini 1.5 Pro"],
+      "avgRating": 4.89,
+      "reviewCount": 67,
+      "purchaseCount": 244
+    },
+    "createdAt": "2026-05-14T11:00:00Z"
+  },
+  {
+    "id": "prod-prompt-018",
+    "slug": "educational-historical-timeline-motion",
+    "title": "Kinetic History Timeline — Broadcast Documentary Style",
+    "description": "Generate broadcast-quality animated historical timeline sequences with spatial depth, archival texture layering, and authoritative editorial typography systems.",
+    "content": {
+      "text": "Broadcast-quality documentary motion graphic sequence visualizing '{{historical_event}}' as an animated horizontal timeline: camera performs slow lateral dolly right along a physical timeline constructed from aged kraft paper texture with hand-drawn illustration spots and archival sepia photography insets appearing at each key date marker, date typography uses ITC Caslon 224 Bold 72pt with warm gold (#C8A96E) color on dark manuscript brown (#1A120B) background, key event cards animate upward with 0.3s ease-out from below frame, connecting timeline spine uses a continuous ruled line with hand-drawn crosshatch texture, subtle film grain overlay at 12% opacity, ambient orchestral swell audio placeholder markers at each major event, depth-of-field effect on distant timeline sections creating cinematic spatial recession, total duration 60-90 seconds for 5-7 events, 16:9, narration placeholder chapters delineated. PBS/BBC visual standards.",
+      "negativePrompt": "PowerPoint-style animation, flat modern UI motion, inconsistent font sizing, rushed transitions, contemporary color palettes, digital-only texture, floating elements without grounding",
+      "version": "1.0"
+    },
+    "promptToCopy": "Broadcast-quality documentary motion graphic sequence visualizing '{{historical_event}}' as an animated horizontal timeline: camera performs slow lateral dolly right along a physical timeline constructed from aged kraft paper texture with hand-drawn illustration spots and archival sepia photography insets appearing at each key date marker, date typography uses ITC Caslon 224 Bold 72pt with warm gold (#C8A96E) color on dark manuscript brown (#1A120B) background, key event cards animate upward with 0.3s ease-out from below frame, connecting timeline spine uses a continuous ruled line with hand-drawn crosshatch texture, subtle film grain overlay at 12% opacity, ambient orchestral swell audio placeholder markers at each major event, depth-of-field effect on distant timeline sections creating cinematic spatial recession, total duration 60-90 seconds for 5-7 events, 16:9, narration placeholder chapters delineated. PBS/BBC visual standards.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/history_timeline.mp4",
+        "thumbnailUrl": "/images/marketplace/history_timeline_thumb.png",
+        "dimensions": { "width": 1920, "height": 1080 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-018",
+      "handle": "@archival.motion",
+      "displayName": "Archival Motion",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "luma-v1.6",
+      "provider": "Luma AI",
+      "parameters": { "camera_motion": "dolly_right", "motion_intensity": "low" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Educational Videos",
+      "tags": ["history", "timeline", "documentary", "educational", "motion-graphics", "broadcast", "archival"]
+    },
+    "stats": { "likes": 1900, "views": 14000, "saves": 720 },
+    "pricing": { "type": "one_time", "priceCents": 1799 },
+    "_db": {
+      "longDescription": "Trusted by history YouTube channels and EdTech publishers. The dolly-right camera movement along a physical timeline creates documentary gravitas that digital scroll animations simply cannot match.",
+      "variables": [
+        { "name": "historical_event", "description": "Historical event or era to animate", "default": "The Space Race 1957-1969" }
+      ],
+      "exampleInput": { "historical_event": "The Silk Road Trade Routes 200 BCE - 1450 CE" },
+      "exampleOutput": "90-second PBS-style timeline animation with kraft paper texture, 7 event cards, archival sepia insets, gold typography on manuscript brown.",
+      "modelCompatibility": ["Luma Dream Machine", "Runway Gen-3", "Kling v1.6"],
+      "avgRating": 4.88,
+      "reviewCount": 54,
+      "purchaseCount": 197
+    },
+    "createdAt": "2026-05-14T11:30:00Z"
+  },
+  {
+    "id": "prod-prompt-019",
+    "slug": "trending-social-golden-hour-aesthetic",
+    "title": "Trending Golden Hour Lifestyle Grid — Editorial Social Image",
+    "description": "Generate algorithmically-optimized golden hour lifestyle imagery engineered for peak Instagram engagement with specific warm chromatic science and composition hierarchy.",
+    "content": {
+      "text": "Editorial lifestyle photograph optimized for Instagram 4:5 grid placement: {{subject_description}} photographed during the final 8 minutes of golden hour (sun at 3 degrees above horizon), subject positioned to receive full side-rim illumination from setting sun creating warm amber specular edge from crown to shoulder, background environment rendered in deep orange atmospheric haze with volumetric lens flare streak extending horizontally from light source across upper third of frame, subject in sharp focus at f/2.2, background subject separation at 85mm equivalent focal length, Kodak Portra 400 film simulation: shadow tone lifted +30, highlight rolloff compressed -15, midtone hue shifted +8 degrees toward amber, fine grain structure at ISO 400 equivalent, foreground element (tall grass, flower stems, or architectural edge) partially obscuring 12% of frame lower-left for asymmetric depth layering, composition rule: subject eye-line at upper golden ratio intersection (61.8% from top), 4:5 aspect ratio, Instagram-ready export. --ar 4:5 --v 6.0 --style raw --stylize 120",
+      "negativePrompt": "midday harsh light, oversaturated HDR, purple or teal color grading, plastic skin tones, flat even lighting, centered symmetrical composition, overused lens flare artifacts",
+      "version": "1.4"
+    },
+    "promptToCopy": "Editorial lifestyle photograph optimized for Instagram 4:5 grid placement: {{subject_description}} photographed during the final 8 minutes of golden hour (sun at 3 degrees above horizon), subject positioned to receive full side-rim illumination from setting sun creating warm amber specular edge from crown to shoulder, background environment rendered in deep orange atmospheric haze with volumetric lens flare streak extending horizontally from light source across upper third of frame, subject in sharp focus at f/2.2, background subject separation at 85mm equivalent focal length, Kodak Portra 400 film simulation: shadow tone lifted +30, highlight rolloff compressed -15, midtone hue shifted +8 degrees toward amber, fine grain structure at ISO 400 equivalent, foreground element (tall grass, flower stems, or architectural edge) partially obscuring 12% of frame lower-left for asymmetric depth layering, composition rule: subject eye-line at upper golden ratio intersection (61.8% from top), 4:5 aspect ratio, Instagram-ready export. --ar 4:5 --v 6.0 --style raw --stylize 120",
+    "assets": [
+      {
+        "type": "image",
+        "primaryUrl": "/images/marketplace/golden_hour.png",
+        "thumbnailUrl": "/images/marketplace/golden_hour_thumb.png",
+        "dimensions": { "width": 1080, "height": 1350 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-019",
+      "handle": "@goldenmag.co",
+      "displayName": "Golden Magazine",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "stylize": 120, "version": "6.0", "style": "raw" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Trending Social Media Images",
+      "tags": ["instagram", "golden-hour", "lifestyle", "trending", "editorial", "social-media", "aesthetic"]
+    },
+    "stats": { "likes": 7300, "views": 61000, "saves": 2700 },
+    "pricing": { "type": "one_time", "priceCents": 799 },
+    "_db": {
+      "longDescription": "Golden hour content consistently generates 3-4x higher engagement on Instagram compared to midday lighting. This prompt uses precise chromatic science rather than generic 'warm filter' instructions.",
+      "variables": [
+        { "name": "subject_description", "description": "Description of the lifestyle subject", "default": "a young woman in a flowing linen dress walking barefoot through a wheat field" }
+      ],
+      "exampleInput": { "subject_description": "a couple sitting on a wooden pier overlooking a lake" },
+      "exampleOutput": "Instagram 4:5 golden hour image with Portra 400 film simulation, asymmetric foreground depth, and precise amber rim lighting.",
+      "modelCompatibility": ["Midjourney v6", "FLUX 1.1 Pro", "Stable Diffusion XL"],
+      "avgRating": 4.94,
+      "reviewCount": 219,
+      "purchaseCount": 876
+    },
+    "createdAt": "2026-05-14T12:00:00Z"
+  },
+  {
+    "id": "prod-prompt-020",
+    "slug": "trending-social-viral-moodboard-aesthetic",
+    "title": "Viral Moodboard Collage — Trending Aesthetic Grid System",
+    "description": "Generate hyper-curated 3x3 collage moodboard images engineered for Pinterest virality and Instagram saves using precise compositional harmony and trending palette science.",
+    "content": {
+      "text": "Curated Pinterest-optimized 3x3 moodboard collage image presenting the complete '{{aesthetic_theme}}' visual world: 9 individual image tiles arranged in a CSS-grid-equivalent perfect 3-column 3-row layout with 3px neutral #F5F0EB gap between cells, each tile visually cohesive but compositionally distinct — alternating between product flat-lay, close-up texture, environmental wide-shot, and editorial portrait crops, unified by a strict color story: {{primary_palette}}, typography overlay on center cell only: aesthetic name in thin 18pt Garamond Italic on cream background tile, total image exports at 1:1 ratio 2160x2160px for max Pinterest resolution, each sub-tile internally composed with 20% breathing room margins, no cell bleeds across borders, overall mood reads as one intentional visual world despite 9 separate scenes, film grain at 8% applied uniformly across full composite. --ar 1:1 --v 6.0 --stylize 100",
+      "negativePrompt": "uneven tile sizing, clashing color stories, random stock photo assembly, digital watermarks in tiles, mismatched grain levels, border radius on tiles, vignette per-tile",
+      "version": "1.1"
+    },
+    "promptToCopy": "Curated Pinterest-optimized 3x3 moodboard collage image presenting the complete '{{aesthetic_theme}}' visual world: 9 individual image tiles arranged in a CSS-grid-equivalent perfect 3-column 3-row layout with 3px neutral #F5F0EB gap between cells, each tile visually cohesive but compositionally distinct — alternating between product flat-lay, close-up texture, environmental wide-shot, and editorial portrait crops, unified by a strict color story: {{primary_palette}}, typography overlay on center cell only: aesthetic name in thin 18pt Garamond Italic on cream background tile, total image exports at 1:1 ratio 2160x2160px for max Pinterest resolution, each sub-tile internally composed with 20% breathing room margins, no cell bleeds across borders, overall mood reads as one intentional visual world despite 9 separate scenes, film grain at 8% applied uniformly across full composite. --ar 1:1 --v 6.0 --stylize 100",
+    "assets": [
+      {
+        "type": "image",
+        "primaryUrl": "/images/marketplace/moodboard_grid.png",
+        "thumbnailUrl": "/images/marketplace/moodboard_grid_thumb.png",
+        "dimensions": { "width": 1080, "height": 1080 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-020",
+      "handle": "@grid.oracle",
+      "displayName": "Grid Oracle",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "stylize": 100, "version": "6.0" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Trending Social Media Images",
+      "tags": ["moodboard", "pinterest", "collage", "aesthetic", "grid", "trending", "visual-identity"]
+    },
+    "stats": { "likes": 5400, "views": 44000, "saves": 2400 },
+    "pricing": { "type": "one_time", "priceCents": 899 },
+    "_db": {
+      "longDescription": "Moodboard saves on Pinterest translate directly to profile authority and SEO. This prompt generates a complete aesthetic universe in a single output — the holy grail for brand creators.",
+      "variables": [
+        { "name": "aesthetic_theme", "description": "Named aesthetic or visual concept for the moodboard", "default": "quiet luxury minimalism" },
+        { "name": "primary_palette", "description": "Color palette description", "default": "warm ivory, camel, bone white, and aged parchment" }
+      ],
+      "exampleInput": { "aesthetic_theme": "Japandi forest bathing", "primary_palette": "soft sage, cedar brown, fog grey, and moss green" },
+      "exampleOutput": "2160x2160px Pinterest-optimized 3x3 moodboard grid for Japandi forest bathing aesthetic with unified sage/cedar palette.",
+      "modelCompatibility": ["Midjourney v6", "DALL-E 3", "FLUX 1.1 Pro"],
+      "avgRating": 4.92,
+      "reviewCount": 163,
+      "purchaseCount": 640
+    },
+    "createdAt": "2026-05-14T12:30:00Z"
+  },
+  {
+    "id": "prod-prompt-021",
+    "slug": "cinematic-video-prompt-drone-coastal",
+    "title": "Cinematic Drone Coastal Reveal — Epic Video Prompt",
+    "description": "Generate breathtaking AI video prompts for cinematic drone coastal reveals with precise camera trajectory engineering, atmospheric depth, and broadcast-grade color science.",
+    "content": {
+      "text": "Cinematic aerial drone video sequence opening with camera positioned 4 meters above crashing ocean wave surface moving at 40km/h horizontal speed toward a dramatic rocky coastline at {{time_of_day}}: camera begins at wave height skimming ocean surface with foam spray partially obscuring lens, then ascends in a continuous 8-second smooth exponential arc from 4m to 180m altitude while simultaneously decelerating forward motion to zero at apex — at apex: camera holds 3 seconds with slow 360-degree pan revealing full coastline geography, then descends toward a coastal village at 120m cruising altitude with forward dolly motion resuming, volumetric atmospheric haze in middle-distance between 500m-2km creating natural depth layering, wave impact spray on lens in opening 2 seconds using practical water particle simulation, color grade: teal shadows, warm midtone amber, de-saturated highlights with -8 contrast pull, LOG-C to Rec.709 conversion with custom LUT applied, total duration 20 seconds, DJI Inspire 3 simulation. 16:9 4K.",
+      "negativePrompt": "static locked-off camera, flat altitude, abrupt motion changes, digital zoom artifacts, oversaturated cyan water, inconsistent wave simulation, helicopter vibration shear",
+      "version": "1.3"
+    },
+    "promptToCopy": "Cinematic aerial drone video sequence opening with camera positioned 4 meters above crashing ocean wave surface moving at 40km/h horizontal speed toward a dramatic rocky coastline at {{time_of_day}}: camera begins at wave height skimming ocean surface with foam spray partially obscuring lens, then ascends in a continuous 8-second smooth exponential arc from 4m to 180m altitude while simultaneously decelerating forward motion to zero at apex — at apex: camera holds 3 seconds with slow 360-degree pan revealing full coastline geography, then descends toward a coastal village at 120m cruising altitude with forward dolly motion resuming, volumetric atmospheric haze in middle-distance between 500m-2km creating natural depth layering, wave impact spray on lens in opening 2 seconds using practical water particle simulation, color grade: teal shadows, warm midtone amber, de-saturated highlights with -8 contrast pull, LOG-C to Rec.709 conversion with custom LUT applied, total duration 20 seconds, DJI Inspire 3 simulation. 16:9 4K.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/drone_coastal.mp4",
+        "thumbnailUrl": "/images/marketplace/drone_coastal_thumb.png",
+        "dimensions": { "width": 3840, "height": 2160 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-021",
+      "handle": "@altitude.frames",
+      "displayName": "Altitude Frames",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "luma-v1.6",
+      "provider": "Luma AI",
+      "parameters": { "camera_motion": "ascend_arc", "motion_intensity": "high", "duration": 20 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Video Prompts",
+      "tags": ["drone", "cinematic", "coastal", "aerial", "video", "travel", "nature", "4K"]
+    },
+    "stats": { "likes": 6800, "views": 57000, "saves": 2600 },
+    "pricing": { "type": "one_time", "priceCents": 1499 },
+    "_db": {
+      "longDescription": "The surface-to-apex camera arc is the single most cinematic drone move in travel content. This prompt engineers every aspect of the trajectory curve, atmospheric density, and color science for maximum cinematic impact.",
+      "variables": [
+        { "name": "time_of_day", "description": "Lighting time of day for the shoot", "default": "golden hour sunset" }
+      ],
+      "exampleInput": { "time_of_day": "blue hour dusk" },
+      "exampleOutput": "20-second 4K cinematic drone reveal with blue hour color science, wave spray lens hit, and 180m altitude arc pan.",
+      "modelCompatibility": ["Luma Dream Machine v1.6", "Runway Gen-3 Alpha", "Kling v1.6"],
+      "avgRating": 4.97,
+      "reviewCount": 241,
+      "purchaseCount": 890
+    },
+    "createdAt": "2026-05-14T13:00:00Z"
+  },
+  {
+    "id": "prod-prompt-022",
+    "slug": "product-hero-video-perfume-liquid",
+    "title": "Luxury Perfume Hero Video — Liquid Architecture Prompt",
+    "description": "Cinematic product video prompt for luxury fragrance brands — engineered for the precise intersection of liquid dynamics, volumetric light shafts, and premium material science.",
+    "content": {
+      "text": "Luxury product video for premium fragrance bottle: {{brand_bottle_description}} positioned on a polished jet black acrylic plinth, camera performs a continuous slow 270-degree orbit beginning from camera-right at 45-degree elevation angle, movement duration 12 seconds on a perfect mathematical arc with no acceleration variation, during orbit: a single narrow-beam theatrical spotlight strikes through the glass bottle body creating prismatic rainbow caustic projections rotating across the black surface as angle changes, ambient fill from a 4x8ft white silk bounce softbox at 30% intensity maintaining bottle form visibility in shadows, a controlled 5ml pour of the perfume liquid occurs at orbit frame 4 seconds — liquid column exits bottle neck in laminar flow then breaks into micro-sphere droplets upon plinth impact creating splash crown visible for 0.8 seconds, macro DOF on liquid droplets at f/1.4 equivalent, bottle label remains legible throughout orbit via secondary fill, total render: 4K 24fps, 16 seconds, luxury retail visual standards, Luma/Runway target.",
+      "negativePrompt": "wobble in orbit path, inconsistent liquid simulation, overexposed highlights clipping glass, visible camera rig shadow, generic turntable motion, floating bottle without plinth contact",
+      "version": "1.1"
+    },
+    "promptToCopy": "Luxury product video for premium fragrance bottle: {{brand_bottle_description}} positioned on a polished jet black acrylic plinth, camera performs a continuous slow 270-degree orbit beginning from camera-right at 45-degree elevation angle, movement duration 12 seconds on a perfect mathematical arc with no acceleration variation, during orbit: a single narrow-beam theatrical spotlight strikes through the glass bottle body creating prismatic rainbow caustic projections rotating across the black surface as angle changes, ambient fill from a 4x8ft white silk bounce softbox at 30% intensity maintaining bottle form visibility in shadows, a controlled 5ml pour of the perfume liquid occurs at orbit frame 4 seconds — liquid column exits bottle neck in laminar flow then breaks into micro-sphere droplets upon plinth impact creating splash crown visible for 0.8 seconds, macro DOF on liquid droplets at f/1.4 equivalent, bottle label remains legible throughout orbit via secondary fill, total render: 4K 24fps, 16 seconds, luxury retail visual standards, Luma/Runway target.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/perfume_hero.mp4",
+        "thumbnailUrl": "/images/marketplace/perfume_hero_thumb.png",
+        "dimensions": { "width": 3840, "height": 2160 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-022",
+      "handle": "@liquid.director",
+      "displayName": "Liquid Director",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "runway-gen3",
+      "provider": "Runway",
+      "parameters": { "motion_intensity": "low", "camera_orbit": true, "consistency_frames": 60 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Video Prompts",
+      "tags": ["product-video", "perfume", "luxury", "liquid", "orbit", "hero-shot", "commercial"]
+    },
+    "stats": { "likes": 4100, "views": 34000, "saves": 1540 },
+    "pricing": { "type": "subscription_only", "priceCents": 2499 },
+    "_db": {
+      "longDescription": "Agency-grade product video prompt used by luxury retail brands. The mathematical orbit arc combined with prismatic caustics from the glass bottle creates a hero video that replaces $15k+ studio production.",
+      "variables": [
+        { "name": "brand_bottle_description", "description": "Visual description of the perfume bottle", "default": "a minimal rectangular clear glass bottle with gold metallic spray nozzle and black embossed label reading NOIR" }
+      ],
+      "exampleInput": { "brand_bottle_description": "a rounded amber glass bottle with geometric faceted base and rose gold atomizer cap" },
+      "exampleOutput": "16-second 4K luxury perfume orbit video with prismatic caustics, laminar liquid pour, and macro droplet crown.",
+      "modelCompatibility": ["Runway Gen-3 Alpha", "Luma Dream Machine v1.6", "Kling v1.6"],
+      "avgRating": 4.96,
+      "reviewCount": 128,
+      "purchaseCount": 476
+    },
+    "createdAt": "2026-05-14T13:30:00Z"
+  },
+  {
+    "id": "prod-prompt-023",
+    "slug": "asmr-soap-cutting-overhead",
+    "title": "ASMR Dry Soap Cutting Overhead — Precision Trigger Sequence",
+    "description": "Generate the most requested ASMR visual trigger: perfectly dry soap block cutting, shot overhead with studio-controlled lighting for maximum visual and tactile trigger satisfaction.",
+    "content": {
+      "text": "Overhead locked-off 4K video of a pristine rectangular block of {{soap_color}} artisan cold-process soap measuring 9x5x4cm positioned on a white marble cutting board, a sharp straight-edge palette knife initiates a slow deliberate cut from top-center downward at 0.3cm/second, as the knife progresses: soap fractures along the cut plane revealing clean interior cross-section with contrasting core color, small dry soap curls and chips accumulating symmetrically on both sides, cut progresses through the full block over 8 seconds — at 4 seconds midpoint a brief 0.5-second pause is observed before continuing, final split at 8 seconds reveals perfect halves, overhead lighting: single cold LED panel at 90-degree top-down with no side shadows, white balance 5600K daylight, natural soap matte surface — no shine, no gloss, no oil sheen, spatial audio placeholder: knife pressure creak + soap fracture crystalline crack + chip scatter. 4K 60fps, 9:16 vertical. Zero camera movement.",
+      "negativePrompt": "greasy soap texture, dramatic shadows, colored background, camera movement, side-angle shot, soft spongy soap simulation, unclean cut line, soap bouncing on cut",
+      "version": "2.1"
+    },
+    "promptToCopy": "Overhead locked-off 4K video of a pristine rectangular block of {{soap_color}} artisan cold-process soap measuring 9x5x4cm positioned on a white marble cutting board, a sharp straight-edge palette knife initiates a slow deliberate cut from top-center downward at 0.3cm/second, as the knife progresses: soap fractures along the cut plane revealing clean interior cross-section with contrasting core color, small dry soap curls and chips accumulating symmetrically on both sides, cut progresses through the full block over 8 seconds — at 4 seconds midpoint a brief 0.5-second pause is observed before continuing, final split at 8 seconds reveals perfect halves, overhead lighting: single cold LED panel at 90-degree top-down with no side shadows, white balance 5600K daylight, natural soap matte surface — no shine, no gloss, no oil sheen, spatial audio placeholder: knife pressure creak + soap fracture crystalline crack + chip scatter. 4K 60fps, 9:16 vertical. Zero camera movement.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/soap_cutting.mp4",
+        "thumbnailUrl": "/images/marketplace/soap_cutting_thumb.png",
+        "dimensions": { "width": 1080, "height": 1920 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-023",
+      "handle": "@crystalline.cuts",
+      "displayName": "Crystalline Cuts",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "kling-v1.6",
+      "provider": "Kling AI",
+      "parameters": { "motion_strength": 0.2, "fps": 60, "duration": 10 }
+    },
+    "taxonomy": {
+      "primaryCategory": "ASMR Videos",
+      "tags": ["asmr", "soap-cutting", "overhead", "satisfying", "dry-soap", "trigger", "tiktok", "youtube"]
+    },
+    "stats": { "likes": 11200, "views": 96000, "saves": 4600 },
+    "pricing": { "type": "one_time", "priceCents": 899 },
+    "_db": {
+      "longDescription": "Soap cutting is the #1 ASMR trigger on TikTok and YouTube. This prompt is engineered to the exact physics of dry cold-process soap fracture — the crystalline crack sound and chip scatter are meticulously specified.",
+      "variables": [
+        { "name": "soap_color", "description": "Color of the exterior soap block", "default": "pale lavender with white speckle interior" }
+      ],
+      "exampleInput": { "soap_color": "deep charcoal with turquoise swirl interior" },
+      "exampleOutput": "10-second 4K 60fps overhead soap cutting video with charcoal exterior fracturing to reveal turquoise interior.",
+      "modelCompatibility": ["Kling v1.6", "Runway Gen-3", "Pika 2.0"],
+      "avgRating": 4.98,
+      "reviewCount": 389,
+      "purchaseCount": 1480
+    },
+    "createdAt": "2026-05-14T14:00:00Z"
+  },
+  {
+    "id": "prod-prompt-024",
+    "slug": "viral-shorts-text-hook-carousel-motion",
+    "title": "Viral Text-Hook Carousel Reel — Dopamine Architecture Prompt",
+    "description": "Engineer maximum-retention vertical video prompts using psychological dopamine loop typography reveals, built specifically for the TikTok and Reels retention algorithm.",
+    "content": {
+      "text": "Vertical 9:16 text-forward viral reel motion design sequence: opening 0.5 seconds — screen is 100% {{accent_color}} solid fill, then a single bold centered headline '{{hook_line_1}}' slams in with a 2-frame scale-from-120% snap, immediately followed at frame 18 with '{{hook_line_2}}' sliding in from the right at 400px/s, at second 1.5 the background transitions to B-roll video footage ({{b_roll_description}}) via opacity morph while text remains fully opaque over it using multiply blend mode, at second 2.5 a progress bar appears bottom-center incrementing to 100% over 4 seconds with a tick mark animation — this anchors viewer to stay, at second 3 a third text reveal appears: '{{payoff_text}}' in smaller 24pt subtext below hero, at second 5 CTA button animates: '{{cta_text}}' in a pill button with pulsing ring glow, total 6 second duration, pacing calibrated for 100% retention to the 3-second mark based on platform algorithm data.",
+      "negativePrompt": "slow text animations, serif fonts, multiple font weights in same sequence, background music reference without permission, text that bleeds off safe zone, excessive color changes",
+      "version": "3.0"
+    },
+    "promptToCopy": "Vertical 9:16 text-forward viral reel motion design sequence: opening 0.5 seconds — screen is 100% {{accent_color}} solid fill, then a single bold centered headline '{{hook_line_1}}' slams in with a 2-frame scale-from-120% snap, immediately followed at frame 18 with '{{hook_line_2}}' sliding in from the right at 400px/s, at second 1.5 the background transitions to B-roll video footage ({{b_roll_description}}) via opacity morph while text remains fully opaque over it using multiply blend mode, at second 2.5 a progress bar appears bottom-center incrementing to 100% over 4 seconds with a tick mark animation — this anchors viewer to stay, at second 3 a third text reveal appears: '{{payoff_text}}' in smaller 24pt subtext below hero, at second 5 CTA button animates: '{{cta_text}}' in a pill button with pulsing ring glow, total 6 second duration, pacing calibrated for 100% retention to the 3-second mark based on platform algorithm data.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/viral_text_reel.mp4",
+        "thumbnailUrl": "/images/marketplace/viral_text_reel_thumb.png",
+        "dimensions": { "width": 1080, "height": 1920 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-024",
+      "handle": "@algo.architect",
+      "displayName": "Algo Architect",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "luma-v1.6",
+      "provider": "Luma AI",
+      "parameters": { "motion_curve": "snap", "consistency_frames": 36 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Viral Shorts",
+      "tags": ["viral", "tiktok", "reels", "text-hook", "retention", "algorithm", "motion-design", "dopamine"]
+    },
+    "stats": { "likes": 12800, "views": 105000, "saves": 5200 },
+    "pricing": { "type": "subscription_only", "priceCents": 1999 },
+    "_db": {
+      "longDescription": "The progress bar + text slam combo is the current highest-retention pattern across TikTok and Instagram Reels. This prompt is built on platform algorithm psychology, not visual aesthetics alone.",
+      "variables": [
+        { "name": "accent_color", "description": "Opening solid background accent color", "default": "#FF3B30" },
+        { "name": "hook_line_1", "description": "First headline hook text", "default": "STOP SCROLLING" },
+        { "name": "hook_line_2", "description": "Secondary hook supporting text", "default": "You need to see this" },
+        { "name": "b_roll_description", "description": "Background B-roll footage description", "default": "cinematic close-up of hands typing on a laptop at a cafe" },
+        { "name": "payoff_text", "description": "Payoff information text", "default": "Most creators don't know this" },
+        { "name": "cta_text", "description": "Call to action button text", "default": "Follow for more" }
+      ],
+      "exampleInput": { "hook_line_1": "THIS CHANGED EVERYTHING", "accent_color": "#007AFF" },
+      "exampleOutput": "6-second viral reel with blue snap intro, progress bar retention anchor, B-roll morph, and CTA pulse button.",
+      "modelCompatibility": ["Luma Dream Machine v1.6", "Runway Gen-3", "GPT-4o for script"],
+      "avgRating": 4.99,
+      "reviewCount": 512,
+      "purchaseCount": 2100
+    },
+    "createdAt": "2026-05-14T14:30:00Z"
+  },
+  {
+    "id": "prod-prompt-025",
+    "slug": "asmr-resin-pour-geode",
+    "title": "ASMR Geode Resin Pour — Crystalline Pigment Diffusion Series",
+    "description": "Deeply satisfying ASMR video prompt of epoxy resin geode pours — pigment clouds diffusing through clear resin in real-time with extreme color depth and crystalline light behavior.",
+    "content": {
+      "text": "Overhead locked-off 4K video of a white-rimmed geode mold (28cm diameter circular) sitting flat on a black matte surface, slow-pour sequence: clear epoxy resin at exactly 72°F (optimal viscosity) is poured from a height of 18cm into the center of the mold, as resin pools outward in a perfect radial spread, three sequential pigment drops are introduced — first {{color_1}} alcohol ink at center, second {{color_2}} metallic mica powder dusted from 12cm height creating suspended sparkle cloud, third {{color_3}} opaque pigment dropper introduced at 4-o-clock position — all three pigments diffuse into each other in slow organic plumes driven by resin viscosity, no stirring, no intervention, purely diffusion-driven color mixing, time-lapse hybrid: real-time pacing for first 30 seconds of pour, then 4x accelerated for remaining diffusion, lighting: matched twin stripbox lights at 10 and 2 o-clock positions creating bilateral specular reflections on wet resin surface, zero camera movement, ultra-high-fidelity resin surface detail, spatial audio placeholder: resin drizzle + pigment dust settle. 9:16 vertical crop.",
+      "negativePrompt": "stirring motion, plastic-looking resin, overexposed white mold rim, camera drift, fast-paced pour, opaque resin without translucency, flat overhead lighting without specular",
+      "version": "1.0"
+    },
+    "promptToCopy": "Overhead locked-off 4K video of a white-rimmed geode mold (28cm diameter circular) sitting flat on a black matte surface, slow-pour sequence: clear epoxy resin at exactly 72°F (optimal viscosity) is poured from a height of 18cm into the center of the mold, as resin pools outward in a perfect radial spread, three sequential pigment drops are introduced — first {{color_1}} alcohol ink at center, second {{color_2}} metallic mica powder dusted from 12cm height creating suspended sparkle cloud, third {{color_3}} opaque pigment dropper introduced at 4-o-clock position — all three pigments diffuse into each other in slow organic plumes driven by resin viscosity, no stirring, no intervention, purely diffusion-driven color mixing, time-lapse hybrid: real-time pacing for first 30 seconds of pour, then 4x accelerated for remaining diffusion, lighting: matched twin stripbox lights at 10 and 2 o-clock positions creating bilateral specular reflections on wet resin surface, zero camera movement, ultra-high-fidelity resin surface detail, spatial audio placeholder: resin drizzle + pigment dust settle. 9:16 vertical crop.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/resin_geode.mp4",
+        "thumbnailUrl": "/images/marketplace/resin_geode_thumb.png",
+        "dimensions": { "width": 1080, "height": 1920 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-025",
+      "handle": "@resin.oracle",
+      "displayName": "Resin Oracle",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "kling-v1.6",
+      "provider": "Kling AI",
+      "parameters": { "motion_strength": 0.4, "fps": 24, "duration": 15 }
+    },
+    "taxonomy": {
+      "primaryCategory": "ASMR Videos",
+      "tags": ["asmr", "resin", "geode", "pour", "satisfying", "pigment", "art", "diffusion"]
+    },
+    "stats": { "likes": 7800, "views": 64000, "saves": 3100 },
+    "pricing": { "type": "one_time", "priceCents": 999 },
+    "_db": {
+      "longDescription": "Resin geode content is among the top 5 ASMR categories on YouTube by watch time. The diffusion-driven pigment mixing creates an infinitely variable visual experience — no two pours are the same.",
+      "variables": [
+        { "name": "color_1", "description": "First pigment color (alcohol ink center drop)", "default": "deep amethyst purple" },
+        { "name": "color_2", "description": "Second pigment color (metallic mica sparkle)", "default": "rose gold" },
+        { "name": "color_3", "description": "Third pigment color (opaque outer ring)", "default": "snow white" }
+      ],
+      "exampleInput": { "color_1": "midnight cobalt blue", "color_2": "silver chrome", "color_3": "matte black" },
+      "exampleOutput": "15-second geode resin pour with cobalt/silver/black pigment diffusion, bilateral stripbox specular, 4x time-lapse second half.",
+      "modelCompatibility": ["Kling v1.6", "Runway Gen-3", "Luma Dream Machine"],
+      "avgRating": 4.95,
+      "reviewCount": 298,
+      "purchaseCount": 1040
+    },
+    "createdAt": "2026-05-14T15:00:00Z"
+  },
+  {
+    "id": "prod-prompt-026",
+    "slug": "fruit-flat-lay-styled-editorial",
+    "title": "Styled Exotic Fruit Flat-Lay — Editorial Food Art Direction",
+    "description": "Artistically directed overhead fruit flat-lay prompt for editorial food publications and premium health brand campaigns — color theory driven, zero props, pure fruit geometry.",
+    "content": {
+      "text": "Professional editorial overhead flat-lay photograph of an artfully arranged collection of {{fruit_selection}} on a raw concrete surface with subtle aggregate texture, arrangement philosophy: radial composition from center — whole fruits at outer ring, halved fruits in middle ring revealing cross-section geometry, individual segments and micro-details at center core, color palette strictly limited to the natural fruit pigments with no props, no garnish, no foreign elements, overhead angle exactly 90 degrees with zero perspective distortion, lighting: full-frame softbox overhead diffuser creating shadowless even exposure with +0.7 stop exposure compensation preserving highlight detail in pale-flesh fruits, post-grade: +5 clarity, -10 vibrance (to keep colors natural rather than artificial), 2200x2200px square crop, ultra-sharp focus across entire frame using f/11 aperture equivalent for full DOF, wet surfaces on cut fruits from light water misting to restore natural freshness sheen, professional food styling — all cut angles deliberate and non-random. --ar 1:1 --v 6.0 --style raw --stylize 60",
+      "negativePrompt": "props, cutlery, rustic wooden boards, dramatic shadows, oversaturated colors, random arrangement, uncut fruit only, garnish herbs, colored backgrounds",
+      "version": "1.2"
+    },
+    "promptToCopy": "Professional editorial overhead flat-lay photograph of an artfully arranged collection of {{fruit_selection}} on a raw concrete surface with subtle aggregate texture, arrangement philosophy: radial composition from center — whole fruits at outer ring, halved fruits in middle ring revealing cross-section geometry, individual segments and micro-details at center core, color palette strictly limited to the natural fruit pigments with no props, no garnish, no foreign elements, overhead angle exactly 90 degrees with zero perspective distortion, lighting: full-frame softbox overhead diffuser creating shadowless even exposure with +0.7 stop exposure compensation preserving highlight detail in pale-flesh fruits, post-grade: +5 clarity, -10 vibrance (to keep colors natural rather than artificial), 2200x2200px square crop, ultra-sharp focus across entire frame using f/11 aperture equivalent for full DOF, wet surfaces on cut fruits from light water misting to restore natural freshness sheen, professional food styling — all cut angles deliberate and non-random. --ar 1:1 --v 6.0 --style raw --stylize 60",
+    "assets": [
+      {
+        "type": "image",
+        "primaryUrl": "/images/marketplace/fruit_flatlay.png",
+        "thumbnailUrl": "/images/marketplace/fruit_flatlay_thumb.png",
+        "dimensions": { "width": 1080, "height": 1080 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-026",
+      "handle": "@table.director",
+      "displayName": "Table Director",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "stylize": 60, "version": "6.0", "style": "raw" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Fruit Videos & Photography",
+      "tags": ["fruit", "flat-lay", "editorial", "food-art", "overhead", "organic", "health", "instagram"]
+    },
+    "stats": { "likes": 4200, "views": 33000, "saves": 1700 },
+    "pricing": { "type": "one_time", "priceCents": 699 },
+    "_db": {
+      "longDescription": "Used by food magazines, smoothie brands, and organic grocery campaigns. The radial arrangement system creates visual harmony that random flat-lays cannot achieve. Concrete surface provides premium editorial grounding.",
+      "variables": [
+        { "name": "fruit_selection", "description": "Curated selection of fruits for the flat-lay", "default": "dragonfruit, passion fruit, star fruit, rambutan, lychee, and kiwano melon" }
+      ],
+      "exampleInput": { "fruit_selection": "pomelo, blood orange, cara cara orange, kumquats, and bergamot" },
+      "exampleOutput": "Square editorial flat-lay of citrus collection with radial arrangement, concrete surface, 90-degree overhead, natural pigment palette.",
+      "modelCompatibility": ["Midjourney v6", "FLUX 1.1 Pro", "DALL-E 3"],
+      "avgRating": 4.90,
+      "reviewCount": 114,
+      "purchaseCount": 432
+    },
+    "createdAt": "2026-05-14T15:30:00Z"
+  },
+  {
+    "id": "prod-prompt-027",
+    "slug": "educational-language-learning-immersive",
+    "title": "Immersive Language Flashcard Scene — Contextual Learning Video",
+    "description": "Generate visually rich contextual learning video prompts showing vocabulary words embedded inside photorealistic cultural environments for immersive language acquisition.",
+    "content": {
+      "text": "Immersive language learning video scene for teaching {{target_language}} vocabulary: a photorealistic environment depicting {{scene_environment}} with key vocabulary objects appearing in the scene with clean text labels floating above them — label system: white rounded-rectangle pill badges with 14pt bold sans-serif target language word and 11pt italic native language translation below, labels animate into frame using a smooth scale-from-0 with spring physics (tension 180, damping 22), each label appears sequentially with 0.8-second intervals giving viewer time to absorb, camera performs a slow environmental pan (5 degrees/second) across the scene ensuring all labeled objects enter frame naturally, scene lighting is warm and inviting — not academic or sterile, pronunciation phonetic guide appears in smaller grey text below each translation, after all 8 vocabulary items are labeled a 3-second vocabulary review grid appears as lower-third overlay, total duration 20 seconds, 16:9 widescreen, accessible typography contrast ratios AA compliant, suitable for EdTech embedding.",
+      "negativePrompt": "cluttered label placement, overlapping text, harsh institutional lighting, rapid label pacing, phonetic guides in wrong alphabet, low-contrast label badges, camera movement obscuring labels",
+      "version": "1.0"
+    },
+    "promptToCopy": "Immersive language learning video scene for teaching {{target_language}} vocabulary: a photorealistic environment depicting {{scene_environment}} with key vocabulary objects appearing in the scene with clean text labels floating above them — label system: white rounded-rectangle pill badges with 14pt bold sans-serif target language word and 11pt italic native language translation below, labels animate into frame using a smooth scale-from-0 with spring physics (tension 180, damping 22), each label appears sequentially with 0.8-second intervals giving viewer time to absorb, camera performs a slow environmental pan (5 degrees/second) across the scene ensuring all labeled objects enter frame naturally, scene lighting is warm and inviting — not academic or sterile, pronunciation phonetic guide appears in smaller grey text below each translation, after all 8 vocabulary items are labeled a 3-second vocabulary review grid appears as lower-third overlay, total duration 20 seconds, 16:9 widescreen, accessible typography contrast ratios AA compliant, suitable for EdTech embedding.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/language_learning.mp4",
+        "thumbnailUrl": "/images/marketplace/language_learning_thumb.png",
+        "dimensions": { "width": 1920, "height": 1080 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-027",
+      "handle": "@lexica.world",
+      "displayName": "Lexica World",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "claude-sonnet-4-20250514",
+      "provider": "Anthropic",
+      "parameters": { "temperature": 0.4 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Educational Videos",
+      "tags": ["education", "language-learning", "vocabulary", "immersive", "edtech", "contextual", "animation"]
+    },
+    "stats": { "likes": 2100, "views": 16000, "saves": 880 },
+    "pricing": { "type": "subscription_only", "priceCents": 1299 },
+    "_db": {
+      "longDescription": "Contextual learning outperforms flashcard drilling by 3x for vocabulary retention (based on spaced repetition research). This prompt places vocabulary inside real-world scenes rather than abstract cards.",
+      "variables": [
+        { "name": "target_language", "description": "Language being learned", "default": "Japanese" },
+        { "name": "scene_environment", "description": "Contextual scene environment", "default": "a traditional Japanese kitchen with visible cooking utensils and ingredients" }
+      ],
+      "exampleInput": { "target_language": "Spanish", "scene_environment": "a vibrant Mexican market stall with fruits, vegetables, and textiles" },
+      "exampleOutput": "20-second Spanish vocabulary labeling video with Mexican market scene, spring-physics label reveals, and AA-compliant typography.",
+      "modelCompatibility": ["Claude Sonnet 4", "GPT-4o", "Luma Dream Machine"],
+      "avgRating": 4.87,
+      "reviewCount": 71,
+      "purchaseCount": 261
+    },
+    "createdAt": "2026-05-14T16:00:00Z"
+  },
+  {
+    "id": "prod-prompt-028",
+    "slug": "trending-social-dark-academia-aesthetic",
+    "title": "Dark Academia Trending Aesthetic — Editorial Library Portrait",
+    "description": "Generate the viral Dark Academia aesthetic image for Instagram and Pinterest with precise environmental control, moody chiaroscuro lighting, and literary visual grammar.",
+    "content": {
+      "text": "Editorial portrait photograph embodying the Dark Academia aesthetic for Instagram and Pinterest viral distribution: {{subject_description}} photographed inside a grand Victorian university library with floor-to-ceiling mahogany bookshelves receding into amber darkness behind them, subject positioned in a leather Chesterfield reading chair angled 30 degrees to camera, lit exclusively by the warm amber glow of a single brass desk lamp at frame-right creating dramatic chiaroscuro — 80% shadow coverage on camera-left side of subject's face, subject dressed in collegiate layers: Oxford tweed blazer over cream linen, small reading glasses, an open leather-bound book resting on lap though eyes look directly into camera, atmospheric depth: visible dust motes in the single light shaft from a high window, shallow DOF on subject at f/1.8 with middle-row bookshelves soft, warm chocolate-amber tonal color grade, natural film grain at ISO 800, slight vignette 25% at corners. --ar 4:5 --v 6.0 --style raw --stylize 150",
+      "negativePrompt": "harsh flash photography, bright airy setting, modern clothing, contemporary library design, over-lit even exposure, missing shadows, cold blue tones, digital-clean look",
+      "version": "1.0"
+    },
+    "promptToCopy": "Editorial portrait photograph embodying the Dark Academia aesthetic for Instagram and Pinterest viral distribution: {{subject_description}} photographed inside a grand Victorian university library with floor-to-ceiling mahogany bookshelves receding into amber darkness behind them, subject positioned in a leather Chesterfield reading chair angled 30 degrees to camera, lit exclusively by the warm amber glow of a single brass desk lamp at frame-right creating dramatic chiaroscuro — 80% shadow coverage on camera-left side of subject's face, subject dressed in collegiate layers: Oxford tweed blazer over cream linen, small reading glasses, an open leather-bound book resting on lap though eyes look directly into camera, atmospheric depth: visible dust motes in the single light shaft from a high window, shallow DOF on subject at f/1.8 with middle-row bookshelves soft, warm chocolate-amber tonal color grade, natural film grain at ISO 800, slight vignette 25% at corners. --ar 4:5 --v 6.0 --style raw --stylize 150",
+    "assets": [
+      {
+        "type": "image",
+        "primaryUrl": "/images/marketplace/dark_academia.png",
+        "thumbnailUrl": "/images/marketplace/dark_academia_thumb.png",
+        "dimensions": { "width": 1080, "height": 1350 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-028",
+      "handle": "@nocturne.press",
+      "displayName": "Nocturne Press",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "stylize": 150, "version": "6.0", "style": "raw" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Trending Social Media Images",
+      "tags": ["dark-academia", "aesthetic", "pinterest", "editorial", "moody", "library", "trending", "portrait"]
+    },
+    "stats": { "likes": 8800, "views": 73000, "saves": 3600 },
+    "pricing": { "type": "one_time", "priceCents": 799 },
+    "_db": {
+      "longDescription": "Dark Academia remains a perennial top-10 Pinterest aesthetic by search volume. This prompt is engineered to the exact lighting ratio, color science, and environmental depth that makes Dark Academia content saves-worthy.",
+      "variables": [
+        { "name": "subject_description", "description": "Subject description for the portrait", "default": "a young woman with dark shoulder-length hair and contemplative expression" }
+      ],
+      "exampleInput": { "subject_description": "a young man with round wire glasses and a pensive, slightly tired expression" },
+      "exampleOutput": "Instagram 4:5 Dark Academia library portrait with chiaroscuro brass lamp lighting, 80% shadow split, and chocolate-amber grade.",
+      "modelCompatibility": ["Midjourney v6", "FLUX 1.1 Pro", "Stable Diffusion XL"],
+      "avgRating": 4.96,
+      "reviewCount": 347,
+      "purchaseCount": 1320
+    },
+    "createdAt": "2026-05-14T16:30:00Z"
+  },
+  {
+    "id": "prod-prompt-029",
+    "slug": "video-prompt-timelapse-city-metabolism",
+    "title": "Urban Metabolism Timelapse — Architectural City Flow Video",
+    "description": "Cinematic urban timelapse video prompt capturing city infrastructure as a living organism — traffic arteries, light cycles, and human flows rendered as biological systems.",
+    "content": {
+      "text": "Cinematic urban infrastructure timelapse video of {{city_district}} shot from a 180m elevated position looking down at 45-degree diagonal angle during a 4-hour real-time compression to 60 seconds: road network rendered as circulatory system — vehicle light trails become continuous amber and white flow streams with no individual vehicles visible at this speed, pedestrian crossings pulse with rhythmic crowd density waves every 30 seconds corresponding to traffic light cycles, building windows transition from office-lit warm yellow to residential cool blue as the sequence spans from 5PM to 9PM golden hour to blue hour, intersection geometry creates radial compositional mandala read from above, camera holds perfectly locked across entire 60 seconds — no camera movement, only temporal motion, volumetric atmosphere deepening from golden haze to violet dusk gradient, 8K resolution for maximum print and digital versatility, final second: freeze-frame of peak blue hour with all light trails still glowing, title safe zone preserved.",
+      "negativePrompt": "camera movement, visible individual cars, choppy temporal compression, overexposed traffic streams, flat midday lighting, generic urban skyline shot",
+      "version": "1.1"
+    },
+    "promptToCopy": "Cinematic urban infrastructure timelapse video of {{city_district}} shot from a 180m elevated position looking down at 45-degree diagonal angle during a 4-hour real-time compression to 60 seconds: road network rendered as circulatory system — vehicle light trails become continuous amber and white flow streams with no individual vehicles visible at this speed, pedestrian crossings pulse with rhythmic crowd density waves every 30 seconds corresponding to traffic light cycles, building windows transition from office-lit warm yellow to residential cool blue as the sequence spans from 5PM to 9PM golden hour to blue hour, intersection geometry creates radial compositional mandala read from above, camera holds perfectly locked across entire 60 seconds — no camera movement, only temporal motion, volumetric atmosphere deepening from golden haze to violet dusk gradient, 8K resolution for maximum print and digital versatility, final second: freeze-frame of peak blue hour with all light trails still glowing, title safe zone preserved.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/city_timelapse.mp4",
+        "thumbnailUrl": "/images/marketplace/city_timelapse_thumb.png",
+        "dimensions": { "width": 7680, "height": 4320 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-029",
+      "handle": "@urban.pulse",
+      "displayName": "Urban Pulse",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "runway-gen3",
+      "provider": "Runway",
+      "parameters": { "motion_intensity": "high", "fps": 24, "duration": 60 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Video Prompts",
+      "tags": ["timelapse", "urban", "city", "architecture", "cinematic", "light-trails", "travel", "8K"]
+    },
+    "stats": { "likes": 5900, "views": 49000, "saves": 2200 },
+    "pricing": { "type": "one_time", "priceCents": 1999 },
+    "_db": {
+      "longDescription": "The urban-as-organism visual metaphor consistently earns millions of views on YouTube and Instagram Reels. The 8K resolution enables repurposing as wall art prints, broadcast b-roll, and social content simultaneously.",
+      "variables": [
+        { "name": "city_district", "description": "City district or area to render", "default": "Shibuya crossing, Tokyo" }
+      ],
+      "exampleInput": { "city_district": "Times Square intersection grid, New York City" },
+      "exampleOutput": "60-second 8K urban timelapse with amber-to-violet transition, circulatory light trail system, mandala intersection geometry.",
+      "modelCompatibility": ["Runway Gen-3 Alpha", "Luma Dream Machine v1.6", "Kling v1.6"],
+      "avgRating": 4.93,
+      "reviewCount": 176,
+      "purchaseCount": 640
+    },
+    "createdAt": "2026-05-14T17:00:00Z"
+  },
+  {
+    "id": "prod-prompt-030",
+    "slug": "asmr-whisper-page-turning-ancient",
+    "title": "ASMR Ancient Manuscript Page Turn — Antiquarian Trigger Series",
+    "description": "Deeply evocative ASMR video prompt of aged manuscript page turning with precise paper texture simulation, crinkle physics, and warm antiquarian lighting.",
+    "content": {
+      "text": "Side-angle 4K macro video of an ancient {{manuscript_type}} book opened on a raw oak reading stand: a pale hand with clean unpolished nails enters frame from right and slowly lifts the edge of a single aged parchment page, page is visibly translucent at thin sections with inked text visible in reverse through the paper, lifting motion at 0.8cm/second — page curves in a natural physical arc revealing micro-fiber surface texture, yellowed edge patina, minor foxing spots, and hand-stitched binding threads at spine, page flips at frame 6 seconds with a full rotation showing both faces sequentially before settling against the left stack with a soft weighted thud, during lift phase: raking light from a single candle-equivalent warm tungsten source at 20-degree low angle reveals full paper surface texture via specular sheen, camera positioned at 30-degree elevation angle to reading stand, macro lens equivalent at 150mm showing full page width in frame, focus point tracking the lifting page edge at f/3.5, ASMR pacing: complete unhurried calm, duration 9 seconds per page turn. No audio track — spatial audio placeholder for paper crinkle + thud.",
+      "negativePrompt": "fast page turning, modern paper, digital book simulation, harsh overhead lighting, visible modern props, camera movement, plastic page texture, rushed pacing",
+      "version": "1.0"
+    },
+    "promptToCopy": "Side-angle 4K macro video of an ancient {{manuscript_type}} book opened on a raw oak reading stand: a pale hand with clean unpolished nails enters frame from right and slowly lifts the edge of a single aged parchment page, page is visibly translucent at thin sections with inked text visible in reverse through the paper, lifting motion at 0.8cm/second — page curves in a natural physical arc revealing micro-fiber surface texture, yellowed edge patina, minor foxing spots, and hand-stitched binding threads at spine, page flips at frame 6 seconds with a full rotation showing both faces sequentially before settling against the left stack with a soft weighted thud, during lift phase: raking light from a single candle-equivalent warm tungsten source at 20-degree low angle reveals full paper surface texture via specular sheen, camera positioned at 30-degree elevation angle to reading stand, macro lens equivalent at 150mm showing full page width in frame, focus point tracking the lifting page edge at f/3.5, ASMR pacing: complete unhurried calm, duration 9 seconds per page turn. No audio track — spatial audio placeholder for paper crinkle + thud.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/asmr_page_turn.mp4",
+        "thumbnailUrl": "/images/marketplace/asmr_page_turn_thumb.png",
+        "dimensions": { "width": 3840, "height": 2160 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-030",
+      "handle": "@scriptorium.ai",
+      "displayName": "Scriptorium AI",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "kling-v1.6",
+      "provider": "Kling AI",
+      "parameters": { "motion_strength": 0.15, "fps": 24, "duration": 9 }
+    },
+    "taxonomy": {
+      "primaryCategory": "ASMR Videos",
+      "tags": ["asmr", "page-turning", "ancient", "manuscript", "antiquarian", "tactile", "calm", "book"]
+    },
+    "stats": { "likes": 5200, "views": 42000, "saves": 2100 },
+    "pricing": { "type": "one_time", "priceCents": 799 },
+    "_db": {
+      "longDescription": "Book and page-turning ASMR has a dedicated audience of 50M+ monthly viewers on YouTube. The antiquarian manuscript variant appeals to the intellectual ASMR demographic who prefers historical triggers.",
+      "variables": [
+        { "name": "manuscript_type", "description": "Type of ancient manuscript or book", "default": "illuminated medieval herbal manuscript" }
+      ],
+      "exampleInput": { "manuscript_type": "Edo-period Japanese woodblock-printed botanical atlas" },
+      "exampleOutput": "9-second ASMR page turn of a Japanese botanical atlas with raking tungsten light, parchment fiber texture, and binding thread detail.",
+      "modelCompatibility": ["Kling v1.6", "Runway Gen-3", "Luma Dream Machine"],
+      "avgRating": 4.94,
+      "reviewCount": 183,
+      "purchaseCount": 700
+    },
+    "createdAt": "2026-05-14T17:30:00Z"
+  },
+  {
+    "id": "prod-prompt-031",
+    "slug": "viral-shorts-before-after-split",
+    "title": "Cinematic Before/After Split Reveal — Transformation Viral Prompt",
+    "description": "Maximum-engagement transformation reveal prompt using precision-engineered split-screen wipe timing, psychological tension architecture, and dopamine-timed reveal mechanics.",
+    "content": {
+      "text": "9:16 viral transformation video using a vertical split-screen reveal mechanic: left half of screen shows {{before_state}} in desaturated muted color grade (-60% saturation, +20% grain), right half shows {{after_state}} in full cinematic color with +15% vibrance and clean lighting — a sharp vertical dividing line splits the frame exactly at center-x, initially 100% of screen shows the BEFORE state (line at right edge, off-screen), over 3 seconds the line sweeps from right to left at accelerating speed (ease-in curve) revealing the AFTER state incrementally, at 50% reveal the line pauses for exactly 0.4 seconds — creating maximum psychological tension — then resumes sweep to full left edge completing the reveal, immediately after full reveal a bold centered text badge scales in with spring animation: '{{transformation_label}}' in 48pt heavy sans-serif with a dark semi-transparent pill background, below that: a social proof line '{{stats_line}}' in 14pt, 2-second hold on completed reveal, fade to black at second 6. Music cue placeholder: tension build → impact hit at reveal completion.",
+      "negativePrompt": "gradual fade transition instead of wipe, identical color grades on both sides, slow unsatisfying reveal pace, missing pause moment, text appearing before reveal completes, blurry split line",
+      "version": "2.2"
+    },
+    "promptToCopy": "9:16 viral transformation video using a vertical split-screen reveal mechanic: left half of screen shows {{before_state}} in desaturated muted color grade (-60% saturation, +20% grain), right half shows {{after_state}} in full cinematic color with +15% vibrance and clean lighting — a sharp vertical dividing line splits the frame exactly at center-x, initially 100% of screen shows the BEFORE state (line at right edge, off-screen), over 3 seconds the line sweeps from right to left at accelerating speed (ease-in curve) revealing the AFTER state incrementally, at 50% reveal the line pauses for exactly 0.4 seconds — creating maximum psychological tension — then resumes sweep to full left edge completing the reveal, immediately after full reveal a bold centered text badge scales in with spring animation: '{{transformation_label}}' in 48pt heavy sans-serif with a dark semi-transparent pill background, below that: a social proof line '{{stats_line}}' in 14pt, 2-second hold on completed reveal, fade to black at second 6. Music cue placeholder: tension build → impact hit at reveal completion.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/before_after_split.mp4",
+        "thumbnailUrl": "/images/marketplace/before_after_split_thumb.png",
+        "dimensions": { "width": 1080, "height": 1920 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-031",
+      "handle": "@reveal.mechanics",
+      "displayName": "Reveal Mechanics",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "luma-v1.6",
+      "provider": "Luma AI",
+      "parameters": { "split_motion": "wipe_left", "motion_intensity": "medium" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Viral Shorts",
+      "tags": ["before-after", "transformation", "viral", "split-screen", "reveal", "shorts", "tiktok"]
+    },
+    "stats": { "likes": 14500, "views": 122000, "saves": 6100 },
+    "pricing": { "type": "subscription_only", "priceCents": 2499 },
+    "_db": {
+      "longDescription": "The before/after split wipe is the highest-converting format in fitness, interior design, and product transformation content. The 0.4-second pause at 50% reveal is a patented psychological tension technique that forces the brain to complete the reveal.",
+      "variables": [
+        { "name": "before_state", "description": "Description of before state", "default": "a cluttered, dark home office with cable chaos and empty coffee cups" },
+        { "name": "after_state", "description": "Description of after state", "default": "a minimalist clean workspace with cable management, plants, and perfect desk setup" },
+        { "name": "transformation_label", "description": "Badge label for the transformation", "default": "3-HOUR TRANSFORMATION" },
+        { "name": "stats_line", "description": "Social proof statistic", "default": "2.3M saves · Zero budget" }
+      ],
+      "exampleInput": { "before_state": "an overgrown neglected backyard with dead grass and weeds", "transformation_label": "WEEKEND MAKEOVER" },
+      "exampleOutput": "6-second split-wipe viral short with desaturated before, vibrant after, 0.4s tension pause, spring-animated badge.",
+      "modelCompatibility": ["Luma Dream Machine v1.6", "Runway Gen-3", "Kling v1.6"],
+      "avgRating": 4.99,
+      "reviewCount": 621,
+      "purchaseCount": 2480
+    },
+    "createdAt": "2026-05-14T18:00:00Z"
+  },
+  {
+    "id": "prod-prompt-032",
+    "slug": "educational-math-visual-proof",
+    "title": "Visual Math Proof Animation — Geometric Intuition Builder",
+    "description": "Generate elegant animated visual proof sequences for mathematical concepts using pure geometric construction without formula overload — designed for intuition-first learning.",
+    "content": {
+      "text": "Clean minimal animation for demonstrating the visual proof of '{{math_concept}}' using geometric construction only: clean white canvas with a 4px grid in #F0EDE8 (barely visible for spatial reference), primary construction elements drawn in pure black (#1A1A1A) with 2px stroke weight, proof stages separated by clean 0.5-second fade transitions, each geometric element animates in using a precise draw-on path animation (SVG stroke-dashoffset at 60px/second draw speed), color fills appear as semi-transparent washes (35% opacity) — one per distinct proof component, color palette: terracotta (#C45E47), cobalt (#2C5EA8), sage (#6B9E73), construction lines use dashed stroke pattern (8px dash, 4px gap) in #AAAAAA, angle markers are small arc indicators at 14px radius with degree labels in 11pt monospace font, proof conclusion highlighted with a clean rectangular underline rule, duration: 60-90 seconds for 4-6 proof stages, no text on canvas except labels — narration handled externally, 16:9 widescreen, exportable as MP4 and SVG animation sequence.",
+      "negativePrompt": "formula-heavy overlay text, photorealistic rendering, dark background, 3D perspective, rushed stage transitions, inconsistent stroke weights, decorative non-functional elements",
+      "version": "1.1"
+    },
+    "promptToCopy": "Clean minimal animation for demonstrating the visual proof of '{{math_concept}}' using geometric construction only: clean white canvas with a 4px grid in #F0EDE8 (barely visible for spatial reference), primary construction elements drawn in pure black (#1A1A1A) with 2px stroke weight, proof stages separated by clean 0.5-second fade transitions, each geometric element animates in using a precise draw-on path animation (SVG stroke-dashoffset at 60px/second draw speed), color fills appear as semi-transparent washes (35% opacity) — one per distinct proof component, color palette: terracotta (#C45E47), cobalt (#2C5EA8), sage (#6B9E73), construction lines use dashed stroke pattern (8px dash, 4px gap) in #AAAAAA, angle markers are small arc indicators at 14px radius with degree labels in 11pt monospace font, proof conclusion highlighted with a clean rectangular underline rule, duration: 60-90 seconds for 4-6 proof stages, no text on canvas except labels — narration handled externally, 16:9 widescreen, exportable as MP4 and SVG animation sequence.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/math_proof.mp4",
+        "thumbnailUrl": "/images/marketplace/math_proof_thumb.png",
+        "dimensions": { "width": 1920, "height": 1080 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-032",
+      "handle": "@axiom.visual",
+      "displayName": "Axiom Visual",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "claude-sonnet-4-20250514",
+      "provider": "Anthropic",
+      "parameters": { "temperature": 0.2 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Educational Videos",
+      "tags": ["mathematics", "proof", "geometry", "education", "animation", "visual-learning", "3b1b-inspired"]
+    },
+    "stats": { "likes": 3700, "views": 28000, "saves": 1500 },
+    "pricing": { "type": "one_time", "priceCents": 1299 },
+    "_db": {
+      "longDescription": "Inspired by 3Blue1Brown's visual mathematics philosophy. This prompt generates construction-first proofs that build intuition before formulas — the gold standard for mathematical education.",
+      "variables": [
+        { "name": "math_concept", "description": "Mathematical theorem or concept to visually prove", "default": "Pythagorean theorem via square area rearrangement" }
+      ],
+      "exampleInput": { "math_concept": "sum of exterior angles of any polygon equals 360 degrees" },
+      "exampleOutput": "90-second visual proof animation with geometric construction, draw-on paths, 4-stage proof with terracotta/cobalt/sage palette.",
+      "modelCompatibility": ["Claude Sonnet 4", "GPT-4o", "Gemini 1.5 Pro"],
+      "avgRating": 4.91,
+      "reviewCount": 93,
+      "purchaseCount": 355
+    },
+    "createdAt": "2026-05-14T18:30:00Z"
+  },
+  {
+    "id": "prod-prompt-033",
+    "slug": "fruit-abstract-sculptural-still-life",
+    "title": "Abstract Sculptural Fruit Still Life — Gallery Fine Art Series",
+    "description": "Fine art still life photography prompt treating exotic fruits as sculptural objects — gallery exhibition quality with precise chiaroscuro, material realism, and compositional tension.",
+    "content": {
+      "text": "Fine art gallery still life photograph treating {{fruit_selection}} as abstract sculptural objects: fruits arranged on a dark grey rough-cast concrete plinth (not a table — a sculptural plinth) with 8cm height differential between arrangement tiers, lighting: single hard theatrical Fresnel spotlight from camera-left at 25-degree elevation creating deep chiaroscuro shadows — shadow depth 95% with no fill light (gallery darkness), fruits selected for their sculptural geometry and material contrast: smooth vs rough surfaces, translucent vs opaque flesh, geometric vs organic form, the arrangement reads as a composition of pure form when color is removed, background: absolute black void, no environmental context, foreground negative space 40% of frame (fruit occupies upper 60%), wet surface misting on certain fruits creates specular highlight constellation, shot on 135mm medium format equivalent at f/8 for full tonal range capture, black-and-white conversion test confirms strong value structure before final color version, gallery print optimized 2400x3000px 300dpi, no retouching of natural fruit imperfections. --ar 4:5 --v 6.0 --style raw --stylize 200",
+      "negativePrompt": "white background, even flat lighting, fresh-from-supermarket look, decorative props, rustic context, oversaturated colors, perfect blemish-free fruit, table surface visible",
+      "version": "1.0"
+    },
+    "promptToCopy": "Fine art gallery still life photograph treating {{fruit_selection}} as abstract sculptural objects: fruits arranged on a dark grey rough-cast concrete plinth (not a table — a sculptural plinth) with 8cm height differential between arrangement tiers, lighting: single hard theatrical Fresnel spotlight from camera-left at 25-degree elevation creating deep chiaroscuro shadows — shadow depth 95% with no fill light (gallery darkness), fruits selected for their sculptural geometry and material contrast: smooth vs rough surfaces, translucent vs opaque flesh, geometric vs organic form, the arrangement reads as a composition of pure form when color is removed, background: absolute black void, no environmental context, foreground negative space 40% of frame (fruit occupies upper 60%), wet surface misting on certain fruits creates specular highlight constellation, shot on 135mm medium format equivalent at f/8 for full tonal range capture, black-and-white conversion test confirms strong value structure before final color version, gallery print optimized 2400x3000px 300dpi, no retouching of natural fruit imperfections. --ar 4:5 --v 6.0 --style raw --stylize 200",
+    "assets": [
+      {
+        "type": "image",
+        "primaryUrl": "/images/marketplace/sculptural_fruit.png",
+        "thumbnailUrl": "/images/marketplace/sculptural_fruit_thumb.png",
+        "dimensions": { "width": 1080, "height": 1350 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-033",
+      "handle": "@form.studies",
+      "displayName": "Form Studies",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "stylize": 200, "version": "6.0", "style": "raw" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Fruit Videos & Photography",
+      "tags": ["fine-art", "still-life", "fruit", "sculpture", "gallery", "chiaroscuro", "abstract", "print"]
+    },
+    "stats": { "likes": 2900, "views": 22000, "saves": 1200 },
+    "pricing": { "type": "one_time", "priceCents": 899 },
+    "_db": {
+      "longDescription": "The intersection of fine art still life and food photography generates premium gallery print sales and editorial licensing. This prompt is inspired by the Baroque still life tradition updated for contemporary print buyers.",
+      "variables": [
+        { "name": "fruit_selection", "description": "Curated sculptural fruit selection", "default": "a durian, a halved pomelo, three kumquats, and a single black sapote" }
+      ],
+      "exampleInput": { "fruit_selection": "a jackfruit quarter, five longan clusters, and a purple mangosteen" },
+      "exampleOutput": "Gallery-quality still life of jackfruit/longan/mangosteen on concrete plinth with single Fresnel spotlight, absolute black void background.",
+      "modelCompatibility": ["Midjourney v6", "FLUX 1.1 Pro"],
+      "avgRating": 4.88,
+      "reviewCount": 77,
+      "purchaseCount": 288
+    },
+    "createdAt": "2026-05-14T19:00:00Z"
+  },
+  {
+    "id": "prod-prompt-034",
+    "slug": "trending-social-cottagecore-aesthetic-reels",
+    "title": "Cottagecore Aesthetic Reel — Trending Pastoral Lifestyle Video",
+    "description": "Generate trending cottagecore aesthetic video content for Instagram Reels and TikTok with precise pastoral visual grammar, soft natural light physics, and lifestyle composition theory.",
+    "content": {
+      "text": "Trending cottagecore aesthetic lifestyle video reel (9:16 vertical, 15 seconds) capturing {{scene_activity}} in an idealized pastoral English countryside setting: handheld camera movement with deliberate gentle sway (12px/frame maximum displacement) suggesting personal presence, soft overcast diffused natural light creating even shadowless warmth — not golden hour, but the gentle luminosity of an overcast June day, color palette: dusty rose (#E8C4B8), sage green (#8FAF8A), cream (#F5F0E8), terracotta (#C4875A), linen (#EDE8DC) — all muted and lived-in, no digital saturation, film simulation: Kodak Portra 160 at ISO 200 — extremely fine grain, pastel lift in shadows, linen-warm highlights, visual elements must include: natural textile textures (linen, cotton, wicker), botanical elements (pressed flowers, herbs, wildflowers), ceramic objects with visible throwing marks, b-roll sequence pacing: 3 cuts at 4-5 second intervals, each cut a different crop and angle on the same scene — no jarring transitions, pacing should feel unhurried and meditative. Trending audio placeholder space reserved.",
+      "negativePrompt": "harsh sunlight, urban environment, synthetic materials, fast cuts, Instagram filter look, artificial flower arrangements, modern appliances in frame, digital-clean textures",
+      "version": "1.2"
+    },
+    "promptToCopy": "Trending cottagecore aesthetic lifestyle video reel (9:16 vertical, 15 seconds) capturing {{scene_activity}} in an idealized pastoral English countryside setting: handheld camera movement with deliberate gentle sway (12px/frame maximum displacement) suggesting personal presence, soft overcast diffused natural light creating even shadowless warmth — not golden hour, but the gentle luminosity of an overcast June day, color palette: dusty rose (#E8C4B8), sage green (#8FAF8A), cream (#F5F0E8), terracotta (#C4875A), linen (#EDE8DC) — all muted and lived-in, no digital saturation, film simulation: Kodak Portra 160 at ISO 200 — extremely fine grain, pastel lift in shadows, linen-warm highlights, visual elements must include: natural textile textures (linen, cotton, wicker), botanical elements (pressed flowers, herbs, wildflowers), ceramic objects with visible throwing marks, b-roll sequence pacing: 3 cuts at 4-5 second intervals, each cut a different crop and angle on the same scene — no jarring transitions, pacing should feel unhurried and meditative. Trending audio placeholder space reserved.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/cottagecore_reel.mp4",
+        "thumbnailUrl": "/images/marketplace/cottagecore_reel_thumb.png",
+        "dimensions": { "width": 1080, "height": 1920 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-034",
+      "handle": "@pastoral.edit",
+      "displayName": "Pastoral Edit",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "runway-gen3",
+      "provider": "Runway",
+      "parameters": { "motion_intensity": "low", "camera_sway": true, "fps": 24 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Trending Social Media Images",
+      "tags": ["cottagecore", "aesthetic", "lifestyle", "reels", "pastoral", "trending", "tiktok", "film-simulation"]
+    },
+    "stats": { "likes": 9600, "views": 81000, "saves": 4100 },
+    "pricing": { "type": "one_time", "priceCents": 999 },
+    "_db": {
+      "longDescription": "Cottagecore has sustained 280M+ monthly TikTok views for 3 years running. This prompt captures the precise color science, light physics, and texture grammar that defines the authentic aesthetic versus cheap imitations.",
+      "variables": [
+        { "name": "scene_activity", "description": "Lifestyle scene activity to film", "default": "arranging wildflowers in a terracotta vase on a windowsill with morning mist outside" }
+      ],
+      "exampleInput": { "scene_activity": "making chamomile tea with fresh herbs on a worn wooden kitchen table" },
+      "exampleOutput": "15-second cottagecore reel with 3-cut pacing, Portra 160 simulation, pastoral kitchen herb scene, gentle handheld sway.",
+      "modelCompatibility": ["Runway Gen-3", "Kling v1.6", "Luma Dream Machine"],
+      "avgRating": 4.95,
+      "reviewCount": 356,
+      "purchaseCount": 1380
+    },
+    "createdAt": "2026-05-14T19:30:00Z"
+  },
+  {
+    "id": "prod-prompt-035",
+    "slug": "video-prompt-abstract-liquid-metal",
+    "title": "Abstract Liquid Metal Morphing Loop — Motion Art Prompt",
+    "description": "Hypnotic abstract video art prompt generating mercurial liquid metal forms in perpetual morphic transformation — optimized for art galleries, NFT platforms, and ambient display installations.",
+    "content": {
+      "text": "Abstract 3D fluid simulation video: a continuous 20-second perfectly looping animation of {{primary_metal_color}} liquid mercury-like fluid mass in constant slow morphic transformation — no static moments at any frame, surface exhibits perfect mirror reflectivity with environment map reflections of a pure black void space (only reflections visible, no environment shown), fluid mass transitions between distinct sculptural archetypes across the loop: sphere → toroid → möbius ribbon → branching dendritic form → collapsed sphere restart — each transition spans 4-5 seconds, transition boundaries are imperceptible (morphological continuity maintained), surface normals produce shifting specular highlights as form rotates at 6 RPM constant spin, subsurface scattering creates dark amber glow from interior on backlit passages, 4K render at 60fps for silky motion quality, no background — pure black void, no motion blur (crisp frame precision), loop junction at 20 seconds must be mathematically seamless, ambient orchestral undertone audio placeholder.",
+      "negativePrompt": "static portions, visible loop seam, matte non-reflective surface, color bleeding into void, water behavior (bubbles/foam), organic biological appearance, inconsistent reflections",
+      "version": "1.0"
+    },
+    "promptToCopy": "Abstract 3D fluid simulation video: a continuous 20-second perfectly looping animation of {{primary_metal_color}} liquid mercury-like fluid mass in constant slow morphic transformation — no static moments at any frame, surface exhibits perfect mirror reflectivity with environment map reflections of a pure black void space (only reflections visible, no environment shown), fluid mass transitions between distinct sculptural archetypes across the loop: sphere → toroid → möbius ribbon → branching dendritic form → collapsed sphere restart — each transition spans 4-5 seconds, transition boundaries are imperceptible (morphological continuity maintained), surface normals produce shifting specular highlights as form rotates at 6 RPM constant spin, subsurface scattering creates dark amber glow from interior on backlit passages, 4K render at 60fps for silky motion quality, no background — pure black void, no motion blur (crisp frame precision), loop junction at 20 seconds must be mathematically seamless, ambient orchestral undertone audio placeholder.",
+    "assets": [
+      {
+        "type": "video",
+        "primaryUrl": "/images/marketplace/liquid_metal_loop.mp4",
+        "thumbnailUrl": "/images/marketplace/liquid_metal_loop_thumb.png",
+        "dimensions": { "width": 3840, "height": 2160 }
+      }
+    ],
+    "creator": {
+      "id": "u-auth-035",
+      "handle": "@morphic.render",
+      "displayName": "Morphic Render",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "luma-v1.6",
+      "provider": "Luma AI",
+      "parameters": { "loop": true, "motion_intensity": "high", "fps": 60, "duration": 20 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Video Prompts",
+      "tags": ["abstract", "liquid-metal", "loop", "motion-art", "nft", "installation", "ambient", "generative"]
+    },
+    "stats": { "likes": 6700, "views": 56000, "saves": 2800 },
+    "pricing": { "type": "subscription_only", "priceCents": 2999 },
+    "_db": {
+      "longDescription": "Liquid metal abstract loops are the fastest-selling category on NFT platforms and art installation rental marketplaces. The möbius ribbon transition is the most visually sophisticated morphic form in generative art.",
+      "variables": [
+        { "name": "primary_metal_color", "description": "Primary metal tone for the liquid form", "default": "chrome silver with deep violet subsurface" }
+      ],
+      "exampleInput": { "primary_metal_color": "24-karat gold with copper-rose subsurface warmth" },
+      "exampleOutput": "20-second seamless loop of gold liquid metal morphing through sphere/toroid/möbius/dendritic sequence, 4K 60fps, void background.",
+      "modelCompatibility": ["Luma Dream Machine v1.6", "Runway Gen-3 Alpha", "Kling v1.6"],
+      "avgRating": 4.97,
+      "reviewCount": 224,
+      "purchaseCount": 840
+    },
+    "createdAt": "2026-05-14T20:00:00Z"
+  }
+]

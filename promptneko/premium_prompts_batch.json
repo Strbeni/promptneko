@@ -1,0 +1,1060 @@
+[
+  {
+    "id": "premium-001",
+    "slug": "saas-fintech-dashboard-tailwind",
+    "title": "FinTech Analytics Dashboard — Dark Mode High-Density UI",
+    "description": "Production-grade React + Tailwind prompt for generating a high-density financial analytics dashboard with complex data visualization, glassmorphism cards, and sophisticated state management requirements.",
+    "content": {
+      "text": "Build a React functional component for a high-density FinTech analytics dashboard using TailwindCSS. Architecture requirements: Strict dark mode (zinc-900 to zinc-950 background gradients), 1px zinc-800 borders on all glassmorphic data cards, Inter or Geist Sans typography system. Include a 3-column bento-style layout. Left column: Navigation sidebar with active state micro-interactions. Center column: Hero chart area with interactive tooltip zones, followed by a recent transactions data table featuring sticky headers and status pill badges. Right column: Real-time ticker cards with pulse animations for upward/downward price action. State management: Use a mock Zustand store structure. Use lucide-react for iconography. Implement subtle hover states (bg-zinc-800/50) and active ring focus utilities. Ensure responsive reflow to a single column below 1024px.",
+      "negativePrompt": "",
+      "version": "1.0"
+    },
+    "promptToCopy": "Build a React functional component for a high-density FinTech analytics dashboard using TailwindCSS. Architecture requirements: Strict dark mode (zinc-900 to zinc-950 background gradients), 1px zinc-800 borders on all glassmorphic data cards, Inter or Geist Sans typography system. Include a 3-column bento-style layout. Left column: Navigation sidebar with active state micro-interactions. Center column: Hero chart area with interactive tooltip zones, followed by a recent transactions data table featuring sticky headers and status pill badges. Right column: Real-time ticker cards with pulse animations for upward/downward price action. State management: Use a mock Zustand store structure. Use lucide-react for iconography. Implement subtle hover states (bg-zinc-800/50) and active ring focus utilities. Ensure responsive reflow to a single column below 1024px.",
+    "assets": [],
+    "creator": {
+      "id": "c-001",
+      "handle": "@ui.engineer",
+      "displayName": "UI/UX Architect",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "claude-3-5-sonnet",
+      "provider": "Anthropic",
+      "parameters": { "temperature": 0.2 }
+    },
+    "taxonomy": {
+      "primaryCategory": "React + Tailwind Systems",
+      "tags": ["saas", "dashboard", "fintech", "react", "tailwind", "dark-mode"]
+    },
+    "stats": { "likes": 4210, "views": 38000, "saves": 1800 },
+    "pricing": { "type": "one_time", "priceCents": 1299 },
+    "_db": {
+      "longDescription": "Ideal for generating instant production-ready dashboards for SaaS platforms.",
+      "variables": [
+        { "name": "primary_color", "description": "Tailwind color scale for active states", "default": "indigo-500" }
+      ],
+      "exampleInput": { "primary_color": "emerald-500" },
+      "exampleOutput": "A complete React component file with emerald-accented FinTech dashboard layout.",
+      "modelCompatibility": ["Claude 3.5 Sonnet", "GPT-4o"],
+      "avgRating": 4.9,
+      "reviewCount": 140,
+      "purchaseCount": 510
+    },
+    "createdAt": "2026-05-14T20:00:00Z"
+  },
+  {
+    "id": "premium-002",
+    "slug": "brutalist-ecommerce-interface",
+    "title": "Neo-Brutalist E-commerce Interface — High-Contrast Grid",
+    "description": "Architectural prompt for a brutalist web interface featuring sharp borders, high-contrast typography, and aggressive grid systems.",
+    "content": {
+      "text": "Design a Neo-Brutalist e-commerce product landing page in React. Styling rules: Absolute stark contrast using #000000 and #FFFFFF with one aggressive accent color ({{accent}}). Typography: Use a heavy display sans-serif (e.g., Space Grotesk or Monument Extended) pushed to maximum weight for headers. UI Elements: All buttons and cards must have thick 3px solid black borders, hard drop shadows (box-shadow: 6px 6px 0px #000000), and absolutely no border-radius (0px). Layout: Utilize a visible CSS grid architecture where border lines extend to the edges of the viewport. Interactive elements should invert colors on hover instantly (no transition duration). Include a marquee ticker tape component at the top, a massive hero product image on a pure white background, and an oversized 'ADD TO BAG' call to action.",
+      "negativePrompt": "",
+      "version": "1.1"
+    },
+    "promptToCopy": "Design a Neo-Brutalist e-commerce product landing page in React. Styling rules: Absolute stark contrast using #000000 and #FFFFFF with one aggressive accent color ({{accent}}). Typography: Use a heavy display sans-serif (e.g., Space Grotesk or Monument Extended) pushed to maximum weight for headers. UI Elements: All buttons and cards must have thick 3px solid black borders, hard drop shadows (box-shadow: 6px 6px 0px #000000), and absolutely no border-radius (0px). Layout: Utilize a visible CSS grid architecture where border lines extend to the edges of the viewport. Interactive elements should invert colors on hover instantly (no transition duration). Include a marquee ticker tape component at the top, a massive hero product image on a pure white background, and an oversized 'ADD TO BAG' call to action.",
+    "assets": [],
+    "creator": {
+      "id": "c-002",
+      "handle": "@brutalist.web",
+      "displayName": "Brutalist Systems",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "gpt-4o",
+      "provider": "OpenAI",
+      "parameters": { "temperature": 0.4 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Brutalist Interfaces",
+      "tags": ["ecommerce", "brutalist", "react", "high-contrast", "grid"]
+    },
+    "stats": { "likes": 3100, "views": 25000, "saves": 1100 },
+    "pricing": { "type": "one_time", "priceCents": 999 },
+    "_db": {
+      "longDescription": "Perfect for edgy fashion brands, independent design studios, and streetwear e-commerce sites.",
+      "variables": [
+        { "name": "accent", "description": "Hex code for the aggressive accent color", "default": "#FF3366" }
+      ],
+      "exampleInput": { "accent": "#00FF00" },
+      "exampleOutput": "A React functional component implementing the stark neo-brutalist aesthetic with toxic green accents.",
+      "modelCompatibility": ["GPT-4o", "Claude 3.5 Sonnet"],
+      "avgRating": 4.8,
+      "reviewCount": 92,
+      "purchaseCount": 314
+    },
+    "createdAt": "2026-05-14T20:05:00Z"
+  },
+  {
+    "id": "premium-003",
+    "slug": "optical-caustics-perfume-product",
+    "title": "Optical Caustics Perfume Macro — Material Realism",
+    "description": "High-fidelity FLUX prompt for commercial product photography focused on extreme optical refraction, liquid dynamics, and premium glass textures.",
+    "content": {
+      "text": "Macro commercial product photograph of a geometric crystal perfume bottle resting on a rippled mirror surface. Environmental lighting: A single intense collimated spotlight cuts through a dense atmospheric haze, striking the faceted glass to cast razor-sharp spectral dispersion caustics across the dark background. Material realism: The glass exhibits severe refractive index accuracy, thick base weighting, and subtle condensation micro-droplets. The liquid inside is a glowing golden amber hue with sub-surface scattering. Cinematic framing: The bottle occupies the lower right golden ratio intersection, allowing the optical light patterns to dominate the negative space. Shot on 100mm macro lens, f/8 for deep focal plane, ISO 100, photorealistic 8k render quality, highly tactile surface textures.",
+      "negativePrompt": "CGI plastic look, soft focus, messy reflections, overlapping shadows, muddy colors, digital artifacts, floating objects",
+      "version": "2.0"
+    },
+    "promptToCopy": "Macro commercial product photograph of a geometric crystal perfume bottle resting on a rippled mirror surface. Environmental lighting: A single intense collimated spotlight cuts through a dense atmospheric haze, striking the faceted glass to cast razor-sharp spectral dispersion caustics across the dark background. Material realism: The glass exhibits severe refractive index accuracy, thick base weighting, and subtle condensation micro-droplets. The liquid inside is a glowing golden amber hue with sub-surface scattering. Cinematic framing: The bottle occupies the lower right golden ratio intersection, allowing the optical light patterns to dominate the negative space. Shot on 100mm macro lens, f/8 for deep focal plane, ISO 100, photorealistic 8k render quality, highly tactile surface textures.",
+    "assets": [],
+    "creator": {
+      "id": "c-003",
+      "handle": "@photon.studio",
+      "displayName": "Photon Studio",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "flux-1-pro",
+      "provider": "Black Forest Labs",
+      "parameters": { "aspect_ratio": "16:9", "style_preset": "photographic" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Product Photography",
+      "tags": ["caustics", "macro", "perfume", "flux", "realism", "glass"]
+    },
+    "stats": { "likes": 5600, "views": 41000, "saves": 2900 },
+    "pricing": { "type": "subscription_only", "priceCents": 1999 },
+    "_db": {
+      "longDescription": "Generates flawless agency-quality product hero shots with physically accurate light refraction.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A stunning 16:9 macro shot of a crystal bottle with intricate rainbow light caustics on a dark background.",
+      "modelCompatibility": ["FLUX 1.1 Pro", "Midjourney v6"],
+      "avgRating": 4.98,
+      "reviewCount": 210,
+      "purchaseCount": 850
+    },
+    "createdAt": "2026-05-14T20:10:00Z"
+  },
+  {
+    "id": "premium-004",
+    "slug": "cyberpunk-cinematic-character-portrait",
+    "title": "Neon-Noir Cinematic Portrait — Atmospheric Density",
+    "description": "Midjourney v6 prompt engineered for maximum cinematic mood, utilizing advanced lens parameters, volumetric fog, and complex edge illumination.",
+    "content": {
+      "text": "Cinematic medium-close portrait of a rogue hacker in a rain-slicked Tokyo alleyway, neon-noir aesthetic. Lighting: Motivated edge illumination from a flickering magenta neon sign out-of-frame right, casting harsh specular highlights on a wet leather jacket collar, contrasted by cool cyan ambient street-light fill from the left. Atmosphere: Thick volumetric diffusion from steaming street vents, rendering the background a bokeh wash of anamorphic light streaks. Camera physics: Shot on anamorphic 50mm Panavision lens, T1.4, shallow depth of field perfectly isolating the subject's rain-streaked cybernetic optic implant. Texture: Procedural film grain, 35mm celluloid aesthetic, high micro-contrast on the skin pores and metal joints. Asymmetric composition, moody, hyper-realistic, dramatic temporal tension. --ar 21:9 --style raw --stylize 250 --v 6.0",
+      "negativePrompt": "flat lighting, 3d render, cartoon, anime, bright daylight, clear sky, perfectly clean clothes, symmetrical framing",
+      "version": "1.0"
+    },
+    "promptToCopy": "Cinematic medium-close portrait of a rogue hacker in a rain-slicked Tokyo alleyway, neon-noir aesthetic. Lighting: Motivated edge illumination from a flickering magenta neon sign out-of-frame right, casting harsh specular highlights on a wet leather jacket collar, contrasted by cool cyan ambient street-light fill from the left. Atmosphere: Thick volumetric diffusion from steaming street vents, rendering the background a bokeh wash of anamorphic light streaks. Camera physics: Shot on anamorphic 50mm Panavision lens, T1.4, shallow depth of field perfectly isolating the subject's rain-streaked cybernetic optic implant. Texture: Procedural film grain, 35mm celluloid aesthetic, high micro-contrast on the skin pores and metal joints. Asymmetric composition, moody, hyper-realistic, dramatic temporal tension. --ar 21:9 --style raw --stylize 250 --v 6.0",
+    "assets": [],
+    "creator": {
+      "id": "c-004",
+      "handle": "@neon.noir",
+      "displayName": "Neon Noir",
+      "avatarUrl": "",
+      "isVerified": false
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "stylize": 250, "aspect_ratio": "21:9" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Cyberpunk",
+      "tags": ["cyberpunk", "portrait", "cinematic", "neon", "midjourney", "anamorphic"]
+    },
+    "stats": { "likes": 8900, "views": 72000, "saves": 3400 },
+    "pricing": { "type": "one_time", "priceCents": 899 },
+    "_db": {
+      "longDescription": "Creates flawless Hollywood-level sci-fi portraits with accurate anamorphic bokeh and dramatic split lighting.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A highly detailed 21:9 aspect ratio portrait of a cyberpunk character with striking magenta and cyan rim lighting.",
+      "modelCompatibility": ["Midjourney v6", "DALL-E 3"],
+      "avgRating": 4.95,
+      "reviewCount": 320,
+      "purchaseCount": 1100
+    },
+    "createdAt": "2026-05-14T20:15:00Z"
+  },
+  {
+    "id": "premium-005",
+    "slug": "kubernetes-devops-pipeline-architecture",
+    "title": "K8s CI/CD Pipeline Architect — Infrastructure as Code",
+    "description": "Advanced coding prompt to generate a production-ready Kubernetes deployment pipeline with Terraform, GitHub Actions, and security guardrails.",
+    "content": {
+      "text": "Act as a Principal DevOps Engineer. Design and generate the complete code for a zero-downtime CI/CD pipeline deploying a containerized microservice to a highly-available AWS EKS cluster. Requirements: 1) A GitHub Actions workflow YAML that includes phases for linting, Trivy vulnerability scanning, Docker image building with multi-stage caching, and pushing to Amazon ECR. 2) A set of Terraform configuration files (main.tf, variables.tf, outputs.tf) to provision the ECR repository and IAM OIDC provider for passwordless GitHub authentication. 3) A Kubernetes Helm chart structure (Deployment, HPA, PodDisruptionBudget, and Service) utilizing RollingUpdate strategy, resource requests/limits, and liveness/readiness probes. Ensure all code follows security best practices (least privilege, immutable tags, no hardcoded secrets) and include a concise architecture markdown summary detailing the failover and rollback strategy.",
+      "negativePrompt": "",
+      "version": "1.0"
+    },
+    "promptToCopy": "Act as a Principal DevOps Engineer. Design and generate the complete code for a zero-downtime CI/CD pipeline deploying a containerized microservice to a highly-available AWS EKS cluster. Requirements: 1) A GitHub Actions workflow YAML that includes phases for linting, Trivy vulnerability scanning, Docker image building with multi-stage caching, and pushing to Amazon ECR. 2) A set of Terraform configuration files (main.tf, variables.tf, outputs.tf) to provision the ECR repository and IAM OIDC provider for passwordless GitHub authentication. 3) A Kubernetes Helm chart structure (Deployment, HPA, PodDisruptionBudget, and Service) utilizing RollingUpdate strategy, resource requests/limits, and liveness/readiness probes. Ensure all code follows security best practices (least privilege, immutable tags, no hardcoded secrets) and include a concise architecture markdown summary detailing the failover and rollback strategy.",
+    "assets": [],
+    "creator": {
+      "id": "c-005",
+      "handle": "@infra.code",
+      "displayName": "InfraCode",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "claude-3-5-sonnet",
+      "provider": "Anthropic",
+      "parameters": { "temperature": 0.1 }
+    },
+    "taxonomy": {
+      "primaryCategory": "DevOps",
+      "tags": ["kubernetes", "terraform", "github-actions", "aws", "architecture"]
+    },
+    "stats": { "likes": 2400, "views": 18000, "saves": 950 },
+    "pricing": { "type": "one_time", "priceCents": 1499 },
+    "_db": {
+      "longDescription": "Saves hours of boilerplate coding by generating a secure, industry-standard deployment pipeline structure.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "Multiple code blocks including main.tf, deployment.yaml, and deployment.yml (GitHub Actions).",
+      "modelCompatibility": ["Claude 3.5 Sonnet", "GPT-4o"],
+      "avgRating": 4.92,
+      "reviewCount": 85,
+      "purchaseCount": 420
+    },
+    "createdAt": "2026-05-14T20:20:00Z"
+  },
+  {
+    "id": "premium-006",
+    "slug": "luxury-monogram-minimalist-identity",
+    "title": "Minimalist Luxury Monogram — Vector Branding",
+    "description": "Generates ultra-premium luxury fashion monogram logos utilizing precise architectural geometry, negative space, and typographic elegance.",
+    "content": {
+      "text": "A hyper-minimalist luxury fashion monogram logo featuring the intersecting letters '{{initials}}'. The design utilizes severe architectural geometry, extreme contrast between thick and razor-thin strokes (Didone typographic influence), and masterful use of negative space to create a seamless optical illusion where the letters merge. Vector-style flat graphic, absolute pure black on a pristine white background. No gradients, no 3D effects, no shadows, no distracting ornaments. Clean, authoritative, timeless elegance, echoing heritage brands like Saint Laurent or Givenchy, but modernized. High-fidelity editorial quality, mathematically perfect proportions, striking visual balance. --v 6.0 --style raw",
+      "negativePrompt": "gradients, 3d bevel, drop shadow, complex illustration, messy lines, illegible, colorful, cartoonish, low resolution",
+      "version": "1.2"
+    },
+    "promptToCopy": "A hyper-minimalist luxury fashion monogram logo featuring the intersecting letters '{{initials}}'. The design utilizes severe architectural geometry, extreme contrast between thick and razor-thin strokes (Didone typographic influence), and masterful use of negative space to create a seamless optical illusion where the letters merge. Vector-style flat graphic, absolute pure black on a pristine white background. No gradients, no 3D effects, no shadows, no distracting ornaments. Clean, authoritative, timeless elegance, echoing heritage brands like Saint Laurent or Givenchy, but modernized. High-fidelity editorial quality, mathematically perfect proportions, striking visual balance. --v 6.0 --style raw",
+    "assets": [],
+    "creator": {
+      "id": "c-006",
+      "handle": "@brand.atelier",
+      "displayName": "Brand Atelier",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "stylize": 50, "version": "6.0" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Monograms",
+      "tags": ["logo", "luxury", "monogram", "minimalist", "branding", "fashion"]
+    },
+    "stats": { "likes": 4500, "views": 33000, "saves": 2100 },
+    "pricing": { "type": "one_time", "priceCents": 799 },
+    "_db": {
+      "longDescription": "Ideal for generating foundational logo marks for high-end boutique brands and luxury real estate.",
+      "variables": [
+        { "name": "initials", "description": "The two or three letters for the monogram", "default": "V X" }
+      ],
+      "exampleInput": { "initials": "A R" },
+      "exampleOutput": "A pristine black-and-white minimalist monogram of the letters AR with striking negative space.",
+      "modelCompatibility": ["Midjourney v6", "DALL-E 3"],
+      "avgRating": 4.88,
+      "reviewCount": 160,
+      "purchaseCount": 610
+    },
+    "createdAt": "2026-05-14T20:25:00Z"
+  },
+  {
+    "id": "premium-007",
+    "slug": "cinematic-fpv-drone-volumetric-forest",
+    "title": "FPV Drone Volumetric Forest — Continuous Temporal Motion",
+    "description": "High-velocity AI video prompt dictating precise camera banking, spatial continuity, and lighting shifts in a dense environmental setting.",
+    "content": {
+      "text": "First-person-view (FPV) cinematic drone video continuously flying through a dense, ancient redwood forest at high velocity. Camera dynamics: aggressive banking and rolling maneuvers to narrowly dodge massive moss-covered tree trunks, maintaining spatial continuity and relentless forward momentum without clipping objects. Lighting: The environment is shrouded in early morning mist, pierced by God-rays (volumetric light shafts) cascading through the canopy. As the drone passes through shadows into sudden bursts of golden hour sunlight, the camera auto-exposure dynamically adjusts, creating realistic lens flares. Environment: lush ferns, floating pollen particles caught in the downdraft, hyper-realistic bark textures. Smooth 60fps pacing, ultra-fluid 6-DOF movement, 4k resolution, cinematic color grading mimicking Arri Alexa sensor science.",
+      "negativePrompt": "jitter, artifacting, morphing trees, camera clipping through objects, static camera, unnatural physics, flat lighting, muddy textures",
+      "version": "1.4"
+    },
+    "promptToCopy": "First-person-view (FPV) cinematic drone video continuously flying through a dense, ancient redwood forest at high velocity. Camera dynamics: aggressive banking and rolling maneuvers to narrowly dodge massive moss-covered tree trunks, maintaining spatial continuity and relentless forward momentum without clipping objects. Lighting: The environment is shrouded in early morning mist, pierced by God-rays (volumetric light shafts) cascading through the canopy. As the drone passes through shadows into sudden bursts of golden hour sunlight, the camera auto-exposure dynamically adjusts, creating realistic lens flares. Environment: lush ferns, floating pollen particles caught in the downdraft, hyper-realistic bark textures. Smooth 60fps pacing, ultra-fluid 6-DOF movement, 4k resolution, cinematic color grading mimicking Arri Alexa sensor science.",
+    "assets": [],
+    "creator": {
+      "id": "c-007",
+      "handle": "@fpv.ai",
+      "displayName": "FPV AI Dynamics",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "runway-gen3",
+      "provider": "Runway",
+      "parameters": { "motion_intensity": "high", "fps": 60 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Motion Design",
+      "tags": ["video", "drone", "fpv", "forest", "volumetric-lighting", "cinematic"]
+    },
+    "stats": { "likes": 7100, "views": 59000, "saves": 3800 },
+    "pricing": { "type": "subscription_only", "priceCents": 2999 },
+    "_db": {
+      "longDescription": "Tests the absolute limits of temporal continuity in AI video models, producing adrenaline-pumping, highly realistic aerial maneuvers.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A breathtaking high-speed flight through a foggy redwood forest dodging trees with perfect temporal consistency.",
+      "modelCompatibility": ["Runway Gen-3", "Luma Dream Machine"],
+      "avgRating": 4.96,
+      "reviewCount": 412,
+      "purchaseCount": 1250
+    },
+    "createdAt": "2026-05-14T20:30:00Z"
+  },
+  {
+    "id": "premium-008",
+    "slug": "sql-optimization-gin-index-performance",
+    "title": "PostgreSQL Performance Optimization — GIN Indexing & CTEs",
+    "description": "Expert-level coding prompt designed to analyze slow database queries and refactor them using advanced indexing and execution plan logic.",
+    "content": {
+      "text": "Act as a Senior Database Administrator. Analyze the following highly inefficient PostgreSQL query that searches through a massive JSONB column and performs multiple nested subqueries. Your task is to refactor this query for a high-concurrency production environment. Requirements: 1) Replace the nested subqueries with a clean, readable Common Table Expression (CTE) pipeline. 2) Provide the exact exact Data Definition Language (DDL) command to create a GIN index on the target JSONB fields to ensure index-only scans or bitmap heap scans. 3) Explain the query execution plan difference (EXPLAIN ANALYZE) between the old and new query, focusing on cost reduction and memory usage. 4) Ensure the refactored SQL avoids N+1 data fetch problems and utilizes lateral joins if necessary. Output the final optimized SQL script and the architectural explanation in well-structured markdown.",
+      "negativePrompt": "",
+      "version": "1.0"
+    },
+    "promptToCopy": "Act as a Senior Database Administrator. Analyze the following highly inefficient PostgreSQL query that searches through a massive JSONB column and performs multiple nested subqueries. Your task is to refactor this query for a high-concurrency production environment. Requirements: 1) Replace the nested subqueries with a clean, readable Common Table Expression (CTE) pipeline. 2) Provide the exact exact Data Definition Language (DDL) command to create a GIN index on the target JSONB fields to ensure index-only scans or bitmap heap scans. 3) Explain the query execution plan difference (EXPLAIN ANALYZE) between the old and new query, focusing on cost reduction and memory usage. 4) Ensure the refactored SQL avoids N+1 data fetch problems and utilizes lateral joins if necessary. Output the final optimized SQL script and the architectural explanation in well-structured markdown.",
+    "assets": [],
+    "creator": {
+      "id": "c-008",
+      "handle": "@data.architect",
+      "displayName": "Data Architect",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "gpt-4o",
+      "provider": "OpenAI",
+      "parameters": { "temperature": 0.2 }
+    },
+    "taxonomy": {
+      "primaryCategory": "SQL Optimization",
+      "tags": ["sql", "postgresql", "optimization", "database", "gin-index", "backend"]
+    },
+    "stats": { "likes": 1800, "views": 12000, "saves": 800 },
+    "pricing": { "type": "one_time", "priceCents": 1199 },
+    "_db": {
+      "longDescription": "An invaluable tool for backend engineers dealing with massive JSONB payload searches in PostgreSQL.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "Markdown response with optimized CTE SQL, CREATE INDEX statements, and execution plan breakdown.",
+      "modelCompatibility": ["GPT-4o", "Claude 3.5 Sonnet"],
+      "avgRating": 4.93,
+      "reviewCount": 78,
+      "purchaseCount": 350
+    },
+    "createdAt": "2026-05-14T20:35:00Z"
+  },
+  {
+    "id": "premium-009",
+    "slug": "experimental-typography-editorial-poster",
+    "title": "Experimental Swiss Typography — Editorial Grid Poster",
+    "description": "Generates avant-garde typography posters inspired by the International Typographic Style, focusing on rigorous grids and striking letterform manipulation.",
+    "content": {
+      "text": "An avant-garde editorial poster design inspired by the Swiss Style (International Typographic Style). The composition is anchored by a rigorous asymmetrical multi-column mathematical grid. The primary visual element is a massive, distorted letter '{{letter}}' using Helvetica Neue, stretched and warped through an optical scanner feedback loop effect, creating beautiful horizontal typographic tearing and motion blur. A stark, disciplined color palette: pure Swiss red (#DA291C), black ink, and off-white paper texture. Tiny, meticulously aligned block paragraphs of technical placeholder text sit in the extreme corners, contrasting with the massive scale of the central letterform. Design aesthetics: maximalist tension, precise alignment, tactile print quality with visible offset lithography halftone dots and subtle ink bleed at the edges. --ar 3:4 --v 6.0",
+      "negativePrompt": "centered composition, messy layout, cursive fonts, watercolor, 3d render, busy backgrounds, illegible text blocks, digital gradients",
+      "version": "1.1"
+    },
+    "promptToCopy": "An avant-garde editorial poster design inspired by the Swiss Style (International Typographic Style). The composition is anchored by a rigorous asymmetrical multi-column mathematical grid. The primary visual element is a massive, distorted letter '{{letter}}' using Helvetica Neue, stretched and warped through an optical scanner feedback loop effect, creating beautiful horizontal typographic tearing and motion blur. A stark, disciplined color palette: pure Swiss red (#DA291C), black ink, and off-white paper texture. Tiny, meticulously aligned block paragraphs of technical placeholder text sit in the extreme corners, contrasting with the massive scale of the central letterform. Design aesthetics: maximalist tension, precise alignment, tactile print quality with visible offset lithography halftone dots and subtle ink bleed at the edges. --ar 3:4 --v 6.0",
+    "assets": [],
+    "creator": {
+      "id": "c-009",
+      "handle": "@swiss.grid",
+      "displayName": "Swiss Grid Systems",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "aspect_ratio": "3:4" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Experimental Typography",
+      "tags": ["typography", "poster", "swiss-design", "editorial", "graphic-design"]
+    },
+    "stats": { "likes": 3900, "views": 29000, "saves": 1600 },
+    "pricing": { "type": "one_time", "priceCents": 699 },
+    "_db": {
+      "longDescription": "Perfect for design studios and art directors looking to generate moodboards for high-end exhibition posters.",
+      "variables": [
+        { "name": "letter", "description": "The focal letter to distort", "default": "A" }
+      ],
+      "exampleInput": { "letter": "Z" },
+      "exampleOutput": "A striking red, black, and white poster featuring a warped 'Z' and rigorous micro-typography.",
+      "modelCompatibility": ["Midjourney v6", "DALL-E 3"],
+      "avgRating": 4.87,
+      "reviewCount": 115,
+      "purchaseCount": 490
+    },
+    "createdAt": "2026-05-14T20:40:00Z"
+  },
+  {
+    "id": "premium-010",
+    "slug": "ai-agent-dark-mode-interface",
+    "title": "AI Agent Cognitive Interface — Transparent HUD",
+    "description": "UI/UX prompt to generate a highly futuristic yet usable dashboard for a multi-modal AI agent working in real-time.",
+    "content": {
+      "text": "Design a high-fidelity UI mockup for a next-generation AI Agent operating system. The interface is a dark mode, full-viewport dashboard (bg-zinc-950). Center stage: A real-time 'cognitive graph' visualizing the AI's thought process through glowing neural nodes and connecting splines, rendered with WebGL-style glowing vectors in electric blue and hyper-violet. Left panel: A streaming command-line interface with monospace typography detailing sub-agent task execution and status codes. Right panel: A sleek glassmorphic context window with a severe blur backdrop (backdrop-blur-xl), showing multimodal inputs (a miniature video feed being analyzed, code snippets being compiled). The design uses a micro-grid system, razor-thin neon borders to delineate sections, and bespoke technical iconography. Absolute premium visual hierarchy, conveying immense computational power and sleek sophistication. Modern, tech-wear aesthetic.",
+      "negativePrompt": "",
+      "version": "1.0"
+    },
+    "promptToCopy": "Design a high-fidelity UI mockup for a next-generation AI Agent operating system. The interface is a dark mode, full-viewport dashboard (bg-zinc-950). Center stage: A real-time 'cognitive graph' visualizing the AI's thought process through glowing neural nodes and connecting splines, rendered with WebGL-style glowing vectors in electric blue and hyper-violet. Left panel: A streaming command-line interface with monospace typography detailing sub-agent task execution and status codes. Right panel: A sleek glassmorphic context window with a severe blur backdrop (backdrop-blur-xl), showing multimodal inputs (a miniature video feed being analyzed, code snippets being compiled). The design uses a micro-grid system, razor-thin neon borders to delineate sections, and bespoke technical iconography. Absolute premium visual hierarchy, conveying immense computational power and sleek sophistication. Modern, tech-wear aesthetic.",
+    "assets": [],
+    "creator": {
+      "id": "c-010",
+      "handle": "@agent.ui",
+      "displayName": "Agent OS",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "claude-3-5-sonnet",
+      "provider": "Anthropic",
+      "parameters": { "temperature": 0.4 }
+    },
+    "taxonomy": {
+      "primaryCategory": "AI Agents",
+      "tags": ["ui", "ai-agent", "dashboard", "dark-mode", "glassmorphism"]
+    },
+    "stats": { "likes": 5200, "views": 43000, "saves": 2200 },
+    "pricing": { "type": "one_time", "priceCents": 1599 },
+    "_db": {
+      "longDescription": "Ideal for generating the frontend React code and layout structure for advanced autonomous AI dashboards.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A comprehensive React/Tailwind component with advanced grid layouts and glowing node aesthetics.",
+      "modelCompatibility": ["Claude 3.5 Sonnet", "GPT-4o"],
+      "avgRating": 4.95,
+      "reviewCount": 182,
+      "purchaseCount": 720
+    },
+    "createdAt": "2026-05-14T20:45:00Z"
+  },
+  {
+    "id": "premium-011",
+    "slug": "high-speed-liquid-crown-splash",
+    "title": "Ultra Slow-Motion Liquid Crown — Viscosity Physics",
+    "description": "Video prompt engineered for extreme frame-rate simulation, capturing the precise surface tension physics of liquid impact.",
+    "content": {
+      "text": "Ultra high-speed phantom camera video (10,000 fps playback) capturing the exact micro-second a single drop of thick, iridescent metallic liquid mercury impacts a perfectly still pool of the same substance. The impact generates a mathematically perfect symmetrical 'splash crown'—a coronet of liquid spikes, each topped with a spherical micro-droplet separating from the main body. The material displays high-viscosity surface tension, bending light with intense specular reflections. Lighting: A single overhead ring light creates a continuous circular highlight tracing the inner rim of the splash crown, contrasting against a pitch-black studio void. The camera is positioned at macro water-level, angled slightly upward. Zero temporal artifacting, absolute fluid dynamics fidelity, cinematic color depth, incredibly sharp focal plane on the leading edge of the crown. 4k resolution.",
+      "negativePrompt": "watery consistency, messy splash, asymmetrical, low frame rate, blurry motion, artifacting, noisy background, overexposed reflections",
+      "version": "1.3"
+    },
+    "promptToCopy": "Ultra high-speed phantom camera video (10,000 fps playback) capturing the exact micro-second a single drop of thick, iridescent metallic liquid mercury impacts a perfectly still pool of the same substance. The impact generates a mathematically perfect symmetrical 'splash crown'—a coronet of liquid spikes, each topped with a spherical micro-droplet separating from the main body. The material displays high-viscosity surface tension, bending light with intense specular reflections. Lighting: A single overhead ring light creates a continuous circular highlight tracing the inner rim of the splash crown, contrasting against a pitch-black studio void. The camera is positioned at macro water-level, angled slightly upward. Zero temporal artifacting, absolute fluid dynamics fidelity, cinematic color depth, incredibly sharp focal plane on the leading edge of the crown. 4k resolution.",
+    "assets": [],
+    "creator": {
+      "id": "c-011",
+      "handle": "@fluid.dynamics",
+      "displayName": "Fluid Dynamics",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "kling-v1.6",
+      "provider": "Kling AI",
+      "parameters": { "fps": 120, "motion_strength": 0.5 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Motion Design",
+      "tags": ["liquid", "slow-motion", "macro", "physics", "video", "abstract"]
+    },
+    "stats": { "likes": 4800, "views": 39000, "saves": 1950 },
+    "pricing": { "type": "subscription_only", "priceCents": 2499 },
+    "_db": {
+      "longDescription": "Used by high-end commercial directors to pre-visualize or generate final B-roll for luxury product campaigns.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A hyper-detailed slow-motion video of a metallic liquid crown splash with perfect temporal physics.",
+      "modelCompatibility": ["Kling v1.6", "Runway Gen-3"],
+      "avgRating": 4.97,
+      "reviewCount": 154,
+      "purchaseCount": 580
+    },
+    "createdAt": "2026-05-14T20:50:00Z"
+  },
+  {
+    "id": "premium-012",
+    "slug": "procedural-grain-abstract-gradient",
+    "title": "Procedural Noise Gradient — Ambient Texture Art",
+    "description": "Generates beautiful, soothing abstract gradient artwork with mathematical noise patterns, ideal for high-end SaaS backgrounds or packaging design.",
+    "content": {
+      "text": "A beautiful, abstract, high-resolution organic gradient mesh. Colors: A sophisticated, muted palette blending soft sage green, pale terracotta, and warm ivory. The transition between colors is completely non-linear and fluid, resembling topography or shifting sand dunes viewed from above. The entire image is unified by a heavy procedural film grain and stippled noise texture, giving it a tactile, risograph-printed or woven paper feel. Subtle, diffused lighting creates a sense of spatial depth, with gentle highlights and soft, enveloping shadows. No sharp geometric lines, no recognizable objects. Pure ambient mood, elegant, calming, minimal, Apple wallpaper aesthetic. --ar 16:9 --v 6.0",
+      "negativePrompt": "sharp lines, geometric shapes, high contrast, neon colors, recognizable objects, plastic texture, digital banding",
+      "version": "1.0"
+    },
+    "promptToCopy": "A beautiful, abstract, high-resolution organic gradient mesh. Colors: A sophisticated, muted palette blending soft sage green, pale terracotta, and warm ivory. The transition between colors is completely non-linear and fluid, resembling topography or shifting sand dunes viewed from above. The entire image is unified by a heavy procedural film grain and stippled noise texture, giving it a tactile, risograph-printed or woven paper feel. Subtle, diffused lighting creates a sense of spatial depth, with gentle highlights and soft, enveloping shadows. No sharp geometric lines, no recognizable objects. Pure ambient mood, elegant, calming, minimal, Apple wallpaper aesthetic. --ar 16:9 --v 6.0",
+    "assets": [],
+    "creator": {
+      "id": "c-012",
+      "handle": "@ambient.mesh",
+      "displayName": "Ambient Mesh",
+      "avatarUrl": "",
+      "isVerified": false
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "aspect_ratio": "16:9", "stylize": 50 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Landing Pages",
+      "tags": ["abstract", "gradient", "texture", "background", "minimalist"]
+    },
+    "stats": { "likes": 6400, "views": 51000, "saves": 3200 },
+    "pricing": { "type": "one_time", "priceCents": 599 },
+    "_db": {
+      "longDescription": "Creates the perfect organic, textured backgrounds for modern landing pages and premium branding materials.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A gorgeous 16:9 wallpaper featuring fluid sage and terracotta gradients with rich paper texture.",
+      "modelCompatibility": ["Midjourney v6", "FLUX 1.1 Pro"],
+      "avgRating": 4.9,
+      "reviewCount": 240,
+      "purchaseCount": 1050
+    },
+    "createdAt": "2026-05-14T20:55:00Z"
+  },
+  {
+    "id": "premium-013",
+    "slug": "react-tailwind-authentication-flow",
+    "title": "Enterprise Auth Flow — React Component Architecture",
+    "description": "Code generation prompt for a complete, secure authentication UI pattern with complex state handling, validation, and flawless aesthetics.",
+    "content": {
+      "text": "Develop a production-ready Authentication Flow UI using Next.js, React Hook Form, Zod for validation, and TailwindCSS. The UI must include a centered, glassmorphic login card over a dark, animated mesh gradient background. Inside the card: 1) A clean, typography-led header. 2) Email/Password inputs with floating labels, custom focus rings (ring-2 ring-violet-500/50), and inline real-time error messages with smooth framer-motion slide-down animations. 3) A 'Magic Link' alternative login state. 4) An OAuth provider block (Google/GitHub) with custom SVG icons and hover lift effects. 5) An interactive submit button that transitions into a loading spinner state upon submission. Include the Zod schema definition for strict password constraints (uppercase, number, special char) and document the state machine transitioning between 'idle', 'submitting', and 'success'. Must be fully accessible (aria-labels, keyboard navigation).",
+      "negativePrompt": "",
+      "version": "2.1"
+    },
+    "promptToCopy": "Develop a production-ready Authentication Flow UI using Next.js, React Hook Form, Zod for validation, and TailwindCSS. The UI must include a centered, glassmorphic login card over a dark, animated mesh gradient background. Inside the card: 1) A clean, typography-led header. 2) Email/Password inputs with floating labels, custom focus rings (ring-2 ring-violet-500/50), and inline real-time error messages with smooth framer-motion slide-down animations. 3) A 'Magic Link' alternative login state. 4) An OAuth provider block (Google/GitHub) with custom SVG icons and hover lift effects. 5) An interactive submit button that transitions into a loading spinner state upon submission. Include the Zod schema definition for strict password constraints (uppercase, number, special char) and document the state machine transitioning between 'idle', 'submitting', and 'success'. Must be fully accessible (aria-labels, keyboard navigation).",
+    "assets": [],
+    "creator": {
+      "id": "c-013",
+      "handle": "@fullstack.wizard",
+      "displayName": "Fullstack Wizard",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "claude-3-5-sonnet",
+      "provider": "Anthropic",
+      "parameters": { "temperature": 0.2 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Fullstack Systems",
+      "tags": ["react", "auth", "nextjs", "tailwind", "zod", "ui"]
+    },
+    "stats": { "likes": 3500, "views": 27000, "saves": 1400 },
+    "pricing": { "type": "one_time", "priceCents": 1299 },
+    "_db": {
+      "longDescription": "Save 4+ hours of boilerplate by generating a flawless, accessible, and secure authentication frontend.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A comprehensive Next.js file containing the auth component, Zod schemas, and animation variants.",
+      "modelCompatibility": ["Claude 3.5 Sonnet", "GPT-4o"],
+      "avgRating": 4.94,
+      "reviewCount": 105,
+      "purchaseCount": 530
+    },
+    "createdAt": "2026-05-14T21:00:00Z"
+  },
+  {
+    "id": "premium-014",
+    "slug": "anime-cinematic-gargantuan-scale",
+    "title": "Epic Anime Splash Art — Gargantuan Scale Dynamics",
+    "description": "Midjourney Niji prompt designed to create breathtaking anime-style illustrations emphasizing immense scale, dramatic perspective, and intricate environmental storytelling.",
+    "content": {
+      "text": "A breathtaking cinematic anime illustration of extreme scale. A tiny, silhouette-rendered protagonist stands atop a crumbling stone pillar in the foreground. In the distant background, towering into the clouds, is a gargantuan, ancient mechanical deity woven with glowing ethereal energy lines. The composition uses severe forced perspective (worms-eye view) to emphasize the massive size disparity. Environmental atmosphere: Swirling volumetric dust, dramatic cloud breaks piercing the sky with divine shafts of sunlight, flocks of tiny birds circling the titan for scale reference. Visual style: Makoto Shinkai environmental detail meets Studio Ghibli mechanical design. Highly detailed matte painting background, intense color grading with a high-contrast battle between celestial gold and deep shadow blue. Epic, awe-inspiring, masterpiece. --ar 16:9 --niji 6",
+      "negativePrompt": "flat layout, bad anatomy, simple background, chibi, low resolution, uninspired lighting, missing details",
+      "version": "1.0"
+    },
+    "promptToCopy": "A breathtaking cinematic anime illustration of extreme scale. A tiny, silhouette-rendered protagonist stands atop a crumbling stone pillar in the foreground. In the distant background, towering into the clouds, is a gargantuan, ancient mechanical deity woven with glowing ethereal energy lines. The composition uses severe forced perspective (worms-eye view) to emphasize the massive size disparity. Environmental atmosphere: Swirling volumetric dust, dramatic cloud breaks piercing the sky with divine shafts of sunlight, flocks of tiny birds circling the titan for scale reference. Visual style: Makoto Shinkai environmental detail meets Studio Ghibli mechanical design. Highly detailed matte painting background, intense color grading with a high-contrast battle between celestial gold and deep shadow blue. Epic, awe-inspiring, masterpiece. --ar 16:9 --niji 6",
+    "assets": [],
+    "creator": {
+      "id": "c-014",
+      "handle": "@niji.master",
+      "displayName": "Niji Master",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "model": "niji 6", "aspect_ratio": "16:9" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Anime Art",
+      "tags": ["anime", "cinematic", "scale", "mecha", "fantasy", "niji"]
+    },
+    "stats": { "likes": 9500, "views": 82000, "saves": 4500 },
+    "pricing": { "type": "one_time", "priceCents": 699 },
+    "_db": {
+      "longDescription": "The ultimate prompt for generating jaw-dropping splash art for games, visual novels, and desktop wallpapers.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A stunning 16:9 anime illustration featuring a tiny hero facing an impossibly large mechanical god.",
+      "modelCompatibility": ["Midjourney Niji 6"],
+      "avgRating": 4.98,
+      "reviewCount": 430,
+      "purchaseCount": 1600
+    },
+    "createdAt": "2026-05-14T21:05:00Z"
+  },
+  {
+    "id": "premium-015",
+    "slug": "ecommerce-product-styling-sneaker",
+    "title": "Hypebeast Sneaker Product Photography — Floating Dynamics",
+    "description": "Commercial photography prompt for streetwear e-commerce, focusing on dynamic suspension, material textures, and studio lighting.",
+    "content": {
+      "text": "High-end commercial product photography for a futuristic streetwear sneaker. The shoe is suspended in mid-air, angled dynamically to showcase both the lateral profile and the complex tread pattern on the sole. The background is an infinite, seamless studio cyclorama in a deep, moody charcoal grey. Lighting setup: A large overhead softbox provides a soft fill, while dual rim lights (one warm orange, one cool cyan) trace the aggressive, technical silhouette of the shoe, creating an energetic split-tone edge highlight. Material focus: Hyper-detailed rendering of the breathable knit mesh, matte rubber overlays, and glossy translucent air-cushioning units. Several small pieces of geometric concrete debris float weightlessly around the shoe, emphasizing a sense of anti-gravity impact. Shot on 85mm lens, f/5.6 for perfect edge-to-edge sharpness. --ar 4:5 --style raw --stylize 100",
+      "negativePrompt": "flat lighting, person wearing shoe, floor visible, messy background, soft focus, warped shoe anatomy, dull colors",
+      "version": "1.1"
+    },
+    "promptToCopy": "High-end commercial product photography for a futuristic streetwear sneaker. The shoe is suspended in mid-air, angled dynamically to showcase both the lateral profile and the complex tread pattern on the sole. The background is an infinite, seamless studio cyclorama in a deep, moody charcoal grey. Lighting setup: A large overhead softbox provides a soft fill, while dual rim lights (one warm orange, one cool cyan) trace the aggressive, technical silhouette of the shoe, creating an energetic split-tone edge highlight. Material focus: Hyper-detailed rendering of the breathable knit mesh, matte rubber overlays, and glossy translucent air-cushioning units. Several small pieces of geometric concrete debris float weightlessly around the shoe, emphasizing a sense of anti-gravity impact. Shot on 85mm lens, f/5.6 for perfect edge-to-edge sharpness. --ar 4:5 --style raw --stylize 100",
+    "assets": [],
+    "creator": {
+      "id": "c-015",
+      "handle": "@kick.studio",
+      "displayName": "Kick Studio",
+      "avatarUrl": "",
+      "isVerified": false
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "stylize": 100, "aspect_ratio": "4:5" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Product Photography",
+      "tags": ["sneaker", "ecommerce", "floating", "studio", "streetwear"]
+    },
+    "stats": { "likes": 5100, "views": 39000, "saves": 1800 },
+    "pricing": { "type": "one_time", "priceCents": 899 },
+    "_db": {
+      "longDescription": "Produces instantly usable, dynamic hero images for sneaker brands and e-commerce campaigns.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A sharp, suspended sneaker with orange and cyan rim lighting and floating concrete debris.",
+      "modelCompatibility": ["Midjourney v6", "FLUX 1.1 Pro"],
+      "avgRating": 4.91,
+      "reviewCount": 190,
+      "purchaseCount": 770
+    },
+    "createdAt": "2026-05-14T21:10:00Z"
+  },
+  {
+    "id": "premium-016",
+    "slug": "spatial-computing-vision-os-ui",
+    "title": "VisionOS Spatial Interface — Glassmorphism Dashboard",
+    "description": "UI design prompt tailored for spatial computing, focusing on translucent materials, depth layering, and ergonomic layouts.",
+    "content": {
+      "text": "A UI/UX design mockup for a spatial computing app designed for VisionOS. The interface consists of multiple floating, translucent glassmorphic windows positioned in a 3D environment against a blurred, warmly lit living room background. The main central window displays a high-end architectural portfolio: a large, crisp hero image of a building, surrounded by a borderless, frosted glass frame that distinctly refracts the background light (blur-3xl, varying opacity). Typography is Apple's San Francisco Pro, utilizing bright white text with subtle drop shadows for legibility. Sidebar navigation curves slightly toward the user (ergonomic wrapping). UI elements like toggles and sliders have physical depth and cast soft realistic shadows onto the glass surface below them. Premium, immersive, volumetric design language.",
+      "negativePrompt": "flat 2d design, dark harsh shadows, opaque backgrounds, cluttered layout, non-apple typography, pixelated",
+      "version": "1.0"
+    },
+    "promptToCopy": "A UI/UX design mockup for a spatial computing app designed for VisionOS. The interface consists of multiple floating, translucent glassmorphic windows positioned in a 3D environment against a blurred, warmly lit living room background. The main central window displays a high-end architectural portfolio: a large, crisp hero image of a building, surrounded by a borderless, frosted glass frame that distinctly refracts the background light (blur-3xl, varying opacity). Typography is Apple's San Francisco Pro, utilizing bright white text with subtle drop shadows for legibility. Sidebar navigation curves slightly toward the user (ergonomic wrapping). UI elements like toggles and sliders have physical depth and cast soft realistic shadows onto the glass surface below them. Premium, immersive, volumetric design language.",
+    "assets": [],
+    "creator": {
+      "id": "c-016",
+      "handle": "@spatial.design",
+      "displayName": "Spatial Architect",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "aspect_ratio": "16:9" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Websites & UI",
+      "tags": ["spatial-computing", "visionos", "ui", "glassmorphism", "3d", "dashboard"]
+    },
+    "stats": { "likes": 4700, "views": 36000, "saves": 2050 },
+    "pricing": { "type": "one_time", "priceCents": 1199 },
+    "_db": {
+      "longDescription": "The definitive prompt for brainstorming AR/VR application layouts with accurate depth and refraction aesthetics.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A stunning 16:9 concept of floating glass UI panels in a blurred modern living room.",
+      "modelCompatibility": ["Midjourney v6", "DALL-E 3"],
+      "avgRating": 4.93,
+      "reviewCount": 125,
+      "purchaseCount": 490
+    },
+    "createdAt": "2026-05-14T21:15:00Z"
+  },
+  {
+    "id": "premium-017",
+    "slug": "fullstack-nextjs-stripe-subscription",
+    "title": "Next.js SaaS Boilerplate — Stripe Integration Logic",
+    "description": "Comprehensive coding architecture prompt to generate a secure, webhook-driven Stripe subscription system within a Next.js App Router environment.",
+    "content": {
+      "text": "Act as a Senior Fullstack Engineer. Write the complete, production-ready implementation for a Stripe Subscription billing system in a Next.js 14 App Router application. Requirements: 1) A clean UI component in React/Tailwind for a pricing table displaying 'Pro' and 'Enterprise' tiers. 2) The Server Action (app/actions/stripe.ts) to create a Stripe Checkout Session, passing the user ID in the metadata. 3) The crucial Webhook Route Handler (app/api/webhook/stripe/route.ts) that securely verifies the Stripe signature and processes the 'checkout.session.completed' and 'customer.subscription.updated' events. 4) The database update logic (using Prisma mock syntax) to activate or revoke user premium status. Ensure you handle raw body parsing correctly for the webhook signature verification and provide inline comments explaining the error-handling strategy.",
+      "negativePrompt": "",
+      "version": "1.0"
+    },
+    "promptToCopy": "Act as a Senior Fullstack Engineer. Write the complete, production-ready implementation for a Stripe Subscription billing system in a Next.js 14 App Router application. Requirements: 1) A clean UI component in React/Tailwind for a pricing table displaying 'Pro' and 'Enterprise' tiers. 2) The Server Action (app/actions/stripe.ts) to create a Stripe Checkout Session, passing the user ID in the metadata. 3) The crucial Webhook Route Handler (app/api/webhook/stripe/route.ts) that securely verifies the Stripe signature and processes the 'checkout.session.completed' and 'customer.subscription.updated' events. 4) The database update logic (using Prisma mock syntax) to activate or revoke user premium status. Ensure you handle raw body parsing correctly for the webhook signature verification and provide inline comments explaining the error-handling strategy.",
+    "assets": [],
+    "creator": {
+      "id": "c-017",
+      "handle": "@code.architect",
+      "displayName": "Code Architect",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "claude-3-5-sonnet",
+      "provider": "Anthropic",
+      "parameters": { "temperature": 0.1 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Fullstack Systems",
+      "tags": ["nextjs", "stripe", "saas", "payments", "backend", "react"]
+    },
+    "stats": { "likes": 3800, "views": 22000, "saves": 1600 },
+    "pricing": { "type": "subscription_only", "priceCents": 1999 },
+    "_db": {
+      "longDescription": "A critical time-saver for developers building SaaS products, generating secure payment webhook infrastructure.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "Well-structured Next.js files covering UI, Server Actions, and a robust Stripe Webhook handler.",
+      "modelCompatibility": ["Claude 3.5 Sonnet", "GPT-4o"],
+      "avgRating": 4.96,
+      "reviewCount": 98,
+      "purchaseCount": 610
+    },
+    "createdAt": "2026-05-14T21:20:00Z"
+  },
+  {
+    "id": "premium-018",
+    "slug": "3d-isometric-developer-workspace",
+    "title": "3D Isometric Developer Room — Voxel Clay Render",
+    "description": "Generates delightful, highly-detailed 3D isometric rooms in a soft clay/vinyl toy aesthetic, perfect for developer portfolios and tech blogs.",
+    "content": {
+      "text": "A highly detailed, 3D isometric render of a cozy, futuristic developer's workspace. The room is cut away to show exactly two walls and the floor. Visual style: Soft, tactile claymation or vinyl toy aesthetic, smooth matte materials, rounded edges. Contents: A massive curved ultra-wide monitor glowing with lines of code, a mechanical keyboard with colorful keycaps, scattered empty coffee cups, a server rack blinking in the corner, and lush oversized pothos plants draped over the shelves. Lighting: Soft global illumination, warm ambient desk lamp contrasting with the cool blue glow from the screens. Soft, diffuse shadows. Color palette: Pastel mint green walls, natural birch wood floor, pops of neon pink and cyan. Cute, highly aesthetic, Blender cycles render quality. --ar 1:1 --v 6.0",
+      "negativePrompt": "realistic, photography, dirty, cluttered, dark lighting, 2d illustration, pixel art, sharp harsh edges",
+      "version": "1.2"
+    },
+    "promptToCopy": "A highly detailed, 3D isometric render of a cozy, futuristic developer's workspace. The room is cut away to show exactly two walls and the floor. Visual style: Soft, tactile claymation or vinyl toy aesthetic, smooth matte materials, rounded edges. Contents: A massive curved ultra-wide monitor glowing with lines of code, a mechanical keyboard with colorful keycaps, scattered empty coffee cups, a server rack blinking in the corner, and lush oversized pothos plants draped over the shelves. Lighting: Soft global illumination, warm ambient desk lamp contrasting with the cool blue glow from the screens. Soft, diffuse shadows. Color palette: Pastel mint green walls, natural birch wood floor, pops of neon pink and cyan. Cute, highly aesthetic, Blender cycles render quality. --ar 1:1 --v 6.0",
+    "assets": [],
+    "creator": {
+      "id": "c-018",
+      "handle": "@iso.craft",
+      "displayName": "IsoCraft 3D",
+      "avatarUrl": "",
+      "isVerified": false
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "aspect_ratio": "1:1", "stylize": 80 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Bento Layouts",
+      "tags": ["3d", "isometric", "workspace", "developer", "clay-render", "cute"]
+    },
+    "stats": { "likes": 5900, "views": 48000, "saves": 2500 },
+    "pricing": { "type": "one_time", "priceCents": 699 },
+    "_db": {
+      "longDescription": "Perfect for creating engaging hero graphics for personal developer sites or tech blog articles.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A 1:1 isometric room of a cute developer setup with smooth clay-like textures.",
+      "modelCompatibility": ["Midjourney v6", "DALL-E 3"],
+      "avgRating": 4.89,
+      "reviewCount": 176,
+      "purchaseCount": 820
+    },
+    "createdAt": "2026-05-14T21:25:00Z"
+  },
+  {
+    "id": "premium-019",
+    "slug": "generative-loader-animation-motion",
+    "title": "Generative Loader Animation — Continuous Morphing",
+    "description": "Video prompt for motion design: creates infinitely morphing, highly satisfying geometric loaders for premium UI implementations.",
+    "content": {
+      "text": "Smooth, seamless motion graphics animation of a loading spinner. A clean, minimal white geometric shape (starting as a perfect circle) suspended in the center of a pitch-black background. Over 6 seconds, the shape undergoes complex fluid metamorphosis: the circle gracefully extrudes into a 3D mobius strip, twists, collapses into a sharp tetrahedron, and finally morphs smoothly back into the perfect circle. The motion is governed by buttery smooth easing curves (ease-in-out), creating a hypnotic, rhythmic pulse. Lighting is studio-like, rendering the object as frosted glass that glows softly from within. Perfect loop geometry, 60fps, absolutely no background distraction, ultra-high resolution. Minimalist tech-company aesthetic.",
+      "negativePrompt": "jitter, artifacting, abrupt cuts, colors, messy background, low frame rate, complex busy geometry",
+      "version": "1.0"
+    },
+    "promptToCopy": "Smooth, seamless motion graphics animation of a loading spinner. A clean, minimal white geometric shape (starting as a perfect circle) suspended in the center of a pitch-black background. Over 6 seconds, the shape undergoes complex fluid metamorphosis: the circle gracefully extrudes into a 3D mobius strip, twists, collapses into a sharp tetrahedron, and finally morphs smoothly back into the perfect circle. The motion is governed by buttery smooth easing curves (ease-in-out), creating a hypnotic, rhythmic pulse. Lighting is studio-like, rendering the object as frosted glass that glows softly from within. Perfect loop geometry, 60fps, absolutely no background distraction, ultra-high resolution. Minimalist tech-company aesthetic.",
+    "assets": [],
+    "creator": {
+      "id": "c-019",
+      "handle": "@motion.lab",
+      "displayName": "Motion Lab",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "runway-gen3",
+      "provider": "Runway",
+      "parameters": { "loop": true, "motion_intensity": "medium" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Motion Design",
+      "tags": ["loader", "animation", "motion-graphics", "minimal", "loop", "geometry"]
+    },
+    "stats": { "likes": 3200, "views": 26000, "saves": 1100 },
+    "pricing": { "type": "one_time", "priceCents": 999 },
+    "_db": {
+      "longDescription": "Generates perfect, bespoke loading animations that can be implemented as Lottie files or video backgrounds in premium apps.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A seamless 6-second looping video of a white geometric shape morphing fluidly on a black background.",
+      "modelCompatibility": ["Runway Gen-3", "Luma Dream Machine"],
+      "avgRating": 4.9,
+      "reviewCount": 82,
+      "purchaseCount": 390
+    },
+    "createdAt": "2026-05-14T21:30:00Z"
+  },
+  {
+    "id": "premium-020",
+    "slug": "python-fastapi-rag-architecture",
+    "title": "Production RAG Backend — FastAPI & LangChain",
+    "description": "Comprehensive coding prompt to generate a secure, high-performance Retrieval-Augmented Generation API pipeline.",
+    "content": {
+      "text": "Act as a Lead AI Engineer. Write the complete Python backend architecture using FastAPI, LangChain, and a vector database (e.g., Pinecone or Qdrant) for a production-grade Retrieval-Augmented Generation (RAG) system. Requirements: 1) A clean folder structure representation. 2) The main API router with an endpoint `/api/v1/query` that accepts a user prompt. 3) The core service logic that takes the query, embeds it using OpenAI's embedding model, performs a similarity search with a filter on metadata (e.g., tenant_id to ensure data separation), retrieves the top_k context chunks, and formats them into a robust system prompt. 4) A streaming response setup (using Server-Sent Events) returning the LLM generation chunk by chunk. Emphasize error handling for API limits and invalid inputs. Code must be fully typed and adhere to PEP-8.",
+      "negativePrompt": "",
+      "version": "1.0"
+    },
+    "promptToCopy": "Act as a Lead AI Engineer. Write the complete Python backend architecture using FastAPI, LangChain, and a vector database (e.g., Pinecone or Qdrant) for a production-grade Retrieval-Augmented Generation (RAG) system. Requirements: 1) A clean folder structure representation. 2) The main API router with an endpoint `/api/v1/query` that accepts a user prompt. 3) The core service logic that takes the query, embeds it using OpenAI's embedding model, performs a similarity search with a filter on metadata (e.g., tenant_id to ensure data separation), retrieves the top_k context chunks, and formats them into a robust system prompt. 4) A streaming response setup (using Server-Sent Events) returning the LLM generation chunk by chunk. Emphasize error handling for API limits and invalid inputs. Code must be fully typed and adhere to PEP-8.",
+    "assets": [],
+    "creator": {
+      "id": "c-020",
+      "handle": "@ai.backend",
+      "displayName": "AI Backend Systems",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "claude-3-5-sonnet",
+      "provider": "Anthropic",
+      "parameters": { "temperature": 0.2 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Coding Prompts",
+      "tags": ["python", "fastapi", "rag", "ai", "backend", "langchain"]
+    },
+    "stats": { "likes": 4100, "views": 31000, "saves": 1850 },
+    "pricing": { "type": "subscription_only", "priceCents": 2199 },
+    "_db": {
+      "longDescription": "Accelerates AI application development by providing a secure, stream-ready backend framework.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "Well-commented Python scripts demonstrating routing, embedding, retrieval, and SSE streaming.",
+      "modelCompatibility": ["Claude 3.5 Sonnet", "GPT-4o"],
+      "avgRating": 4.96,
+      "reviewCount": 150,
+      "purchaseCount": 680
+    },
+    "createdAt": "2026-05-14T21:35:00Z"
+  },
+  {
+    "id": "premium-021",
+    "slug": "high-fashion-editorial-desert-dune",
+    "title": "High-Fashion Desert Editorial — Cinematic Framing",
+    "description": "Premium prompt for generating Vogue-tier fashion photography, leveraging complex environmental scale, wardrobe physics, and dramatic lighting.",
+    "content": {
+      "text": "A breathtaking high-fashion editorial photograph set in the monumental rolling sand dunes of the Sahara at deep twilight. A striking avant-garde model stands atop a dune crest, wearing an impossibly voluminous, sculptural gown made of iridescent crimson silk. The wind catches the fabric, whipping it into a massive, frozen wave of red that dominates the upper right quadrant of the composition. Lighting: The sun has just dipped below the horizon, bathing the dunes in a cool, moody blue hour ambient light, while a powerful off-camera HMI strobe flashes from the left, illuminating the model and the dress with stark, dramatic intensity. The contrast between the electric crimson fabric and the cool blue twilight desert creates intense chromatic tension. Shot from a low angle on medium format film, 35mm lens, hyper-detailed texture on the sand ripples and silk folds. Vogue magazine cover aesthetic. --ar 3:4 --v 6.0",
+      "negativePrompt": "casual clothing, bright sunny day, flat lighting, messy composition, blurry, uninspired pose, normal dress",
+      "version": "1.1"
+    },
+    "promptToCopy": "A breathtaking high-fashion editorial photograph set in the monumental rolling sand dunes of the Sahara at deep twilight. A striking avant-garde model stands atop a dune crest, wearing an impossibly voluminous, sculptural gown made of iridescent crimson silk. The wind catches the fabric, whipping it into a massive, frozen wave of red that dominates the upper right quadrant of the composition. Lighting: The sun has just dipped below the horizon, bathing the dunes in a cool, moody blue hour ambient light, while a powerful off-camera HMI strobe flashes from the left, illuminating the model and the dress with stark, dramatic intensity. The contrast between the electric crimson fabric and the cool blue twilight desert creates intense chromatic tension. Shot from a low angle on medium format film, 35mm lens, hyper-detailed texture on the sand ripples and silk folds. Vogue magazine cover aesthetic. --ar 3:4 --v 6.0",
+    "assets": [],
+    "creator": {
+      "id": "c-021",
+      "handle": "@vogue.lens",
+      "displayName": "Editorial Lens",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "aspect_ratio": "3:4", "stylize": 150 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Cinematic Fashion",
+      "tags": ["fashion", "editorial", "photography", "desert", "couture", "lighting"]
+    },
+    "stats": { "likes": 8800, "views": 69000, "saves": 3900 },
+    "pricing": { "type": "one_time", "priceCents": 1099 },
+    "_db": {
+      "longDescription": "Produces jaw-dropping fashion editorial spreads combining epic landscapes with avant-garde styling.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A stunning 3:4 fashion portrait of a model in a flowing red dress against twilight blue dunes.",
+      "modelCompatibility": ["Midjourney v6", "FLUX 1.1 Pro"],
+      "avgRating": 4.94,
+      "reviewCount": 280,
+      "purchaseCount": 1100
+    },
+    "createdAt": "2026-05-14T21:40:00Z"
+  },
+  {
+    "id": "premium-022",
+    "slug": "dynamic-landing-page-hero-saas",
+    "title": "SaaS Hero Section — High-Converting Copy & Layout",
+    "description": "Generates an intricately detailed structure for a high-converting SaaS landing page hero section, merging copy, layout, and visual direction.",
+    "content": {
+      "text": "Design the ultimate hero section for a B2B AI copywriting SaaS landing page. Layout structure: Split 50/50. Left side content: A massive, bold headline (H1) that reads 'Write Copy That Converts, At The Speed Of Thought.' using Inter Tight, heavily weighted. Below, a descriptive subheadline in a muted zinc-400 color explaining the value proposition. A primary CTA button (solid vivid purple, rounded-full, with an animated arrow icon on hover) next to a secondary 'Book a Demo' ghost button. Below the buttons, a social proof micro-banner: small overlapping avatars and text 'Trusted by 10,000+ marketers'. Right side visual: A 3D isometric mockup of the app interface floating slightly, enveloped in a soft purple glowing aura. Background: Dark mode (zinc-950) with a very subtle, radial gradient mesh in deep violet behind the app mockup to draw the eye. Clean, enterprise-grade, high trust.",
+      "negativePrompt": "",
+      "version": "1.0"
+    },
+    "promptToCopy": "Design the ultimate hero section for a B2B AI copywriting SaaS landing page. Layout structure: Split 50/50. Left side content: A massive, bold headline (H1) that reads 'Write Copy That Converts, At The Speed Of Thought.' using Inter Tight, heavily weighted. Below, a descriptive subheadline in a muted zinc-400 color explaining the value proposition. A primary CTA button (solid vivid purple, rounded-full, with an animated arrow icon on hover) next to a secondary 'Book a Demo' ghost button. Below the buttons, a social proof micro-banner: small overlapping avatars and text 'Trusted by 10,000+ marketers'. Right side visual: A 3D isometric mockup of the app interface floating slightly, enveloped in a soft purple glowing aura. Background: Dark mode (zinc-950) with a very subtle, radial gradient mesh in deep violet behind the app mockup to draw the eye. Clean, enterprise-grade, high trust.",
+    "assets": [],
+    "creator": {
+      "id": "c-022",
+      "handle": "@growth.ui",
+      "displayName": "Growth UI",
+      "avatarUrl": "",
+      "isVerified": false
+    },
+    "engine": {
+      "modelId": "gpt-4o",
+      "provider": "OpenAI",
+      "parameters": { "temperature": 0.5 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Landing Pages",
+      "tags": ["saas", "hero-section", "ui", "conversion", "dark-mode"]
+    },
+    "stats": { "likes": 4300, "views": 33000, "saves": 1900 },
+    "pricing": { "type": "one_time", "priceCents": 799 },
+    "_db": {
+      "longDescription": "The blueprint for building high-converting landing pages. Feed this into an LLM to generate React code, or Midjourney for a mockup.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A detailed layout structure and UI instruction set for a top-tier SaaS hero.",
+      "modelCompatibility": ["GPT-4o", "Claude 3.5 Sonnet", "Midjourney v6"],
+      "avgRating": 4.88,
+      "reviewCount": 140,
+      "purchaseCount": 560
+    },
+    "createdAt": "2026-05-14T21:45:00Z"
+  },
+  {
+    "id": "premium-023",
+    "slug": "retro-futurist-synthesizer-hardware-ui",
+    "title": "Retro-Futurist Synthesizer Interface — Tactile Hardware",
+    "description": "Design prompt for creating hyper-realistic vintage/futuristic audio hardware interfaces with extreme tactile detail.",
+    "content": {
+      "text": "A hyper-realistic, macro close-up product shot of the interface panel of a fictional, retro-futuristic analog synthesizer. The panel is constructed from brushed aluminum and thick matte-black powder-coated steel. The interface is crowded with tactile components: heavy knurled aluminum rotary knobs, satisfying mechanical toggle switches, and glowing warm-amber segmented LED displays. Intricate, microscopic technical screen-printing labels every control in a clinical, thin Helvetica font. A tangle of brightly colored, braided patch cables (neon pink, cyan, yellow) plugs into brass audio jacks, casting sharp, distinct shadows across the metal plate. Lighting: Cinematic, moody studio lighting with a harsh rim light picking up the texture of the metal and the dust particles settling on the surface. Tactile, mechanical, audiophile aesthetic. 8k resolution, photorealism. --ar 16:9 --v 6.0",
+      "negativePrompt": "flat 2d, vector illustration, modern touchscreen UI, clean sterile look, out of focus, poor anatomy of knobs",
+      "version": "1.0"
+    },
+    "promptToCopy": "A hyper-realistic, macro close-up product shot of the interface panel of a fictional, retro-futuristic analog synthesizer. The panel is constructed from brushed aluminum and thick matte-black powder-coated steel. The interface is crowded with tactile components: heavy knurled aluminum rotary knobs, satisfying mechanical toggle switches, and glowing warm-amber segmented LED displays. Intricate, microscopic technical screen-printing labels every control in a clinical, thin Helvetica font. A tangle of brightly colored, braided patch cables (neon pink, cyan, yellow) plugs into brass audio jacks, casting sharp, distinct shadows across the metal plate. Lighting: Cinematic, moody studio lighting with a harsh rim light picking up the texture of the metal and the dust particles settling on the surface. Tactile, mechanical, audiophile aesthetic. 8k resolution, photorealism. --ar 16:9 --v 6.0",
+    "assets": [],
+    "creator": {
+      "id": "c-023",
+      "handle": "@synth.wave",
+      "displayName": "Hardware UI",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "aspect_ratio": "16:9" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Bento Layouts",
+      "tags": ["hardware", "synthesizer", "retro-futurism", "tactile", "ui", "macro"]
+    },
+    "stats": { "likes": 3600, "views": 25000, "saves": 1300 },
+    "pricing": { "type": "one_time", "priceCents": 699 },
+    "_db": {
+      "longDescription": "Generates stunningly realistic hardware panels, great for inspiration in audio software plugin design.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A 16:9 photorealistic image of heavy metal knobs, glowing amber LEDs, and colorful patch cables.",
+      "modelCompatibility": ["Midjourney v6", "FLUX 1.1 Pro"],
+      "avgRating": 4.92,
+      "reviewCount": 110,
+      "purchaseCount": 420
+    },
+    "createdAt": "2026-05-14T21:50:00Z"
+  },
+  {
+    "id": "premium-024",
+    "slug": "editorial-zine-layout-punk",
+    "title": "Punk Editorial Zine Layout — Chaotic Composition",
+    "description": "Graphic design prompt for generating aggressive, chaotic print layouts inspired by DIY punk zines and modern brutalist typography.",
+    "content": {
+      "text": "A full-spread graphic design layout for an underground punk music zine. The composition is intentionally chaotic, brutalist, and anti-grid. Elements are layered destructively: torn halftone photographs of a live concert, scanned crumpled paper textures, and aggressive, oversized typography using a distressed sans-serif font spelling out 'NO FUTURE'. Text blocks are rotated at extreme angles, overlapping and obscuring parts of the imagery. The color palette is restricted to high-contrast black ink, raw newsprint off-white, and striking splashes of fluorescent safety yellow. Visible scanning artifacts, staple marks in the center fold, and xerox degradation effects throughout. Raw, visceral, high-energy print design aesthetic. --ar 3:2 --v 6.0",
+      "negativePrompt": "clean layout, digital polish, corporate, boring, colorful, soft edges, modern UI, perfect alignment",
+      "version": "1.0"
+    },
+    "promptToCopy": "A full-spread graphic design layout for an underground punk music zine. The composition is intentionally chaotic, brutalist, and anti-grid. Elements are layered destructively: torn halftone photographs of a live concert, scanned crumpled paper textures, and aggressive, oversized typography using a distressed sans-serif font spelling out 'NO FUTURE'. Text blocks are rotated at extreme angles, overlapping and obscuring parts of the imagery. The color palette is restricted to high-contrast black ink, raw newsprint off-white, and striking splashes of fluorescent safety yellow. Visible scanning artifacts, staple marks in the center fold, and xerox degradation effects throughout. Raw, visceral, high-energy print design aesthetic. --ar 3:2 --v 6.0",
+    "assets": [],
+    "creator": {
+      "id": "c-024",
+      "handle": "@punk.print",
+      "displayName": "Xerox Print Co",
+      "avatarUrl": "",
+      "isVerified": false
+    },
+    "engine": {
+      "modelId": "mj-v6",
+      "provider": "Midjourney",
+      "parameters": { "aspect_ratio": "3:2", "stylize": 40 }
+    },
+    "taxonomy": {
+      "primaryCategory": "Editorial Posters",
+      "tags": ["zine", "punk", "editorial", "layout", "print", "brutalist"]
+    },
+    "stats": { "likes": 4200, "views": 31000, "saves": 1700 },
+    "pricing": { "type": "one_time", "priceCents": 599 },
+    "_db": {
+      "longDescription": "Instantly generates compelling raw print layouts for moodboarding music festivals, zines, and edgy fashion lookbooks.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A 3:2 print spread featuring torn halftone images, safety yellow accents, and chaotic text.",
+      "modelCompatibility": ["Midjourney v6", "DALL-E 3"],
+      "avgRating": 4.85,
+      "reviewCount": 94,
+      "purchaseCount": 380
+    },
+    "createdAt": "2026-05-14T21:55:00Z"
+  },
+  {
+    "id": "premium-025",
+    "slug": "viral-shorts-satisfying-loop-kinetic",
+    "title": "Viral Kinetic Loop — Satisfying Physics Engine",
+    "description": "Video prompt crafted specifically for TikTok/Reels to generate a mathematically perfect, highly satisfying looping 3D physics animation.",
+    "content": {
+      "text": "A perfectly seamless, infinitely looping 3D animation optimized for vertical social media. Subject: A heavy, polished chrome sphere rolling smoothly down a twisting, translucent pastel-pink glass track. As the sphere rolls, it triggers perfectly synchronized kinetic dominoes made of matte white ceramic, which fall in a satisfying wave pattern. The physics are completely dialed in: slow, deliberate, heavy gravity feeling. Lighting: Even, soft-box studio lighting, casting soft ambient occlusion shadows, highlighting the reflections in the chrome and the subsurface scattering in the glass. Pacing: The loop occurs exactly at the 8-second mark, where the ball drops through a portal and seamlessly emerges at the top of the track again. Absolutely no visible cuts, stuttering, or camera drift. ASMR visual aesthetic. 4K, 60fps, 9:16.",
+      "negativePrompt": "visible cut, camera shake, jitter, messy background, low framerate, changing lighting, motion blur on loop point",
+      "version": "1.5"
+    },
+    "promptToCopy": "A perfectly seamless, infinitely looping 3D animation optimized for vertical social media. Subject: A heavy, polished chrome sphere rolling smoothly down a twisting, translucent pastel-pink glass track. As the sphere rolls, it triggers perfectly synchronized kinetic dominoes made of matte white ceramic, which fall in a satisfying wave pattern. The physics are completely dialed in: slow, deliberate, heavy gravity feeling. Lighting: Even, soft-box studio lighting, casting soft ambient occlusion shadows, highlighting the reflections in the chrome and the subsurface scattering in the glass. Pacing: The loop occurs exactly at the 8-second mark, where the ball drops through a portal and seamlessly emerges at the top of the track again. Absolutely no visible cuts, stuttering, or camera drift. ASMR visual aesthetic. 4K, 60fps, 9:16.",
+    "assets": [],
+    "creator": {
+      "id": "c-025",
+      "handle": "@loop.master",
+      "displayName": "Loop Architect",
+      "avatarUrl": "",
+      "isVerified": true
+    },
+    "engine": {
+      "modelId": "runway-gen3",
+      "provider": "Runway",
+      "parameters": { "loop": true, "motion_intensity": "low" }
+    },
+    "taxonomy": {
+      "primaryCategory": "Viral Shorts",
+      "tags": ["loop", "satisfying", "kinetic", "3d", "shorts", "reels", "asmr"]
+    },
+    "stats": { "likes": 11500, "views": 98000, "saves": 5100 },
+    "pricing": { "type": "subscription_only", "priceCents": 1999 },
+    "_db": {
+      "longDescription": "The holy grail for engagement hacking on TikTok and Reels. Generates a flawless, satisfying physics loop that viewers will watch multiple times.",
+      "variables": [],
+      "exampleInput": {},
+      "exampleOutput": "A seamlessly looping 9:16 video of a chrome ball on a glass track triggering ceramic dominoes.",
+      "modelCompatibility": ["Runway Gen-3"],
+      "avgRating": 4.99,
+      "reviewCount": 612,
+      "purchaseCount": 2300
+    },
+    "createdAt": "2026-05-14T22:00:00Z"
+  }
+]
