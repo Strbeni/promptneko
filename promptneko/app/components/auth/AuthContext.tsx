@@ -1,9 +1,11 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {
   createContext,
   useContext,
   useEffect,
+  useRef,
   useState,
   useCallback,
   type ReactNode,
@@ -49,6 +51,15 @@ type AuthContextValue = {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 const ONBOARDING_DONE_KEY = "pn_onboarding_done";
+const DB_USER_CACHE_MS = 5 * 60 * 1000;
+
+type DbUserCacheEntry = {
+  data?: DbUser | null;
+  expiresAt: number;
+  promise?: Promise<DbUser | null>;
+};
+
+const dbUserCache = new Map<string, DbUserCacheEntry>();
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -56,103 +67,121 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [needsOnboarding, setNeedsOnboarding] = useState(false);
+  const latestSessionUserId = useRef<string | null>(null);
 
   // Fetch the public.users row for the current auth user
-  const fetchDbUser = useCallback(async (uid: string) => {
-    // Use maybeSingle() — returns null (not 406) when no row exists
-    const { data } = await (supabase as any)
-      .from("users")
-      .select(
-        "id, email, username, display_name, avatar_url, role, is_email_verified, is_creator_approved, is_banned"
-      )
-      .eq("id", uid)
-      .maybeSingle();
+  const fetchDbUser = useCallback(async (uid: string, authUser?: User, force = false) => {
+    const now = Date.now();
+    const cached = dbUserCache.get(uid);
+    if (!force && cached?.data !== undefined && cached.expiresAt > now) return cached.data;
+    if (!force && cached?.promise) return cached.promise;
 
-    if (data) return data as DbUser;
+    const promise = (async () => {
+      // Use maybeSingle() — returns null (not 406) when no row exists
+      const { data } = await (supabase as any)
+        .from("users")
+        .select(
+          "id, email, username, display_name, avatar_url, role, is_email_verified, is_creator_approved, is_banned"
+        )
+        .eq("id", uid)
+        .maybeSingle();
 
-    // ── Self-healing fallback ─────────────────────────────────────────────
-    // If no public.users row exists (migration 002 not yet run), create one
-    // from the current auth session so the UI isn't stuck in a broken state.
-    const { data: { user: authUser } } = await supabase.auth.getUser();
-    if (!authUser) return null;
+      if (data) return data as DbUser;
 
-    const base = authUser.email?.split("@")[0]?.toLowerCase().replace(/[^a-z0-9_-]+/g, "_") ?? "user";
-    const uname = base + Math.floor(Math.random() * 9000 + 1000);
-    const dname =
-      authUser.user_metadata?.full_name ??
-      authUser.user_metadata?.name ??
-      authUser.email?.split("@")[0] ??
-      "User";
+      // ── Self-healing fallback ─────────────────────────────────────────────
+      // If no public.users row exists (migration 002 not yet run), create one
+      // from the current auth session so the UI isn't stuck in a broken state.
+      if (!authUser) return null;
 
-    const { data: created } = await (supabase as any)
-      .from("users")
-      .upsert({
-        id: authUser.id,
-        email: authUser.email,
-        username: uname,
-        display_name: dname,
-        avatar_url: authUser.user_metadata?.avatar_url ?? null,
-        is_email_verified: !!authUser.email_confirmed_at,
-      }, { onConflict: "id" })
-      .select("id, email, username, display_name, avatar_url, role, is_email_verified, is_creator_approved, is_banned")
-      .maybeSingle();
+      const base = authUser.email?.split("@")[0]?.toLowerCase().replace(/[^a-z0-9_-]+/g, "_") ?? "user";
+      const uname = base + Math.floor(Math.random() * 9000 + 1000);
+      const dname =
+        authUser.user_metadata?.full_name ??
+        authUser.user_metadata?.name ??
+        authUser.email?.split("@")[0] ??
+        "User";
 
-    return (created as DbUser) ?? null;
+      const { data: created } = await (supabase as any)
+        .from("users")
+        .upsert({
+          id: authUser.id,
+          email: authUser.email,
+          username: uname,
+          display_name: dname,
+          avatar_url: authUser.user_metadata?.avatar_url ?? null,
+          is_email_verified: !!authUser.email_confirmed_at,
+        }, { onConflict: "id" })
+        .select("id, email, username, display_name, avatar_url, role, is_email_verified, is_creator_approved, is_banned")
+        .maybeSingle();
+
+      return (created as DbUser) ?? null;
+    })();
+
+    dbUserCache.set(uid, { promise, expiresAt: now + DB_USER_CACHE_MS });
+
+    try {
+      const resolved = await promise;
+      dbUserCache.set(uid, { data: resolved, expiresAt: Date.now() + DB_USER_CACHE_MS });
+      return resolved;
+    } catch (error) {
+      dbUserCache.delete(uid);
+      throw error;
+    }
   }, []);
 
   const refreshDbUser = useCallback(async () => {
     if (!user) return;
-    const d = await fetchDbUser(user.id);
+    const d = await fetchDbUser(user.id, user, true);
     setDbUser(d);
   }, [user, fetchDbUser]);
 
+  const applySession = useCallback(async (nextSession: Session | null) => {
+    const authUser = nextSession?.user ?? null;
+    latestSessionUserId.current = authUser?.id ?? null;
+    setSession(nextSession);
+    setUser(authUser);
+
+    if (!authUser) {
+      setDbUser(null);
+      setNeedsOnboarding(false);
+      setLoading(false);
+      return;
+    }
+
+    const d = await fetchDbUser(authUser.id, authUser);
+    if (latestSessionUserId.current !== authUser.id) return;
+
+    setDbUser(d);
+    const done = localStorage.getItem(ONBOARDING_DONE_KEY);
+    if (!done && d && d.role !== "creator" && d.role !== "admin") {
+      setNeedsOnboarding(true);
+    } else if (d && (d.role === "creator" || d.role === "admin")) {
+      localStorage.setItem(ONBOARDING_DONE_KEY, "1");
+      setNeedsOnboarding(false);
+    } else {
+      setNeedsOnboarding(false);
+    }
+    setLoading(false);
+  }, [fetchDbUser]);
+
   // Bootstrap session on mount
   useEffect(() => {
+    let disposed = false;
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        fetchDbUser(session.user.id).then((d) => {
-          setDbUser(d);
-          // Show onboarding if this is a brand-new user
-          const done = localStorage.getItem(ONBOARDING_DONE_KEY);
-          if (!done && d && d.role !== "creator" && d.role !== "admin") {
-            setNeedsOnboarding(true);
-          } else if (d && (d.role === "creator" || d.role === "admin")) {
-            localStorage.setItem(ONBOARDING_DONE_KEY, "1");
-            setNeedsOnboarding(false);
-          }
-          setLoading(false);
-        });
-      } else {
-        setLoading(false);
-      }
+      if (!disposed) void applySession(session);
     });
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        fetchDbUser(session.user.id).then((d) => {
-          setDbUser(d);
-          const done = localStorage.getItem(ONBOARDING_DONE_KEY);
-          if (!done && d && d.role !== "creator" && d.role !== "admin") {
-            setNeedsOnboarding(true);
-          } else if (d && (d.role === "creator" || d.role === "admin")) {
-            localStorage.setItem(ONBOARDING_DONE_KEY, "1");
-            setNeedsOnboarding(false);
-          }
-        });
-      } else {
-        setDbUser(null);
-        setNeedsOnboarding(false);
-      }
+      void applySession(session);
     });
 
-    return () => subscription.unsubscribe();
-  }, [fetchDbUser]);
+    return () => {
+      disposed = true;
+      subscription.unsubscribe();
+    };
+  }, [applySession]);
 
   // ── Actions ────────────────────────────────────────────────────────────────
 

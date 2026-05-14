@@ -27,8 +27,9 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  // Refresh session — this is a no-op if the session is still valid
-  await supabase.auth.getUser();
+  // Keep cookies fresh without forcing a Supabase Auth user lookup on every
+  // page, RSC, prefetch, and API request.
+  await supabase.auth.getSession();
 
   return response;
 }
@@ -40,8 +41,8 @@ export const config = {
      * - _next/static  (static files)
      * - _next/image   (image optimisation)
      * - favicon.ico
-     * - public folder assets
+     * - common public folder assets
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js|map|txt|woff2?)$).*)",
   ],
 };

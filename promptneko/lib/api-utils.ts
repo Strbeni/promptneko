@@ -1,5 +1,6 @@
 import { cookies, headers } from "next/headers";
 import { NextResponse } from "next/server";
+import { cache } from "react";
 import { createSupabaseServerClient } from "./supabase";
 
 type RateEntry = {
@@ -53,7 +54,7 @@ export async function rateLimit(scope: string, limit: number, windowMs: number) 
   return { ok: true, remaining: limit - entry.count };
 }
 
-export async function requireUser() {
+export const requireUser = cache(async () => {
   const cookieStore = await cookies();
   const authClient = createSupabaseServerClient(cookieStore);
   const {
@@ -66,4 +67,4 @@ export async function requireUser() {
   }
 
   return { user, authClient, error: null };
-}
+});

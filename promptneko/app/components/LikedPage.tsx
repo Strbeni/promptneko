@@ -17,9 +17,15 @@ import { MarketplaceLayout } from "./MarketplaceLayout";
 import { DetailedPrompt, promptCards } from "./marketplace-data";
 import { dbPromptsToDetailedPrompts } from "../../lib/adapters";
 import { useAuth } from "./auth/AuthContext";
+import { getCachedJson, invalidateCachedJson } from "./client-request-cache";
 
 const LOCAL_KEY = "pn_static_interactions";
+const LIKED_CACHE_MS = 30_000;
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+type PromptListPayload = {
+  prompts?: Parameters<typeof dbPromptsToDetailedPrompts>[0];
+};
 
 function isDbPrompt(id: string) {
   return UUID_RE.test(id);
@@ -134,17 +140,18 @@ export function LikedPage() {
   useEffect(() => {
     if (loading || !user) return;
 
-    const controller = new AbortController();
-    fetch("/api/me/liked", { signal: controller.signal })
-      .then((res) => (res.ok ? res.json() : null))
+    let cancelled = false;
+    getCachedJson<PromptListPayload>("/api/me/liked", LIKED_CACHE_MS)
       .then((payload) => {
-        if (payload?.prompts) {
+        if (!cancelled && payload?.prompts) {
           setRemotePrompts(dbPromptsToDetailedPrompts(payload.prompts));
         }
       })
       .catch(() => {});
 
-    return () => controller.abort();
+    return () => {
+      cancelled = true;
+    };
   }, [loading, user]);
 
   const allLikedPrompts = useMemo(() => {
@@ -171,7 +178,11 @@ export function LikedPage() {
   async function handleUnlike(id: string) {
     if (isDbPrompt(id)) {
       const res = await fetch(`/api/prompts/${id}/like`, { method: "POST" });
-      if (res.ok) setRemotePrompts((prev) => prev.filter((prompt) => prompt.id !== id));
+      if (res.ok) {
+        invalidateCachedJson("/api/me/liked");
+        invalidateCachedJson("/api/me/interactions");
+        setRemotePrompts((prev) => prev.filter((prompt) => prompt.id !== id));
+      }
       return;
     }
 

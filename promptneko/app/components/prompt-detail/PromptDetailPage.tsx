@@ -35,6 +35,9 @@ export function PromptDetailPage({ prompt, isPending }: PromptDetailPageProps) {
 
   useEffect(() => {
     recordPromptView(prompt);
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(prompt.id)) {
+      return;
+    }
 
     const controller = new AbortController();
     fetch(`/api/prompts/${prompt.id}/view`, { method: "POST", signal: controller.signal })
@@ -45,7 +48,7 @@ export function PromptDetailPage({ prompt, isPending }: PromptDetailPageProps) {
       .catch(() => {});
 
     return () => controller.abort();
-  }, [prompt.id, setViews]);
+  }, [prompt, setViews]);
 
   function openAction(action: string) {
     setDrawerAction(action);

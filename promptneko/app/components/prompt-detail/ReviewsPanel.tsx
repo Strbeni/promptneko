@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Star } from "lucide-react";
 import { DetailedPrompt } from "../marketplace-data";
 import { useAuth } from "../auth/AuthContext";
+import { getCachedJson, setCachedJson } from "../client-request-cache";
 
 type Review = {
   id: string;
@@ -20,6 +21,11 @@ type Review = {
 };
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+const REVIEWS_CACHE_MS = 60_000;
+
+type ReviewsPayload = {
+  reviews?: Review[];
+};
 
 export function ReviewsPanel({ prompt }: { prompt: DetailedPrompt }) {
   const { user } = useAuth();
@@ -32,13 +38,16 @@ export function ReviewsPanel({ prompt }: { prompt: DetailedPrompt }) {
   useEffect(() => {
     if (!isDbPrompt) return;
 
-    const controller = new AbortController();
-    fetch(`/api/prompts/${prompt.id}/reviews`, { signal: controller.signal })
-      .then((res) => (res.ok ? res.json() : null))
-      .then((payload) => setReviews(payload?.reviews ?? []))
+    let cancelled = false;
+    getCachedJson<ReviewsPayload>(`/api/prompts/${prompt.id}/reviews`, REVIEWS_CACHE_MS)
+      .then((payload) => {
+        if (!cancelled) setReviews(payload?.reviews ?? []);
+      })
       .catch(() => {});
 
-    return () => controller.abort();
+    return () => {
+      cancelled = true;
+    };
   }, [isDbPrompt, prompt.id]);
 
   const reviewSummary = useMemo(() => {
@@ -66,6 +75,7 @@ export function ReviewsPanel({ prompt }: { prompt: DetailedPrompt }) {
     setContent("");
     setMessage("Review saved.");
     const next = await fetch(`/api/prompts/${prompt.id}/reviews`).then((r) => r.json()).catch(() => null);
+    if (next) setCachedJson(`/api/prompts/${prompt.id}/reviews`, next, REVIEWS_CACHE_MS);
     setReviews(next?.reviews ?? reviews);
   }
 

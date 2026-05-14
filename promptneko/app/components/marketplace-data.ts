@@ -1097,6 +1097,316 @@ export const promptCards: DetailedPrompt[] = [
       reviewCount: 33
     },
     createdAt: "2024-05-18T11:00:00Z"
+  },
+  {
+    id: "p38",
+    slug: "performance-thumbnail-audit-nextjs",
+    title: "Next.js Image Performance & Thumbnail Audit",
+    description: "A practical coding prompt that diagnoses scroll jank, oversized thumbnails, layout shifts, lazy loading, and image optimizer configuration.",
+    content: {
+      text: "Act as a senior frontend performance engineer. Audit a Next.js marketplace grid where cards use full-resolution images as CSS background thumbnails and scrolling feels laggy. Identify the rendering bottlenecks, propose a concrete image delivery strategy, and return patched React/TypeScript code. Focus on Next Image Optimization, small thumbnail URLs, lazy loading, paint containment, stable aspect ratios, and avoiding full-size media in repeated cards.",
+      negativePrompt: "Do not give generic performance tips. Do not suggest removing images entirely. Do not ignore CSS background-image usage.",
+      version: "1.0"
+    },
+    promptToCopy: "Act as a senior frontend performance engineer. Audit a {{framework}} marketplace grid where {{card_count}} cards use full-resolution images as CSS background thumbnails and scrolling feels laggy. Identify the rendering bottlenecks, propose a concrete image delivery strategy, and return patched {{language}} code. Focus on {{optimization_targets}}. Include before/after reasoning, implementation steps, and verification commands.",
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/coding_interface.png", thumbnailUrl: "/images/marketplace/coding_interface.png", dimensions: { width: 1024, height: 1024 } }],
+    creator: { id: "u38", handle: "@perf.builder", displayName: "Performance Builder", avatarUrl: "", isVerified: true },
+    engine: { modelId: "gpt-4.1", provider: "OpenAI", parameters: { temperature: 0.15, max_tokens: 3500 } },
+    taxonomy: { primaryCategory: "Coding Prompts", tags: ["nextjs", "performance", "images", "typescript"] },
+    stats: { likes: 4800, views: 42000, saves: 2600 },
+    pricing: { type: 'free', priceCents: 0 },
+    _db: {
+      longDescription: "Built for real UI performance work: it forces the model to inspect image size, paint cost, repeated background images, lazy loading behavior, and Next.js optimizer routing before suggesting code.",
+      variables: [
+        { name: "framework", description: "Target app framework", default: "Next.js App Router" },
+        { name: "card_count", description: "Approximate number of cards on scrollable pages", default: "36 to 120" },
+        { name: "language", description: "Implementation language", default: "TypeScript" },
+        { name: "optimization_targets", description: "Specific performance areas", default: "thumbnail resizing, lazy loading, stable aspect ratios, reduced repaint cost" }
+      ],
+      exampleInput: { framework: "Next.js 16 App Router", card_count: "60", language: "TypeScript", optimization_targets: "Next image optimizer URLs and CSS containment" },
+      exampleOutput: "```ts\nexport function optimizedThumbnailUrl(url?: string, width = 384) {\n  if (!url) return '/main.png';\n  if (!url.startsWith('/') || url.startsWith('/_next/')) return url;\n  return `/_next/image?url=${encodeURIComponent(url)}&w=${width}&q=68`;\n}\n```\n\nVerification checklist:\n1. Cards request 384px thumbnails instead of 1024px originals.\n2. Grid cards keep fixed aspect ratios to avoid layout shifts.\n3. Build passes and scroll timeline shows lower image decode cost.",
+      modelCompatibility: ["GPT-4.1", "Claude Sonnet 4", "Gemini 2.5 Pro"],
+      avgRating: 5.0,
+      reviewCount: 118,
+      purchaseCount: 540,
+      is_featured: true,
+      is_staff_pick: true
+    },
+    createdAt: "2026-05-08T09:00:00Z"
+  },
+  {
+    id: "p39",
+    slug: "cinematic-space-travel-landing-builder",
+    title: "Cinematic Space-Travel Landing Page Builder",
+    description: "Complete React build prompt for a video-led aerospace landing page with liquid glass, crossfading videos, and motion-safe animation.",
+    content: {
+      text: "Build a single-page cinematic space-travel landing page with two full-height sections: Hero and Capabilities. Use React, TypeScript, Tailwind CSS, Framer Motion, and a custom requestAnimationFrame video crossfade component. Implement a liquid-glass nav system, blur-in word animation, responsive stats cards, partner logos, and capability cards. Optimize background videos for preload strategy and avoid unnecessary overlays unless specified.",
+      negativePrompt: "Do not use placeholder lorem ipsum. Do not use CSS transitions for video fades. Do not add gradient blobs, bokeh, or decorative orbs.",
+      version: "2.0"
+    },
+    promptToCopy: "Build a single-page {{brand_category}} landing page called {{brand_name}} with {{sections}} full-height sections. Use {{stack}}. Include a custom rAF-driven FadingVideo component with manual loop reset, a shared liquid-glass design system, Framer Motion entrance animations, responsive navigation, stats cards, partner row, and feature cards. Use these media URLs: hero={{hero_video_url}}, second={{second_video_url}}. Return complete file-by-file implementation and note performance safeguards.",
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/perfume_landing.png", thumbnailUrl: "/images/marketplace/perfume_landing.png", dimensions: { width: 1440, height: 900 } }],
+    creator: { id: "u39", handle: "@landing.systems", displayName: "Landing Systems", avatarUrl: "", isVerified: true },
+    engine: { modelId: "claude-sonnet-4", provider: "Anthropic", parameters: { temperature: 0.25 } },
+    taxonomy: { primaryCategory: "Websites & UI", tags: ["landing", "react", "video", "framer-motion"] },
+    stats: { likes: 5300, views: 51000, saves: 3100 },
+    pricing: { type: 'one_time', priceCents: 899 },
+    _db: {
+      longDescription: "A refined version of the cinematic space brief. It keeps the visual intent but converts it into an implementation-ready prompt with variables, explicit media inputs, animation constraints, and performance guidance.",
+      variables: [
+        { name: "brand_category", description: "Landing page domain", default: "space travel" },
+        { name: "brand_name", description: "Product or company name", default: "Astral" },
+        { name: "sections", description: "Number and names of sections", default: "Hero and Capabilities" },
+        { name: "stack", description: "Frontend stack", default: "React + Vite + TypeScript + Tailwind + Framer Motion" },
+        { name: "hero_video_url", description: "Hero background video URL", default: "https://cdn.example.com/space-hero.mp4" },
+        { name: "second_video_url", description: "Capabilities background video URL", default: "https://cdn.example.com/capabilities.mp4" }
+      ],
+      exampleInput: { brand_name: "Aeon", brand_category: "commercial Mars voyage", sections: "Hero and Capabilities", stack: "React 18 + Vite + TypeScript + Tailwind" },
+      exampleOutput: "```tsx\nfunction FadingVideo({ src, className }: { src: string; className?: string }) {\n  const videoRef = useRef<HTMLVideoElement>(null);\n  const rafRef = useRef<number | null>(null);\n  const fadingOutRef = useRef(false);\n  const fadeTo = useCallback((target: number, duration = 500) => {\n    const video = videoRef.current;\n    if (!video) return;\n    if (rafRef.current) cancelAnimationFrame(rafRef.current);\n    const start = performance.now();\n    const from = Number(video.style.opacity || 0);\n    const tick = (now: number) => {\n      const t = Math.min(1, (now - start) / duration);\n      video.style.opacity = String(from + (target - from) * t);\n      if (t < 1) rafRef.current = requestAnimationFrame(tick);\n    };\n    rafRef.current = requestAnimationFrame(tick);\n  }, []);\n  return <video ref={videoRef} src={src} muted playsInline preload=\"metadata\" className={className} />;\n}\n```",
+      modelCompatibility: ["Claude Sonnet 4", "GPT-4.1", "Gemini 2.5 Pro"],
+      avgRating: 4.9,
+      reviewCount: 96,
+      purchaseCount: 470,
+      is_featured: true
+    },
+    createdAt: "2026-05-08T10:00:00Z"
+  },
+  {
+    id: "p40",
+    slug: "prisma-creative-studio-vite-page",
+    title: "Prisma Creative Studio Vite Page",
+    description: "A code-heavy prompt for a dark cinematic studio website with scroll-linked text reveal, animated word pull-up, and responsive feature cards.",
+    content: {
+      text: "Create a React, Vite, TypeScript, Tailwind CSS landing page for a creative studio. Include Hero, About, and Features sections; load Almarai and Instrument Serif; use Framer Motion for word pull-up, card reveal, and scroll-linked character opacity; use lucide-react icons; include video background, noise overlays, responsive cards, and exact component boundaries.",
+      negativePrompt: "Do not use a marketing-only mockup. Do not skip file structure. Do not omit responsive behavior.",
+      version: "1.0"
+    },
+    promptToCopy: "Create a React + Vite + TypeScript + Tailwind CSS landing page for a creative studio called {{studio_name}}. Sections: {{sections}}. Use {{font_body}} for body and {{font_display}} for accent serif text. Build reusable components for WordsPullUp, WordsPullUpMultiStyle, AnimatedLetter, VideoHero, FeatureCard, and NoiseOverlay. Use framer-motion and lucide-react. Return complete files: package.json, tailwind.config.js, index.html, src/main.tsx, src/App.tsx, src/index.css, and component files.",
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/tech_branding.png", thumbnailUrl: "/images/marketplace/tech_branding.png", dimensions: { width: 2000, height: 2000 } }],
+    creator: { id: "u40", handle: "@vite.pages", displayName: "Vite Pages", avatarUrl: "", isVerified: true },
+    engine: { modelId: "gpt-4.1", provider: "OpenAI", parameters: { temperature: 0.2, max_tokens: 5000 } },
+    taxonomy: { primaryCategory: "Coding Prompts", tags: ["vite", "react", "tailwind", "framer-motion"] },
+    stats: { likes: 4100, views: 38000, saves: 2400 },
+    pricing: { type: 'one_time', priceCents: 799 },
+    _db: {
+      variables: [
+        { name: "studio_name", description: "Creative studio name", default: "Prisma" },
+        { name: "sections", description: "Page sections", default: "Hero, About, Features" },
+        { name: "font_body", description: "Body font", default: "Almarai" },
+        { name: "font_display", description: "Accent font", default: "Instrument Serif italic" }
+      ],
+      exampleInput: { studio_name: "Prisma", sections: "Hero, About, Features", font_body: "Almarai", font_display: "Instrument Serif" },
+      exampleOutput: "```tsx\nconst WordsPullUp = ({ text }: { text: string }) => {\n  const ref = useRef(null);\n  const isInView = useInView(ref, { once: true, margin: '-10% 0px' });\n  return (\n    <span ref={ref} className=\"inline-flex flex-wrap justify-center overflow-hidden\">\n      {text.split(' ').map((word, index) => (\n        <motion.span key={`${word}-${index}`} initial={{ y: 20, opacity: 0 }} animate={isInView ? { y: 0, opacity: 1 } : undefined} transition={{ delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }} className=\"mr-[0.22em] inline-block\">\n          {word}\n        </motion.span>\n      ))}\n    </span>\n  );\n};\n```",
+      modelCompatibility: ["GPT-4.1", "Claude Sonnet 4"],
+      avgRating: 4.9,
+      reviewCount: 76,
+      purchaseCount: 350
+    },
+    createdAt: "2026-05-08T11:00:00Z"
+  },
+  {
+    id: "p41",
+    slug: "shadcn-liquid-video-hero",
+    title: "shadcn Liquid-Glass Video Hero",
+    description: "A production prompt for a single cinematic hero section using shadcn/ui, HSL theme variables, Google fonts, and liquid-glass chrome.",
+    content: {
+      text: "Create a fullscreen video hero section with glassmorphic navigation, cinematic typography, shadcn/ui button primitives, Tailwind CSS variables, and accessible responsive behavior. Use a full-bleed looping background video, no decorative blobs, no overlays unless requested, and simple fade-rise CSS animations.",
+      negativePrompt: "Do not use random gradients. Do not use unconfigured shadcn imports. Do not omit CSS variables.",
+      version: "1.0"
+    },
+    promptToCopy: "Create a single-page hero section for {{brand_name}} using React + Vite + Tailwind + TypeScript + shadcn/ui. Include a fullscreen looping video at {{video_url}}, glassmorphic nav, display font {{display_font}}, body font {{body_font}}, HSL CSS theme variables, a liquid-glass class, and fade-rise animations. Return complete code and explain where each file goes.",
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/fintech_dashboard.png", thumbnailUrl: "/images/marketplace/fintech_dashboard.png", dimensions: { width: 1920, height: 1080 } }],
+    creator: { id: "u41", handle: "@shadcn.ui", displayName: "shadcn UI Lab", avatarUrl: "", isVerified: true },
+    engine: { modelId: "gpt-4.1", provider: "OpenAI", parameters: { temperature: 0.18 } },
+    taxonomy: { primaryCategory: "Coding Prompts", tags: ["shadcn", "hero", "tailwind", "typescript"] },
+    stats: { likes: 3600, views: 29500, saves: 1800 },
+    pricing: { type: 'free', priceCents: 0 },
+    _db: {
+      variables: [
+        { name: "brand_name", description: "Hero brand name", default: "Velorah" },
+        { name: "video_url", description: "Background video URL", default: "https://cdn.example.com/hero.mp4" },
+        { name: "display_font", description: "Heading font", default: "Instrument Serif" },
+        { name: "body_font", description: "Body font", default: "Inter" }
+      ],
+      exampleInput: { brand_name: "Velorah", video_url: "https://cdn.example.com/quiet-hero.mp4", display_font: "Instrument Serif", body_font: "Inter" },
+      exampleOutput: "```css\n.liquid-glass {\n  background: rgba(255,255,255,0.01);\n  backdrop-filter: blur(4px);\n  -webkit-backdrop-filter: blur(4px);\n  box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);\n  position: relative;\n  overflow: hidden;\n}\n@keyframes fade-rise {\n  from { opacity: 0; transform: translateY(24px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n```",
+      modelCompatibility: ["GPT-4.1", "Claude Sonnet 4", "Cursor Agent"],
+      avgRating: 4.8,
+      reviewCount: 64
+    },
+    createdAt: "2026-05-08T12:00:00Z"
+  },
+  {
+    id: "p42",
+    slug: "fullstack-feature-implementation-agent",
+    title: "Full-Stack Feature Implementation Agent",
+    description: "A repo-aware coding prompt for implementing frontend, backend, schema, API, auth, admin, and tests in one coherent pass.",
+    content: {
+      text: "Act as a senior full-stack product engineer working inside an existing repository. First inspect the codebase, local docs, database schema, existing UI patterns, and routing conventions. Then implement the requested feature across UI, API, database actions, validation, auth gates, loading/error states, and tests. Keep changes scoped and verify with build/lint/test commands.",
+      negativePrompt: "Do not invent a new architecture before reading the codebase. Do not stop at a plan unless blocked. Do not overwrite unrelated user changes.",
+      version: "1.1"
+    },
+    promptToCopy: "Act as a senior full-stack engineer in an existing {{framework}} repo. Implement {{feature_name}} across {{write_scope}}. Requirements: {{requirements}}. First inspect local docs and current patterns. Then edit files directly, wire frontend state to backend persistence, add validation and auth checks, handle loading/error/empty states, and run {{verification_command}}. Return changed files, behavior summary, and any residual risks.",
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/coding_interface.png", thumbnailUrl: "/images/marketplace/coding_interface.png", dimensions: { width: 1024, height: 1024 } }],
+    creator: { id: "u42", handle: "@fullstack.agent", displayName: "Fullstack Agent", avatarUrl: "", isVerified: true },
+    engine: { modelId: "claude-sonnet-4", provider: "Anthropic", parameters: { temperature: 0.15, max_tokens: 6000 } },
+    taxonomy: { primaryCategory: "Coding Prompts", tags: ["fullstack", "backend", "tests", "admin"] },
+    stats: { likes: 6200, views: 61000, saves: 4200 },
+    pricing: { type: 'one_time', priceCents: 1199 },
+    _db: {
+      variables: [
+        { name: "framework", description: "Application stack", default: "Next.js App Router + Supabase" },
+        { name: "feature_name", description: "Feature to implement", default: "persistent collections and browsing history" },
+        { name: "write_scope", description: "Files or modules allowed to change", default: "app/components, app/actions, API routes, DB queries" },
+        { name: "requirements", description: "Behavior requirements", default: "remove dummy data, add real persistence, keep UI consistent" },
+        { name: "verification_command", description: "Command to run after changes", default: "npm run build" }
+      ],
+      exampleInput: { framework: "Next.js 16 + Supabase", feature_name: "admin moderation dashboard", write_scope: "app/admin and app/actions", verification_command: "npm run build" },
+      exampleOutput: "Implementation plan:\n1. Read local framework docs and existing action patterns.\n2. Add server actions with role checks.\n3. Update admin UI with metrics, reports, and user controls.\n4. Verify with npm run build.\n\nExpected output includes file list, exact behavior, and test/build result.",
+      modelCompatibility: ["Claude Sonnet 4", "GPT-4.1", "Codex"],
+      avgRating: 5.0,
+      reviewCount: 141,
+      purchaseCount: 720,
+      is_staff_pick: true
+    },
+    createdAt: "2026-05-09T09:00:00Z"
+  },
+  {
+    id: "p43",
+    slug: "faceless-reels-funny-fruit-video-pack",
+    title: "Faceless Reels & Funny Fruit Video Pack",
+    description: "Short-form video prompt system for faceless reels, fruit comedy, ASMR loops, captions, hooks, and shot lists.",
+    content: {
+      text: "Create a faceless short-form video concept package for TikTok, Reels, and Shorts. Generate a hook, 5-shot sequence, voiceover or no-voice caption track, ASMR sound design notes, image/video generation prompts, retention beat markers, title, hashtags, and editing notes. Optimize for funny fruit skits, satisfying macro cuts, product-safe visuals, and loopable endings.",
+      negativePrompt: "Do not write unsafe stunts. Do not rely on a visible human face. Do not make the output vague.",
+      version: "1.0"
+    },
+    promptToCopy: "Create a {{duration_seconds}} second faceless {{platform}} video package about {{topic}} in the style {{style}}. Include hook, 5-shot sequence, visual prompts, ASMR sound notes, caption overlays, loop ending, retention beats, title, hashtags, and editing instructions. Target audience: {{audience}}. Output as a production table.",
+    assets: [{ type: 'video', primaryUrl: "/images/marketplace/banana_drama.png", thumbnailUrl: "/images/marketplace/banana_drama.png", dimensions: { width: 1080, height: 1920 } }],
+    creator: { id: "u43", handle: "@reel.factory", displayName: "Reel Factory", avatarUrl: "", isVerified: true },
+    engine: { modelId: "veo-3", provider: "Google Veo", parameters: { duration: 8, aspect_ratio: "9:16" } },
+    taxonomy: { primaryCategory: "Social & Reels", tags: ["faceless", "fruit", "asmr", "shorts"] },
+    stats: { likes: 5900, views: 87000, saves: 3300 },
+    pricing: { type: 'one_time', priceCents: 599 },
+    _db: {
+      variables: [
+        { name: "duration_seconds", description: "Video length", default: "12" },
+        { name: "platform", description: "Publishing platform", default: "Instagram Reels" },
+        { name: "topic", description: "Central video idea", default: "a banana dramatically training for a fruit race" },
+        { name: "style", description: "Visual and comedic style", default: "macro tabletop comedy with satisfying ASMR cuts" },
+        { name: "audience", description: "Viewer group", default: "people who like funny food loops and satisfying edits" }
+      ],
+      exampleInput: { duration_seconds: "9", platform: "TikTok", topic: "strawberries escaping a blender", style: "fast funny fruit skit with ASMR Foley" },
+      exampleOutput: "| Time | Shot | Visual Prompt | Audio | Caption |\n|---|---|---|---|---|\n| 0-1s | Hook | Extreme macro strawberry lineup under dramatic kitchen light | tiny drum hit | They know. |\n| 1-3s | Escape | Strawberry rolls past the blender button in slow motion | rubber squeak | Operation Smoothie Breakout |\n| 7-9s | Loop | Blender lid closes, cut back to lineup | soft click | Watch the left one... |",
+      modelCompatibility: ["Veo", "Runway", "Pika", "Kling", "Sora"],
+      avgRating: 4.9,
+      reviewCount: 102,
+      purchaseCount: 610,
+      is_featured: true
+    },
+    createdAt: "2026-05-09T10:00:00Z"
+  },
+  {
+    id: "p44",
+    slug: "brand-product-video-photoshoot-director",
+    title: "Brand Product Video & Photoshoot Director",
+    description: "Detailed prompt for commercial product showcases, fashion shoots, coffee shop ads, ecommerce hero media, and launch content.",
+    content: {
+      text: "Act as a commercial creative director planning a brand product shoot. Produce hero still prompts, 9:16 reel prompts, 16:9 website video prompts, lighting maps, prop lists, camera/lens notes, color palette, shot sequence, edit rhythm, negative prompts, and copy overlays. Adapt output for ecommerce, coffee shops, institutes, SaaS, fashion, beauty, tech, food, and local businesses.",
+      negativePrompt: "Do not generate generic stock photography. Do not ignore brand positioning or channel format.",
+      version: "1.0"
+    },
+    promptToCopy: "Act as a commercial creative director. Build a complete {{campaign_type}} shoot plan for {{brand_name}}, a {{business_type}}. Product/service: {{product}}. Mood: {{mood}}. Channels: {{channels}}. Return still image prompts, video prompts, shot list, lighting, props, camera notes, edit rhythm, captions, CTAs, and negative prompts.",
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/watch_ad.png", thumbnailUrl: "/images/marketplace/watch_ad.png", dimensions: { width: 1024, height: 1024 } }],
+    creator: { id: "u44", handle: "@brand.director", displayName: "Brand Director", avatarUrl: "", isVerified: true },
+    engine: { modelId: "mj-v6", provider: "Midjourney", parameters: { stylize: 220 } },
+    taxonomy: { primaryCategory: "Product Ads", tags: ["photoshoot", "ecommerce", "brand", "video"] },
+    stats: { likes: 4700, views: 39000, saves: 2300 },
+    pricing: { type: 'one_time', priceCents: 899 },
+    _db: {
+      variables: [
+        { name: "campaign_type", description: "Campaign format", default: "product launch" },
+        { name: "brand_name", description: "Brand name", default: "Northline Coffee" },
+        { name: "business_type", description: "Business category", default: "specialty coffee shop" },
+        { name: "product", description: "Product or service", default: "cold brew subscription box" },
+        { name: "mood", description: "Creative direction", default: "warm cinematic morning ritual" },
+        { name: "channels", description: "Publishing channels", default: "website hero, ecommerce PDP, Instagram Reels" }
+      ],
+      exampleInput: { brand_name: "Northline Coffee", business_type: "coffee shop", product: "single-origin cold brew", mood: "warm premium morning ritual", channels: "ecommerce, reels, storefront posters" },
+      exampleOutput: "Hero still prompt: A premium glass bottle of single-origin cold brew on a dark walnut counter, warm sunrise rim light, soft steam from fresh espresso nearby, condensation beads, linen napkin, cinematic 85mm product photography, shallow depth, editorial coffee campaign.\n\n9:16 reel prompt: Slow macro pour over ice, condensation crackle, hand enters only as silhouette, three cuts synced to soft cafe ambience, final frame loops to first pour.",
+      modelCompatibility: ["Midjourney v6", "FLUX", "Veo", "Runway"],
+      avgRating: 4.9,
+      reviewCount: 88,
+      purchaseCount: 420
+    },
+    createdAt: "2026-05-09T11:00:00Z"
+  },
+  {
+    id: "p45",
+    slug: "institute-ecommerce-website-generator",
+    title: "Institute, Ecommerce & Local Business Website Generator",
+    description: "A practical website prompt that generates pages, components, copy, schema, analytics events, and responsive Tailwind layouts.",
+    content: {
+      text: "Create a production-ready website plan and implementation for a local business, ecommerce store, institute, course platform, coffee shop, agency, clinic, restaurant, or service brand. Include information architecture, sections, component tree, Tailwind layout, forms, SEO metadata, structured data, analytics events, admin-editable content model, and accessibility requirements.",
+      negativePrompt: "Do not create a generic landing page only. Do not skip mobile layout, forms, or SEO.",
+      version: "1.0"
+    },
+    promptToCopy: "Create a production-ready {{site_type}} website for {{brand_name}}. Audience: {{audience}}. Primary goal: {{primary_goal}}. Required pages/sections: {{sections}}. Tech stack: {{stack}}. Include component tree, responsive Tailwind implementation, content model, form handling, SEO metadata, structured data, analytics events, and accessibility checklist.",
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/perfume_landing.png", thumbnailUrl: "/images/marketplace/perfume_landing.png", dimensions: { width: 1440, height: 900 } }],
+    creator: { id: "u45", handle: "@site.architect", displayName: "Site Architect", avatarUrl: "", isVerified: true },
+    engine: { modelId: "gpt-4.1", provider: "OpenAI", parameters: { temperature: 0.2, max_tokens: 4500 } },
+    taxonomy: { primaryCategory: "Websites & UI", tags: ["ecommerce", "institute", "local-business", "seo"] },
+    stats: { likes: 3900, views: 34000, saves: 2100 },
+    pricing: { type: 'one_time', priceCents: 999 },
+    _db: {
+      variables: [
+        { name: "site_type", description: "Website category", default: "institute admissions website" },
+        { name: "brand_name", description: "Website brand", default: "Nova Institute" },
+        { name: "audience", description: "Primary visitors", default: "students and parents" },
+        { name: "primary_goal", description: "Conversion objective", default: "book a counseling call" },
+        { name: "sections", description: "Pages or homepage sections", default: "hero, programs, outcomes, faculty, fees, FAQ, lead form" },
+        { name: "stack", description: "Technology stack", default: "Next.js + TypeScript + Tailwind + Supabase" }
+      ],
+      exampleInput: { site_type: "coffee shop ecommerce website", brand_name: "Oak & Steam", audience: "local customers and gift buyers", primary_goal: "sell subscriptions and drive store visits" },
+      exampleOutput: "Component tree:\n- SiteShell\n- HeaderNav\n- HeroOffer\n- ProductGrid\n- SubscriptionBuilder\n- StoreLocator\n- ReviewsBand\n- FAQAccordion\n- LeadCaptureForm\n\nSEO: LocalBusiness JSON-LD, Product JSON-LD for subscription packs, OpenGraph image plan, event tracking for add_to_cart, subscription_start, directions_click.",
+      modelCompatibility: ["GPT-4.1", "Claude Sonnet 4", "Cursor Agent"],
+      avgRating: 4.8,
+      reviewCount: 67,
+      purchaseCount: 310
+    },
+    createdAt: "2026-05-09T12:00:00Z"
+  },
+  {
+    id: "p46",
+    slug: "productivity-automation-prompt-system",
+    title: "Productivity Automation Workflow Builder",
+    description: "A detailed automation prompt for Notion, Sheets, Zapier, Make, Airtable, email, CRM, and internal dashboards.",
+    content: {
+      text: "Design a productivity automation workflow from a messy manual process. Convert goals into triggers, data model, validation rules, automation steps, fallback paths, owner responsibilities, notification logic, dashboard metrics, and implementation snippets for tools like Notion, Google Sheets, Airtable, Zapier, Make, Slack, email, CRM, or custom APIs.",
+      negativePrompt: "Do not recommend automation before mapping the current process. Do not ignore failure states or permissions.",
+      version: "1.0"
+    },
+    promptToCopy: "Design a productivity automation workflow for {{team_type}}. Current manual process: {{manual_process}}. Tools available: {{tools}}. Desired outcome: {{desired_outcome}}. Return process map, data schema, triggers, actions, validation, error handling, notifications, dashboard metrics, and implementation snippets.",
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/fintech_dashboard.png", thumbnailUrl: "/images/marketplace/fintech_dashboard.png", dimensions: { width: 1920, height: 1080 } }],
+    creator: { id: "u46", handle: "@ops.systems", displayName: "Ops Systems", avatarUrl: "", isVerified: true },
+    engine: { modelId: "gpt-4.1", provider: "OpenAI", parameters: { temperature: 0.18 } },
+    taxonomy: { primaryCategory: "Productivity", tags: ["automation", "workflow", "ops", "dashboard"] },
+    stats: { likes: 2700, views: 24000, saves: 1600 },
+    pricing: { type: 'free', priceCents: 0 },
+    _db: {
+      variables: [
+        { name: "team_type", description: "Team or business context", default: "small ecommerce operations team" },
+        { name: "manual_process", description: "Current workflow pain", default: "copying order issues from email into a spreadsheet" },
+        { name: "tools", description: "Available software", default: "Gmail, Google Sheets, Slack, Zapier" },
+        { name: "desired_outcome", description: "Automation goal", default: "triage order issues and notify the owner within 5 minutes" }
+      ],
+      exampleInput: { team_type: "creator agency", manual_process: "manually tracking brand deal deadlines", tools: "Notion, Gmail, Slack", desired_outcome: "auto-create tasks and reminders" },
+      exampleOutput: "Automation design:\nTrigger: Gmail label 'Brand Deal'.\nParser: Extract brand, due date, deliverables, fee.\nAction: Create Notion task with status Intake.\nValidation: If due date missing, route to Needs Review.\nNotification: Slack DM owner 72h and 24h before deadline.\nMetric: On-time delivery rate, overdue tasks, average approval delay.",
+      modelCompatibility: ["GPT-4.1", "Claude Sonnet 4", "Gemini 2.5 Pro"],
+      avgRating: 4.8,
+      reviewCount: 52
+    },
+    createdAt: "2026-05-09T13:00:00Z"
   }
 ];
 

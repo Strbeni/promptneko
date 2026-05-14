@@ -131,7 +131,7 @@ function FeaturedRail({ prompts }: { prompts: DetailedPrompt[] }) {
           >
             <div
               className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-              style={{ backgroundImage: `url(${p.assets[0]?.thumbnailUrl || "/main.png"})` }}
+              style={{ backgroundImage: `url(${optimizedThumbnailUrl(p.assets[0]?.thumbnailUrl)})` }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
             {(!p.pricing || p.pricing.type === "free") && (
@@ -189,7 +189,7 @@ function CategoryHero({
                 <div
                   key={i}
                   className="flex-1 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${src})` }}
+                  style={{ backgroundImage: `url(${optimizedThumbnailUrl(src)})` }}
                 />
               ))}
             </div>
@@ -199,7 +199,7 @@ function CategoryHero({
                 <div
                   key={i}
                   className="flex-1 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${src})` }}
+                  style={{ backgroundImage: `url(${optimizedThumbnailUrl(src)})` }}
                 />
               ))}
             </div>

@@ -1,24 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-import { createServerClient, createSupabaseServerClient } from '../../../../lib/supabase';
+import { revalidateTag } from 'next/cache';
+import { createServerClient } from '../../../../lib/supabase';
 import { createPrompt, createPromptAssets, createPromptVariables } from '../../../../lib/queries';
-import { jsonError, rateLimit, sanitizeText } from '../../../../lib/api-utils';
+import { jsonError, rateLimit, requireUser, sanitizeText } from '../../../../lib/api-utils';
 
 export async function POST(req: NextRequest) {
   try {
     const limited = await rateLimit('prompt-create', 15, 60_000);
     if (!limited.ok) return jsonError('Too many prompt submissions. Please wait and try again.', 429);
 
-    // --- Authenticate the caller ---
-    const cookieStore = await cookies();
-    console.log('[create-prompt] Cookies received:', cookieStore.getAll().map(c => c.name));
-    
-    const authClient = createSupabaseServerClient(cookieStore);
-    const { data: { user }, error: authError } = await authClient.auth.getUser();
-
+    const { user, error: authError } = await requireUser();
     if (authError || !user) {
-      console.error('[create-prompt] Auth failed:', authError?.message || 'No user found');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -102,6 +95,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    revalidateTag('prompts', 'max');
     return NextResponse.json({ success: true, promptId, slug });
   } catch (err: any) {
     console.error('[create-prompt]', err);

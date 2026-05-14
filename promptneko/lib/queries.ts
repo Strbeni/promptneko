@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { unstable_cache } from 'next/cache';
 import { createServerClient } from './supabase';
 import { DbPrompt } from './database.types';
 
@@ -26,43 +27,75 @@ export async function getPrompts({
   offset?: number;
   featured?: boolean;
 } = {}) {
-  const db = createServerClient();
-  const safeLimit = Math.min(Math.max(limit, 1), 100);
-  const safeOffset = Math.max(offset, 0);
-  let q = db
-    .from('prompts')
-    .select(PROMPT_SELECT)
-    .eq('status', 'active')
-    .order('published_at', { ascending: false })
-    .range(safeOffset, safeOffset + safeLimit - 1);
-
-  if (category) q = q.eq('category_id', category);
-  if (search) q = q.textSearch('title', search, { type: 'plain' });
-  if (featured !== undefined) q = q.eq('is_featured', featured);
-
-  const { data, error } = await (q as any);
-  if (error) throw error;
-  return (data ?? []) as any[];
+  return getCachedPrompts(
+    category ?? null,
+    search ?? null,
+    Math.min(Math.max(limit, 1), 100),
+    Math.max(offset, 0),
+    featured ?? null
+  );
 }
 
+const getCachedPrompts = unstable_cache(
+  async (
+    category: string | null,
+    search: string | null,
+    safeLimit: number,
+    safeOffset: number,
+    featured: boolean | null
+  ) => {
+    const db = createServerClient();
+    let q = db
+      .from('prompts')
+      .select(PROMPT_SELECT)
+      .eq('status', 'active')
+      .order('published_at', { ascending: false })
+      .range(safeOffset, safeOffset + safeLimit - 1);
+
+    if (category) q = q.eq('category_id', category);
+    if (search) q = q.textSearch('title', search, { type: 'plain' });
+    if (featured !== null) q = q.eq('is_featured', featured);
+
+    const { data, error } = await (q as any);
+    if (error) throw error;
+    return (data ?? []) as any[];
+  },
+  ['prompts-list'],
+  { revalidate: 300, tags: ['prompts'] }
+);
+
 export async function getPromptBySlug(slug: string, options?: { includePending?: boolean }) {
+  if (!options?.includePending) return getCachedPromptBySlug(slug);
+
   const db = createServerClient();
-  let query = db
+  const query = db
     .from('prompts')
     .select(PROMPT_SELECT)
-    .eq('slug', slug);
-
-  if (!options?.includePending) {
-    query = query.eq('status', 'active');
-  } else {
-    query = query.in('status', ['active', 'pending_review']);
-  }
+    .eq('slug', slug)
+    .in('status', ['active', 'pending_review']);
 
   const { data, error } = await query.single();
 
   if (error) return null;
   return data;
 }
+
+const getCachedPromptBySlug = unstable_cache(
+  async (slug: string) => {
+    const db = createServerClient();
+    const { data, error } = await db
+      .from('prompts')
+      .select(PROMPT_SELECT)
+      .eq('slug', slug)
+      .eq('status', 'active')
+      .single();
+
+    if (error) return null;
+    return data;
+  },
+  ['prompt-by-slug'],
+  { revalidate: 300, tags: ['prompts'] }
+);
 
 export async function getPromptsByCategory(categorySlug: string, limit = 8) {
   const db = createServerClient();
@@ -78,34 +111,50 @@ export async function getPromptsByCategory(categorySlug: string, limit = 8) {
 }
 
 export async function getCategories() {
-  const db = createServerClient();
-  const { data, error } = await db
-    .from('categories')
-    .select('*')
-    .is('parent_category_id', null)
-    .eq('is_active', true)
-    .order('sort_order');
-
-  if (error) throw error;
-  return data ?? [];
+  return getCachedCategories();
 }
+
+const getCachedCategories = unstable_cache(
+  async () => {
+    const db = createServerClient();
+    const { data, error } = await db
+      .from('categories')
+      .select('*')
+      .is('parent_category_id', null)
+      .eq('is_active', true)
+      .order('sort_order');
+
+    if (error) throw error;
+    return data ?? [];
+  },
+  ['categories-root'],
+  { revalidate: 3600, tags: ['categories'] }
+);
 
 export async function getFeaturedPrompts(limit = 8) {
   return getPrompts({ featured: true, limit });
 }
 
 export async function getTrendingPrompts(limit = 8) {
-  const db = createServerClient();
-  const { data, error } = await db
-    .from('prompts')
-    .select(PROMPT_SELECT)
-    .eq('status', 'active')
-    .order('view_count', { ascending: false })
-    .limit(limit);
-
-  if (error) throw error;
-  return data ?? [];
+  return getCachedTrendingPrompts(Math.min(Math.max(limit, 1), 100));
 }
+
+const getCachedTrendingPrompts = unstable_cache(
+  async (limit: number) => {
+    const db = createServerClient();
+    const { data, error } = await db
+      .from('prompts')
+      .select(PROMPT_SELECT)
+      .eq('status', 'active')
+      .order('view_count', { ascending: false })
+      .limit(limit);
+
+    if (error) throw error;
+    return data ?? [];
+  },
+  ['prompts-trending'],
+  { revalidate: 300, tags: ['prompts'] }
+);
 
 export async function incrementViewCount(promptId: string) {
   const db = createServerClient();

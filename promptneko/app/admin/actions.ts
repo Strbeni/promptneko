@@ -1,17 +1,26 @@
 "use server";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
 import { createSupabaseServerClient, createServerClient } from "../../lib/supabase";
 
-export async function getAdminDashboardData() {
+async function requireAdmin() {
   const cookieStore = await cookies();
   const authClient = createSupabaseServerClient(cookieStore);
   const { data: { user } } = await authClient.auth.getUser();
 
-  if (!user) return { error: "Unauthorized" };
+  if (!user) return { user: null, error: "Unauthorized" as const };
 
   const { data: dbUser } = await (authClient as any).from("users").select("role").eq("id", user.id).single();
-  if ((dbUser as any)?.role !== "admin") return { error: "Forbidden" };
+  if ((dbUser as any)?.role !== "admin") return { user: null, error: "Forbidden" as const };
+
+  return { user, error: null };
+}
+
+export async function getAdminDashboardData() {
+  const admin = await requireAdmin();
+  if (admin.error || !admin.user) return { error: admin.error };
 
   // Use service role client to bypass RLS
   const adminClient = createServerClient();
@@ -70,44 +79,31 @@ export async function getAdminDashboardData() {
 }
 
 export async function adminToggleFlag(id: string, flag: 'is_featured' | 'is_staff_pick', value: boolean) {
-  const cookieStore = await cookies();
-  const authClient = createSupabaseServerClient(cookieStore);
-  const { data: { user } } = await authClient.auth.getUser();
-  if (!user) return { error: "Unauthorized" };
-
-  const { data: dbUser } = await (authClient as any).from("users").select("role").eq("id", user.id).single();
-  if ((dbUser as any)?.role !== "admin") return { error: "Forbidden" };
+  const admin = await requireAdmin();
+  if (admin.error || !admin.user) return { error: admin.error };
 
   const adminClient = createServerClient();
   await (adminClient as any).from("prompts").update({ [flag]: value }).eq("id", id);
+  revalidateTag("prompts", "max");
   return { success: true };
 }
 
 export async function adminUpdatePromptStatus(id: string, status: string) {
-  const cookieStore = await cookies();
-  const authClient = createSupabaseServerClient(cookieStore);
-  const { data: { user } } = await authClient.auth.getUser();
-  if (!user) return { error: "Unauthorized" };
-
-  const { data: dbUser } = await (authClient as any).from("users").select("role").eq("id", user.id).single();
-  if ((dbUser as any)?.role !== "admin") return { error: "Forbidden" };
+  const admin = await requireAdmin();
+  if (admin.error || !admin.user) return { error: admin.error };
 
   const adminClient = createServerClient();
   // Map UI status "published" to DB status "active"
   const finalStatus = status === "published" ? "active" : status;
   
   await (adminClient as any).from("prompts").update({ status: finalStatus }).eq("id", id);
+  revalidateTag("prompts", "max");
   return { success: true };
 }
 
 export async function adminUpdatePromptCategory(id: string, categoryLabel: string) {
-  const cookieStore = await cookies();
-  const authClient = createSupabaseServerClient(cookieStore);
-  const { data: { user } } = await authClient.auth.getUser();
-  if (!user) return { error: "Unauthorized" };
-
-  const { data: dbUser } = await (authClient as any).from("users").select("role").eq("id", user.id).single();
-  if ((dbUser as any)?.role !== "admin") return { error: "Forbidden" };
+  const admin = await requireAdmin();
+  if (admin.error || !admin.user) return { error: admin.error };
 
   const adminClient = createServerClient();
   
@@ -121,7 +117,7 @@ export async function adminUpdatePromptCategory(id: string, categoryLabel: strin
   
   if (!categoryId) {
     // If category doesn't exist, try to create it
-    const { data: newCat, error } = await (adminClient as any).from("categories").insert({ name: categoryLabel, slug }).select("id").single();
+    const { data: newCat } = await (adminClient as any).from("categories").insert({ name: categoryLabel, slug }).select("id").single();
     if (newCat) {
       categoryId = newCat.id;
     } else {
@@ -130,38 +126,31 @@ export async function adminUpdatePromptCategory(id: string, categoryLabel: strin
   }
 
   await (adminClient as any).from("prompts").update({ category_id: categoryId }).eq("id", id);
+  revalidateTag("prompts", "max");
+  revalidateTag("categories", "max");
   return { success: true };
 }
 
 export async function adminApproveCreator(id: string) {
-  const cookieStore = await cookies();
-  const authClient = createSupabaseServerClient(cookieStore);
-  const { data: { user } } = await authClient.auth.getUser();
-  if (!user) return { error: "Unauthorized" };
-
-  const { data: dbUser } = await (authClient as any).from("users").select("role").eq("id", user.id).single();
-  if ((dbUser as any)?.role !== "admin") return { error: "Forbidden" };
+  const admin = await requireAdmin();
+  if (admin.error || !admin.user) return { error: admin.error };
 
   const adminClient = createServerClient();
   await (adminClient as any).from("users").update({ is_creator_approved: true }).eq("id", id);
+  revalidateTag("prompts", "max");
   return { success: true };
 }
 
 export async function adminUpdateReportStatus(id: string, status: 'investigating' | 'resolved' | 'dismissed') {
-  const cookieStore = await cookies();
-  const authClient = createSupabaseServerClient(cookieStore);
-  const { data: { user } } = await authClient.auth.getUser();
-  if (!user) return { error: "Unauthorized" };
-
-  const { data: dbUser } = await (authClient as any).from("users").select("role").eq("id", user.id).single();
-  if ((dbUser as any)?.role !== "admin") return { error: "Forbidden" };
+  const admin = await requireAdmin();
+  if (admin.error || !admin.user) return { error: admin.error };
 
   const adminClient = createServerClient();
   await (adminClient as any)
     .from("moderation_reports")
     .update({
       status,
-      resolved_by: status === "resolved" || status === "dismissed" ? user.id : null,
+      resolved_by: status === "resolved" || status === "dismissed" ? admin.user.id : null,
       resolved_at: status === "resolved" || status === "dismissed" ? new Date().toISOString() : null,
     })
     .eq("id", id);
@@ -169,19 +158,14 @@ export async function adminUpdateReportStatus(id: string, status: 'investigating
 }
 
 export async function adminToggleUserBan(id: string, isBanned: boolean) {
-  const cookieStore = await cookies();
-  const authClient = createSupabaseServerClient(cookieStore);
-  const { data: { user } } = await authClient.auth.getUser();
-  if (!user) return { error: "Unauthorized" };
-
-  const { data: dbUser } = await (authClient as any).from("users").select("role").eq("id", user.id).single();
-  if ((dbUser as any)?.role !== "admin") return { error: "Forbidden" };
+  const admin = await requireAdmin();
+  if (admin.error || !admin.user) return { error: admin.error };
 
   const adminClient = createServerClient();
   await (adminClient as any)
     .from("users")
     .update({ is_banned: isBanned, ban_reason: isBanned ? "Admin dashboard action" : null })
     .eq("id", id)
-    .neq("id", user.id);
+    .neq("id", admin.user.id);
   return { success: true };
 }

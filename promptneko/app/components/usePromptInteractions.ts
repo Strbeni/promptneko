@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAuth } from "./auth/AuthContext";
+import { getCachedJson, invalidateCachedJson } from "./client-request-cache";
 import { DetailedPrompt } from "./marketplace-data";
 
 type CounterPatch = {
@@ -11,7 +12,13 @@ type CounterPatch = {
 };
 
 const LOCAL_KEY = "pn_static_interactions";
+const INTERACTION_CACHE_MS = 30_000;
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+type InteractionPayload = {
+  liked?: string[];
+  saved?: string[];
+};
 
 function isDbPrompt(id: string) {
   return UUID_RE.test(id);
@@ -52,20 +59,19 @@ export function usePromptInteractions(prompts: DetailedPrompt[]) {
   useEffect(() => {
     if (!user || !dbIdsKey) return;
 
-    const controller = new AbortController();
-    fetch(`/api/me/interactions?ids=${encodeURIComponent(dbIdsKey)}`, {
-      signal: controller.signal,
-    })
-      .then((res) => (res.ok ? res.json() : null))
+    let cancelled = false;
+    getCachedJson<InteractionPayload>(`/api/me/interactions?ids=${encodeURIComponent(dbIdsKey)}`, INTERACTION_CACHE_MS)
       .then((payload) => {
-        if (!payload) return;
+        if (!payload || cancelled) return;
         const local = readLocal();
         setLiked(new Set([...local.liked, ...(payload.liked ?? [])]));
         setSaved(new Set([...local.saved, ...(payload.saved ?? [])]));
       })
       .catch(() => {});
 
-    return () => controller.abort();
+    return () => {
+      cancelled = true;
+    };
   }, [dbIdsKey, user]);
 
   const persistLocal = useCallback((nextLiked: Set<string>, nextSaved: Set<string>) => {
@@ -90,6 +96,8 @@ export function usePromptInteractions(prompts: DetailedPrompt[]) {
       }
 
       const payload = await res.json();
+      invalidateCachedJson("/api/me/interactions");
+      invalidateCachedJson("/api/me/liked");
       setCounterPatches((current) => ({
         ...current,
         [prompt.id]: { ...current[prompt.id], likes: payload.likes },
@@ -117,6 +125,8 @@ export function usePromptInteractions(prompts: DetailedPrompt[]) {
       }
 
       const payload = await res.json();
+      invalidateCachedJson("/api/me/interactions");
+      invalidateCachedJson("/api/me/saved");
       setCounterPatches((current) => ({
         ...current,
         [prompt.id]: { ...current[prompt.id], saves: payload.saves },
