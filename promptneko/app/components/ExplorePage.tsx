@@ -3,7 +3,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, Suspense } from "react";
-import { ActionDrawer } from "./ActionDrawer";
+
 import { FilterBar } from "./FilterBar";
 import { optimizedThumbnailUrl } from "./image-utils";
 import { MarketplaceLayout } from "./MarketplaceLayout";
@@ -226,7 +226,7 @@ function ExplorePageInner({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }
           }}
         />
       </div>
-      <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
+      
     </MarketplaceLayout>
   );
 }

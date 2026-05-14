@@ -21,7 +21,7 @@ import {
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState } from "react";
-import { ActionDrawer } from "./ActionDrawer";
+
 import { optimizedThumbnailUrl } from "./image-utils";
 import { MarketplaceLayout } from "./MarketplaceLayout";
 import { CategoryMeta, DetailedPrompt } from "./marketplace-data";
@@ -672,7 +672,7 @@ function CategoryDetailPageInner({
         )}
       </div>
 
-      <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
+      
     </MarketplaceLayout>
   );
 }

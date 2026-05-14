@@ -28,7 +28,7 @@ import {
   Globe,
 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { ActionDrawer } from "./ActionDrawer";
+
 import { optimizedThumbnailUrl } from "./image-utils";
 import { MarketplaceLayout } from "./MarketplaceLayout";
 import { CATEGORY_REGISTRY, DetailedPrompt, getCategoryBySlug } from "./marketplace-data";
@@ -372,7 +372,7 @@ export function CategoriesPage({ allPrompts = [] }: { allPrompts?: DetailedPromp
 
         <SuggestCategory />
       </div>
-      <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
+      
     </MarketplaceLayout>
   );
 }

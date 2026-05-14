@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ActionDrawer } from "../ActionDrawer";
+
 import { MarketplaceLayout } from "../MarketplaceLayout";
 import { DetailedPrompt } from "../marketplace-data";
 import { recordPromptView } from "../prompt-history";
@@ -120,7 +120,7 @@ export function PromptDetailPage({ prompt, isPending }: PromptDetailPageProps) {
         </div>
       </div>
 
-      <ActionDrawer action={drawerAction} prompt={drawerAction && promptDrawerActions.has(drawerAction) ? patchedPrompt : null} onClose={() => setDrawerAction(null)} />
+      
     </MarketplaceLayout>
   );
 }

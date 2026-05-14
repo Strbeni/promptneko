@@ -1,11 +1,31 @@
 const fs = require('fs');
-const path = './app/components/marketplace-data.ts';
-let data = fs.readFileSync(path, 'utf8');
+const path = require('path');
 
-// Update DetailedPrompt interface
-data = data.replace('content: {\n    text: string;\n    negativePrompt?: string;\n    version: string;\n  };', 'content: {\n    text: string;\n    negativePrompt?: string;\n    version: string;\n  };\n  promptToCopy?: string;');
+function walkDir(dir, callback) {
+  fs.readdirSync(dir).forEach(f => {
+    let dirPath = path.join(dir, f);
+    let isDirectory = fs.statSync(dirPath).isDirectory();
+    isDirectory ? walkDir(dirPath, callback) : callback(path.join(dir, f));
+  });
+}
 
-// Add promptToCopy to objects
-data = data.replace(/content: \{ text: \"([^\"]+)\", version: \"([^\"]+)\" \},/g, 'content: { text: \"$1\", version: \"$2\" }, promptToCopy: \"$1\",');
-
-fs.writeFileSync(path, data);
+walkDir('./app', function(filePath) {
+  if (filePath.endsWith('.tsx') || filePath.endsWith('.ts')) {
+    let content = fs.readFileSync(filePath, 'utf8');
+    let original = content;
+    
+    // Remove import
+    content = content.replace(/import\s+{\s*ActionDrawer\s*}\s+from\s+["'].*ActionDrawer["'];?\n?/g, '');
+    
+    // Remove usage <ActionDrawer ... />
+    content = content.replace(/<ActionDrawer\s+[^>]*\/>\n?/g, '');
+    
+    // Also remove from MainPage.tsx which might have it split over lines
+    content = content.replace(/<ActionDrawer[\s\S]*?\/>\n?/g, '');
+    
+    if (content !== original) {
+      fs.writeFileSync(filePath, content);
+      console.log('Cleaned:', filePath);
+    }
+  }
+});

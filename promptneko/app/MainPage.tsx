@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { MarketplaceLayout } from "./components/MarketplaceLayout";
 import { HomePage } from "./components/HomePage";
-import { ActionDrawer } from "./components/ActionDrawer";
+
 
 import { DetailedPrompt } from "./components/marketplace-data";
 
@@ -43,13 +43,7 @@ export default function MainPage({ allPrompts = [] }: { allPrompts?: DetailedPro
         allPrompts={allPrompts}
       />
 
-      <ActionDrawer 
-        action={drawerAction} 
-        prompt={null} 
-        onClose={() => {
-          setDrawerAction(null);
-        }} 
-      />
+      
     </MarketplaceLayout>
   );
 }

@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ActionDrawer } from "./ActionDrawer";
+
 import { MarketplaceLayout } from "./MarketplaceLayout";
 
 export function ToolsPage() {
@@ -112,7 +112,7 @@ export function ToolsPage() {
         </div>
       </div>
 
-      <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
+      
     </MarketplaceLayout>
   );
 }

@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useMemo } from "react";
-import { ActionDrawer } from "./ActionDrawer";
+
 import { optimizedThumbnailUrl } from "./image-utils";
 import { MarketplaceLayout } from "./MarketplaceLayout";
 import { DetailedPrompt, promptCards } from "./marketplace-data";
@@ -275,7 +275,7 @@ export function LikedPage() {
           </div>
         )}
       </div>
-      <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
+      
     </MarketplaceLayout>
   );
 }

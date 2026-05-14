@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { ActionDrawer } from "./ActionDrawer";
+
 import { optimizedThumbnailUrl } from "./image-utils";
 import { MarketplaceLayout } from "./MarketplaceLayout";
 import { DetailedPrompt } from "./marketplace-data";
@@ -495,7 +495,7 @@ export function CollectionsPage({ allPrompts = [] }: { allPrompts?: DetailedProm
           }}
         />
       )}
-      <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
+      
     </MarketplaceLayout>
   );
 }

@@ -154,8 +154,17 @@ export function Sidebar({ active, onAction }: SidebarProps) {
         ))}
       </div>
 
+      {/* Legal & Policy Links */}
+      <div className="mt-auto pt-3 pb-2 border-t border-[#141b31] flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[10.5px] text-[#657091]">
+        <Link href="/about" className="hover:text-white transition-colors no-underline text-inherit" onClick={() => onAction("About")}>About</Link>
+        <Link href="/contact" className="hover:text-white transition-colors no-underline text-inherit" onClick={() => onAction("Contact")}>Contact</Link>
+        <Link href="/privacy" className="hover:text-white transition-colors no-underline text-inherit" onClick={() => onAction("Privacy")}>Privacy</Link>
+        <Link href="/terms" className="hover:text-white transition-colors no-underline text-inherit" onClick={() => onAction("Terms")}>Terms</Link>
+        <Link href="/cookies" className="hover:text-white transition-colors no-underline text-inherit" onClick={() => onAction("Cookies")}>Cookies</Link>
+      </div>
+
       {/* Footer Controls */}
-      <div className="mt-auto pt-4 border-t border-[#141b31] flex items-center justify-between px-1 text-[#7e89ac]">
+      <div className="pt-2 border-t border-[#141b31]/40 flex items-center justify-between px-1 text-[#7e89ac]">
         <button 
           aria-label="Settings" 
           title="Settings"
