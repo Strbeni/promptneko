@@ -33,8 +33,8 @@ export function RightRail({ onAction, isCollapsed, onToggle }: RightRailProps) {
   }
 
   return (
-    <aside className="w-[300px] flex-[0_0_300px] overflow-y-auto bg-[#030711] border-l border-white/5 flex flex-col h-full">
-      <div className="p-5 flex items-center justify-between border-b border-white/5 mb-2">
+    <aside className="w-[280px] flex-[0_0_280px] bg-[#030711] border-l border-white/5 flex flex-col h-full min-h-0">
+      <div className="px-4 py-3 flex items-center justify-between border-b border-white/5">
         <h2 className="text-white text-[15px] font-bold tracking-tight">Market Insights</h2>
         <button 
           onClick={onToggle}
@@ -44,10 +44,10 @@ export function RightRail({ onAction, isCollapsed, onToggle }: RightRailProps) {
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-5 py-2 space-y-8 scrollbar-hide">
+      <div className="flex-1 min-h-0 overflow-y-auto px-4 py-3 space-y-5 custom-scrollbar">
         {/* Trending */}
         <section>
-          <header className="flex items-center justify-between mb-4">
+          <header className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2 text-[#a46aff]">
               <TrendingUp size={14} />
               <span className="text-[11px] font-bold uppercase tracking-wider">Trending</span>
@@ -56,12 +56,12 @@ export function RightRail({ onAction, isCollapsed, onToggle }: RightRailProps) {
               View All
             </button>
           </header>
-          <div className="space-y-3">
+          <div className="space-y-1.5">
             {trendingSearches.slice(0, 4).map((item, index) => (
               <button 
                 key={item.title}
                 onClick={() => onAction(item.title)}
-                className="group flex items-center w-full gap-3 p-2 rounded-xl hover:bg-white/5 transition-all text-left"
+                className="group flex items-center w-full gap-2.5 p-2 rounded-lg hover:bg-white/5 transition-all text-left"
               >
                 <span className="text-[11px] font-mono font-bold text-white/20 group-hover:text-[#a46aff] transition-colors">
                   0{index + 1}
@@ -81,18 +81,18 @@ export function RightRail({ onAction, isCollapsed, onToggle }: RightRailProps) {
 
         {/* Trending Tags */}
         <section>
-          <header className="flex items-center justify-between mb-4">
+          <header className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2 text-[#00d9a8]">
               <Tag size={14} />
               <span className="text-[11px] font-bold uppercase tracking-wider">Top Topics</span>
             </div>
           </header>
-          <div className="grid grid-cols-1 gap-2">
+          <div className="grid grid-cols-1 gap-1.5">
             {popularTags.slice(0, 5).map(([tag, count]) => (
               <button 
                 key={tag}
                 onClick={() => onAction(tag)}
-                className="flex items-center justify-between p-3 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/5 hover:border-white/10 transition-all text-left group"
+                className="flex items-center justify-between px-3 py-2 rounded-lg border border-white/5 bg-white/[0.02] hover:bg-white/5 hover:border-white/10 transition-all text-left group"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#00d9a8]/40 group-hover:bg-[#00d9a8] transition-colors" />
@@ -106,18 +106,18 @@ export function RightRail({ onAction, isCollapsed, onToggle }: RightRailProps) {
 
         {/* Tags */}
         <section>
-          <header className="flex items-center justify-between mb-4">
+          <header className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2 text-[#ff9f21]">
               <Tag size={14} />
               <span className="text-[11px] font-bold uppercase tracking-wider">Popular Tags</span>
             </div>
           </header>
           <div className="flex flex-wrap gap-2">
-            {popularTags.slice(0, 10).map(([tag, count]) => (
+            {popularTags.slice(0, 10).map(([tag]) => (
               <button 
                 key={tag}
                 onClick={() => onAction(tag)}
-                className="px-3 py-1.5 rounded-lg border border-white/5 bg-white/5 text-[11px] text-white/60 hover:text-white hover:bg-white/10 transition-all"
+                className="px-2.5 py-1.5 rounded-lg border border-white/5 bg-white/5 text-[11px] text-white/60 hover:text-white hover:bg-white/10 transition-all"
               >
                 #{tag}
               </button>
@@ -126,10 +126,9 @@ export function RightRail({ onAction, isCollapsed, onToggle }: RightRailProps) {
         </section>
 
         {/* Sell Banner */}
-        <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#8751ff] to-[#6530e9] p-5 shadow-lg group">
-          <div className="absolute top-[-20%] right-[-10%] w-32 h-32 bg-white/10 rounded-full blur-2xl transition-transform group-hover:scale-150 duration-700" />
+        <section className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#8751ff] to-[#6530e9] p-4 shadow-lg group">
           <h3 className="relative z-10 text-white text-[17px] font-bold leading-tight">Start earning today</h3>
-          <p className="relative z-10 mt-1.5 mb-4 text-white/70 text-[12px] leading-relaxed">Join 12K+ creators selling high-performing prompts.</p>
+          <p className="relative z-10 mt-1 mb-3 text-white/70 text-[12px] leading-snug">Publish tested prompts with variables, examples, and outputs.</p>
           <button 
             onClick={() => onAction("Sell")}
             className="relative z-10 w-full py-2 bg-white text-[#6530e9] rounded-xl text-[13px] font-bold shadow-md hover:bg-white/90 transition-colors"

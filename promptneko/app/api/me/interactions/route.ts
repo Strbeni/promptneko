@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
 import { isUuid, jsonError, requireUser } from "../../../../lib/api-utils";
 

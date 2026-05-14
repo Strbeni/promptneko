@@ -30,10 +30,7 @@ export function ReviewsPanel({ prompt }: { prompt: DetailedPrompt }) {
   const isDbPrompt = UUID_RE.test(prompt.id);
 
   useEffect(() => {
-    if (!isDbPrompt) {
-      setReviews([]);
-      return;
-    }
+    if (!isDbPrompt) return;
 
     const controller = new AbortController();
     fetch(`/api/prompts/${prompt.id}/reviews`, { signal: controller.signal })

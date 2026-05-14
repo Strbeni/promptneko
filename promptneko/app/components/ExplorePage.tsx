@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, Suspense } from "react";
 import { ActionDrawer } from "./ActionDrawer";
 import { FilterBar } from "./FilterBar";
+import { optimizedThumbnailUrl } from "./image-utils";
 import { MarketplaceLayout } from "./MarketplaceLayout";
 import { PromptCard } from "./PromptCard";
 import { ResultsTabs } from "./ResultsTabs";
@@ -20,6 +21,10 @@ function ExplorePageInner({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }
   const [activeNav, setActiveNav] = useState("Explore");
   const [query, setQuery] = useState(initialQuery);
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [activeTab, setActiveTab] = useState("Popular");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [drawerAction, setDrawerAction] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -32,19 +37,44 @@ function ExplorePageInner({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }
     }
   }, [searchParams]);
 
-  const [activeTab, setActiveTab] = useState("Popular");
-  const [drawerAction, setDrawerAction] = useState<string | null>(null);
+  // Reset pagination to page 1 when query, category, or tab changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [query, selectedCategory, activeTab]);
+
   const { liked, saved, toggleLike, toggleSave } = usePromptInteractions(allPrompts);
 
   const visiblePrompts = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    return allPrompts.filter((prompt) => {
+    let result = allPrompts.filter((prompt) => {
       const matchesQuery = !needle || 
-        `${prompt.title} ${prompt.engine.provider} ${prompt.creator.handle} ${prompt.taxonomy.primaryCategory}`.toLowerCase().includes(needle);
+        `${prompt.title} ${prompt.engine.provider} ${prompt.creator.handle} ${prompt.taxonomy.primaryCategory} ${prompt.description}`.toLowerCase().includes(needle);
       const matchesCategory = selectedCategory === "All" || prompt.taxonomy.primaryCategory === selectedCategory;
-      return matchesQuery && matchesCategory;
+      const matchesFree = activeTab !== "Free" || !prompt.pricing?.priceCents;
+      return matchesQuery && matchesCategory && matchesFree;
     });
-  }, [query, selectedCategory, allPrompts]);
+
+    // Apply Sorting based on Active Tab
+    result = [...result].sort((a, b) => {
+      if (activeTab === "Newest") {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      }
+      if (activeTab === "Top Rated") {
+        return (b._db?.avgRating || 0) - (a._db?.avgRating || 0);
+      }
+      // Default to Popular (views + likes)
+      return (b.stats.likes + b.stats.views) - (a.stats.likes + a.stats.views);
+    });
+
+    return result;
+  }, [query, selectedCategory, activeTab, allPrompts]);
+
+  const itemsPerPage = 12;
+  const totalPages = Math.ceil(visiblePrompts.length / itemsPerPage) || 1;
+  const paginatedPrompts = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return visiblePrompts.slice(start, start + itemsPerPage);
+  }, [visiblePrompts, currentPage]);
 
   function openAction(action: string) {
     setActiveNav(action);
@@ -67,7 +97,7 @@ function ExplorePageInner({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }
       onSearch={handleSearch}
       onAction={openAction}
     >
-      <div className="flex flex-1 min-h-0 [grid-template-columns:minmax(0,1fr)_300px] lg:grid">
+      <div className="flex flex-1 min-h-0 [grid-template-columns:minmax(0,1fr)_280px] lg:grid">
         <section className="flex-1 min-w-0 overflow-y-auto px-5 py-3 pb-7 lg:border-r lg:border-[#121930]/72">
           <FilterBar
             query={query}
@@ -75,46 +105,116 @@ function ExplorePageInner({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }
             onQueryChange={setQuery}
             onCategoryChange={(category) => {
               setSelectedCategory(category);
-              // Update URL without a full reload for copy-paste sharing
               window.history.replaceState(null, '', `/explore?q=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`);
             }}
             onAction={openAction}
           />
 
-          <ResultsTabs activeTab={activeTab} onTabChange={setActiveTab} />
+          <ResultsTabs 
+            activeTab={activeTab} 
+            onTabChange={setActiveTab}
+            viewMode={viewMode}
+            onViewModeChange={setViewMode}
+            totalCount={visiblePrompts.length}
+          />
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {(visiblePrompts.length || query || selectedCategory !== "All" ? visiblePrompts : allPrompts).map((prompt) => (
-              <PromptCard
-                item={prompt}
-                isSaved={saved.has(prompt.id)}
-                isLiked={liked.has(prompt.id)}
-                key={prompt.id}
-                onOpen={() => {
-                  setDrawerAction(null);
-                }}
-                onSave={() => toggleSave(prompt)}
-                onLike={() => toggleLike(prompt)}
-              />
-            ))}
-          </div>
+          {viewMode === "grid" ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {paginatedPrompts.map((prompt) => (
+                <PromptCard
+                  item={prompt}
+                  isSaved={saved.has(prompt.id)}
+                  isLiked={liked.has(prompt.id)}
+                  key={prompt.id}
+                  onOpen={() => setDrawerAction(null)}
+                  onSave={() => toggleSave(prompt)}
+                  onLike={() => toggleLike(prompt)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col gap-3">
+              {paginatedPrompts.map((prompt) => (
+                <div 
+                  key={prompt.id}
+                  onClick={() => {
+                    setDrawerAction(null);
+                    router.push(`/prompt/${prompt.slug}`);
+                  }}
+                  className="flex items-center gap-4 p-3 rounded-2xl bg-[#111111] border border-white/5 hover:border-white/10 cursor-pointer transition-all group"
+                >
+                  <div 
+                    className="w-16 h-16 rounded-xl bg-cover bg-center shrink-0 relative overflow-hidden"
+                    style={{ backgroundImage: `url(${optimizedThumbnailUrl(prompt.assets[0]?.thumbnailUrl)})` }}
+                  />
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-white text-[14px] font-semibold m-0 truncate group-hover:text-[#a46aff] transition-colors">{prompt.title}</h3>
+                    <p className="text-[#888] text-[12px] m-0 mt-0.5 truncate">{prompt.description}</p>
+                    <div className="flex items-center gap-3 mt-1.5 text-[11px] text-[#666]">
+                      <span>{prompt.engine.provider}</span>
+                      <span>•</span>
+                      <span>{prompt.taxonomy.primaryCategory}</span>
+                      <span>•</span>
+                      <span className="text-[#00d9a8] font-medium">{prompt.pricing?.priceCents ? `$${(prompt.pricing.priceCents / 100).toFixed(2)}` : 'Free'}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button 
+                      className={`px-3 py-1.5 rounded-lg border text-[12px] font-medium transition-colors ${saved.has(prompt.id) ? 'bg-white/10 text-white border-white/20' : 'bg-transparent text-white/60 border-white/5 hover:text-white hover:bg-white/5'}`}
+                      onClick={(e) => { e.stopPropagation(); toggleSave(prompt); }}
+                    >
+                      {saved.has(prompt.id) ? 'Saved' : 'Save'}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
-          <footer className="flex items-center justify-center h-[60px] mt-4 gap-[9px] border border-[#151d37] border-t-0 rounded-[8px] bg-[#090e1b]">
-            <button aria-label="Previous page" className="grid place-items-center min-w-[30px] h-[30px] border border-[#1a2340] rounded-[7px] bg-[#0e1427] text-[#a5aec7] hover:text-white"><ChevronLeft size={17} /></button>
-            {[1, 2, 3, 4, 5].map((page) => (
+          {totalPages > 1 && (
+            <footer className="flex items-center justify-center h-[60px] mt-6 gap-1.5 border border-[#151d37] rounded-xl bg-[#090e1b] px-4">
               <button 
-                className={`grid place-items-center min-w-[30px] h-[30px] border rounded-[7px] text-[12px] 
-                  ${page === 1 ? "border-[#7332f3] bg-[#682ee2] text-white" : "border-[#1a2340] bg-[#0e1427] text-[#a5aec7]"}`} 
-                key={page}
+                aria-label="Previous page" 
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                className="grid place-items-center min-w-[30px] h-[30px] border border-[#1a2340] rounded-lg bg-[#0e1427] text-[#a5aec7] hover:text-white disabled:opacity-40 transition-all cursor-pointer"
               >
-                {page}
+                <ChevronLeft size={16} />
               </button>
-            ))}
-            <button className="grid place-items-center min-w-[30px] h-[30px] border border-[#1a2340] rounded-7 bg-[#0e1427] text-[#a5aec7]">1059</button>
-            <button aria-label="Next page" className="grid place-items-center min-w-[30px] h-[30px] border border-[#1a2340] rounded-7 bg-[#0e1427] text-[#a5aec7] hover:text-white"><ChevronRight size={17} /></button>
-            <span className="ml-auto text-[#8f98b4] text-[12px]">Go to page</span>
-            <button className="grid place-items-center min-w-[30px] h-[30px] border border-[#1a2340] rounded-7 bg-[#0e1427] text-[#a5aec7]">1</button>
-          </footer>
+              
+              {Array.from({ length: Math.min(5, totalPages) }, (_, i) => i + 1).map((page) => (
+                <button 
+                  className={`grid place-items-center min-w-[30px] h-[30px] border rounded-lg text-[12px] font-medium transition-all cursor-pointer
+                    ${currentPage === page ? "border-[#7332f3] bg-[#682ee2] text-white shadow-md" : "border-[#1a2340] bg-[#0e1427] text-[#a5aec7] hover:text-white"}`} 
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                >
+                  {page}
+                </button>
+              ))}
+              
+              {totalPages > 5 && <span className="text-[#666] px-1">...</span>}
+              {totalPages > 5 && (
+                <button 
+                  className={`grid place-items-center min-w-[30px] h-[30px] border rounded-lg text-[12px] font-medium transition-all cursor-pointer
+                    ${currentPage === totalPages ? "border-[#7332f3] bg-[#682ee2] text-white shadow-md" : "border-[#1a2340] bg-[#0e1427] text-[#a5aec7] hover:text-white"}`}
+                  onClick={() => setCurrentPage(totalPages)}
+                >
+                  {totalPages}
+                </button>
+              )}
+
+              <button 
+                aria-label="Next page" 
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                className="grid place-items-center min-w-[30px] h-[30px] border border-[#1a2340] rounded-lg bg-[#0e1427] text-[#a5aec7] hover:text-white disabled:opacity-40 transition-all cursor-pointer"
+              >
+                <ChevronRight size={16} />
+              </button>
+              <span className="ml-auto text-[#8f98b4] text-[12px] hidden sm:inline">Page {currentPage} of {totalPages}</span>
+            </footer>
+          )}
         </section>
 
         <RightRail

@@ -21,6 +21,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ActionDrawer } from "./ActionDrawer";
+import { optimizedThumbnailUrl } from "./image-utils";
 import { MarketplaceLayout } from "./MarketplaceLayout";
 import { promptCards, DetailedPrompt } from "./marketplace-data";
 
@@ -56,7 +57,7 @@ function ManageCard({ item }: { item: (typeof MY_PROMPTS)[0] }) {
       {/* Thumbnail */}
       <div
         className="relative aspect-[4/3] bg-cover bg-center cursor-pointer overflow-hidden"
-        style={{ backgroundImage: `url(${asset?.thumbnailUrl || "/main.png"})` }}
+        style={{ backgroundImage: `url(${optimizedThumbnailUrl(asset?.thumbnailUrl)})` }}
         onClick={() => router.push(`/prompt/${item.slug}`)}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />

@@ -2,11 +2,9 @@
 
 import {
   Heart,
-  ChevronRight,
   Copy,
   Check,
   Search,
-  Grid2X2,
   Bookmark,
   Play,
   Share2,
@@ -14,6 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useMemo } from "react";
 import { ActionDrawer } from "./ActionDrawer";
+import { optimizedThumbnailUrl } from "./image-utils";
 import { MarketplaceLayout } from "./MarketplaceLayout";
 import { DetailedPrompt, promptCards } from "./marketplace-data";
 import { dbPromptsToDetailedPrompts } from "../../lib/adapters";
@@ -37,7 +36,10 @@ function readLocalLikes() {
 }
 
 function writeLocalLikes(next: string[]) {
-  const parsed = JSON.parse(window.localStorage.getItem(LOCAL_KEY) ?? "{}");
+  let parsed = {};
+  try {
+    parsed = JSON.parse(window.localStorage.getItem(LOCAL_KEY) ?? "{}");
+  } catch {}
   window.localStorage.setItem(LOCAL_KEY, JSON.stringify({ ...parsed, liked: next }));
 }
 
@@ -57,7 +59,7 @@ function LikedCard({ item, onUnlike }: { item: DetailedPrompt; onUnlike: (id: st
       <div className="relative aspect-[4/3] overflow-hidden bg-[#090e1b]">
         <div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-          style={{ backgroundImage: `url(${asset?.thumbnailUrl || "/main.png"})` }}
+          style={{ backgroundImage: `url(${optimizedThumbnailUrl(asset?.thumbnailUrl)})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
@@ -124,20 +126,13 @@ export function LikedPage() {
   const { user, loading } = useAuth();
   const [query, setQuery] = useState("");
   const [drawerAction, setDrawerAction] = useState<string | null>(null);
-  const [likedIds, setLikedIds] = useState<string[]>([]);
+  const [likedIds, setLikedIds] = useState<string[]>(() => readLocalLikes());
   const [remotePrompts, setRemotePrompts] = useState<DetailedPrompt[]>([]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQ, setSearchQ] = useState("");
 
   useEffect(() => {
-    setLikedIds(readLocalLikes());
-  }, []);
-
-  useEffect(() => {
-    if (loading || !user) {
-      setRemotePrompts([]);
-      return;
-    }
+    if (loading || !user) return;
 
     const controller = new AbortController();
     fetch("/api/me/liked", { signal: controller.signal })
@@ -204,7 +199,7 @@ export function LikedPage() {
               Liked Prompts
             </h1>
             <p className="m-0 mt-1.5 text-[13px] text-[#6070a0]">
-              {visible.length} prompt{visible.length !== 1 ? "s" : ""} you've shown love to.
+              {visible.length} prompt{visible.length !== 1 ? "s" : ""} you&apos;ve shown love to.
             </p>
           </div>
           <button
@@ -258,7 +253,7 @@ export function LikedPage() {
             <Heart size={48} className="text-[#1e2840] mb-5" />
             <h3 className="m-0 text-[16px] font-bold text-white mb-2">No liked prompts yet</h3>
             <p className="m-0 text-[13px] text-[#6070a0] mb-6 max-w-[300px]">
-              Hit the heart icon on prompts you like, and they'll be saved here.
+              Hit the heart icon on prompts you like, and they&apos;ll be saved here.
             </p>
             <button
               className="flex items-center gap-2 h-10 px-6 rounded-xl bg-[#1e2840] text-white text-[13px] font-semibold hover:bg-[#2a3854] transition-all"

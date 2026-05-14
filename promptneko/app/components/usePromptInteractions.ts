@@ -50,12 +50,6 @@ export function usePromptInteractions(prompts: DetailedPrompt[]) {
   const dbIdsKey = useMemo(() => prompts.map((prompt) => prompt.id).filter(isDbPrompt).join(","), [prompts]);
 
   useEffect(() => {
-    const local = readLocal();
-    setLiked((current) => new Set([...local.liked, ...Array.from(current).filter(isDbPrompt)]));
-    setSaved((current) => new Set([...local.saved, ...Array.from(current).filter(isDbPrompt)]));
-  }, []);
-
-  useEffect(() => {
     if (!user || !dbIdsKey) return;
 
     const controller = new AbortController();

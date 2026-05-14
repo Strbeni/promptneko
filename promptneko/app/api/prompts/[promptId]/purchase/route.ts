@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "../../../../../lib/supabase";
 import { isUuid, jsonError, rateLimit, requireUser } from "../../../../../lib/api-utils";
@@ -13,7 +14,7 @@ export async function POST(_req: NextRequest, ctx: RouteContext<"/api/prompts/[p
   if (error || !user) return jsonError("Sign in to buy prompts", 401);
 
   const db = createServerClient();
-  const { data: prompt, error: promptError } = await db
+  const { data: prompt, error: promptError } = await (db as any)
     .from("prompts")
     .select("id, creator_id, version, price_cents, pricing_type, status, purchase_count")
     .eq("id", promptId)
@@ -27,7 +28,7 @@ export async function POST(_req: NextRequest, ctx: RouteContext<"/api/prompts/[p
     return jsonError("Creators already own their prompts", 400);
   }
 
-  const { data: existingPurchase } = await db
+  const { data: existingPurchase } = await (db as any)
     .from("purchases")
     .select("id, status")
     .eq("buyer_id", user.id)

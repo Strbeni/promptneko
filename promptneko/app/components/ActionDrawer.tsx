@@ -3,6 +3,7 @@
 import { Check, Loader2, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { optimizedThumbnailUrl } from "./image-utils";
 import { DetailedPrompt } from "./marketplace-data";
 
 type ActionDrawerProps = {
@@ -72,7 +73,7 @@ export function ActionDrawer({ action, prompt, onClose }: ActionDrawerProps) {
         <>
           <div 
             className="w-full aspect-square rounded-2xl mb-5 bg-cover bg-center" 
-            style={{ backgroundImage: `url(${prompt.assets[0].thumbnailUrl})` }} 
+            style={{ backgroundImage: `url(${optimizedThumbnailUrl(prompt.assets[0]?.thumbnailUrl)})` }} 
           />
           <h2 className="m-0 text-white text-[22px] font-bold">{prompt.title}</h2>
           <p className="mt-2 text-[#aeb5ca] text-[14px] leading-relaxed">

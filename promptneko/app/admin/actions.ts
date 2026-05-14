@@ -34,10 +34,38 @@ export async function getAdminDashboardData() {
     .eq("role", "creator")
     .eq("is_creator_approved", false);
 
+  const { data: reports } = await (adminClient as any)
+    .from("moderation_reports")
+    .select("id, target_type, target_id, reason, description, status, created_at")
+    .in("status", ["open", "investigating"])
+    .order("created_at", { ascending: false })
+    .limit(20);
+
+  const { data: users } = await (adminClient as any)
+    .from("users")
+    .select("id, display_name, email, role, is_banned, created_at")
+    .order("created_at", { ascending: false })
+    .limit(25);
+
+  const [{ count: promptCount }, { count: activeCount }, { count: userCount }, { count: reportCount }] = await Promise.all([
+    (adminClient as any).from("prompts").select("id", { count: "exact", head: true }),
+    (adminClient as any).from("prompts").select("id", { count: "exact", head: true }).eq("status", "active"),
+    (adminClient as any).from("users").select("id", { count: "exact", head: true }),
+    (adminClient as any).from("moderation_reports").select("id", { count: "exact", head: true }).in("status", ["open", "investigating"]),
+  ]);
+
   return { 
     prompts: prompts || [], 
     activePrompts: activePrompts || [],
-    creators: creators || [] 
+    creators: creators || [],
+    reports: reports || [],
+    users: users || [],
+    metrics: {
+      prompts: promptCount ?? 0,
+      activePrompts: activeCount ?? 0,
+      users: userCount ?? 0,
+      openReports: reportCount ?? 0,
+    },
   };
 }
 
@@ -116,5 +144,44 @@ export async function adminApproveCreator(id: string) {
 
   const adminClient = createServerClient();
   await (adminClient as any).from("users").update({ is_creator_approved: true }).eq("id", id);
+  return { success: true };
+}
+
+export async function adminUpdateReportStatus(id: string, status: 'investigating' | 'resolved' | 'dismissed') {
+  const cookieStore = await cookies();
+  const authClient = createSupabaseServerClient(cookieStore);
+  const { data: { user } } = await authClient.auth.getUser();
+  if (!user) return { error: "Unauthorized" };
+
+  const { data: dbUser } = await (authClient as any).from("users").select("role").eq("id", user.id).single();
+  if ((dbUser as any)?.role !== "admin") return { error: "Forbidden" };
+
+  const adminClient = createServerClient();
+  await (adminClient as any)
+    .from("moderation_reports")
+    .update({
+      status,
+      resolved_by: status === "resolved" || status === "dismissed" ? user.id : null,
+      resolved_at: status === "resolved" || status === "dismissed" ? new Date().toISOString() : null,
+    })
+    .eq("id", id);
+  return { success: true };
+}
+
+export async function adminToggleUserBan(id: string, isBanned: boolean) {
+  const cookieStore = await cookies();
+  const authClient = createSupabaseServerClient(cookieStore);
+  const { data: { user } } = await authClient.auth.getUser();
+  if (!user) return { error: "Unauthorized" };
+
+  const { data: dbUser } = await (authClient as any).from("users").select("role").eq("id", user.id).single();
+  if ((dbUser as any)?.role !== "admin") return { error: "Forbidden" };
+
+  const adminClient = createServerClient();
+  await (adminClient as any)
+    .from("users")
+    .update({ is_banned: isBanned, ban_reason: isBanned ? "Admin dashboard action" : null })
+    .eq("id", id)
+    .neq("id", user.id);
   return { success: true };
 }

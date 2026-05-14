@@ -2,6 +2,7 @@
 
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { useState } from "react";
+import { optimizedPreviewUrl, optimizedThumbnailUrl } from "../image-utils";
 import { DetailedPrompt } from "../marketplace-data";
 
 export function PromptMedia({ prompt }: { prompt: DetailedPrompt }) {
@@ -23,7 +24,7 @@ export function PromptMedia({ prompt }: { prompt: DetailedPrompt }) {
       <div className="relative h-[520px] overflow-hidden rounded-xl border border-[#243052] bg-[#0b1222]">
         <div 
           className="absolute inset-0 bg-cover bg-center" 
-          style={{ backgroundImage: `url(${activeAsset.primaryUrl})` }} 
+          style={{ backgroundImage: `url(${optimizedPreviewUrl(activeAsset.primaryUrl)})` }} 
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_52%_28%,rgba(42,164,255,0.22),transparent_36%),linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.2))]" />
         <span className="absolute right-4 top-4 rounded-md bg-[#ff4f9d]/85 px-3 py-1 text-[11px] font-bold text-white">Boosted</span>
@@ -45,7 +46,7 @@ export function PromptMedia({ prompt }: { prompt: DetailedPrompt }) {
           >
             <div 
               className="absolute inset-0 bg-cover bg-center" 
-              style={{ backgroundImage: `url(${asset.thumbnailUrl})` }} 
+              style={{ backgroundImage: `url(${optimizedThumbnailUrl(asset.thumbnailUrl)})` }} 
             />
             {asset.type === 'video' ? <Play className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-white/80" size={18} fill="currentColor" /> : null}
           </button>

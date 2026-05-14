@@ -6,13 +6,13 @@ import {
   Boxes, 
   ChevronRight, 
   Coins, 
-  Code,
   MessageSquare, 
   Search, 
   Sparkles, 
   Star 
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { optimizedThumbnailUrl } from "./image-utils";
 import { filterCategories, DetailedPrompt, trendingTags } from "./marketplace-data";
 import { RightRail } from "./RightRail";
 import { PromptCard } from "./PromptCard";
@@ -71,7 +71,7 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
     .filter(cat => cat.prompts.length > 0);
 
   return (
-    <div className={`h-full flex flex-col lg:flex-row flex-1 min-h-0 lg:grid overflow-hidden transition-all duration-300 ${isRightRailCollapsed ? 'lg:[grid-template-columns:minmax(0,1fr)_60px]' : 'lg:[grid-template-columns:minmax(0,1fr)_300px]'}`}>
+    <div className={`h-full flex flex-col lg:flex-row flex-1 min-h-0 lg:grid overflow-hidden transition-all duration-300 ${isRightRailCollapsed ? 'lg:[grid-template-columns:minmax(0,1fr)_60px]' : 'lg:[grid-template-columns:minmax(0,1fr)_280px]'}`}>
       <section className="flex-1 min-w-0 overflow-y-auto px-4 md:px-8 py-6 md:py-4 lg:border-r lg:border-[#121930]/72 space-y-4 md:space-y-2">
         {/* Hero */}
         <div className="relative h-[280px] md:h-[313px] overflow-visible border border-[#202746] rounded-2xl bg-[#101629] after:absolute after:inset-0 after:[background:linear-gradient(90deg,rgba(6,8,17,0.94),rgba(6,8,17,0.72)_39%,rgba(6,8,17,0.06)_74%)] after:content-[''] after:pointer-events-none">
@@ -128,7 +128,7 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
                       ))}
                     </ul>
                   ) : (
-                    <div className="px-4 py-3 text-[#8990aa] text-sm">No results found for "{homeQuery}"</div>
+                    <div className="px-4 py-3 text-[#8990aa] text-sm">No results found for &quot;{homeQuery}&quot;</div>
                   )}
                 </div>
               )}
@@ -214,7 +214,7 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
               <div key={prompt.id} onClick={() => openPrompt(prompt)} className="relative h-[150px] md:h-[180px] overflow-hidden border border-[#273056] rounded-2xl bg-[#080d19] group hover:border-[#6132bf] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#6132bf]/20 transition-all duration-300 cursor-pointer flex flex-col justify-end">
                 <div 
                   className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-500" 
-                  style={{ backgroundImage: `url(${prompt.assets[0]?.thumbnailUrl || `/images/stock/${['sakura-night', 'neon-tokyo', 'ethereal-castle', 'cybernetic-girl', 'lost-galaxy', 'cinematic-portrait'][i % 6]}.png`})` }} 
+                  style={{ backgroundImage: `url(${optimizedThumbnailUrl(prompt.assets[0]?.thumbnailUrl || `/images/stock/${['sakura-night', 'neon-tokyo', 'ethereal-castle', 'cybernetic-girl', 'lost-galaxy', 'cinematic-portrait'][i % 6]}.png`)})` }} 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#030711] via-[#030711]/40 to-transparent" />
                 <i className="absolute top-2 left-2 z-10 grid place-items-center w-[18px] md:w-[22px] h-[18px] md:h-[22px] rounded-full bg-gradient-to-b from-[#8c57ff] to-[#6433e9] text-white text-[10px] md:text-[12px] font-extrabold not-italic shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
@@ -253,7 +253,7 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
               >
                 <div 
                   className="absolute inset-0 opacity-20 bg-cover bg-center group-hover:opacity-40 transition-opacity duration-500" 
-                  style={{ backgroundImage: `url(/images/stock/${['sakura-night', 'neon-tokyo', 'ethereal-castle', 'cybernetic-girl', 'lost-galaxy', 'cinematic-portrait'][i % 6]}.png)` }} 
+                  style={{ backgroundImage: `url(${optimizedThumbnailUrl(`/images/stock/${['sakura-night', 'neon-tokyo', 'ethereal-castle', 'cybernetic-girl', 'lost-galaxy', 'cinematic-portrait'][i % 6]}.png`)})` }} 
                 />
                 <strong className="relative z-10 block mt-2 md:mt-3 ml-3 text-white text-[12px] md:text-[13px] font-bold">{cat.label}</strong>
                 <small className="relative z-10 block mt-0 ml-3 text-[#c1c7d8] text-[9px] md:text-[10px]">{allPrompts.filter(p => p.taxonomy.primaryCategory === cat.label || cat.label === 'All').length} Prompts</small>
@@ -294,7 +294,7 @@ export function HomePage({ setDrawerAction, allPrompts = [] }: HomePageProps) {
         ))}
       </section>
 
-      <div className="hidden lg:block">
+      <div className="hidden lg:block h-full min-h-0">
         <RightRail 
           isCollapsed={isRightRailCollapsed}
           onToggle={() => setIsRightRailCollapsed(!isRightRailCollapsed)}

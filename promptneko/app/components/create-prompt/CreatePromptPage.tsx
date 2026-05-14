@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Check, ChevronRight } from "lucide-react";
 import { PromptFormState } from "./types";
-import { TopBar } from "../TopBar";
+import { MarketplaceLayout } from "../MarketplaceLayout";
 import { Step1Content } from "./Step1Content";
 import { Step2Variables } from "./Step2Variables";
 import { Step3Metadata } from "./Step3Metadata";
@@ -52,6 +52,7 @@ export function CreatePromptPage() {
   const [formData, setFormData] = useState<PromptFormState>(INITIAL_STATE);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
 
   const handleNext = () => { if (currentStep < STEPS.length - 1) setCurrentStep((p) => p + 1); };
   const handleBack = () => { if (currentStep > 0) setCurrentStep((p) => p - 1); };
@@ -78,10 +79,14 @@ export function CreatePromptPage() {
   const isLastStep = currentStep === STEPS.length - 1;
 
   return (
-    <div className="flex flex-col h-screen bg-[#030711] overflow-hidden text-[#c5ccdd]">
-      <TopBar query="" onQueryChange={() => {}} onSearch={() => {}} />
-
-      <main className="flex-1 overflow-hidden flex flex-col">
+    <MarketplaceLayout
+      activeNav="Create"
+      query={query}
+      onQueryChange={setQuery}
+      onSearch={() => router.push(query.trim() ? `/explore?q=${encodeURIComponent(query)}` : "/explore")}
+      onAction={() => {}}
+    >
+      <main className="flex-1 overflow-hidden flex flex-col bg-[#030711] text-[#c5ccdd]">
         {/* Top progress bar + step header */}
         <div className="border-b border-[#141b31] bg-[#040c1a]/80 px-4 md:px-8 py-3">
           {/* Progress bar */}
@@ -184,6 +189,6 @@ export function CreatePromptPage() {
           </div>
         </div>
       </main>
-    </div>
+    </MarketplaceLayout>
   );
 }

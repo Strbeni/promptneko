@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "../../../../../lib/supabase";
 import { isUuid, jsonError, rateLimit, requireUser, sanitizeText } from "../../../../../lib/api-utils";
@@ -36,7 +37,7 @@ export async function POST(req: NextRequest, ctx: RouteContext<"/api/prompts/[pr
   }
 
   const db = createServerClient();
-  const { data: purchase } = await db
+  const { data: purchase } = await (db as any)
     .from("purchases")
     .select("id")
     .eq("buyer_id", user.id)

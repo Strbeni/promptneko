@@ -42,6 +42,7 @@ export function MarketplaceLayout({ activeNav, query, children, onQueryChange, o
           onSearch={onSearch} 
           onAction={onAction} 
           onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+          activeNav={activeNav}
         />
         {children}
       </main>

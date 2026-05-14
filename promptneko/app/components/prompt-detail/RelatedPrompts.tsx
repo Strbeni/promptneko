@@ -2,6 +2,7 @@
 
 import { Play } from "lucide-react";
 import Link from "next/link";
+import { optimizedThumbnailUrl } from "../image-utils";
 import { promptCards } from "../marketplace-data";
 
 export function RelatedPrompts({ title }: { title: string }) {
@@ -23,7 +24,7 @@ export function RelatedPrompts({ title }: { title: string }) {
             <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0a0a0a]">
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" 
-                style={{ backgroundImage: `url(${prompt.assets[0].thumbnailUrl || '/main.png'})` }} 
+                style={{ backgroundImage: `url(${optimizedThumbnailUrl(prompt.assets[0]?.thumbnailUrl)})` }} 
               />
               <div className="absolute inset-0 bg-black/20 transition-opacity group-hover:opacity-0" />
               {prompt.assets[0].type === 'video' && (

@@ -2,117 +2,100 @@
 
 import {
   Bookmark,
-  ChevronRight,
-  Copy,
-  Check,
   FolderOpen,
   Heart,
   LayoutGrid,
   Lock,
-  Play,
   Plus,
   Search,
-  SlidersHorizontal,
   Sparkles,
   Star,
   TrendingUp,
   Users,
 } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ActionDrawer } from "./ActionDrawer";
+import { optimizedThumbnailUrl } from "./image-utils";
 import { MarketplaceLayout } from "./MarketplaceLayout";
-import { promptCards, DetailedPrompt } from "./marketplace-data";
+import { DetailedPrompt } from "./marketplace-data";
+import { usePromptInteractions } from "./usePromptInteractions";
 
-// ─── Static collection data (placeholder until auth + DB) ─────────────────────
+type Collection = {
+  id: string;
+  title: string;
+  description: string;
+  author: string;
+  promptCount: number;
+  saves: number;
+  isPublic: boolean;
+  tags: string[];
+  accent: string;
+  coverPrompts: DetailedPrompt[];
+  queryTerm: string;
+};
 
-const FEATURED_COLLECTIONS = [
-  {
-    id: "c1",
-    title: "Cyberpunk Aesthetics",
-    description: "Neon-lit cities, chrome warriors, and electric dreams.",
-    author: "@cyber.blade",
-    promptCount: 18,
-    saves: 2400,
-    isPublic: true,
-    tags: ["Art", "Sci-Fi"],
-    accent: "#a463ff",
-    coverPrompts: promptCards.slice(0, 4),
-  },
-  {
-    id: "c2",
-    title: "Product Photography Mastery",
-    description: "Studio-quality product shots for any brand or campaign.",
-    author: "@ad.master",
-    promptCount: 12,
-    saves: 1800,
-    isPublic: true,
-    tags: ["Marketing", "Photography"],
-    accent: "#ff9f7a",
-    coverPrompts: promptCards.slice(4, 8),
-  },
-  {
-    id: "c3",
-    title: "Developer Toolkit",
-    description: "Best coding prompts for Python, React, SQL and DevOps.",
-    author: "@code.wizard",
-    promptCount: 24,
-    saves: 3100,
-    isPublic: true,
-    tags: ["Coding", "Productivity"],
-    accent: "#7affb0",
-    coverPrompts: promptCards.slice(8, 12),
-  },
-  {
-    id: "c4",
-    title: "Anime & Manga Worlds",
-    description: "From slice-of-life to shonen — all your anime styles.",
-    author: "@ghibli.fan",
-    promptCount: 31,
-    saves: 5200,
-    isPublic: true,
-    tags: ["Art", "Anime"],
-    accent: "#ffef75",
-    coverPrompts: promptCards.slice(0, 4),
-  },
-  {
-    id: "c5",
-    title: "Brand Identity Starter Pack",
-    description: "Logos, colour palettes and typography prompts for new brands.",
-    author: "@brandingpro",
-    promptCount: 15,
-    saves: 1400,
-    isPublic: true,
-    tags: ["Logos", "Marketing"],
-    accent: "#78c7ff",
-    coverPrompts: promptCards.slice(4, 8),
-  },
-  {
-    id: "c6",
-    title: "Social Media Viral Kit",
-    description: "Reels, shorts and TikTok prompts that get views.",
-    author: "@vfxmaster",
-    promptCount: 20,
-    saves: 4700,
-    isPublic: true,
-    tags: ["Social", "Video"],
-    accent: "#ff78c8",
-    coverPrompts: promptCards.slice(8, 12),
-  },
-];
+type StoredCollection = {
+  id: string;
+  title: string;
+  description: string;
+  isPublic: boolean;
+  queryTerm: string;
+};
 
-const MY_COLLECTIONS = [
-  {
-    id: "mc1",
-    title: "My Favourites",
-    description: "Hand-picked prompts I use daily.",
-    promptCount: 7,
-    isPublic: false,
-    accent: "#a463ff",
-    coverPrompts: promptCards.slice(0, 4),
-  },
-];
+const LOCAL_COLLECTION_KEY = "pn_user_collections";
+const ACCENTS = ["#a463ff", "#ff9f7a", "#7affb0", "#ffef75", "#78c7ff", "#ff78c8", "#00d9a8"];
+
+function readStoredCollections(): StoredCollection[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(LOCAL_COLLECTION_KEY) ?? "[]");
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter((item): item is StoredCollection => (
+      typeof item?.id === "string" &&
+      typeof item?.title === "string" &&
+      typeof item?.description === "string" &&
+      typeof item?.isPublic === "boolean" &&
+      typeof item?.queryTerm === "string"
+    ));
+  } catch {
+    return [];
+  }
+}
+
+function writeStoredCollections(collections: StoredCollection[]) {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(LOCAL_COLLECTION_KEY, JSON.stringify(collections));
+}
+
+function buildCommunityCollections(prompts: DetailedPrompt[]): Collection[] {
+  const byCategory = new Map<string, DetailedPrompt[]>();
+  prompts.forEach((prompt) => {
+    const category = prompt.taxonomy.primaryCategory || "Uncategorized";
+    byCategory.set(category, [...(byCategory.get(category) ?? []), prompt]);
+  });
+
+  return Array.from(byCategory.entries())
+    .map(([category, items], index) => {
+      const sorted = [...items].sort((a, b) => (b.stats.views + b.stats.likes) - (a.stats.views + a.stats.likes));
+      const topTags = Array.from(new Set(sorted.flatMap((prompt) => prompt.taxonomy.tags))).slice(0, 3);
+      return {
+        id: `category-${category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+        title: `${category} Prompt System`,
+        description: `${sorted.length} working prompts with copy-ready variables, compatibility notes, and example outputs.`,
+        author: sorted[0]?.creator.handle ?? "@promptneko",
+        promptCount: sorted.length,
+        saves: sorted.reduce((sum, prompt) => sum + prompt.stats.saves, 0),
+        isPublic: true,
+        tags: topTags.length ? topTags : [category],
+        accent: ACCENTS[index % ACCENTS.length],
+        coverPrompts: sorted.slice(0, 4),
+        queryTerm: category,
+      };
+    })
+    .filter((collection) => collection.coverPrompts.length > 0)
+    .sort((a, b) => b.promptCount - a.promptCount);
+}
 
 // ─── Collection Card ──────────────────────────────────────────────────────────
 
@@ -120,7 +103,7 @@ function CollectionCard({
   col,
   onOpen,
 }: {
-  col: (typeof FEATURED_COLLECTIONS)[0];
+  col: Collection;
   onOpen: (id: string) => void;
 }) {
   const [saved, setSaved] = useState(false);
@@ -137,7 +120,7 @@ function CollectionCard({
           <div
             key={i}
             className="bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-            style={{ backgroundImage: `url(${p.assets[0]?.thumbnailUrl || "/main.png"})` }}
+            style={{ backgroundImage: `url(${optimizedThumbnailUrl(p.assets[0]?.thumbnailUrl)})` }}
           />
         ))}
         {/* Overlay */}
@@ -193,10 +176,30 @@ function CollectionCard({
 
 // ─── Create Collection Modal ───────────────────────────────────────────────────
 
-function CreateCollectionModal({ onClose }: { onClose: () => void }) {
+function CreateCollectionModal({
+  onClose,
+  onCreate,
+  topics,
+}: {
+  onClose: () => void;
+  onCreate: (collection: StoredCollection) => void;
+  topics: string[];
+}) {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [isPublic, setIsPublic] = useState(false);
+  const [queryTerm, setQueryTerm] = useState(topics[0] ?? "All");
+
+  function submit() {
+    if (!title.trim()) return;
+    onCreate({
+      id: `local-${Date.now()}`,
+      title: title.trim(),
+      description: desc.trim() || `A focused workspace collection for ${queryTerm} prompts.`,
+      isPublic,
+      queryTerm,
+    });
+  }
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={onClose}>
@@ -223,6 +226,17 @@ function CreateCollectionModal({ onClose }: { onClose: () => void }) {
           onChange={(e) => setDesc(e.target.value)}
         />
 
+        <label className="block text-[11px] font-semibold text-[#8090b4] uppercase tracking-wide mb-2">Prompt Topic</label>
+        <select
+          className="w-full h-[40px] rounded-xl border border-[#1e2840] bg-[#060b18] text-white text-[13px] px-4 outline-none focus:border-[#7b3cff] transition-colors mb-4"
+          value={queryTerm}
+          onChange={(event) => setQueryTerm(event.target.value)}
+        >
+          {topics.map((topic) => (
+            <option key={topic} value={topic}>{topic}</option>
+          ))}
+        </select>
+
         <div className="flex items-center justify-between mb-6">
           <div>
             <p className="m-0 text-[13px] font-semibold text-white">Make Public</p>
@@ -248,7 +262,7 @@ function CreateCollectionModal({ onClose }: { onClose: () => void }) {
           <button
             className="flex-1 h-10 rounded-xl bg-gradient-to-r from-[#7b3cff] to-[#6028d4] text-white text-[13px] font-semibold hover:brightness-110 transition-all disabled:opacity-40"
             disabled={!title.trim()}
-            onClick={onClose}
+            onClick={submit}
           >
             Create Collection
           </button>
@@ -260,14 +274,24 @@ function CreateCollectionModal({ onClose }: { onClose: () => void }) {
 
 // ─── Stats Bar ────────────────────────────────────────────────────────────────
 
-function StatsBar() {
+function StatsBar({
+  myCount,
+  publicCount,
+  savedCount,
+  totalPrompts,
+}: {
+  myCount: number;
+  publicCount: number;
+  savedCount: number;
+  totalPrompts: number;
+}) {
   return (
     <div className="grid grid-cols-4 gap-4 mb-7">
       {[
-        { label: "My Collections", value: MY_COLLECTIONS.length.toString(), icon: FolderOpen, accent: "#a463ff" },
-        { label: "Public Collections", value: FEATURED_COLLECTIONS.length.toString(), icon: Users, accent: "#78c7ff" },
-        { label: "Total Prompts Saved", value: "34", icon: Bookmark, accent: "#ff78c8" },
-        { label: "Community Collections", value: "12K+", icon: Sparkles, accent: "#ffef75" },
+        { label: "My Collections", value: myCount.toString(), icon: FolderOpen, accent: "#a463ff" },
+        { label: "Public Collections", value: publicCount.toString(), icon: Users, accent: "#78c7ff" },
+        { label: "Saved Prompts", value: savedCount.toString(), icon: Bookmark, accent: "#ff78c8" },
+        { label: "Prompt Templates", value: totalPrompts.toString(), icon: Sparkles, accent: "#ffef75" },
       ].map(({ label, value, icon: Icon, accent }) => (
         <div
           key={label}
@@ -291,15 +315,70 @@ function StatsBar() {
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
-export function CollectionsPage() {
+export function CollectionsPage({ allPrompts = [] }: { allPrompts?: DetailedPrompt[] }) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [drawerAction, setDrawerAction] = useState<string | null>(null);
   const [showCreate, setShowCreate] = useState(false);
-  const [activeTab, setActiveTab] = useState<"discover" | "mine">("discover");
   const [searchQ, setSearchQ] = useState("");
+  const [storedCollections, setStoredCollections] = useState<StoredCollection[]>(() => readStoredCollections());
+  const { saved } = usePromptInteractions(allPrompts);
 
-  const filtered = FEATURED_COLLECTIONS.filter(
+  useEffect(() => {
+    setStoredCollections(readStoredCollections());
+  }, []);
+
+  const communityCollections = useMemo(() => buildCommunityCollections(allPrompts), [allPrompts]);
+  const topics = useMemo(() => {
+    const categories = Array.from(new Set(allPrompts.map((prompt) => prompt.taxonomy.primaryCategory).filter(Boolean)));
+    return categories.length ? categories : ["All"];
+  }, [allPrompts]);
+
+  const savedPrompts = allPrompts.filter((prompt) => saved.has(prompt.id));
+  const myCollections = useMemo<Collection[]>(() => {
+    const createdCollections = storedCollections.map((collection, index) => {
+      const matchingPrompts = allPrompts
+        .filter((prompt) => {
+          const haystack = `${prompt.title} ${prompt.description} ${prompt.taxonomy.primaryCategory} ${prompt.taxonomy.tags.join(" ")}`.toLowerCase();
+          return collection.queryTerm === "All" || haystack.includes(collection.queryTerm.toLowerCase());
+        })
+        .slice(0, 4);
+
+      return {
+        id: collection.id,
+        title: collection.title,
+        description: collection.description,
+        author: "@you",
+        promptCount: matchingPrompts.length,
+        saves: 0,
+        isPublic: collection.isPublic,
+        tags: [collection.queryTerm],
+        accent: ACCENTS[index % ACCENTS.length],
+        coverPrompts: matchingPrompts.length ? matchingPrompts : allPrompts.slice(0, 4),
+        queryTerm: collection.queryTerm,
+      };
+    });
+
+    if (savedPrompts.length === 0) return createdCollections;
+    return [
+      {
+        id: "saved-prompts",
+        title: "Saved Prompts",
+        description: "Prompts saved from marketplace browsing and detail pages.",
+        author: "@you",
+        promptCount: savedPrompts.length,
+        saves: savedPrompts.length,
+        isPublic: false,
+        tags: ["Saved"],
+        accent: "#a463ff",
+        coverPrompts: savedPrompts.slice(0, 4),
+        queryTerm: "Saved",
+      },
+      ...createdCollections,
+    ];
+  }, [allPrompts, savedPrompts, storedCollections]);
+
+  const filtered = communityCollections.filter(
     (c) =>
       !searchQ ||
       c.title.toLowerCase().includes(searchQ.toLowerCase()) ||
@@ -330,27 +409,32 @@ export function CollectionsPage() {
         </div>
 
         {/* Stats */}
-        <StatsBar />
+        <StatsBar
+          myCount={myCollections.length}
+          publicCount={communityCollections.length}
+          savedCount={saved.size}
+          totalPrompts={allPrompts.length}
+        />
 
         {/* My Collections */}
-        {MY_COLLECTIONS.length > 0 && (
+        {myCollections.length > 0 && (
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <FolderOpen size={18} className="text-[#a463ff]" />
                 <h2 className="m-0 text-[16px] font-bold text-white">My Collections</h2>
-                <span className="text-[11px] text-[#4a5a80]">{MY_COLLECTIONS.length} collection</span>
+                <span className="text-[11px] text-[#4a5a80]">{myCollections.length} collection{myCollections.length === 1 ? "" : "s"}</span>
               </div>
               <button className="text-[12px] font-semibold text-[#a463ff] hover:text-white transition-colors">
                 Manage →
               </button>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {MY_COLLECTIONS.map((col) => (
+              {myCollections.map((col) => (
                 <CollectionCard
                   key={col.id}
-                  col={{ ...col, author: "@you", saves: 0, isPublic: false, tags: [] }}
-                  onOpen={() => {}}
+                  col={col}
+                  onOpen={() => router.push(`/explore?q=${encodeURIComponent(col.queryTerm === "Saved" ? "" : col.queryTerm)}`)}
                 />
               ))}
               {/* Create new placeholder */}
@@ -387,13 +471,30 @@ export function CollectionsPage() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4">
             {filtered.map((col) => (
-              <CollectionCard key={col.id} col={col} onOpen={() => {}} />
+              <CollectionCard 
+                key={col.id} 
+                col={col} 
+                onOpen={() => {
+                  router.push(`/explore?category=${encodeURIComponent(col.queryTerm)}`);
+                }} 
+              />
             ))}
           </div>
         </div>
       </div>
 
-      {showCreate && <CreateCollectionModal onClose={() => setShowCreate(false)} />}
+      {showCreate && (
+        <CreateCollectionModal
+          onClose={() => setShowCreate(false)}
+          topics={topics}
+          onCreate={(collection) => {
+            const next = [collection, ...storedCollections];
+            setStoredCollections(next);
+            writeStoredCollections(next);
+            setShowCreate(false);
+          }}
+        />
+      )}
       <ActionDrawer action={drawerAction} prompt={null} onClose={() => setDrawerAction(null)} />
     </MarketplaceLayout>
   );

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ActionDrawer } from "../ActionDrawer";
 import { MarketplaceLayout } from "../MarketplaceLayout";
 import { DetailedPrompt } from "../marketplace-data";
+import { recordPromptView } from "../prompt-history";
 import { usePromptInteractions } from "../usePromptInteractions";
 import { PromptMedia } from "./PromptMedia";
 import { PromptSidebar } from "./PromptSidebar";
@@ -33,6 +34,8 @@ export function PromptDetailPage({ prompt, isPending }: PromptDetailPageProps) {
   }, [counterPatches, prompt]);
 
   useEffect(() => {
+    recordPromptView(prompt);
+
     const controller = new AbortController();
     fetch(`/api/prompts/${prompt.id}/view`, { method: "POST", signal: controller.signal })
       .then((res) => (res.ok ? res.json() : null))

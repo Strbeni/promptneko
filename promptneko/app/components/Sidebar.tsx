@@ -2,7 +2,7 @@
 
 import { ChevronDown, ChevronRight, Hexagon, Moon, Settings, Sliders } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { sidebarGroups } from "./marketplace-data";
 
 type SidebarProps = {
@@ -13,7 +13,21 @@ type SidebarProps = {
 };
 
 export function Sidebar({ active, onAction }: SidebarProps) {
-  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set(["Categories"]));
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const parent = sidebarGroups
+      .flatMap((group) => group.items)
+      .find((item: any) => item.children?.some((child: any) => child.label === active));
+
+    if (!parent) return;
+    setExpandedItems((current) => {
+      if (current.has(parent.label)) return current;
+      const next = new Set(current);
+      next.add(parent.label);
+      return next;
+    });
+  }, [active]);
 
   const toggleExpand = (label: string) => {
     const next = new Set(expandedItems);
@@ -63,7 +77,7 @@ export function Sidebar({ active, onAction }: SidebarProps) {
               {group.items.map((item) => {
                 const { icon: Icon, label, href, children } = item as any;
                 const isExpanded = expandedItems.has(label);
-                const isActive = active === label;
+                const isActive = active === label || children?.some((child: any) => child.label === active);
 
                 const baseItemClass = "flex items-center w-full h-[36px] gap-3 px-3 rounded-xl text-[13.5px] font-medium no-underline transition-all duration-200 relative group";
                 const activeClass = "bg-gradient-to-r from-[#7b3cff]/20 via-[#7b3cff]/10 to-transparent text-white border border-[#7b3cff]/30 shadow-[0_0_12px_rgba(123,60,255,0.1)]";

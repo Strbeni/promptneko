@@ -22,6 +22,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState } from "react";
 import { ActionDrawer } from "./ActionDrawer";
+import { optimizedThumbnailUrl } from "./image-utils";
 import { MarketplaceLayout } from "./MarketplaceLayout";
 import { CategoryMeta, DetailedPrompt } from "./marketplace-data";
 
@@ -62,7 +63,7 @@ function CategoryPromptCard({ item }: { item: DetailedPrompt }) {
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#090e1b]">
         <div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-          style={{ backgroundImage: `url(${primaryAsset?.thumbnailUrl || "/main.png"})` }}
+          style={{ backgroundImage: `url(${optimizedThumbnailUrl(primaryAsset?.thumbnailUrl)})` }}
         />
         {/* Free badge */}
         {(!item.pricing || item.pricing.type === "free") && (

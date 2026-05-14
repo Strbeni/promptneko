@@ -13,6 +13,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useMemo } from "react";
 import { ActionDrawer } from "./ActionDrawer";
+import { optimizedThumbnailUrl } from "./image-utils";
 import { MarketplaceLayout } from "./MarketplaceLayout";
 import { DetailedPrompt, promptCards } from "./marketplace-data";
 import { dbPromptsToDetailedPrompts } from "../../lib/adapters";
@@ -59,7 +60,7 @@ function BookmarkCard({ item, onRemove }: { item: DetailedPrompt; onRemove: (id:
       <div className="relative aspect-[4/3] overflow-hidden bg-[#090e1b]">
         <div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-          style={{ backgroundImage: `url(${asset?.thumbnailUrl || "/main.png"})` }}
+          style={{ backgroundImage: `url(${optimizedThumbnailUrl(asset?.thumbnailUrl)})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
@@ -118,20 +119,13 @@ export function BookmarksPage() {
   const { user, loading } = useAuth();
   const [query, setQuery] = useState("");
   const [drawerAction, setDrawerAction] = useState<string | null>(null);
-  const [bookmarks, setBookmarks] = useState<string[]>([]);
+  const [bookmarks, setBookmarks] = useState<string[]>(() => readLocalBookmarks());
   const [remotePrompts, setRemotePrompts] = useState<DetailedPrompt[]>([]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQ, setSearchQ] = useState("");
 
   useEffect(() => {
-    setBookmarks(readLocalBookmarks());
-  }, []);
-
-  useEffect(() => {
-    if (loading || !user) {
-      setRemotePrompts([]);
-      return;
-    }
+    if (loading || !user) return;
 
     const controller = new AbortController();
     fetch("/api/me/saved", { signal: controller.signal })
@@ -249,7 +243,7 @@ export function BookmarksPage() {
             <Bookmark size={48} className="text-[#1e2840] mb-5" />
             <h3 className="m-0 text-[16px] font-bold text-white mb-2">No bookmarks yet</h3>
             <p className="m-0 text-[13px] text-[#6070a0] mb-6 max-w-[300px]">
-              Save prompts you love while browsing — they'll appear here for easy access.
+              Save prompts you love while browsing — they&apos;ll appear here for easy access.
             </p>
             <button
               className="flex items-center gap-2 h-10 px-6 rounded-xl bg-gradient-to-r from-[#7b3cff] to-[#6028d4] text-white text-[13px] font-semibold hover:brightness-110 transition-all"

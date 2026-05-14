@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Command, LogIn, LogOut, Menu, Plus, Search, Sparkles, User } from "lucide-react";
+import { Bell, Command, LogIn, LogOut, Menu, Plus, Search, ShieldCheck, Sparkles, User } from "lucide-react";
 import { FormEvent, useState, useRef, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "./auth/AuthContext";
@@ -14,7 +14,7 @@ type TopBarProps = {
   activeNav?: string;
 };
 
-export function TopBar({ query = "", onQueryChange, onSearch, onAction, onToggleSidebar }: TopBarProps) {
+export function TopBar({ query = "", onQueryChange, onSearch, onAction, onToggleSidebar, activeNav }: TopBarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const isOnCreatePage = pathname === "/create";
@@ -38,13 +38,11 @@ export function TopBar({ query = "", onQueryChange, onSearch, onAction, onToggle
     if (onSearch) onSearch();
   }
 
-  // For development testing, let's allow any 'creator' to see the button
-  // (In production, this should be dbUser?.is_creator_approved)
-  const isCreator = dbUser?.role === "creator" || !!user; // temporarily show for any logged in user so you aren't blocked!
+  const isCreator = dbUser?.role === "admin" || (dbUser?.role === "creator" && dbUser.is_creator_approved);
   const avatarLetter = (dbUser?.display_name ?? user?.email ?? "?")[0].toUpperCase();
 
   return (
-    <header className="flex items-center h-[52px] gap-2 md:gap-4 px-3 md:px-5 border-b border-[#141b31] bg-[#030711]/95 backdrop-blur-sm sticky top-0 z-40">
+    <header className="flex items-center h-[56px] gap-2 md:gap-4 px-3 md:px-5 border-b border-[#141b31] bg-[#030711]/95 backdrop-blur-xl sticky top-0 z-40 shadow-[0_8px_30px_rgba(0,0,0,0.18)]">
       {/* Mobile sidebar toggle */}
       {onToggleSidebar && (
         <button
@@ -56,9 +54,16 @@ export function TopBar({ query = "", onQueryChange, onSearch, onAction, onToggle
         </button>
       )}
 
+      {activeNav && (
+        <div className="hidden xl:flex flex-col min-w-[116px]">
+          <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#657091]">Workspace</span>
+          <strong className="text-[13px] font-bold text-white leading-tight">{activeNav}</strong>
+        </div>
+      )}
+
       {/* Search */}
       <form
-        className="flex items-center flex-1 md:flex-none md:w-[320px] h-[32px] gap-2 px-3 border border-[#1e2640] rounded-lg bg-[#080f1e] text-[#8990aa] text-[13px] transition-all focus-within:border-[#7b3cff] focus-within:shadow-[0_0_12px_rgba(123,60,255,0.12)]"
+        className="flex items-center flex-1 md:flex-none md:w-[340px] h-[34px] gap-2 px-3 border border-[#1e2640] rounded-lg bg-[#080f1e] text-[#8990aa] text-[13px] transition-all focus-within:border-[#7b3cff] focus-within:shadow-[0_0_12px_rgba(123,60,255,0.12)]"
         onSubmit={submit}
       >
         <Search size={14} className="shrink-0" />
@@ -85,6 +90,17 @@ export function TopBar({ query = "", onQueryChange, onSearch, onAction, onToggle
           >
             <Plus size={14} />
             <span className="hidden sm:inline">Create</span>
+          </button>
+        )}
+
+        {!loading && dbUser?.role === "admin" && pathname !== "/admin" && (
+          <button
+            onClick={() => router.push("/admin")}
+            className="grid place-items-center w-8 h-8 rounded-lg text-[#a46aff] hover:text-white hover:bg-[#a46aff]/10 transition-colors"
+            title="Admin dashboard"
+            aria-label="Admin dashboard"
+          >
+            <ShieldCheck size={16} />
           </button>
         )}
 

@@ -3,6 +3,7 @@
 import { Bookmark, Heart, Copy, Play, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { optimizedThumbnailUrl } from "./image-utils";
 import { DetailedPrompt } from "./marketplace-data";
 
 type PromptCardProps = {
@@ -18,6 +19,7 @@ export function PromptCard({ item, isSaved = false, isLiked = false, onOpen, onS
   const router = useRouter();
   const [copied, setCopied] = useState(false);
   const primaryAsset = item.assets[0];
+  const thumbnailUrl = optimizedThumbnailUrl(primaryAsset?.thumbnailUrl);
 
   const handleCopy = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -37,10 +39,10 @@ export function PromptCard({ item, isSaved = false, isLiked = false, onOpen, onS
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0a0a0a]">
         <div 
           className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
-          style={{ backgroundImage: `url(${primaryAsset.thumbnailUrl || '/main.png'})` }} 
+          style={{ backgroundImage: `url(${thumbnailUrl})` }} 
         />
         
-        {primaryAsset.type === 'video' && (
+        {primaryAsset?.type === 'video' && (
           <div className="absolute top-3 left-3 z-10 grid place-items-center w-8 h-8 rounded-full bg-black/50 backdrop-blur-md text-white">
             <Play size={14} fill="currentColor" className="ml-0.5" />
           </div>

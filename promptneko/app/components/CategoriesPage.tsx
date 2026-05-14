@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { ActionDrawer } from "./ActionDrawer";
+import { optimizedThumbnailUrl } from "./image-utils";
 import { MarketplaceLayout } from "./MarketplaceLayout";
 import { CATEGORY_REGISTRY, DetailedPrompt, getCategoryBySlug } from "./marketplace-data";
 
@@ -197,7 +198,7 @@ function PromptTile({ prompt, onNavigate }: { prompt: DetailedPrompt; onNavigate
       <div className="relative h-[150px] overflow-hidden bg-[#090e1b]">
         <div
           className="absolute inset-0 bg-cover bg-center transition duration-300 group-hover:scale-105"
-          style={{ backgroundImage: `url(${prompt.assets[0]?.thumbnailUrl || "/main.png"})` }}
+          style={{ backgroundImage: `url(${optimizedThumbnailUrl(prompt.assets[0]?.thumbnailUrl)})` }}
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02)_36%,rgba(2,4,10,0.88)_100%)]" />
         <span className="absolute left-[8px] top-[8px] rounded-md bg-[#1b2031]/86 px-[7px] py-[3px] text-[9px] font-bold text-white">

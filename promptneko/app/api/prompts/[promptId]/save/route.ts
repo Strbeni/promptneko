@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
 import { createServerClient } from "../../../../../lib/supabase";
 import { isUuid, jsonError, rateLimit, requireUser } from "../../../../../lib/api-utils";
@@ -12,8 +13,8 @@ export async function POST(_req: Request, ctx: RouteContext<"/api/prompts/[promp
   const { user, authClient, error } = await requireUser();
   if (error || !user) return jsonError("Sign in to save prompts", 401);
 
-  const { data: existing, error: readError } = await authClient
-    .from("user_saved_prompts" as any)
+  const { data: existing, error: readError } = await (authClient as any)
+    .from("user_saved_prompts")
     .select("prompt_id")
     .eq("user_id", user.id)
     .eq("prompt_id", promptId)
@@ -22,21 +23,21 @@ export async function POST(_req: Request, ctx: RouteContext<"/api/prompts/[promp
   if (readError) return jsonError(readError.message, 500);
 
   if (existing) {
-    const { error: deleteError } = await authClient
-      .from("user_saved_prompts" as any)
+    const { error: deleteError } = await (authClient as any)
+      .from("user_saved_prompts")
       .delete()
       .eq("user_id", user.id)
       .eq("prompt_id", promptId);
     if (deleteError) return jsonError(deleteError.message, 500);
   } else {
-    const { error: insertError } = await authClient
-      .from("user_saved_prompts" as any)
+    const { error: insertError } = await (authClient as any)
+      .from("user_saved_prompts")
       .insert({ user_id: user.id, prompt_id: promptId });
     if (insertError) return jsonError(insertError.message, 500);
   }
 
   const adminDb = createServerClient();
-  const { data: count } = await adminDb.rpc("prompt_save_count", { p_id: promptId });
+  const { data: count } = await (adminDb as any).rpc("prompt_save_count", { p_id: promptId });
 
   return NextResponse.json({ saved: !existing, saves: count ?? 0 });
 }
