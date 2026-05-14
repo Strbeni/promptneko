@@ -287,7 +287,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A highly dynamic full body character concept of a cybernetically enhanced ronin samurai standing center frame in a dark rain-slicked Tokyo alleyway, heavy advanced tactical carbon-fiber samurai armor glowing with thin neon crimson trim, holding a drawn thermal katana blade emitting heat waves, volumetric water splash reacting to blade illumination, ultra sharp focus, photographic depth",
-    assets: [{ type: 'image', primaryUrl: "/images/stock/neon-tokyo.png", thumbnailUrl: "/images/stock/neon-tokyo.png", dimensions: { width: 1024, height: 1024 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/neon_samurai.png", thumbnailUrl: "/images/marketplace/neon_samurai.png", dimensions: { width: 1024, height: 1024 } }],
     creator: { id: "u12", handle: "@cyber.blade", displayName: "Cyber Blade", avatarUrl: "", isVerified: true },
     engine: { modelId: "flux", provider: "FLUX", parameters: { guidance_scale: 3.5 } },
     taxonomy: { primaryCategory: "AI Art & Anime", tags: ["samurai", "cyberpunk", "neon"] },
@@ -372,7 +372,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A pixel-perfect smartphone mobile app user interface display showing a modern immersive destination travel guide app, edge-to-edge layout, prominent vertical responsive scrolling cards featuring high dynamic range photography of scenic mountain ranges, integrated top floating semi-transparent search pill, clean sans-serif editorial typography metadata labels, soft bottom sticky navigation interface, clean modern aesthetic, dribbble inspiration award winning layout --ar 9:16 --v 6.0",
-    assets: [{ type: 'image', primaryUrl: "/images/stock/lost-galaxy.png", thumbnailUrl: "/images/stock/lost-galaxy.png", dimensions: { width: 1080, height: 1920 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/travel_app_ui.png", thumbnailUrl: "/images/marketplace/travel_app_ui.png", dimensions: { width: 1080, height: 1920 } }],
     creator: { id: "u14", handle: "@pixel.perfection", displayName: "Pixel Perfection", avatarUrl: "", isVerified: false },
     engine: { modelId: "mj-v6", provider: "Midjourney", parameters: { stylize: 200 } },
     taxonomy: { primaryCategory: "Websites & UI", tags: ["travel", "mobile", "app"] },
@@ -398,7 +398,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A state-of-the-art modern SaaS web application landing page user interface using a beautiful advanced asymmetrical bento box grid architecture, clean soft off-white background layout, each rounded card container featuring custom smooth 3D extruded utility icons and real-time visual progress metrics, premium sans-serif typography, subtle pastel violet and mint accent tokens, clean spatial organization, hyper-minimalist premium visual feel",
-    assets: [{ type: 'image', primaryUrl: "/images/stock/ethereal-castle.png", thumbnailUrl: "/images/stock/ethereal-castle.png", dimensions: { width: 1440, height: 900 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/saas_landing.png", thumbnailUrl: "/images/marketplace/saas_landing.png", dimensions: { width: 1440, height: 900 } }],
     creator: { id: "u15", handle: "@creative.layouts", displayName: "Creative Layouts", avatarUrl: "", isVerified: true },
     engine: { modelId: "flux", provider: "FLUX", parameters: { guidance_scale: 3.0 } },
     taxonomy: { primaryCategory: "Websites & UI", tags: ["saas", "bento", "landing"] },
@@ -425,7 +425,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A premium high-fashion minimalist e-commerce digital storefront website user interface layout, full-height multi-column editorial photography layout featuring avant-garde models in raw structured clothing, deep monochrome aesthetic with ultra-clean negative space, bold striking modern serif product titles, ultra-thin border dividing lines, discrete micro-interactive purchasing controls, clean high-end aesthetic --ar 16:9 --v 6.0",
-    assets: [{ type: 'image', primaryUrl: "/images/stock/cinematic-portrait.png", thumbnailUrl: "/images/stock/cinematic-portrait.png", dimensions: { width: 1440, height: 900 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/ecommerce_fashion.png", thumbnailUrl: "/images/marketplace/ecommerce_fashion.png", dimensions: { width: 1440, height: 900 } }],
     creator: { id: "u16", handle: "@vogue.design", displayName: "Vogue Design", avatarUrl: "", isVerified: true },
     engine: { modelId: "mj-v6", provider: "Midjourney", parameters: { stylize: 220 } },
     taxonomy: { primaryCategory: "Websites & UI", tags: ["ecommerce", "fashion", "luxury"] },
@@ -484,7 +484,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A highly sophisticated rustic visual identity presentation setup for a premium organic small-batch artisanal coffee roastery, showcasing premium unbleached textured kraft paper coffee bean pouches with simple continuous line minimalist foil-stamped illustrations, matching raw linen aprons, distinct custom warm earthy pantone color palette cards, soft top-down natural sunlit photography studio table setup --ar 1:1 --v 6.0",
-    assets: [{ type: 'image', primaryUrl: "/images/stock/sakura-night.png", thumbnailUrl: "/images/stock/sakura-night.png", dimensions: { width: 1024, height: 1024 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/organic_coffee_branding.png", thumbnailUrl: "/images/marketplace/organic_coffee_branding.png", dimensions: { width: 1024, height: 1024 } }],
     creator: { id: "u17", handle: "@nature.designs", displayName: "Nature Designs", avatarUrl: "", isVerified: false },
     engine: { modelId: "mj-v6", provider: "Midjourney", parameters: { stylize: 120 } },
     taxonomy: { primaryCategory: "Branding & Logos", tags: ["coffee", "organic", "branding"] },
@@ -536,7 +536,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A stunning ultra-minimalist vector line art interlocking monogram logo design combining the letters '{{letter_1}}' and '{{letter_2}}' seamlessly, perfectly balanced geometric proportions, continuous elegant stroke width, set against a pristine absolute white background, high-end timeless luxury jewelry house aesthetic, extreme design simplicity, professional graphic design masterpiece --no gradient, text, 3d effects --v 6.0",
-    assets: [{ type: 'image', primaryUrl: "/images/stock/ethereal-castle.png", thumbnailUrl: "/images/stock/ethereal-castle.png", dimensions: { width: 1024, height: 1024 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/minimal_monogram.png", thumbnailUrl: "/images/marketplace/minimal_monogram.png", dimensions: { width: 1024, height: 1024 } }],
     creator: { id: "u19", handle: "@logo.master", displayName: "Logo Master", avatarUrl: "", isVerified: true },
     engine: { modelId: "mj-v6", provider: "Midjourney", parameters: { stylize: 80 } },
     taxonomy: { primaryCategory: "Branding & Logos", tags: ["logo", "minimal", "monogram"] },
@@ -565,7 +565,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A stunning sophisticated cosmetics brand identity kit presentation for an organic skincare laboratory named 'LUMINA', high-end photography displaying custom matte frosted cosmetic dropper bottles arranged systematically alongside pure water droplets and fresh natural eucalyptus leaves, premium delicate light grey pastel background, clean crisp sans-serif minimalist packaging typography, premium commercial visual staging --ar 16:9 --v 6.0",
-    assets: [{ type: 'image', primaryUrl: "/images/stock/cinematic-portrait.png", thumbnailUrl: "/images/stock/cinematic-portrait.png", dimensions: { width: 1024, height: 1024 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/skincare_identity.png", thumbnailUrl: "/images/marketplace/skincare_identity.png", dimensions: { width: 1024, height: 1024 } }],
     creator: { id: "u20", handle: "@beauty.brander", displayName: "Beauty Brander", avatarUrl: "", isVerified: true },
     engine: { modelId: "mj-v6", provider: "Midjourney", parameters: { stylize: 140 } },
     taxonomy: { primaryCategory: "Branding & Logos", tags: ["skincare", "beauty", "branding"] },
@@ -621,7 +621,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A stunning seamless high-speed hyperlapse tracking video sequence traveling swiftly down the center of an illuminated architectural hyper-futuristic tunnel in neo-Tokyo, dramatic streak optical motion blur on peripheral lighting arrays, perfectly centered cinematic composition, hyper-detailed surface tracking, vivid dynamic range grading, smooth 60fps playback rendering interpolation",
-    assets: [{ type: 'video', primaryUrl: "/images/stock/lost-galaxy.png", thumbnailUrl: "/images/stock/lost-galaxy.png", dimensions: { width: 1080, height: 1920 } }],
+    assets: [{ type: 'video', primaryUrl: "/images/marketplace/hyper_speed_travel.png", thumbnailUrl: "/images/marketplace/hyper_speed_travel.png", dimensions: { width: 1080, height: 1920 } }],
     creator: { id: "u21", handle: "@travel.cuts", displayName: "Travel Cuts", avatarUrl: "", isVerified: true },
     engine: { modelId: "pika", provider: "Pika Labs", parameters: { camera_zoom: "in_fast" } },
     taxonomy: { primaryCategory: "Social & Reels", tags: ["travel", "viral", "video"] },
@@ -647,7 +647,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A highly cinematic tranquil lifestyle close-up shot capturing a slow morning moment, warm organic morning golden hour sunbeams casting strong clean parallel shadows across a rustic bleached white wooden kitchen surface, a single handcrafted ceramic mug emitting gentle wisps of rising steam, a partially opened minimal hardback book, pristine Scandinavian minimalist decor aesthetic, hyper-detailed surface textures --ar 9:16 --v 6.0",
-    assets: [{ type: 'video', primaryUrl: "/images/stock/sakura-night.png", thumbnailUrl: "/images/stock/sakura-night.png", dimensions: { width: 1080, height: 1920 } }],
+    assets: [{ type: 'video', primaryUrl: "/images/marketplace/cozy_lifestyle.png", thumbnailUrl: "/images/marketplace/cozy_lifestyle.png", dimensions: { width: 1080, height: 1920 } }],
     creator: { id: "u22", handle: "@moody.vibes", displayName: "Moody Vibes", avatarUrl: "", isVerified: false },
     engine: { modelId: "mj-v6", provider: "Midjourney", parameters: { stylize: 130 } },
     taxonomy: { primaryCategory: "Social & Reels", tags: ["lifestyle", "aesthetic", "shorts"] },
@@ -673,7 +673,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A striking high-end commercial vertical video product launch animation showcasing a hyper-sleek minimal matte black metallic smartphone rotating smoothly in perfect mid-air orbit, localized single source tracking rim lighting casting sleek edge illumination along curved bezel contours, ultra dark studio background with volumetric gradient falloff, extreme detail rendering, cinematic commercial grade 3D sequence",
-    assets: [{ type: 'video', primaryUrl: "/images/stock/cybernetic-girl.png", thumbnailUrl: "/images/stock/cybernetic-girl.png", dimensions: { width: 1080, height: 1350 } }],
+    assets: [{ type: 'video', primaryUrl: "/images/marketplace/product_reveal.png", thumbnailUrl: "/images/marketplace/product_reveal.png", dimensions: { width: 1080, height: 1350 } }],
     creator: { id: "u23", handle: "@vfx.wizard", displayName: "VFX Wizard", avatarUrl: "", isVerified: true },
     engine: { modelId: "luma", provider: "Luma AI", parameters: { orbit: "left_360" } },
     taxonomy: { primaryCategory: "Social & Reels", tags: ["3d", "product", "reveal"] },
@@ -700,7 +700,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "An ultra close-up mouth-watering tracking video clip of authentic Japanese street food preparation, dynamic pan across a hyper-detailed sizzling cast-iron grill surface cooking thick yakitori skewers coated in deep dark bubbling sweet soy glaze, dense volumetric warm steam reacting directly to localized golden string lights overhead, hyper-realistic macro food cinematography, shallow depth of field, high motion fidelity",
-    assets: [{ type: 'video', primaryUrl: "https://i.ibb.co/VGDhfdn/1cb96527-d65b-466c-9d1c-d7fbba507fea.jpg", thumbnailUrl: "https://i.ibb.co/VGDhfdn/1cb96527-d65b-466c-9d1c-d7fbba507fea.jpg", dimensions: { width: 1080, height: 1920 } }],
+    assets: [{ type: 'video', primaryUrl: "/images/marketplace/street_food_tour.png", thumbnailUrl: "/images/marketplace/street_food_tour.png", dimensions: { width: 1080, height: 1920 } }],
     creator: { id: "u30", handle: "@foodie.vlogs", displayName: "Foodie Vlogs", avatarUrl: "", isVerified: true },
     engine: { modelId: "pika", provider: "Pika Labs", parameters: { camera_pan: "right" } },
     taxonomy: { primaryCategory: "Social & Reels", tags: ["food", "vlog", "shorts"] },
@@ -834,7 +834,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A mouth-watering commercial close-up macro photograph of a towering premium gourmet artisan cheeseburger, incredibly thick flame-grilled juicy beef patty with precise sear marks, perfectly melted golden aged cheddar cheese dripping down the side, crisp green butter lettuce and deep red vine tomato slices, set inside a toasted brioche bun with sesame seeds catching crisp tracking top lights, dramatic dark mood lighting, shallow depth of field, hyper-detailed photography --ar 1:1 --v 6.0",
-    assets: [{ type: 'image', primaryUrl: "https://i.ibb.co/RGmqb9WK/e15fa9d3-5c99-4aaf-b08f-a9fa750043cb.jpg", thumbnailUrl: "https://i.ibb.co/RGmqb9WK/e15fa9d3-5c99-4aaf-b08f-a9fa750043cb.jpg", dimensions: { width: 1024, height: 1024 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/gourmet_burger.png", thumbnailUrl: "/images/marketplace/gourmet_burger.png", dimensions: { width: 1024, height: 1024 } }],
     creator: { id: "u26", handle: "@food.focus", displayName: "Food Focus", avatarUrl: "", isVerified: false },
     engine: { modelId: "mj-v6", provider: "Midjourney", parameters: { stylize: 160 } },
     taxonomy: { primaryCategory: "Marketing", tags: ["food", "burger", "marketing"] },
@@ -860,7 +860,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A highly sophisticated minimalist commercial product visual for an avant-garde fragrance house, an immaculate geometric polished glass perfume bottle standing tall on a stark pure matte off-white plaster platform, perfect clean minimalist framing, elegant single-source diffuse lighting casting long crisp diagonal shadows across the lower third, hyper-detailed transparent liquid refraction, award-winning commercial layout design",
-    assets: [{ type: 'image', primaryUrl: "/images/marketplace/perfume_landing.png", thumbnailUrl: "/images/marketplace/perfume_landing.png", dimensions: { width: 1024, height: 1024 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/perfume_minimal_ad.png", thumbnailUrl: "/images/marketplace/perfume_minimal_ad.png", dimensions: { width: 1024, height: 1024 } }],
     creator: { id: "u32", handle: "@essence.studio", displayName: "Essence Studio", avatarUrl: "", isVerified: true },
     engine: { modelId: "flux", provider: "FLUX", parameters: { guidance_scale: 3.5 } },
     taxonomy: { primaryCategory: "Product Ads", tags: ["perfume", "minimal", "ads"] },
@@ -887,7 +887,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A stunning pure organic cosmetic serum product shot, close-up framing capturing a minimalist clear crystal dropper bottle set directly on a pristine pool of pure clear shallow water, soft direct sunlight refracting beautiful tracking optical caustic light patterns through the fluid, background fresh organic green aloe vera leaves with clean water condensation, commercial luxury day-spa aesthetic --ar 1:1 --v 6.0",
-    assets: [{ type: 'image', primaryUrl: "/images/stock/cinematic-portrait.png", thumbnailUrl: "/images/stock/cinematic-portrait.png", dimensions: { width: 1024, height: 1024 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/organic_skincare_ad.png", thumbnailUrl: "/images/marketplace/organic_skincare_ad.png", dimensions: { width: 1024, height: 1024 } }],
     creator: { id: "u33", handle: "@natural.glow", displayName: "Natural Glow", avatarUrl: "", isVerified: true },
     engine: { modelId: "mj-v6", provider: "Midjourney", parameters: { stylize: 150 } },
     taxonomy: { primaryCategory: "Marketing", tags: ["skincare", "organic", "marketing"] },
@@ -1057,7 +1057,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A magnificent high-end automotive visualization of a hyper-engineered futuristic carbon fiber hypercar parked on wet illuminated tarmac at midnight, sleek aggressive angular body lines reflecting ambient localized neon street strip lights, dramatic low-angle perspective emphasizing large polished multi-spoke custom wheels, rain mist falling through single key top lighting setups, ultra sharp professional rendering fidelity --ar 16:9 --v 6.0",
-    assets: [{ type: 'image', primaryUrl: "/images/stock/neon-tokyo.png", thumbnailUrl: "/images/stock/neon-tokyo.png", dimensions: { width: 1024, height: 1024 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/luxury_car_ad.png", thumbnailUrl: "/images/marketplace/luxury_car_ad.png", dimensions: { width: 1024, height: 1024 } }],
     creator: { id: "u36", handle: "@auto.visuals", displayName: "Auto Visuals", avatarUrl: "", isVerified: true },
     engine: { modelId: "mj-v6", provider: "Midjourney", parameters: { stylize: 280 } },
     taxonomy: { primaryCategory: "Product Ads", tags: ["car", "luxury", "ads"] },
@@ -1083,7 +1083,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "1.0"
     },
     promptToCopy: "A highly refreshing dynamic macro advertising visual for a premium raw organic cold-pressed beverage brand, close-up tracking frame showing an intense burst of real golden orange liquid splash frozen in perfect mid-air orbit, whole fresh ripe slice ingredients suspended inside the fluid stream, pure pristine sunlit daylight setup mapping beautiful continuous caustics across absolute white background plains, extreme commercial visual clarity",
-    assets: [{ type: 'image', primaryUrl: "/images/stock/sakura-night.png", thumbnailUrl: "/images/stock/sakura-night.png", dimensions: { width: 1024, height: 1024 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/organic_drink_ad.png", thumbnailUrl: "/images/marketplace/organic_drink_ad.png", dimensions: { width: 1024, height: 1024 } }],
     creator: { id: "u37", handle: "@fresh.media", displayName: "Fresh Media", avatarUrl: "", isVerified: false },
     engine: { modelId: "flux", provider: "FLUX", parameters: { guidance_scale: 3.2 } },
     taxonomy: { primaryCategory: "Product Ads", tags: ["juice", "organic", "ads"] },
@@ -1145,7 +1145,7 @@ export const promptCards: DetailedPrompt[] = [
       version: "2.0"
     },
     promptToCopy: "Build a single-page {{brand_category}} landing page called {{brand_name}} with {{sections}} full-height sections. Use {{stack}}. Include a custom rAF-driven FadingVideo component with manual loop reset, a shared liquid-glass design system, Framer Motion entrance animations, responsive navigation, stats cards, partner row, and feature cards. Use these media URLs: hero={{hero_video_url}}, second={{second_video_url}}. Return complete file-by-file implementation and note performance safeguards.",
-    assets: [{ type: 'image', primaryUrl: "/images/marketplace/perfume_landing.png", thumbnailUrl: "/images/marketplace/perfume_landing.png", dimensions: { width: 1440, height: 900 } }],
+    assets: [{ type: 'image', primaryUrl: "/images/marketplace/space_travel_landing.png", thumbnailUrl: "/images/marketplace/space_travel_landing.png", dimensions: { width: 1440, height: 900 } }],
     creator: { id: "u39", handle: "@landing.systems", displayName: "Landing Systems", avatarUrl: "", isVerified: true },
     engine: { modelId: "claude-sonnet-4", provider: "Anthropic", parameters: { temperature: 0.25 } },
     taxonomy: { primaryCategory: "Websites & UI", tags: ["landing", "react", "video", "framer-motion"] },

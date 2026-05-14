@@ -8,8 +8,7 @@ function canUseNextImageOptimizer(url?: string) {
 
 export function optimizedThumbnailUrl(url?: string, width = OPTIMIZED_IMAGE_WIDTH) {
   if (!url) return "/main.png";
-  if (!canUseNextImageOptimizer(url)) return url;
-  return `/_next/image?url=${encodeURIComponent(url)}&w=${width}&q=${OPTIMIZED_IMAGE_QUALITY}`;
+  return url;
 }
 
 export function optimizedPreviewUrl(url?: string) {
